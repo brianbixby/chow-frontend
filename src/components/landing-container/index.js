@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
+import { recipesFetchRequest } from '../../actions/search-actions.js';
 import Modal from '../helpers/modal';
 import UserAuthForm from '../userAuth-form';
 import SeachBar from '../searchBar';
@@ -31,6 +32,31 @@ class LandingContainer extends React.Component {
         errCB(err);
       });
   };
+  handleSearch = (searchParams, errCB) => {
+    console.log('searchParams: ',searchParams);
+    if(!searchParams.minCals) searchParams.minCals='0';
+    if(!searchParams.maxCals) searchParams.maxCals='10000';
+    let ingredients = searchParams.maxIngredients ? `&ingr=${searchParams.maxIngredients}` : '';
+    let diet = searchParams.dietOption ? `&diet=${searchParams.dietOption}` : '';
+    let health = searchParams.healthOption ? `&health=${searchParams.healthOption}` : '';
+    let queryParams = `&calories=${searchParams.minCals}-${searchParams.maxCals}${health}${diet}${ingredients}`;
+    let queryString = searchParams.searchTerm ? `search?q=${searchParams.searchTerm}` : null;
+    console.log('queryString: ', queryString);
+    console.log('queryParams: ', queryParams);
+  
+    return this.props.recipesFetch(queryString, queryParams)
+      .then(() => {
+        if(queryString) {
+          return this.props.history.push(`/search/${queryString}${queryParams}`);
+        } else {
+          return this.props.history.push(`/search/?q=${queryString}${queryParams}`);
+        }
+      })
+      .catch(err => {
+        logError(err);
+        errCB(err);
+      });
+  };
 
   render() {
     let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
@@ -46,7 +72,7 @@ class LandingContainer extends React.Component {
             </div>
           </div>
         )}
-        <SeachBar />
+        <SeachBar onComplete={this.handleSearch} />
         <div>
           {renderIf(this.state.formDisplay,
             <div>
@@ -79,6 +105,7 @@ let mapDispatchToProps = dispatch => {
     signUp: user => dispatch(signUpRequest(user)),
     signIn: user => dispatch(signInRequest(user)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
+    recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
   };
 };
 
