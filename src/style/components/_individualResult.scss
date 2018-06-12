@@ -1,0 +1,85 @@
+.individualResultImg {
+  margin: 30px 30px 0px 30px;
+}
+.individualResultIngredientCount, .individualResultPrep, .individualResultNutrition {
+  font-size: 16px;
+  color: gray;
+  border-bottom: 1px rgba(220,220,220, 0.7) solid;
+}
+.individualResultIngredientCount {
+  margin-top: 0px;
+}
+.individualResultLabel {
+  font-size: 20px;
+  margin-top: 45px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.individualResultSource {
+  font-size: 12px;
+  margin-bottom: 45px;
+  text-align: center;
+}
+.individualResultFavButton {
+  text-align: center;
+  margin-left: 140px;
+  margin-bottom: 45px;
+}
+.individualResultDietLabel {
+  margin-left: 70px;
+  margin-right: 70px;
+}
+.individualResultIngredients {
+  margin-left: 15px;
+}
+.individualResultNutritionLable {
+  font-size: 10px;
+  margin-left: 35px;
+}
+.individualResultNutritionNumber {
+  margin-left: 55px;
+  font-size: 18px;
+}
+.individualResultNutritionBox {
+  display: inline-block;
+}
+.individualResultNutritionDiv {
+  border-bottom: 1px rgba(220,220,220, 0.7) solid;
+  margin-bottom: 15px;
+}
+.individualResultNutritionPercentFacts {
+  text-align: right;
+  color: gray;
+  float: right;
+  margin-left: 40px;
+}
+.individualResultNutritionNumberFacts {
+  text-align: right;
+}
+.individualResultNutritionItemFacts {
+  color: black;
+}
+.individualResultNutritionButton:hover {
+  text-decoration: none;
+  font-weight:bold;
+}
+.individualResultNutritionPercentDetailedFacts {
+  text-align: right;
+  color: gray;
+  float: right;
+  margin-left: 40px;
+  font-size: 12px;
+}
+.individualResultNutritionNumberDetailedFacts {
+  text-align: right;
+  font-size: 12px;
+}
+.individualResultNutritionItemDetailedFacts {
+  color: black;
+  margin-left: 40px;
+  font-size: 12px;
+}
+#ingredListDiv {
+  margin-top: 0px;
+  padding-top: 0px;
+}

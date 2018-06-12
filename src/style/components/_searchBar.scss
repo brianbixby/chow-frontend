@@ -1,0 +1,45 @@
+#searchBarDiv {
+  max-width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBarForm {
+  border-radius: 45px 0px 0px 45px;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  font-weight: 200;
+  font-size: 16px;
+  padding-left: 20px;
+}
+
+#searchBarForm {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  /*margin-top: 75px;*/
+}
+
+#searchBarButton {
+  border-radius: 0px 45px 45px 0px;
+  cursor:pointer;
+  height: 50px;
+  width: 50px;
+  background-color: #8EE11B;
+  color: white;
+}
+
+@media only screen and (max-width : 400px) {
+  #searchBarDiv {
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+  }
+}
