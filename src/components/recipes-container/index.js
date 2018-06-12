@@ -83,7 +83,7 @@ class RecipesContainer extends React.Component {
 
   handleBoundRecipeClick = (myRecipe, e) => {
     this.props.recipeFetchRequest(myRecipe.recipe);
-    return this.props.history.push(`/recipe/${myRecipe.recipe.uri}`);
+    return this.props.history.push(`/recipe/${myRecipe.recipe.label}`);
   };
 
   // recipeFetch

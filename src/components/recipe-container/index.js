@@ -8,14 +8,15 @@ import { recipesFetchRequest, recipeFetchRequest, recipeFetch } from '../../acti
 import Modal from '../helpers/modal';
 import UserAuthForm from '../userAuth-form';
 import SeachBar from '../searchBar';
-import { logError, renderIf } from './../../lib/util.js';
+import { logError, renderIf, classToggler } from './../../lib/util.js';
 
 class RecipeContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {  };
   }
-  // componentWillMount() {
+  componentWillMount() {
+    console.log('hi');
   //   userValidation(this.props);
   //   this.props.scoreBoardsFetch(this.props.currentLeague._id)
   //     .then(() => {
@@ -28,7 +29,7 @@ class RecipeContainer extends React.Component {
   //       .catch(logError);
   //     })
   //     window.scrollTo(0, 0);
-  // }
+  }
 
   handleSignin = (user, errCB) => {
     return this.props.signIn(user)
@@ -72,17 +73,17 @@ class RecipeContainer extends React.Component {
   //     });
   // };
 
-  // handleBoundRecipeClick = (myRecipe, e) => {
-  //   return this.props.recipeFetch(myRecipe.recipe.uri)
-  //     .then(() => this.props.history.push(`/recipe/${myRecipe.recipe.uri}`))
-  //     .catch(err => {
-  //       logError(err);
-  //       errCB(err);
-  //     });
-  // };
+  handleBoundRecipeClick = (myRecipe, e) => {
+    return this.props.recipeFetch(myRecipe.recipe.uri)
+      .then(() => this.props.history.push(`/recipe/${myRecipe.recipe.uri}`))
+      .catch(err => {
+        logError(err);
+        errCB(err);
+      });
+  };
 
   // recipeFetch
-  handleFavoriteClick = e => {
+  handleBoundFavoriteClick = e => {
     console.log('recipe: ', recipe);
     // addToFavorite(this.props.recipe.uri, this.props.recipe.label, this.props.recipe.image);
     // return this.props.recipeFetch(recipe.users)
@@ -96,7 +97,7 @@ class RecipeContainer extends React.Component {
   calsPD = (cals, servings) => (cals/servings/20).toFixed(0);
 
   render() {
-    let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
+    // let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
     let { recipe } = this.props;
     return (
       <div className='container'>
@@ -106,7 +107,7 @@ class RecipeContainer extends React.Component {
             Sorry, no results.
           </div>
         )}
-        {renderIf(recipe && recipe.length > 0,
+        {renderIf(recipe && recipe.uri.length > 0,
           <div className='row'>
             <div className='singleResultShowLarge'>
               <div className='row'>
@@ -121,7 +122,7 @@ class RecipeContainer extends React.Component {
                     <span className='glyphicon glyphicon-bookmark'></span> Save
                   </button>
                   {/* both a tag below should have on click */}
-                  <h5> <a className='individualResultDietLabel'>{recipe.dietLabels}</a> <a className='individualResultHealthLabel'>{recipe.healthLabels}</a></h5>
+                  <h5> <span className='individualResultDietLabel'>{recipe.dietLabels}</span> <span className='individualResultHealthLabel'>{recipe.healthLabels}</span></h5>
                 </div>
               </div>
 
@@ -132,53 +133,76 @@ class RecipeContainer extends React.Component {
                   <p className='individualResultNutritionBox'> <span className='individualResultNutritionNumber'>{this.calsPD(recipe.calories, recipe.yield)}% </span><br/><span className='individualResultNutritionLable'> DAILY VALUE</span></p>
                   <p className='individualResultNutritionBox'> <span className='individualResultNutritionNumber'>{recipe.yield}</span> <br/><span className='individualResultNutritionLable'> SERVINGS </span> </p>
                 </div>
-                <div id='showWhenLargeNutritionalInfo' ng-repeat='all in result.digest'>
-                  <p>
-                    <a className='individualResultNutritionButton'id='all-{{$index}}'
-                    ng-click='all.isHidingOpen = !all.isHidingOpen'
-                    className='{'glyphicon glyphicon-play': all.sub.length > 0, 'disable-link': !all.sub }'>
-                    <span className='individualResultNutritionItemFacts'>{all.label}</span></a>
-                    <span className='individualResultNutritionNumberFacts'>{this.calsPS(all.total, result.yield)} {all.unit}</span>
-                    <span className='individualResultNutritionPercentFacts'>{this.calsPS((all.total/result.yield), all.daily)}%</span>
-                  </p>
-                  <p ng-show='all.isHidingOpen'
-                    ng-repeat='subitem in all.sub'
-                    id='subitem-{{$index}}'>
-                    <span className='individualResultNutritionItemDetailedFacts'>{subitem.label} </span>
-                    <span className='individualResultNutritionNumberDetailedFacts'>{this.calsPS(subitem.total, result.yield)}{subitem.unit} </span>
-                    <span className='individualResultNutritionPercentDetailedFacts'>{this.calsPS((subitem.total/result.yield), subitem.daily)}% </span>
-                  </p>
-                </div>
+
+                {recipe.digest.map((myRecipe, idx) => {
+                  return <div id='showWhenLargeNutritionalInfo' key={idx}>
+                    <div>
+                      {/* p below should have on click open  all.isHidingOpen = !all.isHidingOpen*/}
+                      <p className='individualResultNutritionButton' id={`all-${idx}`}>
+                      {/* what is all */}
+                      
+                      <span className={classToggler({ 'glyphicon glyphicon-play': !!myRecipe.sub, 'disable-link': !myRecipe.sub })}></span>
+                      <span className='individualResultNutritionItemFacts'>{myRecipe.label}</span></p>
+                      <span className='individualResultNutritionNumberFacts'>{this.calsPS(myRecipe.total, recipe.yield)} {myRecipe.unit}</span>
+                      <span className='individualResultNutritionPercentFacts'>{this.calsPS((myRecipe.total/recipe.yield), myRecipe.daily)}%</span>
+                    </div>
+                    {/* {myRecipe.sub.map((item, idx) => {
+                      return <p key={idx} id={`subitem-${idx}`}>
+                        <span className='individualResultNutritionItemDetailedFacts'>{item.label} </span>
+                        <span className='individualResultNutritionNumberDetailedFacts'>{this.calsPS(item.total, recipe.yield)}{item.unit} </span>
+                        <span className='individualResultNutritionPercentDetailedFacts'>{this.calsPS((item.total/recipe.yield), item.daily)}% </span>
+                      </p>
+                    })} */}
+                  </div>
+                })}
+                {recipe.digest.map((myRecipe2, idx) => {
+                  let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe2);
+                  let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe2);
+                  return <div key={idx} className='tile'>
+                    <button onClick={boundFavoriteClick} className='allResultsFavButton' type='btn btn-default'>
+                      <span className='glyphicon glyphicon-bookmark'></span> <span className='allResultsFavButtonText'>Save</span>
+                    </button>
+                    <div className='tileWoutFavButton' onClick={boundRecipeClick}>
+                      <img className='tilePic' src={recipe.image} />
+                      <p className='tileLabel'>{recipe.label}</p>
+                      <p className='tileCalorieAndIngredientText'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(recipe.calories, recipe.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {recipe.ingredientLines.length} </span>   INGREDIENTS</span></p>
+                      <p className='tileCalorieAndIngredientTextHidden'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(recipe.calories, recipe.yield)}</span> CALS   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {recipe.ingredientLines.length} </span>   INGR</span></p>
+                    </div>
+                      <p><a className='tileSource' rel='noopener noreferrer' target='_blank' href={recipe.url}>{recipe.source}</a></p>
+                  </div>
+                })}
               </div>
               <div id='ingredListDiv' className='col-xs-12 col-sm-6 col-lg-5'>
                   <p className='individualResultIngredientCount'>{recipe.ingredientLines.length} Ingredients</p>
-                  <p className='individualResultIngredients' ng-repeat='each in result.ingredients'>{each.text}</p>
+                  {recipe.ingredients.map((ingred, idx) => {
+                    return <p className='individualResultIngredients' key={idx}>{ingred.text}</p>
+                  })}
                   <p className='individualResultPrep'>Preparation</p>
                   <p>
-                    <button ng-click='singleResultComp.instructions(recipe.url)' className='btn btn-default'>
-                      Instructions
-                    </button> on <a rel='noopener noreferrer' target='_blank' href={recipe.url}>{recipe.source}</a>
+                    {/* onClick singleResultComp.instructions(recipe.url) */}
+                    <button className='btn btn-default'> Instructions </button> on <a rel='noopener noreferrer' target='_blank' href={recipe.url}>{recipe.source}</a>
                   </p>
               </div>
-
               <div id='showWhenSmallNutritionalInfo' className='col-xs-12 col-sm-6 col-lg-5'>
-                <div ng-repeat='all in result.digest'>
-                  <p>
-                    <a className='individualResultNutritionButton' id='all-{{$index}}'
-                    ng-click='all.isHidingOpen = !all.isHidingOpen'
-                    ng-className='{'glyphicon glyphicon-play': all.sub.length > 0, 'disable-link': !all.sub }'>
-                    <span className='individualResultNutritionItemFacts'>{all.label }</span></a>
-                    <span className='individualResultNutritionNumberFacts'>{this.calsPS(all.total, result.yield)} {all.unit}</span>
-                    <span className='individualResultNutritionPercentFacts'>{this.calsPS((all.total/result.yield), all.daily)}%</span>
-                  </p>
-                  <p ng-show='all.isHidingOpen'
-                    ng-repeat='subitem in all.sub'
-                    id='subitem-{{$index}}'>
-                    <span className='individualResultNutritionItemDetailedFacts'>{subitem.label} </span>
-                    <span className='individualResultNutritionNumberDetailedFacts'>{this.calsPS(subitem.total, result.yield)}{subitem.unit} </span>
-                    <span className='individualResultNutritionPercentDetailedFacts'>{this.calsPS((subitem.total/result.yield), subitem.daily)}% </span>
-                  </p>
-                </div>
+                {recipe.digest.map((digest2, idx) => {
+                  return <div>
+                    <div>
+                      <p className='individualResultNutritionButton' id={`all-${idx}`}>
+                      {/* p tag above onClick  all.isHidingOpen = !all.isHidingOpen */}
+                      <span className={classToggler({ 'glyphicon glyphicon-play': digest2.sub, 'disable-link': !digest2.sub })}></span>
+                      <span className='individualResultNutritionItemFacts'>{digest2.label}</span></p>
+                      <span className='individualResultNutritionNumberFacts'>{this.calsPS(digest2.total, recipe.yield)} {digest2.unit}</span>
+                      <span className='individualResultNutritionPercentFacts'>{this.calsPS((digest2.total/recipe.yield), digest2.daily)}%</span>
+                    </div>
+                    {/* {digest2.sub.map((sub, idx) => {
+                      return <p key={idx} id={`subitem-${idx}`}>
+                      <span className='individualResultNutritionItemDetailedFacts'>{sub.label} </span>
+                      <span className='individualResultNutritionNumberDetailedFacts'>{this.calsPS(sub.total, recipe.yield)}{sub.unit} </span>
+                      <span className='individualResultNutritionPercentDetailedFacts'>{this.calsPS((sub.total/recipe.yield), sub.daily)}% </span>
+                    </p>
+                    })} */}
+                  </div>
+                })}
               </div>
               <div className='col-lg-2'></div>
             </div>
