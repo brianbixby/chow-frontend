@@ -11,7 +11,7 @@ export const recipeFetch = recipe => ({
 });
 
 export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
-  let url = `https://api.edamam.com/${queryString}${process.env.API_KEY}${queryParams}`;
+  let url = `https://api.edamam.com/${queryString}${process.env.API_KEY}&from=0&to=20${queryParams}`;
   console.log('url: ', url);
   return superagent.get(url)
     .then(res => {
@@ -27,13 +27,19 @@ export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
 };
 
 export const recipeFetchRequest = queryString => dispatch => {
-  let url = `https://api.edamam.com/search${queryString}${process.env.API_KEY}`;
+  var string =  queryString;
+  var hashIndex = string.indexOf('#');
+  var leftSide = string.substring(0, hashIndex);
+  var rightSide = string.substring(hashIndex + 1, string.length);
+  var qString = leftSide + '%23' + rightSide;
+
+  let url = `https://api.edamam.com/search?r=${qString}${process.env.API_KEY}`;
   console.log('url: ', url);
   return superagent.get(url)
     .then(res => {
       console.log('res.body: ', res.body);
-      dispatch(recipeFetch(res.body));
-      return res.body;
+      dispatch(recipeFetch(res.body[0]));
+      return res.body[0];
     })
     .catch(err => {
       if(err.status === 404)

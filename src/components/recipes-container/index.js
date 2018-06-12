@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
-import { recipesFetchRequest, recipeFetchRequest } from '../../actions/search-actions.js';
+import { recipesFetchRequest, recipeFetchRequest, recipeFetch } from '../../actions/search-actions.js';
 import Modal from '../helpers/modal';
 import UserAuthForm from '../userAuth-form';
 import SeachBar from '../searchBar';
@@ -72,14 +72,21 @@ class RecipesContainer extends React.Component {
   //     });
   // };
 
-  handleBoundRecipeClick = (recipe, e) => {
-    return this.props.recipeFetch(recipe.uri)
-      .then(() => this.props.history.push(`/recipe/${recipe.uri}`))
-      .catch(err => {
-        logError(err);
-        errCB(err);
-      });
+  // handleBoundRecipeClick = (myRecipe, e) => {
+  //   return this.props.recipeFetch(myRecipe.recipe.uri)
+  //     .then(() => this.props.history.push(`/recipe/${myRecipe.recipe.uri}`))
+  //     .catch(err => {
+  //       logError(err);
+  //       errCB(err);
+  //     });
+  // };
+
+  handleBoundRecipeClick = (myRecipe, e) => {
+    this.props.recipeFetchRequest(myRecipe.recipe);
+    return this.props.history.push(`/recipe/${myRecipe.recipe.uri}`);
   };
+
+  // recipeFetch
   handleBoundFavoriteClick = (recipe, e) => {
     console.log('recipe: ', recipe);
     // return this.props.recipeFetch(recipe.users)
@@ -109,19 +116,17 @@ class RecipesContainer extends React.Component {
                 {this.props.recipes.map(myRecipe => {
                   let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
                   let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
-                  return <div key={myRecipe.recipe.uri}>
-                    <div className='tile'>
-                      <button onClick={boundFavoriteClick} className='allResultsFavButton' type='btn btn-default'>
-                        <span className='glyphicon glyphicon-bookmark'></span> <span className='allResultsFavButtonText'>Save</span>
-                      </button>
-                      <div className='tileWoutFavButton' onClick={boundRecipeClick}>
-                        <img className='tilePic' src={myRecipe.recipe.image} />
-                        <p className='tileLabel'>{myRecipe.recipe.label}</p>
-                        <p className='tileCalorieAndIngredientText'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGREDIENTS</span></p>
-                        <p className='tileCalorieAndIngredientTextHidden'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALS   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGR</span></p>
-                      </div>
-                        <p><a className='tileSource' rel="noopener noreferrer" target="_blank" href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
+                  return <div key={myRecipe.recipe.uri} className='tile'>
+                    <button onClick={boundFavoriteClick} className='allResultsFavButton' type='btn btn-default'>
+                      <span className='glyphicon glyphicon-bookmark'></span> <span className='allResultsFavButtonText'>Save</span>
+                    </button>
+                    <div className='tileWoutFavButton' onClick={boundRecipeClick}>
+                      <img className='tilePic' src={myRecipe.recipe.image} />
+                      <p className='tileLabel'>{myRecipe.recipe.label}</p>
+                      <p className='tileCalorieAndIngredientText'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGREDIENTS</span></p>
+                      <p className='tileCalorieAndIngredientTextHidden'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALS   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGR</span></p>
                     </div>
+                      <p><a className='tileSource' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
                   </div>
                 })}
               </div>
@@ -146,6 +151,7 @@ let mapDispatchToProps = dispatch => {
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
     recipeFetch: query => dispatch(recipeFetchRequest(query)),
+    recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
   };
 };
 
