@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { recipeFetchRequest } from '../../actions/search-actions.js';
+import { userProfileFavoritesUpdateRequest } from '../../actions/userProfile-actions.js';
 import { logError, renderIf, classToggler } from './../../lib/util.js';
 
 class RecipeContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {  };
+    this.state = { favAdded: false, favError: false };
   }
   componentWillMount() {
     if(!this.props.recipe) {
@@ -28,16 +29,29 @@ class RecipeContainer extends React.Component {
       });
   };
 
-  handleBoundFavoriteClick = e => {
-    console.log('recipe: ', recipe);
-    // addToFavorite(this.props.recipe.uri, this.props.recipe.label, this.props.recipe.image);
-    // return this.props.recipeFetch(recipe.users)
-    //   .then(() => this.props.history.push(`/recipe/${recipe.uri}`))
-    //   .catch(err => {
-    //     logError(err);
-    //     errCB(err);
-    //   });
+  handleFavoriteClick = e => {
+    let { userProfile, recipe } = this.props;
+    if(userProfile) {
+      var found = false;
+      for(var i = 0; i < userProfile.favorites.length; i++) {
+          if (userProfile.favorites[i].label == recipe.label) {
+              found = true;
+              break;
+          }
+      }
+      if(found) return this.setState({ favError: `${recipe.label} is already a favorite.`});
+      return this.props.userProfileFavoritesUpdate({
+        image: recipe.image,
+        label: recipe.label,
+        uri: recipe.uri,
+      })
+        .then(() => this.setState({favAdded: `${recipe.label} is added to your favorites!`}))
+        .catch(err => logError(err));
+    } else {
+      return this.setState({ favError: 'Please signup or login to create a favorite.'});
+    }
   };
+
   calsPS = (cals, servings) => Math.round(cals/servings);
   calsPD = (cals, servings) => (cals/servings/20).toFixed(0);
 
@@ -101,7 +115,7 @@ class RecipeContainer extends React.Component {
                 })}
                 {recipe.digest.map((myRecipe2, idx) => {
                   let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe2);
-                  let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe2);
+                  let boundFavoriteClick = this.handleFavoriteClick.bind(this, myRecipe2);
                   return <div key={idx} className='tile'>
                     <button onClick={boundFavoriteClick} className='allResultsFavButton' type='btn btn-default'>
                       <span className='glyphicon glyphicon-bookmark'></span> <span className='allResultsFavButtonText'>Save</span>
@@ -159,11 +173,13 @@ class RecipeContainer extends React.Component {
 
 let mapStateToProps = state => ({
   recipe: state.recipe,
+  userProfile: state.userProfile,
 });
 
 let mapDispatchToProps = dispatch => {
   return {
     recipeFetch: query => dispatch(recipeFetchRequest(query)),
+    userProfileFavoritesUpdate: favorite => dispatch(userProfileFavoritesUpdateRequest(favorite)),
   };
 };
 
