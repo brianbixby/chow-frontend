@@ -15,9 +15,9 @@ export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
   console.log('url: ', url);
   return superagent.get(url)
     .then(res => {
-      console.log('res.body: ', res.body);
-      dispatch(recipesFetch(res.body));
-      return res.body;
+      console.log('res.body: ', res.body.hits);
+      dispatch(recipesFetch(res.body.hits));
+      return res.body.hits;
     })
     .catch(err => {
       if(err.status === 404)

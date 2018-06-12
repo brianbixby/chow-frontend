@@ -32,7 +32,7 @@ class LandingContainer extends React.Component {
         errCB(err);
       });
   };
-  handleSearch = (searchParams, errCB) => {
+  handleSearch = (searchParams) => {
     console.log('searchParams: ',searchParams);
     if(!searchParams.minCals) searchParams.minCals='0';
     if(!searchParams.maxCals) searchParams.maxCals='10000';
@@ -54,7 +54,7 @@ class LandingContainer extends React.Component {
       })
       .catch(err => {
         logError(err);
-        errCB(err);
+        // errCB(err);
       });
   };
 
