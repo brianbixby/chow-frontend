@@ -11,8 +11,16 @@ import { classToggler, renderIf } from '../../lib/util.js';
 class Navbar extends React.Component {
   constructor(props){
     super(props);
-    this.state={ visible: false, authFormAction: '', formDisplay: false,};
+    this.state={ navOpen: false, authFormAction: '', formDisplay: false };
   }
+
+  handleHamburgerClick = () => this.setState({ navOpen: !this.state.navOpen });
+  closeHamburger = () => this.setState({ navOpen: false });
+  handleSignUpModal = () => this.setState({ authFormAction: 'Sign Up', formDisplay: true, navOpen: false });
+  handleSignInModal = () => this.setState({ authFormAction: 'Sign In', formDisplay: true, navOpen: false });
+  handleFormSwitchToSignUp = () => this.setState({ authFormAction: 'Sign Up' });
+  handleFormSwitchToSignIn = () => this.setState({ authFormAction: 'Sign In' });
+  closeModal = () => this.setState({ formDisplay: false });
 
   handleSignin = (user, errCB) => {
     return this.props.signIn(user)
@@ -34,62 +42,56 @@ class Navbar extends React.Component {
 
   handleSignOut = () => {
     this.props.signOut();
+    this.setState({ navOpen: false });
     this.props.history.push('/');
   };
 
   render() {
-    let user = require('./../helpers/assets/icons/user.icon.svg');
-    let caretDown = require('./../helpers/assets/icons/caret-down.icon.svg');
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/profile/${this.props.userProfile._id}` : '';
     let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
     const { location } = this.props;
- 
     return (
       <div>
-        <header className='navbar'>
+        <header>
           <nav>
-            <div className='logo'>
-                <Link to='/' className={classToggler({ 'link': true, 'logo-text': true, 'intro-text': !this.props.userAuth })}>
-                  <span id='navLogo'>CHOW</span> <span id='navTagline'className='disable-link '>     Eat Great</span>
-                </Link>
+            <div>
+              <div className='logo'>
+                  <Link to='/' onClick={this.closeHamburger}>
+                    <span id='navLogo'>CHOW</span> <span id='navTagline'className='disable-link '>     Eat Great</span>
+                  </Link>
+              </div>
+              <div className={classToggler({ 'hamburger': true, 'open': this.state.navOpen })} onClick={this.handleHamburgerClick}>
+                <span className="top buns"></span>
+                <span className="bottom buns"></span>
+              </div>
+              <section className={classToggler({ 'hamburgerToggle': true, 'slideIn': this.state.navOpen })}>
+                {renderIf(!this.props.userAuth,
+                  <ul className="dropDownList">
+                    <li className="dropDownListItem"><p className="dropDownLink" onClick={this.handleSignUpModal}>Signup</p></li>
+                    <li className="dropDownListItem"><p className="dropDownLink" onClick={this.handleSignInModal}>Login</p></li>
+                  </ul>
+                )}
+                {renderIf(this.props.userAuth,
+                  <ul className="dropDownList">
+                    <li className="dropDownListItem"><Link to={profileLink} className="dropDownLink" onClick={this.closeHamburger}>Favorites</Link></li>
+                    <li className="dropDownListItem"><p className="dropDownLink" onClick={this.handleSignOut}>Logout</p></li>
+                  </ul>
+                )}
+              </section>
             </div>
-            <ul className='socials'>
-              <li className='social dropdown'>
-                  <div>
-                    <div className='avatarDiv' onClick={() => this.setState({ visible: !this.state.visible })} >
-                      <img className='caretDown' src={caretDown}/>
-                      <img className='noProfileImageNav' src={user} />
-                    </div>
-                    <div className={ this.state.visible ? 'slideIn dropdownDiv' : 'slideOut dropdownDiv' }>
-                      {renderIf(!this.props.userAuth,
-                        <div>
-                          <Link to='/' className='link' onClick={() => this.setState({ visible: !this.state.visible })}>Signup</Link>
-                          <Link to='/leagues' className='link' onClick={() => this.setState({ visible: !this.state.visible })}>Login</Link>
-                        </div>
-                      )}
-                      {renderIf(this.props.userAuth,
-                        <div>
-                          <Link to={profileLink} className='link' onClick={() => this.setState({ visible: !this.state.visible })}>Favorites</Link>
-                          <p className='logout link' onClick={this.handleSignOut}>Logout</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-              </li>
-            </ul>
           </nav>
       </header>
       <div>
         {renderIf(this.state.formDisplay,
           <div>
-            <Modal heading='Chow' close={() => this.setState({ formDisplay: false })}>
+            <Modal heading='Chow' close={this.closeModal}>
               <UserAuthForm authFormAction={this.state.authFormAction} onComplete={handleComplete} />
               <div>
                 {renderIf(this.state.authFormAction==='Sign In',
-                  <button onClick={() => this.setState({authFormAction: 'Sign Up'})}>Sign Up</button>
+                  <button onClick={this.handleFormSwitchToSignUp}>Sign Up</button>
                 )}
                 {renderIf(this.state.authFormAction==='Sign Up',
-                  <button onClick={() => this.setState({authFormAction: 'Sign In'})}>Sign In</button>
+                  <button onClick={this.handleFormSwitchToSignIn}>Sign In</button>
                 )}
               </div>
             </Modal>
@@ -97,14 +99,14 @@ class Navbar extends React.Component {
         )}
       </div>
       {renderIf(!this.props.userAuth && location.pathname == '/',
-          <div id='signupOrLogin' className='row'>
-            <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
-              <p id='signupOrLoginText'><span className='line'>Save the recipes </span> <span className='line'> you love!</span></p>
-              <span className='button orange' onClick={() => this.setState({formDisplay: true, authFormAction: 'Sign Up'})}>Sign Up</span>
-              <span className='button green' onClick={() => this.setState({formDisplay: true, authFormAction: 'Sign In'})}>Log In</span>
-            </div>
+        <div id='signupOrLogin' className='row'>
+          <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
+            <p id='signupOrLoginText'><span className='line'>Save the recipes </span> <span className='line'> you love!</span></p>
+            <span className='button orange' onClick={this.handleSignUpModal}>Sign Up</span>
+            <span className='button green' onClick={this.handleSignInModal}>Log In</span>
           </div>
-        )}
+        </div>
+      )}
     </div>
     );
   }

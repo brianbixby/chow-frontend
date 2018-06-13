@@ -19,6 +19,9 @@ textarea {
 
 *, *:before, *:after {
   box-sizing: inherit;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  outline: 0;
+  outline-width: 0;
 }
 
 h1, h2, h3, h4, h5, h6, p, a, span {
