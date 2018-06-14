@@ -1,0 +1,52 @@
+.tileCalorieText {
+  display: inline-block;
+  font: normal 10px Arial;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px #FFF;
+  color: #666;
+  display: inline-block;
+  width: calc((50% - 1px));
+  text-align: center;
+  border-right: 1px solid #D9D9D9;
+}
+.tileIngredientText {
+  display: inline-block;
+  margin-left: 3px;
+  font: normal 10px Arial;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px #FFF;
+  color: #666;
+  width: calc((50% - 3px));
+  display: inline-block;
+  text-align: center;
+}
+@media (max-width: 449px) {
+  .recipesWrapper {
+    width: 280px;
+  }
+}
+@media (max-width: 490px) and (min-width: 450px) {
+  .recipesWrapper {
+    width: 420px;
+  }
+}
+@media (max-width: 719px) and (min-width: 491px) {
+  .recipesWrapper {
+    width: 460px;
+  }
+}
+@media (max-width: 949px) and (min-width: 720px) {
+  .recipesWrapper {
+    width: 690px;
+  }
+}
+@media (max-width: 1179px) and (min-width: 950px) {
+  .recipesWrapper {
+    width: 920px;
+  }
+}
+@media (min-width: 1180px) {
+  .recipesWrapper {
+    width: 1150px;
+  }
+}

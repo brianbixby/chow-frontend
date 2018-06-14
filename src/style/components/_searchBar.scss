@@ -83,6 +83,7 @@
   margin: 8px auto;
   box-shadow: 1px 2px 2px 2px #eee;
   padding: 5px;
+  text-align: right;
 }
 .inputTextP {
   height: 32px;
@@ -100,6 +101,23 @@
     padding: 0 5px 0 5px !important;
   }
 }
+.advancedSearchOptionP {
+  padding: 0px 12px;
+  margin-bottom: 5px;
+  font: normal 13px/29px Arial;
+  color: #333;
+  text-align: left;  
+
+  input[type="radio"] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    -ms-appearance: checkbox; 
+  }
+  input {
+    margin-right: 10px;
+  }
+}
+
 @media only screen and (max-width : 400px) {
   #searchBarDiv {
     max-width: 90%;

@@ -113,7 +113,7 @@ class RecipesContainer extends React.Component {
         <div className='row searchResultsDisplay'>
           <div className='flex-container space-around'>
             {renderIf(this.props.recipes && this.props.recipes.length > 0 ,
-              <div>
+              <div className='recipesWrapper'>
                 {this.props.recipes.map(myRecipe => {
                   let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
                   let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
@@ -124,10 +124,10 @@ class RecipesContainer extends React.Component {
                     <div className='tileWoutFavButton' onClick={boundRecipeClick}>
                       <img className='tilePic' src={myRecipe.recipe.image} />
                       <p className='tileLabel'>{myRecipe.recipe.label}</p>
-                      <p className='tileCalorieAndIngredientText'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGREDIENTS</span></p>
-                      <p className='tileCalorieAndIngredientTextHidden'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALS   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGR</span></p>
+                      <p className='tileCalorieAndIngredientText'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALORIES   </span><span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGREDIENTS</span></p>
+                      <p className='tileCalorieAndIngredientTextHidden'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALS   </span> <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGR</span></p>
                     </div>
-                      <p><a className='tileSource' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
+                      <p className='tileSourceP'><a className='tileSource' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
                   </div>
                 })}
               </div>
