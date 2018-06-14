@@ -1,9 +1,10 @@
 import React from 'react';
+import { classToggler } from '../../../lib/util.js';
 
 class Modal extends React.Component {
   render() {
     return (
-      <div className='modal'>
+      <div className={classToggler({ 'modal': true, 'modalFadeIn': this.props.formDisplay })}>
         <div className='modal-overlay' onClick={this.props.close}></div>
         <div className='modal-wrapper'>
           <div className='modal-close' onClick={this.props.close}></div>
