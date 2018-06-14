@@ -78,6 +78,9 @@ class Navbar extends React.Component {
                   </ul>
                 )}
               </section>
+              {/* {renderIf(this.state.navOpen, */}
+                <div className={classToggler({ 'dropdownOverlay': true, 'overlayFadeIn': this.state.navOpen })} onClick={this.closeHamburger}></div>
+              {/* )} */}
             </div>
           </nav>
       </header>

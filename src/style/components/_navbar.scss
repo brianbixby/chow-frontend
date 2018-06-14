@@ -90,7 +90,7 @@ nav {
   transition: all 0.25s;
   top: 0;
   right: 13px;
-  z-index: 5;
+  z-index: 3005;
 }
 .buns {
   content: '';
@@ -132,31 +132,59 @@ nav {
   padding-top: 48px;
   right: 0;
   bottom: 0;
-  left: 0;
   margin: 0;
   height: auto;
+  width: 320px;
+  max-width: 100vw;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   overflow: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  transform: translateY(-100vh);
+  -webkit-transform: translateX(100vw);
+  transform: translateX(100vw);
+  -webkit-transition: -webkit-transform .4s ease-in;
+  transition: -webkit-transform .4s ease-in;
   transition: transform .4s ease-in;
-  z-index: 1;
+  transition: transform .4s ease-in, -webkit-transform .4s ease-in;
+  z-index: 3002;
   background: #fff;
 }
+.dropdownOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3001;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1.5s, visibility 2.1s;
+  transition-delay: opacity .6s, visibility 2.1s;
+}
+.overlayFadeIn {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1.5s;
+  transition-delay: .6s;
+}
 .slideIn {
-  transform: translateY(0vh);
+  transform: translateX(0vw);
   transition: transform .4s ease-in;
 }
 .dropDownLink {
-  font-size: 34px;
-  color: #8e8e8e;
-  text-decoration: none;
-  padding: 18px 13px 18px 0;
-  display: block;
-  text-align: right;
+  text-align: left;
   transition: all .2s linear;
   cursor: pointer;
+  border-bottom: 1px solid #e3e3e3;
+  color: #2f374c;
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0 30px 0 32px;
+  padding: 18px 0;
+  text-decoration: none;
 }
 .dropDownLink:hover {
   color: #7C0;;
