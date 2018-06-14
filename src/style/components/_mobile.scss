@@ -47,6 +47,13 @@
     justify-content: space-around;
   }
 }
+#search-form {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 75px;
+  position: relative;
+}
 @media only screen and (min-width : 1200px) {
   #search-form {
     margin-left: 15%;

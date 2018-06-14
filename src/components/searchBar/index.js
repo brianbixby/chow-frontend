@@ -115,264 +115,257 @@ class SearchBar extends React.Component {
                 </span>
               </div>
               {renderIf(advancedSearch, 
-                <div className='row'>
-                  <div id='advancedSearchDiv' className='col-xs-12 col-lg-12'>
-                    <div className='row'>
-                      <div className='col-xs-3 col-lg-3'>
-                        <span className='advancedSearchSectionHeader'>Calories</span> <br/>
-                        <span>From 
-                          <input 
-                            id='textBoxInputMinCal' 
-                            type='text' 
-                            name='minCals'
-                            placeholder='ex. 200'
-                            value={this.state.minCals}
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                            style={{width: '50px'}} 
-                          />
-                        </span> <br/>
-                        <span>To 
-                          <input
-                            id='textBoxInputMaxCal'
-                            type='text'
-                            name='maxCals'
-                            placeholder='ex. 600'
-                            value={this.state.maxCals}
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                            style={{width: '50px'}} 
-                          />
-                        </span><br/>
-                        <span className='advancedSearchSectionHeader'>Results</span> <br/>
-                        <span>Up to 
-                          <input
-                            id='textBoxInputMaxResults'
-                            type='text'
-                            name='maxIngredients'
-                            placeholder='Max Ingredients ex. 12'
-                            style={{width: '50px'}} 
-                            value={this.state.maxIngredients}
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                            style={{width: '50px'}} 
-                          />
-                        </span><br/>
-                      </div>
-                      <div className='col-xs-3 col-lg-3'>
-                        <span className='advancedSearchSectionHeader'>Health </span> <br/>
-                        <label>
-                          <input
-                            type='radio'
-                            name='healthOption' 
-                            value='dairy-free'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                          />  
-                          Dairy Free
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio' 
-                            name='healthOption' 
-                            value='gluten-free'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur} 
-                          />  
-                          Gluten Free
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio'
-                            name='healthOption' 
-                            value='kosher'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                          />  
-                          Kosher
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio' 
-                            name='healthOption' 
-                            value='pescatarian'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur} 
-                          />  
-                          Pescatarian
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio'
-                            name='healthOption' 
-                            value='peanut-free'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                          />  
-                          Peanut Free
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio' 
-                            name='healthOption' 
-                            value='paleo'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur} 
-                          />  
-                          Paleo
-                        </label><br/>
-                      </div>
-                      <div className='col-xs-3 col-lg-3'>
-                        <br/>
-                        <div className='dietFormGroup' className='form-group'>
-                          <label>
-                            <input
-                              type='radio'
-                              name='healthOption' 
-                              value='soy-free'
+                <div className='row advancedSearchRow'>
+                  <div className='col-xs-12 col-lg-12'>
+                    <div id='advancedSearchDiv'>
+                      <div className='row'>
+                        <div className='col-xs-4 col-lg-4'>
+                          <span className='advancedSearchSectionHeader'>Calories</span> <br/>
+                          <p className='inputTextP'>From 
+                            <input 
+                              id='textBoxInputMinCal' 
+                              type='text' 
+                              name='minCals'
+                              placeholder='ex. 200'
+                              value={this.state.minCals}
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
-                            />  
-                            Soy Free
-                          </label><br/>
-                          <label>
+                            />
+                          </p> <br/>
+                          <p className='inputTextP'>To 
                             <input
-                              type='radio' 
-                              name='healthOption' 
-                              value='sugar-conscious'
-                              onChange={this.handleChange}
-                              onFocus={this.handleFocus}
-                              onBlur={this.handleBlur} 
-                            />  
-                            Sugar Conscious
-                          </label><br/>
-                          <label>
-                            <input
-                              type='radio'
-                              name='healthOption' 
-                              value='tree-nut-free'
+                              id='textBoxInputMaxCal'
+                              type='text'
+                              name='maxCals'
+                              placeholder='ex. 600'
+                              value={this.state.maxCals}
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
-                            />  
-                            Tree Nut Free
-                          </label><br/>
-                          <label>
+                            />
+                          </p><br/>
+                          <span className='advancedSearchSectionHeader'>Ingredients</span> <br/>
+                          <p className='inputTextP'>Up to 
                             <input
-                              type='radio' 
-                              name='healthOption' 
-                              value='vegan'
-                              onChange={this.handleChange}
-                              onFocus={this.handleFocus}
-                              onBlur={this.handleBlur} 
-                            />  
-                            Vegan
-                          </label><br/>
-                          <label>
-                            <input
-                              type='radio'
-                              name='healthOption' 
-                              value='vegetarian'
+                              id='textBoxInputMaxResults'
+                              type='text'
+                              name='maxIngredients'
+                              placeholder='Max Ingredients ex. 12'
+                              value={this.state.maxIngredients}
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
-                            />  
-                            Vegetarian
-                          </label><br/>
-                          <label>
-                            <input
-                              type='radio' 
-                              name='healthOption' 
-                              value='wheat-free'
-                              onChange={this.handleChange}
-                              onFocus={this.handleFocus}
-                              onBlur={this.handleBlur} 
-                            />  
-                            Wheat Free
-                          </label><br/>
+                            />
+                          </p><br/>
                         </div>
-                      </div>
-                      <div className='col-xs-3 col-lg-3'>
-                        <b>Diet </b> <br/>
-                        <div className='allergyFormGroup' className='form-group'>
+                        <div className='col-xs-4 col-lg-4'>
+                          <span className='advancedSearchSectionHeader'>Allergies </span> <br/>
                           <label>
                             <input
                               type='radio'
-                              name='dietOption' 
-                              value='balanced'
+                              name='healthOption' 
+                              value='dairy-free'
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
                             />  
-                            Balanced
+                            Dairy Free
                           </label><br/>
                           <label>
                             <input
                               type='radio' 
-                              name='dietOption' 
-                              value='high-fiber'
+                              name='healthOption' 
+                              value='gluten-free'
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur} 
                             />  
-                            High Fiber
+                            Gluten Free
                           </label><br/>
                           <label>
                             <input
                               type='radio'
-                              name='dietOption' 
-                              value='high-protein'
+                              name='healthOption' 
+                              value='kosher'
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
                             />  
-                            High Protein
+                            Kosher
                           </label><br/>
                           <label>
                             <input
                               type='radio' 
-                              name='dietOption' 
-                              value='low-carb'
+                              name='healthOption' 
+                              value='pescatarian'
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur} 
                             />  
-                            Low Carb
+                            Pescatarian
                           </label><br/>
                           <label>
                             <input
                               type='radio'
-                              name='dietOption' 
-                              value='low-fat'
+                              name='healthOption' 
+                              value='peanut-free'
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
                             />  
-                            Low Fat
+                            Peanut Free
                           </label><br/>
                           <label>
                             <input
                               type='radio' 
-                              name='dietOption' 
-                              value='low-sodium'
+                              name='healthOption' 
+                              value='paleo'
                               onChange={this.handleChange}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur} 
                             />  
-                            Low Sodium
-                          </label><br/><br/><br/><br/><br/>
+                            Paleo
+                          </label><br/>
+                          <label>
+                              <input
+                                type='radio'
+                                name='healthOption' 
+                                value='soy-free'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                              />  
+                              Soy Free
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio' 
+                                name='healthOption' 
+                                value='sugar-conscious'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur} 
+                              />  
+                              Sugar Conscious
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio'
+                                name='healthOption' 
+                                value='tree-nut-free'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                              />  
+                              Tree Nut Free
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio' 
+                                name='healthOption' 
+                                value='vegan'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur} 
+                              />  
+                              Vegan
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio'
+                                name='healthOption' 
+                                value='vegetarian'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                              />  
+                              Vegetarian
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio' 
+                                name='healthOption' 
+                                value='wheat-free'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur} 
+                              />  
+                              Wheat Free
+                            </label><br/>
                         </div>
-                        <button id='advancedSearchFormButton' type='submit' className='button green'><span id='advancedSearchIcon' className='glyphicon glyphicon-check'>&nbsp;<span id='advancedSearchButtonText'><b>Done</b></span></span></button>
+                        <div className='col-xs-4 col-lg-4'>
+                          <span className='advancedSearchSectionHeader'>Diet </span> <br/>
+                          <div className='allergyFormGroup' className='form-group'>
+                            <label>
+                              <input
+                                type='radio'
+                                name='dietOption' 
+                                value='balanced'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                              />  
+                              Balanced
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio' 
+                                name='dietOption' 
+                                value='high-fiber'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur} 
+                              />  
+                              High Fiber
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio'
+                                name='dietOption' 
+                                value='high-protein'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                              />  
+                              High Protein
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio' 
+                                name='dietOption' 
+                                value='low-carb'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur} 
+                              />  
+                              Low Carb
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio'
+                                name='dietOption' 
+                                value='low-fat'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                              />  
+                              Low Fat
+                            </label><br/>
+                            <label>
+                              <input
+                                type='radio' 
+                                name='dietOption' 
+                                value='low-sodium'
+                                onChange={this.handleChange}
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur} 
+                              />  
+                              Low Sodium
+                            </label><br/><br/><br/><br/><br/>
+                          </div>
+                          <button id='advancedSearchFormButton' type='submit' className='button green'><span id='advancedSearchIcon' className='glyphicon glyphicon-check'>&nbsp;<span id='advancedSearchButtonText'><b>Done</b></span></span></button>
+                        </div>
                       </div>
                     </div>
                   </div>
