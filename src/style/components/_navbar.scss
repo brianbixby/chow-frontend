@@ -79,7 +79,7 @@ nav {
   }
 }
 .logo:hover a {
-  color: #f62626;
+  color: #7C0;;
 }
 .hamburger {
   cursor: pointer;
@@ -105,7 +105,7 @@ nav {
   transition: all 0.25s;
 }
 .hamburger:hover .buns {
-  background: #f62626;
+  background: #7C0;;
 }
 .top {
   top: 24px;
@@ -150,17 +150,16 @@ nav {
 }
 .dropDownLink {
   font-size: 34px;
-  color: #000;
-  font-family: 'Roboto', sans-serif;
+  color: #8e8e8e;
   text-decoration: none;
-  padding: 18px 0;
+  padding: 18px 13px 18px 0;
   display: block;
   text-align: right;
   transition: all .2s linear;
   cursor: pointer;
 }
 .dropDownLink:hover {
-  color: #f62626;
+  color: #7C0;;
 }
 .dropDownListItem {
   height: 70px;
