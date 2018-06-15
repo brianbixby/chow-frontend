@@ -195,16 +195,38 @@ nav {
 .dropDownList {
   padding-top: 20px;
 }
+.bottomNav {
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  top: 51px;
+  border-top: 1px solid #FFF;
+  border-bottom: 1px solid #FFF;
+
+  .innerWrapper {
+    height: 40px;
+    padding: 0px 10px;
+    border-bottom: 1px solid #D9D9D9;
+    background: url(https://i.imgur.com/xIFuhjs.jpg) repeat center center;
+  }
+}
+.mr15 {
+  margin-right: 15px;
+}
 // sign up or login
 .signupOrLogin {
   transform: translateY(-100vh);
   transition: transform 1.5s ease-in-out;
   transition-delay: 1.5s;
   text-align: center;
-  margin-top: 100px;
 }
 .signupOrLoginSlideIn {
   transform: translateY(0vh);
+  transition: transform 1.5s ease-in-out;
+  transition-delay: 1.5s;
+}
+.signupOrLoginSlideIn2 {
+  transform: translateY(-41px);
   transition: transform 1.5s ease-in-out;
   transition-delay: 1.5s;
 }

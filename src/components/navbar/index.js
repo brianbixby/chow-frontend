@@ -93,6 +93,27 @@ class Navbar extends React.Component {
               <div className={classToggler({ 'dropdownOverlay': true, 'overlayFadeIn': this.state.navOpen })} onClick={this.closeHamburger}></div>
             </div>
           </nav>
+          <div className='bottomNav'>
+            <div className='innerWrapper'>
+              {renderIf(location.pathname == '/',
+                <div>
+                  <div className={classToggler({ 'row': true, 'signupOrLogin': true, 'signupOrLoginSlideIn': !this.props.userAuth && this.state.showSignupOrLogin })}>
+                    <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
+                      <p id='signupOrLoginText'><span className='line'>Save the recipes </span> <span className='line'> you love!</span></p>
+                      <span className='button orange' onClick={this.handleSignUpModal}>Sign Up</span>
+                      <span className='button green' onClick={this.handleSignInModal}>Log In</span>
+                    </div>
+                  </div>
+                  <div className={classToggler({ 'row': true, 'signupOrLogin': true, 'signupOrLoginSlideIn2': this.props.userAuth && !this.state.showSignupOrLogin })}>
+                    <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
+                      <p id='signupOrLoginText' className='mr15'><span className='line'>View the recipes </span> <span className='line'> you saved!</span></p>
+                      <Link to={profileLink}><span className='button green'>View</span></Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
       </header>
       <div>
         <Modal heading='Chow' close={this.closeModal} formDisplay={this.state.formDisplay}>
@@ -106,13 +127,6 @@ class Navbar extends React.Component {
             )}
           </div>
         </Modal>
-      </div>
-      <div className={classToggler({ 'row': true, 'signupOrLogin': true, 'signupOrLoginSlideIn': !this.props.userAuth && location.pathname == '/' && this.state.showSignupOrLogin })}>
-        <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
-          <p id='signupOrLoginText'><span className='line'>Save the recipes </span> <span className='line'> you love!</span></p>
-          <span className='button orange' onClick={this.handleSignUpModal}>Sign Up</span>
-          <span className='button green' onClick={this.handleSignInModal}>Log In</span>
-        </div>
       </div>
     </div>
     );

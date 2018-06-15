@@ -120,21 +120,36 @@
 }
 #signupOrLoginText {
   display: inline-block;
+  line-height: 40px;
 }
 span.line {
-  display: inline-block;
+  text-shadow: 1px 1px 0px #FFF;
+  font: normal 10px Arial;
+  color: #666;
+  text-transform: uppercase;
 }
 #bold {
-  font-weight: bold;
-  color: #000000;
+  font: bold 13px Arial !important;
+  text-transform: none;
+  color: #333;
+  padding-left: 3px;
 }
 #searchFilterText {
   margin-top: 10px;
   text-decoration: none;
   color: #747D7D;
+  display: inline-block;
+  cursor: pointer;
+  height: 28px;
+  line-height: 28px;
+  padding: 0px 32px 0px 14px;
+  background: url(https://i.imgur.com/lBqrz4M.png) no-repeat right -382px;
 }
 #smallFont {
-  font-size: 11px;
+  text-shadow: 1px 1px 0px #FFF;
+  font: normal 10px Arial;
+  color: #666;
+  text-transform: uppercase;
 }
 #searchFilterDownArrow {
   font-size: 11px;
@@ -206,47 +221,50 @@ span.line {
 	position: relative;
 	top: 1px;
 }
-.orange {
-	color: #fef4e9;
-	border: solid 1px #da7c0c;
-	background: #f78d1d;
-	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
-	background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
-}
-.orange:hover {
-	background: #f47c20;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
-	background: -moz-linear-gradient(top,  #f88e11,  #f06015);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
-  color: #fef4e9;
-}
-.orange:active {
-	color: #fcd3a5;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
-	background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
-}
+
 .green {
-	color: #e8f0de;
-	border: solid 1px #538312;
-	background: #64991e;
-	background: -webkit-gradient(linear, left top, left bottom, from(#8EE01B), to(#6DB30A));
-	background: -moz-linear-gradient(top,  #8EE01B,  #6DB30A);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#8EE01B', endColorstr='#6DB30A');
+  background: #8fe21b;
+  background: -webkit-gradient(linear, left top, left bottom, from(#8fe21b), to(#6cb30a));
+  background: linear-gradient(to bottom, #8fe21b 0%, #6cb30a 100%);
+  font: bold 13px Arial;
+  text-shadow: 0px -1px 0px #4C7B0C;
+  color: #FFF;
+  border-color: #999;
+  cursor: pointer;
+  border: 1px solid #999;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  width: 75px;
+  min-width: 0px;
+  height: 30px;
+  padding: 0px;
+  line-height: 30px;
 }
-.green:hover {
-	background: #538018;
-	background: -webkit-gradient(linear, left top, left bottom, from(#7CC418), to(#5D9909));
-	background: -moz-linear-gradient(top,  #7CC418,  #5D9909);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7CC418', endColorstr='#5D9909');
-  color: #fef4e9;
-}
-.green:active {
-	color: #a9c08c;
-	background: -webkit-gradient(linear, left top, left bottom, from(#6DB30A), to(#8EE01B));
-	background: -moz-linear-gradient(top,  #6DB30A,  #8EE01B);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6DB30A', endColorstr='#8EE01B');
+.orange {
+  background: #f47c20;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f47c20), to(#f78d1d));
+  background: linear-gradient(to bottom, #f47c20 0%, #f78d1d 100%);
+  font: bold 13px Arial;
+  text-shadow: 0px -1px 0px #4C7B0C;
+  color: #FFF;
+  border-color: #999;
+  cursor: pointer;
+  border: 1px solid #999;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  width: 75px;
+  min-width: 0px;
+  height: 30px;
+  padding: 0px;
+  line-height: 30px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 .allResultsFavButton {
   position: absolute;
