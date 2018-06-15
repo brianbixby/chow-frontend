@@ -42,7 +42,7 @@
   justify-content: center;
   height: 75px;
   font-weight: 300;
-  font-size: 23px;
+  font-size: 20px;
   padding-left: 30px;
   width: calc((100% - 75px));
   float:left;
@@ -58,17 +58,25 @@
   background: -o-linear-gradient(top, #8fe21b 0%,#6cb30a 100%);
   background: -ms-linear-gradient(top, #8fe21b 0%,#6cb30a 100%);
   background: linear-gradient(to bottom, #8fe21b 0%,#6cb30a 100%);
-  border-radius: 0px 30px 30px 0px;
+  border-radius: 0px 70px 70px 0px;
   height: 75px;
   width: 75px;
   color: #fff;
+  position: relative;
+  img {
+    vertical-align: middle;
+    width: 40px;
+    position: absolute;
+    left: 10px;
+    top: 17.5px;
+  }
 }
 #search-form .tooltip {
   position: absolute;
 }
 .advancedSearchRow {
   position: absolute;
-  top: 110px;
+  top: 105px;
   margin: auto !important;
 }
 .advancedSearchSectionHeader {
@@ -84,6 +92,10 @@
   box-shadow: 1px 2px 2px 2px #eee;
   padding: 5px;
   text-align: right;
+
+  input {
+    margin-bottom: 0 !important;
+  }
 }
 .inputTextP {
   height: 32px;
@@ -93,12 +105,13 @@
   padding-left: 10px;
 
   input {
-    width: calc((100% - 50px));
+    width: calc((100% - 60px));
     border-radius: 5px;
     box-shadow: 0 2px 2px #ddd inset;
     font: 12px Arial;
     height: 32px;
     padding: 0 5px 0 5px !important;
+    margin-right: 20px;
   }
 }
 .advancedSearchOptionP {
@@ -106,18 +119,60 @@
   margin-bottom: 5px;
   font: normal 13px/29px Arial;
   color: #333;
-  text-align: left;  
+  text-align: left;
+  background-image: url(https://i.imgur.com/WxVYN93.png);
+  background-repeat: no-repeat;
+  background-position: 11px -57px;
+  position: relative;
+  padding-left: 34px;
 
-  input[type="radio"] {
-    -webkit-appearance: checkbox;
-    -moz-appearance: checkbox;
-    -ms-appearance: checkbox; 
-  }
   input {
-    margin-right: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
   }
 }
-
+.advancedSearchOptionP:hover {
+  background-color: #F2F2F2 !important;
+  text-shadow: 1px 1px 0px #FFF;
+  color: #7C0;
+  cursor: pointer;
+}
+input[type='radio']:checked+label{ font-weight: 700;} 
+.radioChecked { background-position: 11px -121px;}
+#searchFilterCals {
+  margin: 0 -10px 0 10px;
+  width: 25%;
+  float: left;
+}
+#searchFilterDiet {
+  width: 50%;
+  float: left;
+}
+#searchFilterAllergies {
+  width: 25%;
+  float: left;
+}
+.searchOptionsCol1 {
+  width: 47%;
+  float: left;
+  padding: 0 5px;
+}
+.searchOptionsCol2 {
+  width: 53%;
+  float: left;
+  padding: 0 5px;
+}
+.advancedSearchButtonDiv {
+  display: inline-block;
+}
+.searchFilterTextOpen { background: url(https://i.imgur.com/lBqrz4M.png) no-repeat right -382px #F2F2F2 !important; }
 @media only screen and (max-width : 400px) {
   #searchBarDiv {
     max-width: 90%;
@@ -128,8 +183,42 @@
     justify-content: center;
   }
 }
-@media only screen and (min-width : 585px) {
+@media only screen and (max-width : 629px) {
   #advancedSearchDiv {
-    width: 555px;
+    width: 309.41px;
+    height: 340px;
+    position: relative;
   }
+  .advancedOptionsScrollContainer {
+    width: calc((100% - 10px));
+    height: 255px;
+    overflow: scroll;
+    margin-top: 40px;
+  }
+  #searchFilterCals, #searchFilterDiet, #searchFilterAllergies, .searchOptionsCol1, .searchOptionsCol2 {
+    width: 100%;
+  }
+  #searchFilterCals {
+    margin: 0 0 10px;
+    padding-left: 10px;
+  }
+  #searchFilterDiet, #searchFilterAllergies { 
+    padding: 0 10px;
+    margin-bottom: 10px;
+  }
+  .allergyFormGroup { width: auto; }
+  .advancedSearchButtonDiv {
+    width: 100%;
+    height: 45px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    background-color: #F2F2F2;
+    padding-top: 7.5px;
+    padding-right: 10px;
+  }
+}
+@media only screen and (min-width : 630px) {
+  #advancedSearchDiv { width: 600px; }
+  .advancedSearchRow { top: 134px; }
 }

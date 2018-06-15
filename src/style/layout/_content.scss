@@ -135,7 +135,6 @@ span.line {
   padding-left: 3px;
 }
 #searchFilterText {
-  margin-top: 10px;
   text-decoration: none;
   color: #747D7D;
   display: inline-block;
@@ -159,9 +158,13 @@ span.line {
   text-align: center;
   margin-top: 8px;
 }
-.dietFormGroup, .allergyFormGroup {
+.dietFormGroup {
   text-align: left;
   font-weight: normal !important;
+}
+.allergyFormGroup {
+  padding: 0 5px;
+  width: 146.5px;
 }
 #advancedSearchFormButton {
   width: 64px;
@@ -295,4 +298,7 @@ span.line {
 }
 .tileCalorieAndIngredientTextHidden {
   display: none;
+}
+.button:hover, .search-btn:hover, .logo:hover a span {
+  opacity: .8;
 }
