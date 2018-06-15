@@ -85,7 +85,7 @@ class Navbar extends React.Component {
                 )}
                 {renderIf(this.props.userAuth,
                   <ul className="dropDownList">
-                    <li className="dropDownListItem"><Link to={profileLink} className="dropDownLink" onClick={this.closeHamburger}>Favorites</Link></li>
+                    <li className="dropDownListItem"><Link to={profileLink} className="dropDownLink noTextD" onClick={this.closeHamburger}>Favorites</Link></li>
                     <li className="dropDownListItem"><p className="dropDownLink" onClick={this.handleSignOut}>Logout</p></li>
                   </ul>
                 )}
@@ -120,10 +120,10 @@ class Navbar extends React.Component {
           <UserAuthForm authFormAction={this.state.authFormAction} onComplete={handleComplete} />
           <div>
             {renderIf(this.state.authFormAction==='Sign In',
-              <button onClick={this.handleFormSwitchToSignUp}>Sign Up</button>
+              <button className='button orange' onClick={this.handleFormSwitchToSignUp}>Sign Up</button>
             )}
             {renderIf(this.state.authFormAction==='Sign Up',
-              <button onClick={this.handleFormSwitchToSignIn}>Log In</button>
+              <button className='button orange' onClick={this.handleFormSwitchToSignIn}>Log In</button>
             )}
           </div>
         </Modal>
