@@ -162,110 +162,9 @@ class SearchBar extends React.Component {
                             </p>
                           </div>
                           <div id='searchFilterDiet'>
-                            <span className='advancedSearchSectionHeader'>Allergies </span>
+                            <span className='advancedSearchSectionHeader'>Allergies/Health </span>
                             <div className='searchOptionsCol1'>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'dairy-free' })}>
-                                <input
-                                  type='radio'
-                                  name='healthOption' 
-                                  value='dairy-free'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur}
-                                />
-                                <label>Dairy Free</label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'gluten-free' })}>
-                                <input
-                                  type='radio' 
-                                  name='healthOption' 
-                                  value='gluten-free'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur} 
-                                />
-                                <label>Gluten Free </label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'kosher' })}>
-                                <input
-                                  type='radio'
-                                  name='healthOption' 
-                                  value='kosher'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur}
-                                />
-                                <label>Kosher</label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'pescatarian' })}>
-                                <input
-                                  type='radio' 
-                                  name='healthOption' 
-                                  value='pescatarian'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur} 
-                                />
-                                <label>Pescatarian</label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'peanut-free' })}>
-                                <input
-                                  type='radio'
-                                  name='healthOption' 
-                                  value='peanut-free'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur}
-                                />
-                                <label>Peanut Free</label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'paleo' })}>
-                                <input
-                                  type='radio' 
-                                  name='healthOption' 
-                                  value='paleo'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur} 
-                                />
-                                <label>Paleo</label>
-                              </p>
-                            </div>
-                            <div className='searchOptionsCol2'>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'soy-free' })}>
-                                <input
-                                  type='radio'
-                                  name='healthOption' 
-                                  value='soy-free'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur}
-                                />
-                                <label> Soy Free</label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'sugar-conscious' })}>
-                                <input
-                                  type='radio' 
-                                  name='healthOption' 
-                                  value='sugar-conscious'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur} 
-                                />  
-                                <label>Sugar Conscious</label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'tree-nut-free' })}>
-                                <input
-                                  type='radio'
-                                  name='healthOption' 
-                                  value='tree-nut-free'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur}
-                                />  
-                                <label>Tree Nut Free</label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'vegan' })}>
+                            <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'vegan' })}>
                                 <input
                                   type='radio' 
                                   name='healthOption' 
@@ -287,16 +186,49 @@ class SearchBar extends React.Component {
                                 />  
                                 <label>Vegetarian</label>
                               </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'wheat-free' })}>
+                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'peanut-free' })}>
+                                <input
+                                  type='radio'
+                                  name='healthOption' 
+                                  value='peanut-free'
+                                  onChange={this.handleChange}
+                                  onFocus={this.handleFocus}
+                                  onBlur={this.handleBlur}
+                                />
+                                <label>Peanut Free</label>
+                              </p>
+                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'tree-nut-free' })}>
+                                <input
+                                  type='radio'
+                                  name='healthOption' 
+                                  value='tree-nut-free'
+                                  onChange={this.handleChange}
+                                  onFocus={this.handleFocus}
+                                  onBlur={this.handleBlur}
+                                />  
+                                <label>Tree Nut Free</label>
+                              </p>
+                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'sugar-conscious' })}>
                                 <input
                                   type='radio' 
                                   name='healthOption' 
-                                  value='wheat-free'
+                                  value='sugar-conscious'
                                   onChange={this.handleChange}
                                   onFocus={this.handleFocus}
                                   onBlur={this.handleBlur} 
                                 />  
-                                <label>Wheat Free</label>
+                                <label>Sugar Conscious</label>
+                              </p>
+                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.healthOption === 'alcohol-free' })}>
+                                <input
+                                  type='radio'
+                                  name='healthOption' 
+                                  value='alcohol-free'
+                                  onChange={this.handleChange}
+                                  onFocus={this.handleFocus}
+                                  onBlur={this.handleBlur}
+                                />  
+                                <label>Alcohol Free</label>
                               </p>
                             </div>
                           </div>
@@ -313,17 +245,6 @@ class SearchBar extends React.Component {
                                   onBlur={this.handleBlur}
                                 />  
                                 <label>Balanced</label>
-                              </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.dietOption === 'high-fiber' })}>
-                                <input
-                                  type='radio' 
-                                  name='dietOption' 
-                                  value='high-fiber'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur} 
-                                />  
-                                <label>High Fiber</label>
                               </p>
                               <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.dietOption === 'high-protein' })}>
                                 <input
@@ -358,17 +279,6 @@ class SearchBar extends React.Component {
                                 />  
                                 <label>Low Fat</label>
                               </p>
-                              <p className={classToggler({ 'advancedSearchOptionP': true, 'radioChecked': this.state.dietOption === 'low-sodium' })}>
-                                <input
-                                  type='radio' 
-                                  name='dietOption' 
-                                  value='low-sodium'
-                                  onChange={this.handleChange}
-                                  onFocus={this.handleFocus}
-                                  onBlur={this.handleBlur} 
-                                />  
-                                <label>Low Sodium</label>
-                              </p>
                             </div>
                           </div>
                         </div>
@@ -378,11 +288,11 @@ class SearchBar extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className='advancedSearchToolTip'>
+                  {/* <div className='advancedSearchToolTip'>
                     <Tooltip message={minCalsError} show={focused === 'minCals' || submitted} />
                     <Tooltip message={maxCalsError} show={focused === 'maxCals' || submitted} />
                     <Tooltip message={maxIngredientsError} show={focused === 'maxIngredients' || submitted} />
-                  </div>
+                  </div> */}
                 </div>
               )}
             </form>

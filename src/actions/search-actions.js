@@ -21,8 +21,8 @@ export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
     })
     .catch(err => {
       if(err.status === 404)
-        return alert('404 Error: Recipes not found please try again with a valid search term ex. pizza' );
-      alert(`${err.status} Error: ${err.message}`);
+        return console.log('404 Error: Recipes not found please try again with a valid search term ex. pizza' );
+      console.log(`${err.status} Error: ${err.message}`);
     });
 };
 
@@ -43,8 +43,8 @@ export const recipeFetchRequest = queryString => dispatch => {
     })
     .catch(err => {
       if(err.status === 404)
-        return alert('404 Error: Recipe not found please try again with a valid search term ex. pizza' );
-      alert(`${err.status} Error: ${err.message}`);
+        return console.log('404 Error: Recipe not found please try again with a valid search term ex. pizza' );
+      console.log(`${err.status} Error: ${err.message}`);
     });
 };
 

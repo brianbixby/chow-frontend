@@ -148,24 +148,19 @@ input[type='radio']:checked+label{ font-weight: 700;}
 .radioChecked { background-position: 11px -121px;}
 #searchFilterCals {
   margin: 0 -10px 0 10px;
-  width: 25%;
+  width: 30%;
   float: left;
 }
 #searchFilterDiet {
-  width: 50%;
+  width: 36%;
   float: left;
 }
 #searchFilterAllergies {
-  width: 25%;
+  width: 34%;
   float: left;
 }
 .searchOptionsCol1 {
-  width: 47%;
-  float: left;
-  padding: 0 5px;
-}
-.searchOptionsCol2 {
-  width: 53%;
+  width: 100%;
   float: left;
   padding: 0 5px;
 }
@@ -200,7 +195,7 @@ input[type='radio']:checked+label{ font-weight: 700;}
     max-width: calc((100vw - 30px));
   }
 } 
-@media only screen and (max-width : 629px) {
+@media only screen and (max-width : 469px) {
   #advancedSearchDiv {
     width: 309.41px;
     height: 340px;
@@ -212,7 +207,7 @@ input[type='radio']:checked+label{ font-weight: 700;}
     overflow: scroll;
     margin-top: 40px;
   }
-  #searchFilterCals, #searchFilterDiet, #searchFilterAllergies, .searchOptionsCol1, .searchOptionsCol2 {
+  #searchFilterCals, #searchFilterDiet, #searchFilterAllergies, .searchOptionsCol1 {
     width: 100%;
   }
   #searchFilterCals {
@@ -234,8 +229,27 @@ input[type='radio']:checked+label{ font-weight: 700;}
     padding-top: 7.5px;
     padding-right: 10px;
   }
+  .search-form {
+    height: 50px;
+    width: calc((100% - 50px));
+    border-radius: 50px 0px 0px 50px;
+    font-size: 16px;
+  }
+  .search-btn {
+    height: 50px;
+    width: 50px;
+    border-radius: 0px 50px 50px 0px;
+  }
+  .search-btn img {
+    vertical-align: middle;
+    width: 25px;
+    position: absolute;
+    left: 7px;
+    top: 12.5px;
+  }
+  .advancedSearchRow { top: 80px; }
 }
-@media only screen and (min-width : 630px) {
-  #advancedSearchDiv { width: 600px; }
+@media only screen and (min-width : 470px) {
+  #advancedSearchDiv { width: 440px; }
   .advancedSearchRow { top: 134px; }
 }
