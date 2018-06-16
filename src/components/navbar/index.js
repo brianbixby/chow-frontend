@@ -2,17 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { signOut, signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
-import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
+import { signOut, signUpRequest, signInRequest } from '../../actions/userAuth-actions';
+import { userProfileFetchRequest } from '../../actions/userProfile-actions';
 import Modal from '../helpers/modal';
 import UserAuthForm from '../userAuth-form';
-import { classToggler, renderIf } from '../../lib/util.js';
+import { classToggler, renderIf, logError } from '../../lib/util';
 
 
 class Navbar extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={ navOpen: false, authFormAction: '', formDisplay: false, showSignupOrLogin: true };
+    this.state = {
+      navOpen: false, authFormAction: '', formDisplay: false, showSignupOrLogin: true,
+    };
   }
 
   handleHamburgerClick = () => this.setState({ navOpen: !this.state.navOpen });
@@ -24,33 +26,29 @@ class Navbar extends React.Component {
   closeModal = () => this.setState({ formDisplay: false });
   hideSignupOrLogin = () => this.setState({ showSignupOrLogin: false });
 
-  handleSignin = (user, errCB) => {
-    return this.props.signIn(user)
-      .then(() => this.props.userProfileFetch())
-      .then(() => {
-        this.setState({ formDisplay: false });
-        setTimeout(this.closeHamburger, 1000);
-        return setTimeout(this.hideSignupOrLogin, 1000);
-      })
-      .catch(err => {
-        logError(err);
-        errCB(err);
-      });
-  };
+  handleSignin = (user, errCB) => this.props.signIn(user)
+    .then(() => this.props.userProfileFetch())
+    .then(() => {
+      this.setState({ formDisplay: false });
+      setTimeout(this.closeHamburger, 1000);
+      return setTimeout(this.hideSignupOrLogin, 1000);
+    })
+    .catch(err => {
+      logError(err);
+      errCB(err);
+    });
 
-  handleSignup = (user, errCB) => {
-    return this.props.signUp(user)
-      .then(() => this.props.userProfileFetch())
-      .then(() => {
-        this.setState({ formDisplay: false });
-        setTimeout(this.closeHamburger, 1000);
-        return setTimeout(this.hideSignupOrLogin, 1000);
-      })
-      .catch(err => {
-        logError(err);
-        errCB(err);
-      });
-  };
+  handleSignup = (user, errCB) => this.props.signUp(user)
+    .then(() => this.props.userProfileFetch())
+    .then(() => {
+      this.setState({ formDisplay: false });
+      setTimeout(this.closeHamburger, 1000);
+      return setTimeout(this.hideSignupOrLogin, 1000);
+    })
+    .catch(err => {
+      logError(err);
+      errCB(err);
+    });
 
   handleSignOut = () => {
     this.props.signOut();
@@ -59,20 +57,20 @@ class Navbar extends React.Component {
   };
 
   render() {
-    let profileLink = this.props.userProfile && this.props.userProfile._id ? `/profile/${this.props.userProfile._id}` : '';
-    let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
+    const profileLink = this.props.userProfile && this.props.userProfile._id ? `/profile/${this.props.userProfile._id}` : '';
+    const handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
     const { location } = this.props;
     return (
       <div>
         <header>
           <nav>
             <div>
-              <div className='logo'>
-                  <Link to='/' onClick={this.closeHamburger}>
-                    <span id='navLogo'>CHOW</span> <span id='navTagline'className='disable-link '>     Eat Great</span>
-                  </Link>
+              <div className="logo">
+                <Link to="/" onClick={this.closeHamburger}>
+                  <span id="navLogo">CHOW</span> <span id="navTagline" className="disable-link">     Eat Great</span>
+                </Link>
               </div>
-              <div className={classToggler({ 'hamburger': true, 'open': this.state.navOpen })} onClick={this.handleHamburgerClick}>
+              <div className={classToggler({ "hamburger": true, "open": this.state.navOpen })} onClick={this.handleHamburgerClick}>
                 <span className="top buns"></span>
                 <span className="bottom buns"></span>
               </div>
@@ -106,7 +104,7 @@ class Navbar extends React.Component {
                   </div>
                   <div className={classToggler({ 'row': true, 'signupOrLogin': true, 'signupOrLoginSlideIn2': this.props.userAuth && !this.state.showSignupOrLogin })}>
                     <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
-                      <p className='signupOrLoginText' className='mr15'><span className='line'>View the recipes </span> <span className='line'> you saved!</span></p>
+                      <p className='signupOrLoginText' className='mr15 inline'><span className='line'>View the recipes </span> <span className='line'> you saved!</span></p>
                       <Link to={profileLink}><span className='button green'>View</span></Link>
                     </div>
                   </div>

@@ -1,18 +1,18 @@
 import React from 'react';
-import { classToggler } from '../../../lib/util.js';
+import { classToggler } from '../../../lib/util';
 
 class Modal extends React.Component {
   render() {
     return (
-      <div className={classToggler({ 'modal': true, 'modalFadeIn': this.props.formDisplay })}>
-        <div className='modal-overlay' onClick={this.props.close}></div>
-        <div className='modal-wrapper'>
-          <div className='modal-close' onClick={this.props.close}></div>
-          <div className='modal-header'>
-            <h2 className='modal-heading'>{this.props.heading}</h2>
+      <div className={classToggler({ modal: true, modalFadeIn: this.props.formDisplay })}>
+        <div className="modal-overlay" onClick={this.props.close} />
+        <div className="modal-wrapper">
+          <div className="modal-close" onClick={this.props.close} />
+          <div className="modal-header">
+            <h2 className="modal-heading">{this.props.heading}</h2>
           </div>
-          <div className='modal-body'>
-            <div className='modal-content'>
+          <div className="modal-body">
+            <div className="modal-content">
               {this.props.children}
             </div>
           </div>

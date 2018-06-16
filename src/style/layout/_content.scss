@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 .searchResultsDisplay {
-  margin: 20px auto;
+  margin: 130px auto 30px;
 }
 .allResultsFavButton:hover .allResultsFavButtonText{
   color: #8EE11B;
@@ -119,6 +119,10 @@
   font-weight: bold;
 }
 .signupOrLoginText {
+  display: inline-block;
+  line-height: 40px;
+}
+.inline {
   display: inline-block;
   line-height: 40px;
 }
