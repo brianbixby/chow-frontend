@@ -70,7 +70,7 @@ class SearchBar extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    if(!this.state.error) {
+    if(!this.state.error && this.state.searchTerm) {
       this.props.onComplete(this.state)
         .catch(err => {
           this.setState({ 
@@ -81,7 +81,7 @@ class SearchBar extends React.Component {
     }
     this.setState(state => ({
       submitted: true,
-      searchTermError: state.searchTermError || state.searchTerm ? null : 'required',
+      searchTermError: state.searchTermError || state.searchTerm ? null : '*** A search term is required ex. chicken ***',
       minCalsError: state.minCalsError ? null : 'required',
       maxCalsError: state.maxCalsError ? null : 'required',
       maxIngredientsError: state.maxIngredientsError ? null : 'required',
@@ -311,18 +311,3 @@ class SearchBar extends React.Component {
 }
 
 export default SearchBar;
-
-// let mapStateToProps = state => ({
-//   userAuth: state.userAuth,
-//   userProfile: state.userProfile,
-// });
-
-// let mapDispatchToProps = dispatch => {
-//   return {
-//     signUp: user => dispatch(signUpRequest(user)),
-//     signIn: user => dispatch(signInRequest(user)),
-//     userProfileFetch: () => dispatch(userProfileFetchRequest()),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

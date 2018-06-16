@@ -31,3 +31,22 @@
 
   }
 }
+#search-form .tooltip section {
+  margin-top: 90px;
+
+  p {
+    border: none;
+    margin: 0;
+    color: #000;
+    display: block;
+    text-align: center;
+    width: calc((100vw - 30px));
+  }
+  .caret-up { display: none; }
+}
+@media only screen and (min-width : 470px) {
+  #search-form .tooltip section { margin-top: 114px; }
+}
+@media only screen and (min-width : 585px) {
+  #search-form .tooltip section p { width: 555px; }
+}
