@@ -391,7 +391,7 @@ class SearchBar extends React.Component {
         <div id='searchFilter' className='row'>
           <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
             <p id='searchFilterText' className={classToggler({ 'searchFilterTextOpen': this.state.advancedSearch })} onClick={() => this.setState({advancedSearch: !this.state.advancedSearch})}>
-              <span id='smallFont'> REFINE SEARCH BY </span> <span id='bold'> Calories, Diet, Ingredients </span> <span id='searchFilterDownArrow' className='glyphicon glyphicon-triangle-bottom'></span>
+              <span id='smallFont' className='hideSuperSmall'>REFINE </span><span id='smallFont'>SEARCH BY </span> <span id='bold'>Calories, Diet, Ingredients </span> <span id='searchFilterDownArrow' className='glyphicon glyphicon-triangle-bottom'></span>
             </p>
           </div>
         </div>

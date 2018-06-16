@@ -118,7 +118,7 @@
   color: white;
   font-weight: bold;
 }
-#signupOrLoginText {
+.signupOrLoginText {
   display: inline-block;
   line-height: 40px;
 }
@@ -143,6 +143,7 @@ span.line {
   line-height: 28px;
   padding: 0px 32px 0px 14px;
   background: url(https://i.imgur.com/lBqrz4M.png) no-repeat right -382px;
+  overflow: hidden;
 }
 #smallFont {
   text-shadow: 1px 1px 0px #FFF;

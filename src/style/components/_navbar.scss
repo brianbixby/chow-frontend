@@ -201,7 +201,6 @@ nav {
   left: 0px;
   top: 51px;
   border-top: 1px solid #FFF;
-  border-bottom: 1px solid #FFF;
 
   .innerWrapper {
     height: 40px;
@@ -232,4 +231,9 @@ nav {
   transform: translateY(-41px);
   transition: transform 1.5s ease-in-out;
   transition-delay: 1.5s;
+}
+.hideBig { display: none; }
+@media only screen and (max-width: 352px) {
+  .hideSmall { display: none; }
+  .hideBig { display: inline-block; }
 }
