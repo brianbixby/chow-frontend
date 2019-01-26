@@ -1,0 +1,163 @@
+nav {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    // border-bottom: 1px solid #e6e6e6;
+    // min-height: 62px;
+    background-color: #fafafa;
+    min-height: 74px;
+  
+    .homeLinkDiv {
+        position: absolute;
+        top: 32px;
+        left: 22px;
+        min-width: 79px;
+  
+      .homeLink {
+        font-family: 'Varela Round', sans-serif;
+        color: #ff7e1a;
+        font-size: 28px;
+        line-height: 1;
+
+        .spoonContainer {
+            position: relative;
+
+            .spoon {
+                position: absolute;
+                left: -90px;
+                top: -2px;
+            }
+        }
+      }
+    }
+    .browseDiv {
+        height: 50px;
+        line-height: 50px;
+        top: 12px;
+        background: #f2f2f2;
+        position: absolute;
+        left: 123px;
+        padding: 0 54px 0 30px;
+        cursor: pointer;
+
+        p {
+            position: relative;
+
+            span {
+                color: #2d2d2d;
+                font-size: 15px;
+                line-height: 50px;
+            }
+            img {
+                width: 14px;
+                position: absolute;
+                top: 18px;
+                left: 65px;
+            }
+        }
+    }
+    .browseDiv:hover {
+        background: #ebebeb;
+    }
+    .navBellDiv {
+        position: absolute;
+        right: 338px;
+        top: 12px;
+        padding-right: 2px;
+        padding-left: 8px;
+        height: 50px;
+        width: 56px;
+        cursor: pointer;
+
+        img {
+            margin-top: 4px;
+            width: 41px;
+        }
+        img:hover {
+            opacity: .6;
+        }
+    }
+    .navHeartDiv {
+        position: absolute;
+        right: 282px;
+        top: 12px;
+        padding-right: 8px;
+        padding-left: 2px;
+        height: 50px;
+        width: 56px;
+        cursor: pointer;
+
+        img:hover {
+            opacity: .6;
+        }
+    }
+    .navProfileDiv {
+        position: absolute;
+        right: 62px;
+        // top: 6px;
+        top: 12px;
+        background: #f2f2f2;
+
+        .navProfileDivInner {
+            position: relative;
+            width: 220px;
+            height: 50px;
+
+            .profileImageDiv {
+                position: absolute;
+
+                .avatar {
+    
+                }
+                .noProfileImageNav {
+                    width: 52px;
+                    margin-top: -1px;
+                    margin-left: 6px;
+                }
+            }
+            .profileTextDiv {
+                position: absolute;
+                left: 65px;
+                background: #feaa26;
+                height: 50px;
+                width: 155px;
+                text-align: center;
+                cursor: pointer;
+
+                .profileText {
+                    color: #fff;
+                    font-size: 16px;
+                    line-height: 50px;
+                    font-family: 'Source Sans Pro', sans-serif;
+                }
+            }
+            .profileTextDiv:hover {
+                background: #ed9702;
+            }
+        }
+    }
+    .hamburgerNav {
+        position: absolute;
+        // top: 20px;
+        top: 26px;
+        right: 20px;
+        cursor: pointer;
+
+        span {
+            display: block;
+            width: 22px;
+            height: 3px;
+            background-color: #999;
+            margin-top: 4px;
+        }
+        .hamtop {
+
+        }
+        .hammid {
+
+        }
+        .hambot {
+            
+        }
+    }
+  }

@@ -41,15 +41,15 @@ class SearchBar extends React.Component {
 
     if(name === 'searchTerm') {
       if(!value)
-        setError(name, `${name} can not be empty`)
+        setError(name, `${name} can not be empty`);
       else
-        deleteError(name)
+        deleteError(name);
     }
     if(name === 'minCals' || name === 'maxCals' || name === 'maxIngredients') {
       if(value && isInt(value))
-        setError(name, `${name} must be a number`)
+        setError(name, `${name} must be a number`);
       else
-        deleteError(name)
+        deleteError(name);
     }
 
     this.setState({ ...errors, error: !!(errors.emailError || errors.minCalsError || errors.maxCalsError || errors.maxIngredients) });
@@ -59,7 +59,7 @@ class SearchBar extends React.Component {
     let { name } = e.target;
     this.setState(state => ({
       focused: state.focused == name ? null : state.focused,
-    }))
+    }));
   };
   handleChange = e => {
     let { name, value } = e.target;
@@ -85,16 +85,15 @@ class SearchBar extends React.Component {
       minCalsError: state.minCalsError ? null : 'required',
       maxCalsError: state.maxCalsError ? null : 'required',
       maxIngredientsError: state.maxIngredientsError ? null : 'required',
-    }))
+    }));
   };
 
   render() {
     let { searchTerm, searchTermError, minCalsError, maxCalsError, maxIngredientsError, advancedSearch, error, focused, submitted } = this.state;
+    let magnify = require('./../helpers/assets/icons/magnify.icon.svg');
     return (
-      <div >
-        <div className='row'>
-          <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
-            <form id='search-form' onSubmit={this.handleSubmit} className={classToggler({
+          <div className='searchContainer'>
+            <form className='searchForm' onSubmit={this.handleSubmit} className={classToggler({
                 'form': true,
                 'error': error && submitted,
               })}>
@@ -103,22 +102,21 @@ class SearchBar extends React.Component {
                   className='form-control search-form'
                   type='text'
                   name='searchTerm'
-                  placeholder='Find the best recipes from across the web...'
+                  placeholder='Find a recipe'
                   value={searchTerm}
                   onChange={this.handleChange}
                   onFocus={this.handleFocus}
                   onBlur={this.handleBlur}
                 />
+                <div className='advancedSearchButton' onClick={() => this.setState({advancedSearch: !this.state.advancedSearch})}>
+                  <p>Advanced Search</p>
+                </div>
                 <Tooltip message={searchTermError} show={focused === 'searchTerm' || submitted} />
-                <span className='input-group-btn'>
-                  <button type='submit' className='btn search-btn'><i className='fa fa-search'></i></button>
-                </span>
+                <button type='submit' className='btn search-btn'><img src={magnify} /></button>
               </div>
               {renderIf(advancedSearch, 
-                <div className='row'>
-                  <div id='advancedSearchDiv' className='col-xs-12 col-lg-12'>
-                    <div className='row'>
-                      <div className='col-xs-3 col-lg-3'>
+                <div className='advancedSearchDiv'>
+                      <div>
                         <span className='advancedSearchSectionHeader'>Calories</span> <br/>
                         <span>From 
                           <input 
@@ -162,7 +160,7 @@ class SearchBar extends React.Component {
                           />
                         </span><br/>
                       </div>
-                      <div className='col-xs-3 col-lg-3'>
+                      <div>
                         <span className='advancedSearchSectionHeader'>Health </span> <br/>
                         <label>
                           <input
@@ -231,7 +229,7 @@ class SearchBar extends React.Component {
                           Paleo
                         </label><br/>
                       </div>
-                      <div className='col-xs-3 col-lg-3'>
+                      <div>
                         <br/>
                         <div className='dietFormGroup' className='form-group'>
                           <label>
@@ -302,7 +300,7 @@ class SearchBar extends React.Component {
                           </label><br/>
                         </div>
                       </div>
-                      <div className='col-xs-3 col-lg-3'>
+                      <div>
                         <b>Diet </b> <br/>
                         <div className='allergyFormGroup' className='form-group'>
                           <label>
@@ -374,8 +372,6 @@ class SearchBar extends React.Component {
                         </div>
                         <button id='advancedSearchFormButton' type='submit' className='button green'><span id='advancedSearchIcon' className='glyphicon glyphicon-check'>&nbsp;<span id='advancedSearchButtonText'><b>Done</b></span></span></button>
                       </div>
-                    </div>
-                  </div>
                   <div className='advancedSearchToolTip'>
                     <Tooltip message={minCalsError} show={focused === 'minCals' || submitted} />
                     <Tooltip message={maxCalsError} show={focused === 'maxCals' || submitted} />
@@ -385,32 +381,8 @@ class SearchBar extends React.Component {
               )}
             </form>
           </div>
-        </div>
-        <div id='searchFilter' className='row'>
-          <div className='col-xs-12 col-sm-12 com-lg-12 col-lg-12'>
-            <p id='searchFilterText' onClick={() => this.setState({advancedSearch: !this.state.advancedSearch})}>
-              <span id='smallFont'> REFINE SEARCH BY </span> <span id='bold'> Calories, Diet, Ingredients </span> <span id='searchFilterDownArrow' className='glyphicon glyphicon-triangle-bottom'></span>
-            </p>
-          </div>
-        </div>
-      </div>
     );
   }
 }
 
 export default SearchBar;
-
-// let mapStateToProps = state => ({
-//   userAuth: state.userAuth,
-//   userProfile: state.userProfile,
-// });
-
-// let mapDispatchToProps = dispatch => {
-//   return {
-//     signUp: user => dispatch(signUpRequest(user)),
-//     signIn: user => dispatch(signInRequest(user)),
-//     userProfileFetch: () => dispatch(userProfileFetchRequest()),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

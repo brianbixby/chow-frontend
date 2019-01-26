@@ -1,270 +1,270 @@
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.searchResultsDisplay {
-  margin: 20px auto;
-}
-.allResultsFavButton:hover .allResultsFavButtonText{
-  color: #8EE11B;
-}
-.tile {
-  height: 330px;
-  width: 220px;
-  border: 1px rgba(220,220,220, 0.7) solid;
-  margin-bottom: 20px;
-  margin-right: 10px;
-  position: relative;
-  float:left;
-}
-.tileWoutFavButton:hover {
-  cursor: pointer;
-}
-.tileWoutFavButton:hover .tileLabel {
-  color: #8EE11B;
-  text-decoration: none;
-}
-.tilePic {
-  height: 200px;
-  width: 100%;
-}
-.tileLabel {
-  padding: 2px;
-  padding-top: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-}
-.tileCalorieAndIngredientText {
-  padding: 2px;
-  margin: auto;
-  border-top: 1px rgba(220,220,220, 0.7) solid;
-  border-bottom: 1px rgba(220,220,220, 0.7) solid;
-  font-size: 10px;
-  text-align: center;
-  color:gray;
-}
-.tileCalorieTextNumber {
-  font-size: 14px;
-  color: #8EE11B;
-}
-.tileIngredientTextNumber {
-  font-size: 14px;
-  color: #8EE11B;
-}
-.tileSource {
-  display: flex;
-  color: gray;
-  margin-top: 10px;
-  margin-left: 15px;
-}
-.tileSource:hover {
-  color: gray;
-  text-decoration: underline;
-}
-.disable-link {
-  pointer-events: none;
-  cursor: default;
-  text-decoration: none;
-}
-#navTagline {
-  margin-left: 40px;
-  color: gray;
-  font-size: 20px;
-}
-#navLogo {
-  color: #8EE11B;
-  font-size: 40px;
-  font-weight: 600;
-}
-#all-0 {
-  color: #E15115;
-}
-#all-1 {
-  color: #FFC425;
-}
-#all-2 {
-  color: #83CC1C;
-}
-.search-form {
-    border-radius: 70px 0px 0px 70px;
-    display: flex;
-    justify-content: center;
-    height: 75px;
-    font-weight: 300;
-    font-size: 23px;
-    padding-left: 30px;
-}
-#search-form {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  margin-top: 75px;
-}
-.search-btn {
-    border-radius: 0px 70px 70px 0px;
-    cursor:pointer;
-    height: 75px;
-    width: 75px;
-    background-color: #8EE11B;
-    color: white;
-}
-.search-btn:hover {
-  color: white;
-  font-weight: bold;
-}
-#signupOrLoginText {
-  display: inline-block;
-}
-span.line {
-  display: inline-block;
-}
-#signupOrLogin {
-  text-align: center;
-}
-#bold {
-  font-weight: bold;
-  color: #000000;
-}
-.advancedSearchSectionHeader {
-  font-weight: bold;
-  text-align: left;
-}
-#advancedSearchDiv {
-  margin: 8px auto;
-  border: 1px solid gray;
-}
-#searchFilterText {
-  margin-top: 10px;
-  text-decoration: none;
-  color: #747D7D;
-}
-#smallFont {
-  font-size: 11px;
-}
-#searchFilterDownArrow {
-  font-size: 11px;
-  color: #8EE11B;
-}
-#searchFilter {
-  text-align: center;
-  margin-top: 8px;
-}
-.dietFormGroup, .allergyFormGroup {
-  text-align: left;
-  font-weight: normal !important;
-}
-#advancedSearchFormButton {
-  float: right;
-}
-#advancedSearch-form {
-  padding: 20px;
-}
-#advancedSearchButtonText {
-  padding-bottom: 37px;
-}
-#textBoxInputMaxResults, #textBoxInputMaxCal, #textBoxInputMinCal {
-  float: right;
-}
-/* BUTTONS */
-.button {
-	display: inline-block;
-	outline: none;
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	font: 14px/100% Arial, Helvetica, sans-serif;
-	padding: .5em 2em .55em;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	-webkit-border-radius: .5em;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-}
-.button:hover {
-	text-decoration: none;
-}
-.button:active {
-	position: relative;
-	top: 1px;
-}
-.orange {
-	color: #fef4e9;
-	border: solid 1px #da7c0c;
-	background: #f78d1d;
-	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
-	background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
-}
-.orange:hover {
-	background: #f47c20;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
-	background: -moz-linear-gradient(top,  #f88e11,  #f06015);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
-  color: #fef4e9;
-}
-.orange:active {
-	color: #fcd3a5;
-	background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
-	background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
-}
-.green {
-	color: #e8f0de;
-	border: solid 1px #538312;
-	background: #64991e;
-	background: -webkit-gradient(linear, left top, left bottom, from(#8EE01B), to(#6DB30A));
-	background: -moz-linear-gradient(top,  #8EE01B,  #6DB30A);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#8EE01B', endColorstr='#6DB30A');
-}
-.green:hover {
-	background: #538018;
-	background: -webkit-gradient(linear, left top, left bottom, from(#7CC418), to(#5D9909));
-	background: -moz-linear-gradient(top,  #7CC418,  #5D9909);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7CC418', endColorstr='#5D9909');
-  color: #fef4e9;
-}
-.green:active {
-	color: #a9c08c;
-	background: -webkit-gradient(linear, left top, left bottom, from(#6DB30A), to(#8EE01B));
-	background: -moz-linear-gradient(top,  #6DB30A,  #8EE01B);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6DB30A', endColorstr='#8EE01B');
-}
-.allResultsFavButton {
-  position: absolute;
-  background-color: white;
-  color: #8EE11B;
-  right: 5px;
-  top: 5px;
-}
-.allResultsFavButtonText {
-  color: black;
-}
-.flex-container {
-  padding: 0;
-  margin: 0;
-  -ms-box-orient: horizontal;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-.space-around {
-  -webkit-justify-content: space-around;
-  justify-content: space-around;
-}
-.tileCalorieAndIngredientTextHidden {
-  display: none;
-}
+// * {
+//   -webkit-box-sizing: border-box;
+//   -moz-box-sizing: border-box;
+//   box-sizing: border-box;
+// }
+// *:before,
+// *:after {
+//   -webkit-box-sizing: border-box;
+//   -moz-box-sizing: border-box;
+//   box-sizing: border-box;
+// }
+// .searchResultsDisplay {
+//   margin: 20px auto;
+// }
+// .allResultsFavButton:hover .allResultsFavButtonText{
+//   color: #8EE11B;
+// }
+// .tile {
+//   height: 330px;
+//   width: 220px;
+//   border: 1px rgba(220,220,220, 0.7) solid;
+//   margin-bottom: 20px;
+//   margin-right: 10px;
+//   position: relative;
+//   float:left;
+// }
+// .tileWoutFavButton:hover {
+//   cursor: pointer;
+// }
+// .tileWoutFavButton:hover .tileLabel {
+//   color: #8EE11B;
+//   text-decoration: none;
+// }
+// .tilePic {
+//   height: 200px;
+//   width: 100%;
+// }
+// .tileLabel {
+//   padding: 2px;
+//   padding-top: 5px;
+//   margin-left: 15px;
+//   margin-right: 15px;
+// }
+// .tileCalorieAndIngredientText {
+//   padding: 2px;
+//   margin: auto;
+//   border-top: 1px rgba(220,220,220, 0.7) solid;
+//   border-bottom: 1px rgba(220,220,220, 0.7) solid;
+//   font-size: 10px;
+//   text-align: center;
+//   color:gray;
+// }
+// .tileCalorieTextNumber {
+//   font-size: 14px;
+//   color: #8EE11B;
+// }
+// .tileIngredientTextNumber {
+//   font-size: 14px;
+//   color: #8EE11B;
+// }
+// .tileSource {
+//   display: flex;
+//   color: gray;
+//   margin-top: 10px;
+//   margin-left: 15px;
+// }
+// .tileSource:hover {
+//   color: gray;
+//   text-decoration: underline;
+// }
+// .disable-link {
+//   pointer-events: none;
+//   cursor: default;
+//   text-decoration: none;
+// }
+// #navTagline {
+//   margin-left: 40px;
+//   color: gray;
+//   font-size: 20px;
+// }
+// #navLogo {
+//   color: #8EE11B;
+//   font-size: 40px;
+//   font-weight: 600;
+// }
+// #all-0 {
+//   color: #E15115;
+// }
+// #all-1 {
+//   color: #FFC425;
+// }
+// #all-2 {
+//   color: #83CC1C;
+// }
+// .search-form {
+//     border-radius: 70px 0px 0px 70px;
+//     display: flex;
+//     justify-content: center;
+//     height: 75px;
+//     font-weight: 300;
+//     font-size: 23px;
+//     padding-left: 30px;
+// }
+// #search-form {
+//   text-align: center;
+//   display: flex;
+//   justify-content: center;
+//   margin-top: 75px;
+// }
+// .search-btn {
+//     border-radius: 0px 70px 70px 0px;
+//     cursor:pointer;
+//     height: 75px;
+//     width: 75px;
+//     background-color: #8EE11B;
+//     color: white;
+// }
+// .search-btn:hover {
+//   color: white;
+//   font-weight: bold;
+// }
+// #signupOrLoginText {
+//   display: inline-block;
+// }
+// span.line {
+//   display: inline-block;
+// }
+// #signupOrLogin {
+//   text-align: center;
+// }
+// #bold {
+//   font-weight: bold;
+//   color: #000000;
+// }
+// .advancedSearchSectionHeader {
+//   font-weight: bold;
+//   text-align: left;
+// }
+// #advancedSearchDiv {
+//   margin: 8px auto;
+//   border: 1px solid gray;
+// }
+// #searchFilterText {
+//   margin-top: 10px;
+//   text-decoration: none;
+//   color: #747D7D;
+// }
+// #smallFont {
+//   font-size: 11px;
+// }
+// #searchFilterDownArrow {
+//   font-size: 11px;
+//   color: #8EE11B;
+// }
+// #searchFilter {
+//   text-align: center;
+//   margin-top: 8px;
+// }
+// .dietFormGroup, .allergyFormGroup {
+//   text-align: left;
+//   font-weight: normal !important;
+// }
+// #advancedSearchFormButton {
+//   float: right;
+// }
+// #advancedSearch-form {
+//   padding: 20px;
+// }
+// #advancedSearchButtonText {
+//   padding-bottom: 37px;
+// }
+// #textBoxInputMaxResults, #textBoxInputMaxCal, #textBoxInputMinCal {
+//   float: right;
+// }
+// /* BUTTONS */
+// .button {
+// 	display: inline-block;
+// 	outline: none;
+// 	cursor: pointer;
+// 	text-align: center;
+// 	text-decoration: none;
+// 	font: 14px/100% Arial, Helvetica, sans-serif;
+// 	padding: .5em 2em .55em;
+// 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+// 	-webkit-border-radius: .5em;
+// 	-moz-border-radius: .5em;
+// 	border-radius: .5em;
+// 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+// 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+// 	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+// }
+// .button:hover {
+// 	text-decoration: none;
+// }
+// .button:active {
+// 	position: relative;
+// 	top: 1px;
+// }
+// .orange {
+// 	color: #fef4e9;
+// 	border: solid 1px #da7c0c;
+// 	background: #f78d1d;
+// 	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+// 	background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+// 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+// }
+// .orange:hover {
+// 	background: #f47c20;
+// 	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+// 	background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+// 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+//   color: #fef4e9;
+// }
+// .orange:active {
+// 	color: #fcd3a5;
+// 	background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+// 	background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
+// 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+// }
+// .green {
+// 	color: #e8f0de;
+// 	border: solid 1px #538312;
+// 	background: #64991e;
+// 	background: -webkit-gradient(linear, left top, left bottom, from(#8EE01B), to(#6DB30A));
+// 	background: -moz-linear-gradient(top,  #8EE01B,  #6DB30A);
+// 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#8EE01B', endColorstr='#6DB30A');
+// }
+// .green:hover {
+// 	background: #538018;
+// 	background: -webkit-gradient(linear, left top, left bottom, from(#7CC418), to(#5D9909));
+// 	background: -moz-linear-gradient(top,  #7CC418,  #5D9909);
+// 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7CC418', endColorstr='#5D9909');
+//   color: #fef4e9;
+// }
+// .green:active {
+// 	color: #a9c08c;
+// 	background: -webkit-gradient(linear, left top, left bottom, from(#6DB30A), to(#8EE01B));
+// 	background: -moz-linear-gradient(top,  #6DB30A,  #8EE01B);
+// 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6DB30A', endColorstr='#8EE01B');
+// }
+// .allResultsFavButton {
+//   position: absolute;
+//   background-color: white;
+//   color: #8EE11B;
+//   right: 5px;
+//   top: 5px;
+// }
+// .allResultsFavButtonText {
+//   color: black;
+// }
+// .flex-container {
+//   padding: 0;
+//   margin: 0;
+//   -ms-box-orient: horizontal;
+//   display: -webkit-box;
+//   display: -moz-box;
+//   display: -ms-flexbox;
+//   display: -moz-flex;
+//   display: -webkit-flex;
+//   display: flex;
+//   -webkit-flex-wrap: wrap;
+//   flex-wrap: wrap;
+// }
+// .space-around {
+//   -webkit-justify-content: space-around;
+//   justify-content: space-around;
+// }
+// .tileCalorieAndIngredientTextHidden {
+//   display: none;
+// }
