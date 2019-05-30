@@ -1,5 +1,4 @@
 import superagent from 'superagent';
-import * as util from '../lib/util.js';
 
 export const signIn = token => ({
   type: 'SIGN_IN',
@@ -16,6 +15,7 @@ export const signUpRequest = user => dispatch => {
     .withCredentials()
     .send(user)
     .then( res => {
+      console.log("res-cookie: ", res.cookie);
       dispatch(signIn(res.text));
       localStorage.token = res.text;
       return res;
@@ -28,6 +28,7 @@ export const signInRequest = user => dispatch => {
     .auth(user.username, user.password)
     .then( res => {
       dispatch(signIn(res.text));
+      console.log("res-cookie: ", res.cookie);
       localStorage.token = res.text;
       return res;
     });
@@ -38,6 +39,7 @@ export const tokenSignInRequest = token => dispatch => {
     .set('Authorization', `Bearer ${token}`)
     .then( res => {
       dispatch(signIn(res.text));
+      console.log("res-cookie: ", res.cookie);
       localStorage.token = res.text;
       return res;
     });

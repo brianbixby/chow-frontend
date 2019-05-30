@@ -3,18 +3,24 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Avatar from '../helpers/avatar';
-import Modal from '../helpers/modal';
-import UserAuthForm from '../userAuth-form';
 import SearchBar from '../searchBar';
 import { signOut } from '../../actions/userAuth-actions.js';
 import { recipesFetchRequest } from '../../actions/search-actions.js';
-import { classToggler, renderIf } from '../../lib/util.js';
+import { favoritesFetchRequest } from '../../actions/favorite-actions.js';
+import { renderIf, logError } from '../../lib/util.js';
 
 class Navbar extends React.Component {
     constructor(props){
         super(props);
-        this.state={ authFormAction: 'Sign Up', formDisplay: false, };
+        this.state={};
     }
+    componentDidMount() {
+        // fix to token sign in
+        if (this.props.userAuth) {
+            this.props.favoritesFetch()
+            .catch(err => logError(err));
+        }
+    };
     handleSignOut = () => {
         this.props.signOut();
         this.props.history.push('/');
@@ -44,6 +50,10 @@ class Navbar extends React.Component {
             // errCB(err);
           });
     };
+    handleProfileDivClick = e => {
+        let link = this.props.userAuth ? `/profile/${this.props.userProfile.username}` : '/account/signup';
+        this.props.history.push(link);
+    }
     render() {
         let spoon = require('./../helpers/assets/icons/spoon.icon.svg');
         let chevron = require('./../helpers/assets/icons/chevron-down.icon.svg');
@@ -51,7 +61,6 @@ class Navbar extends React.Component {
         let heart = require('./../helpers/assets/icons/heart.icon.svg');
         let user = require('./../helpers/assets/icons/user.icon.svg');
         let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
-        let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
         return (
             <nav>
                 <div className='homeLinkDiv'>
@@ -67,7 +76,7 @@ class Navbar extends React.Component {
                 <div className='navHeartDiv'>
                     <img src={heart} />
                 </div>
-                <div className='navProfileDiv'>
+                <div className='navProfileDiv' onClick={this.handleProfileDivClick}>
                     <div className='navProfileDivInner'>
                         <div className='profileImageDiv'>
                             {profileImage}
@@ -104,6 +113,7 @@ let mapStateToProps = state => ({
 let mapDispatchToProps = dispatch => ({
     signOut: () => dispatch(signOut()),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    favoritesFetch: () => dispatch(favoritesFetchRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
