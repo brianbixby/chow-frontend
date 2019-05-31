@@ -1,77 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
 
 import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { recipesFetchRequest, recipeFetchRequest, recipeFetch } from '../../actions/search-actions.js';
-import Modal from '../helpers/modal';
-import UserAuthForm from '../userAuth-form';
-import SeachBar from '../searchBar';
 import { logError, renderIf, classToggler } from './../../lib/util.js';
 
 class RecipeContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {  };
+    this.state = {};
   }
-  componentWillMount() {
-    console.log('hi');
-  //   userValidation(this.props);
-  //   this.props.scoreBoardsFetch(this.props.currentLeague._id)
-  //     .then(() => {
-  //       this.props.userPicksFetch(this.props.currentLeague._id)
-  //       .then(picks => {
-  //         let gameIDArr = [];
-  //         gameIDArr.push(picks.map(userPick => userPick.gameID._id));
-  //         return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
-  //       })
-  //       .catch(logError);
-  //     })
-  //     window.scrollTo(0, 0);
-  }
-
-  handleSignin = (user, errCB) => {
-    return this.props.signIn(user)
-      .then(() => this.props.userProfileFetch())
-      .catch(err => {
-        logError(err);
-        errCB(err);
-      });
-  };
-  handleSignup = (user, errCB) => {
-    return this.props.signUp(user)
-      .then(() => this.props.userProfileFetch())
-      .catch(err => {
-        logError(err);
-        errCB(err);
-      });
-  };
-  // handleSearch = (searchParams, errCB) => {
-  //   console.log('searchParams: ',searchParams);
-  //   if(!searchParams.minCals) searchParams.minCals='0';
-  //   if(!searchParams.maxCals) searchParams.maxCals='10000';
-  //   let ingredients = searchParams.maxIngredients ? `&ingr=${searchParams.maxIngredients}` : '';
-  //   let diet = searchParams.dietOption ? `&diet=${searchParams.dietOption}` : '';
-  //   let health = searchParams.healthOption ? `&health=${searchParams.healthOption}` : '';
-  //   let queryParams = `&calories=${searchParams.minCals}-${searchParams.maxCals}${health}${diet}${ingredients}`;
-  //   let queryString = searchParams.searchTerm ? `search?q=${searchParams.searchTerm}` : null;
-  //   console.log('queryString: ', queryString);
-  //   console.log('queryParams: ', queryParams);
-  
-  //   return this.props.recipesFetch(queryString, queryParams)
-  //     .then(() => {
-  //       if(queryString) {
-  //         return this.props.history.push(`/search/${queryString}${queryParams}`);
-  //       } else {
-  //         return this.props.history.push(`/search/?q=${queryString}${queryParams}`);
-  //       }
-  //     })
-  //     .catch(err => {
-  //       logError(err);
-  //       errCB(err);
-  //     });
-  // };
 
   handleBoundRecipeClick = (myRecipe, e) => {
     return this.props.recipeFetch(myRecipe.recipe.uri)
@@ -97,7 +36,6 @@ class RecipeContainer extends React.Component {
   calsPD = (cals, servings) => (cals/servings/20).toFixed(0);
 
   render() {
-    // let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
     let { recipe } = this.props;
     return (
       <div className='container'>
@@ -221,8 +159,6 @@ let mapStateToProps = state => ({
 
 let mapDispatchToProps = dispatch => {
   return {
-    signUp: user => dispatch(signUpRequest(user)),
-    signIn: user => dispatch(signInRequest(user)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
     recipeFetch: query => dispatch(recipeFetchRequest(query)),

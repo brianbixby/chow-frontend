@@ -1,8 +1,8 @@
 import { checkAndAdd } from '../lib/util.js';
 
 let validateFavorite = favorite => {
-  if(!favorite._id || !favorite.name || !favorite.image || !favorite.url) {
-    throw new Error('VALIDATION ERROR: favorite requires a id, name, image, url.');
+  if(!favorite._id || !favorite.image || !favorite.label || !favorite.calories || !favorite.yield || !favorite.url || !favorite.uri || !favorite.source || !favorite.ingredientLines) {
+    throw new Error('VALIDATION ERROR: favorite requires a id, image, label, calories, yield, url uri, source and ingredientlines.');
   }
 };
 
@@ -11,10 +11,10 @@ export default (state=[], action) => {
 
   switch(type) {
     case 'FAVORITE_FETCH':
-      validatefavorite(payload);
+      validateFavorite(payload);
       return checkAndAdd(payload, state);
     case 'FAVORITES_FETCH':
-      return [payload];
+      return payload;
     case 'FAVORITE_DELETE':
       // payload is the deleted favorite's ID
       if(state === []) throw new Error('USAGE ERROR: can not delete favorite not in state');

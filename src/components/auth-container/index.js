@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import UserAuthForm from '../userAuth-form';
 import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest } from '../../actions/favorite-actions.js';
-import UserAuthForm from '../userAuth-form';
 import { logError, renderIf } from './../../lib/util.js';
 
 class AuthContainer extends React.Component {
@@ -54,7 +54,7 @@ class AuthContainer extends React.Component {
     let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
     return (
       <div >
-          <p>HELLO\n HELLO\n HELLO\n HELLO\n HELLO\n</p> 
+          <p>HELLO</p> 
           <div>
             <div>
                 <UserAuthForm authFormAction={this.state.authFormAction} onComplete={handleComplete} />

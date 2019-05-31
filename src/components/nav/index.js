@@ -6,7 +6,6 @@ import Avatar from '../helpers/avatar';
 import SearchBar from '../searchBar';
 import { signOut } from '../../actions/userAuth-actions.js';
 import { recipesFetchRequest } from '../../actions/search-actions.js';
-import { favoritesFetchRequest } from '../../actions/favorite-actions.js';
 import { renderIf, logError } from '../../lib/util.js';
 
 class Navbar extends React.Component {
@@ -14,17 +13,12 @@ class Navbar extends React.Component {
         super(props);
         this.state={};
     }
-    componentDidMount() {
-        // fix to token sign in
-        if (this.props.userAuth) {
-            this.props.favoritesFetch()
-            .catch(err => logError(err));
-        }
-    };
+
     handleSignOut = () => {
         this.props.signOut();
         this.props.history.push('/');
     };
+
     handleSearch = (searchParams) => {
         console.log('searchParams: ',searchParams);
         if(!searchParams.minCals) searchParams.minCals='0';
@@ -47,7 +41,7 @@ class Navbar extends React.Component {
           })
           .catch(err => {
             logError(err);
-            // errCB(err);
+            errCB(err);
           });
     };
     handleProfileDivClick = e => {
@@ -61,6 +55,7 @@ class Navbar extends React.Component {
         let heart = require('./../helpers/assets/icons/heart.icon.svg');
         let user = require('./../helpers/assets/icons/user.icon.svg');
         let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
+        let profileText = this.props.userAuth && this.props.userProfile && this.props.userProfile.username ? this.props.userProfile.username : "Sign Up/ Sign In" ;
         return (
             <nav>
                 <div className='homeLinkDiv'>
@@ -82,16 +77,9 @@ class Navbar extends React.Component {
                             {profileImage}
                         </div>
                         <div className='profileTextDiv'>
-                            {renderIf(!this.props.userAuth,
-                                <p className='profileText'>
-                                    Sign Up/ Sign In
-                                </p>
-                            )}
-                            {/* {renderIf(this.props.userProfile,
-                                <p className='profileText'>
-                                    {this.props.userProfile.username}
-                                </p>
-                            )} */}
+                            <p className='profileText'>
+                                {profileText}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -113,7 +101,6 @@ let mapStateToProps = state => ({
 let mapDispatchToProps = dispatch => ({
     signOut: () => dispatch(signOut()),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
-    favoritesFetch: () => dispatch(favoritesFetchRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

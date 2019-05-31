@@ -27,6 +27,7 @@ export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
 };
 
 export const recipeFetchRequest = queryString => dispatch => {
+  console.log("queryString: ", queryString);
   var string =  queryString;
   var hashIndex = string.indexOf('#');
   var leftSide = string.substring(0, hashIndex);

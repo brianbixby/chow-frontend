@@ -24,53 +24,20 @@ export const userValidation = props => {
     if(token) {
       props.tokenSignIn(token)
         .then(() => {
-          return props.sportingEventsFetch()
-            .catch(() => logError);
-        })
-        .then(sportingEvent => {
           return props.userProfileFetch()
-            .then(profile => {
-              return {sportingEventID: sportingEvent._id, leagues: profile.body.leagues, groups: profile.body.groups};
-            })
-            .catch(() => logError);
+            .catch(err => logError(err));
         })
-        .then(returnObj => {
-          if(returnObj.leagues.length)
-            props.leaguesFetch(returnObj.leagues)
-              .catch(() => logError);
-          return returnObj;
+        .then(profile => {
+          return props.favoritesFetch(profile.body)
+            .catch(err => logError(err));
         })
-        .then(returnObj => {
-          if(returnObj.groups.length)
-            props.groupsFetch(returnObj.groups)
-              .catch(() => logError);
-          return returnObj;
-        })
-        .then(returnObj => {
-          if(!returnObj.leagues) 
-            returnObj.leagues = [];
-          return props.topPublicLeaguesFetch(returnObj.sportingEventID, returnObj.leagues)
-            .then(() => returnObj)
-            .catch(() => logError);
-        })
-        .then(returnObj => {
-          return props.topScoresFetch(returnObj.sportingEventID)
-            .then(() => returnObj)
-            .catch(() => logError);
-        })
-        .then(returnObj => {
-          if(!returnObj.groups) 
-            returnObj.groups = [];
-          props.topPublicGroupsFetch(returnObj.groups)
-            .catch(() => logError);
-        })
-        .catch(() => {
-          logError;
-          if(props.location.pathname !== '/')
+        .catch(err => {
+          logError(err);
+          if(props.location.pathname == '/profile/*')
             return history.replace('/');
         });
     } else {
-      if(props.location.pathname !== '/')
+      if(props.location.pathname == '/profile/*')
         return history.replace('/');
     }
   }

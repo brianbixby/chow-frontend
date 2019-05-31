@@ -1,25 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import UserProfileForm from '../userProfile-form';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
+import { favoritesFetchRequest } from '../../actions/favorite-actions.js';
 import { userValidation, logError, formatDate } from './../../lib/util.js';
 
 class ProfileContainer extends React.Component {
   constructor(props){
     super(props);
+    this.state = {};
   }
   componentWillMount() {
-    userValidation(this.props);
+    return userValidation(this.props);
   }
+
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
       .catch(logError);
   };
+  
   render(){
-    // let profileAction='update';
-    // let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
-    // let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
+    let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : require('./../helpers/assets/icons/profilePlaceholder.jpeg');
+    let name = this.props.userProfile.username;
     return (
       <div className='profile-container page-outer-div'>
         <div className='grid-container'>
@@ -28,11 +32,10 @@ class ProfileContainer extends React.Component {
               <div className='col-md-8'>
                 <div className='createOuter'>
                   <div className='page-form'>
-                    {/* <ProfileForm 
+                    <UserProfileForm 
                       userProfile={this.props.userProfile} 
                       onComplete={this.handleProfileUpdate}
-                      profileAction={profileAction}
-                    /> */}
+                    />
                   </div>
                 </div>
               </div>
@@ -40,7 +43,7 @@ class ProfileContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <p className='mainContainerHeader'>{this.props.userProfile.username}</p>
+                      <p className='mainContainerHeader'>{name}</p>
                     </div>
                   </div>
                   <div className='mainContainerSection'>
@@ -48,7 +51,7 @@ class ProfileContainer extends React.Component {
                       <div className='container'>
                         <div className='inner-wrapper'>
                           <div className='profile-image-div'>
-                            {/* <img className='profile-image' src={profileImage} /> */}
+                            <img className='profile-image' src={profileImage} />
                           </div>
                           <div className='userProfileData'>
                             <p>Member Since: {formatDate(this.props.userProfile.createdOn)}</p>
@@ -68,14 +71,14 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-  userAuth: state.userAuth,
   userProfile: state.userProfile,
   favorites: state.favorites,
 })
 
 let mapDispatchToProps = (dispatch) => ({
-  tokenSignIn: token => dispatch(tokenSignInRequest(token)),
+  favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),
   userProfileFetch: () => dispatch(userProfileFetchRequest()),
+  tokenSignIn: token => dispatch(tokenSignInRequest(token)),
   userProfileUpdate: profile => dispatch(userProfileUpdateRequest(profile)),
 })
 
