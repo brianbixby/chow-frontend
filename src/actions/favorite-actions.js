@@ -39,10 +39,10 @@ export const favoritesFetchRequest = favorites => (dispatch, getState) => {
 
 export const favoriteDeleteRequest = favorite => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.delete(`${process.env.API_URL}/api/favorite/${favorite._id}/remove`)
+  return superagent.put(`${process.env.API_URL}/api/favorite/${favorite._id}/remove`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
-      dispatch(favoriteDelete(favorite));
+      dispatch(favoriteDelete(favorite._id));
       return res;
     });
 };

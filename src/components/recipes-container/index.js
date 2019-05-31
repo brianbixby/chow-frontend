@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
-import { recipesFetchRequest, recipeFetchRequest, recipeFetch } from '../../actions/search-actions.js';
+import { recipesFetchRequest, recipeFetch } from '../../actions/search-actions.js';
 import { logError, renderIf, userValidation } from './../../lib/util.js';
 
 class RecipesContainer extends React.Component {
@@ -12,19 +12,18 @@ class RecipesContainer extends React.Component {
     super(props);
     this.state = {};
   }
+  // to do check and get recipes search params from url
 
   componentWillMount() {
     return userValidation(this.props);
   }
 
   handleBoundRecipeClick = (myRecipe, e) => {
-    console.log("myRecipe.recipe: ", myRecipe.recipe);
     this.props.recipeFetchRequest(myRecipe.recipe);
     return this.props.history.push(`/recipe/${myRecipe.recipe.label}`);
   };
 
   handleBoundFavoriteClick = (favorite, e) => {
-    console.log('favorite: ', favorite);
     if (this.props.userAuth) {
       this.props.favoriteFetch(favorite.recipe)
         .then(() => alert("favorite added."))
@@ -73,8 +72,8 @@ class RecipesContainer extends React.Component {
 }
 
 let mapStateToProps = state => ({
-  userAuth: state.userAuth,
   recipes: state.recipes,
+  userAuth: state.userAuth,
 });
 
 let mapDispatchToProps = dispatch => {
@@ -84,7 +83,6 @@ let mapDispatchToProps = dispatch => {
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
-    recipeFetch: query => dispatch(recipeFetchRequest(query)),
     recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
   };
 };

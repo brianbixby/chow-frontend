@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
+import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
-import { recipesFetchRequest, recipeFetchRequest, recipeFetch } from '../../actions/search-actions.js';
-import { logError, renderIf, classToggler } from './../../lib/util.js';
+import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
+import { recipeFetchRequest } from '../../actions/search-actions.js';
+import { logError, renderIf, classToggler, userValidation } from './../../lib/util.js';
+
+// to do check and get recipe search params from url
 
 class RecipeContainer extends React.Component {
   constructor(props){
@@ -12,26 +15,18 @@ class RecipeContainer extends React.Component {
     this.state = {};
   }
 
-  handleBoundRecipeClick = (myRecipe, e) => {
-    return this.props.recipeFetch(myRecipe.recipe.uri)
-      .then(() => this.props.history.push(`/recipe/${myRecipe.recipe.uri}`))
-      .catch(err => {
-        logError(err);
-        errCB(err);
-      });
+  componentWillMount() {
+    return userValidation(this.props);
+  }
+ 
+  handleBoundFavoriteClick = (favorite, e) => {
+    if (this.props.userAuth) {
+      this.props.favoriteFetch(favorite.recipe)
+        .then(() => alert("favorite added."))
+        .catch(err => logError(err));
+    }
   };
 
-  // recipeFetch
-  handleBoundFavoriteClick = e => {
-    console.log('recipe: ', recipe);
-    // addToFavorite(this.props.recipe.uri, this.props.recipe.label, this.props.recipe.image);
-    // return this.props.recipeFetch(recipe.users)
-    //   .then(() => this.props.history.push(`/recipe/${recipe.uri}`))
-    //   .catch(err => {
-    //     logError(err);
-    //     errCB(err);
-    //   });
-  };
   calsPS = (cals, servings) => Math.round(cals/servings);
   calsPD = (cals, servings) => (cals/servings/20).toFixed(0);
 
@@ -94,13 +89,12 @@ class RecipeContainer extends React.Component {
                   </div>
                 })}
                 {recipe.digest.map((myRecipe2, idx) => {
-                  let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe2);
                   let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe2);
                   return <div key={idx} className='tile'>
                     <button onClick={boundFavoriteClick} className='allResultsFavButton' type='btn btn-default'>
                       <span className='glyphicon glyphicon-bookmark'></span> <span className='allResultsFavButtonText'>Save</span>
                     </button>
-                    <div className='tileWoutFavButton' onClick={boundRecipeClick}>
+                    <div className='tileWoutFavButton'>
                       <img className='tilePic' src={recipe.image} />
                       <p className='tileLabel'>{recipe.label}</p>
                       <p className='tileCalorieAndIngredientText'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(recipe.calories, recipe.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {recipe.ingredientLines.length} </span>   INGREDIENTS</span></p>
@@ -152,17 +146,16 @@ class RecipeContainer extends React.Component {
 }
 
 let mapStateToProps = state => ({
-  userAuth: state.userAuth,
-  userProfile: state.userProfile,
   recipe: state.recipe,
 });
 
 let mapDispatchToProps = dispatch => {
   return {
+    favoriteFetch: favorite => dispatch(favoriteFetchRequest(favorite)),
+    favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
-    recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     recipeFetch: query => dispatch(recipeFetchRequest(query)),
-    recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
   };
 };
 

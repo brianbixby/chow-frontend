@@ -8,6 +8,8 @@ import { signOut } from '../../actions/userAuth-actions.js';
 import { recipesFetchRequest } from '../../actions/search-actions.js';
 import { renderIf, logError } from '../../lib/util.js';
 
+// to do figure out advanced search
+
 class Navbar extends React.Component {
     constructor(props){
         super(props);
