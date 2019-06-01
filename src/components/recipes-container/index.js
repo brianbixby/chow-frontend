@@ -12,10 +12,15 @@ class RecipesContainer extends React.Component {
     super(props);
     this.state = {};
   }
-  // to do check and get recipes search params from url
 
   componentWillMount() {
-    return userValidation(this.props);
+    userValidation(this.props);
+    if (this.props.recipes.length == 0) {
+      let string = window.location.href.split('/search/')[1];
+      let hashIndex = string.indexOf('&');
+      this.props.recipesFetch(string.substring(0, hashIndex), string.substring(hashIndex, string.length))
+        .catch(err => logError(err));
+    }
   }
 
   handleBoundRecipeClick = (myRecipe, e) => {

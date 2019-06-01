@@ -72,12 +72,12 @@ class SearchBar extends React.Component {
     e.preventDefault();
     if(!this.state.error) {
       this.props.onComplete(this.state)
-        .catch(err => {
-          this.setState({ 
-            error: err,
-            submitted: true,
-        });
-      });
+      //   .catch(err => {
+      //     this.setState({ 
+      //       error: err,
+      //       submitted: true,
+      //   });
+      // });
     }
     this.setState(state => ({
       submitted: true,
@@ -166,50 +166,6 @@ class SearchBar extends React.Component {
                           <input
                             type='radio'
                             name='healthOption' 
-                            value='dairy-free'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                          />  
-                          Dairy Free
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio' 
-                            name='healthOption' 
-                            value='gluten-free'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur} 
-                          />  
-                          Gluten Free
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio'
-                            name='healthOption' 
-                            value='kosher'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur}
-                          />  
-                          Kosher
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio' 
-                            name='healthOption' 
-                            value='pescatarian'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur} 
-                          />  
-                          Pescatarian
-                        </label><br/>
-                        <label>
-                          <input
-                            type='radio'
-                            name='healthOption' 
                             value='peanut-free'
                             onChange={this.handleChange}
                             onFocus={this.handleFocus}
@@ -217,32 +173,10 @@ class SearchBar extends React.Component {
                           />  
                           Peanut Free
                         </label><br/>
-                        <label>
-                          <input
-                            type='radio' 
-                            name='healthOption' 
-                            value='paleo'
-                            onChange={this.handleChange}
-                            onFocus={this.handleFocus}
-                            onBlur={this.handleBlur} 
-                          />  
-                          Paleo
-                        </label><br/>
                       </div>
                       <div>
                         <br/>
                         <div className='dietFormGroup' className='form-group'>
-                          <label>
-                            <input
-                              type='radio'
-                              name='healthOption' 
-                              value='soy-free'
-                              onChange={this.handleChange}
-                              onFocus={this.handleFocus}
-                              onBlur={this.handleBlur}
-                            />  
-                            Soy Free
-                          </label><br/>
                           <label>
                             <input
                               type='radio' 
@@ -287,17 +221,6 @@ class SearchBar extends React.Component {
                             />  
                             Vegetarian
                           </label><br/>
-                          <label>
-                            <input
-                              type='radio' 
-                              name='healthOption' 
-                              value='wheat-free'
-                              onChange={this.handleChange}
-                              onFocus={this.handleFocus}
-                              onBlur={this.handleBlur} 
-                            />  
-                            Wheat Free
-                          </label><br/>
                         </div>
                       </div>
                       <div>
@@ -313,17 +236,6 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur}
                             />  
                             Balanced
-                          </label><br/>
-                          <label>
-                            <input
-                              type='radio' 
-                              name='dietOption' 
-                              value='high-fiber'
-                              onChange={this.handleChange}
-                              onFocus={this.handleFocus}
-                              onBlur={this.handleBlur} 
-                            />  
-                            High Fiber
                           </label><br/>
                           <label>
                             <input
@@ -346,29 +258,7 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur} 
                             />  
                             Low Carb
-                          </label><br/>
-                          <label>
-                            <input
-                              type='radio'
-                              name='dietOption' 
-                              value='low-fat'
-                              onChange={this.handleChange}
-                              onFocus={this.handleFocus}
-                              onBlur={this.handleBlur}
-                            />  
-                            Low Fat
-                          </label><br/>
-                          <label>
-                            <input
-                              type='radio' 
-                              name='dietOption' 
-                              value='low-sodium'
-                              onChange={this.handleChange}
-                              onFocus={this.handleFocus}
-                              onBlur={this.handleBlur} 
-                            />  
-                            Low Sodium
-                          </label><br/><br/><br/><br/><br/>
+                          </label><br/><br/><br/><br/><br/><br/>
                         </div>
                         <button id='advancedSearchFormButton' type='submit' className='button green'><span id='advancedSearchIcon' className='glyphicon glyphicon-check'>&nbsp;<span id='advancedSearchButtonText'><b>Done</b></span></span></button>
                       </div>

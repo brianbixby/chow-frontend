@@ -6,9 +6,7 @@ import Avatar from '../helpers/avatar';
 import SearchBar from '../searchBar';
 import { signOut } from '../../actions/userAuth-actions.js';
 import { recipesFetchRequest } from '../../actions/search-actions.js';
-import { renderIf, logError } from '../../lib/util.js';
-
-// to do figure out advanced search
+import { logError } from '../../lib/util.js';
 
 class Navbar extends React.Component {
     constructor(props){
@@ -22,34 +20,24 @@ class Navbar extends React.Component {
     };
 
     handleSearch = (searchParams) => {
-        console.log('searchParams: ',searchParams);
         if(!searchParams.minCals) searchParams.minCals='0';
         if(!searchParams.maxCals) searchParams.maxCals='10000';
         let ingredients = searchParams.maxIngredients ? `&ingr=${searchParams.maxIngredients}` : '';
         let diet = searchParams.dietOption ? `&diet=${searchParams.dietOption}` : '';
         let health = searchParams.healthOption ? `&health=${searchParams.healthOption}` : '';
         let queryParams = `&calories=${searchParams.minCals}-${searchParams.maxCals}${health}${diet}${ingredients}`;
-        let queryString = searchParams.searchTerm ? `search?q=${searchParams.searchTerm}` : null;
-        console.log('queryString: ', queryString);
-        console.log('queryParams: ', queryParams);
+        let queryString = searchParams.searchTerm ? `search?q=${searchParams.searchTerm}` : 'search?q=';
       
         return this.props.recipesFetch(queryString, queryParams)
-          .then(() => {
-            if(queryString) {
-              return this.props.history.push(`/search/${queryString}${queryParams}`);
-            } else {
-              return this.props.history.push(`/search/?q=${queryString}${queryParams}`);
-            }
-          })
-          .catch(err => {
-            logError(err);
-            errCB(err);
-          });
+          .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
+          .catch(err => logError(err));
     };
+
     handleProfileDivClick = e => {
         let link = this.props.userAuth ? `/profile/${this.props.userProfile.username}` : '/account/signup';
         this.props.history.push(link);
     }
+
     render() {
         let spoon = require('./../helpers/assets/icons/spoon.icon.svg');
         let chevron = require('./../helpers/assets/icons/chevron-down.icon.svg');

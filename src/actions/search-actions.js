@@ -11,11 +11,12 @@ export const recipeFetch = recipe => ({
 });
 
 export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
+  console.log("queryString: ",queryString);
+  console.log("queryParams: ", queryParams);
   let url = `https://api.edamam.com/${queryString}${process.env.API_KEY}&from=0&to=20${queryParams}`;
-  console.log('url: ', url);
+  console.log("url: ", url);
   return superagent.get(url)
     .then(res => {
-      console.log('res.body: ', res.body.hits);
       dispatch(recipesFetch(res.body.hits));
       return res.body.hits;
     })
