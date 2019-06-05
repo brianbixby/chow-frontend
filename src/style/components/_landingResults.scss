@@ -19,6 +19,7 @@
     background-color: #fff;
     min-height: 90px;
     position: relative;
+    box-sizing: border-box;
 
     
     border: 1px solid #e6e6e6;
@@ -31,7 +32,7 @@
   .likeButton {
     display: block !important;
     position: absolute;
-    z-index: 1;
+    z-index: 9999;
     background-color: rgba(0,0,0,0.5);
     background-image: url(https://i.imgur.com/kR6B6zT.png);
     background-position: 2px 0.5rem;
@@ -44,9 +45,14 @@
     left: auto;
     right: 14px;
     top: 14px;
+    cursor: pointer;
+  }
+  .likeButton:hover {
+    background-color: rgba(0,0,0,0.6);
   }
   .cardImageContainer {
     position: relative;
+    cursor: pointer;
   }
   .cardImage {
     // display: inline;
@@ -59,6 +65,7 @@
     padding-top: 0;
     width: auto;
     flex-direction: column;
+    cursor: pointer;
   }
   .cardTitle {
     margin-top: 5px;
@@ -110,6 +117,28 @@
   display: flex;
   color: #2d2d2d;
   }
+  .cardInfoDiv:hover .cardTitle, .cardImageContainer:hover + .cardInfo .cardInfoDiv .cardTitle {
+    color: #ff7e1a;
+  }
+
+  .byA:hover {
+    color: #feaa26
+  }
+  .byA:hover + h3.cardTitle {
+    color: #4d4d4d !important;
+  }
+
+@media only screen and (max-width: 627px) {
+  .recipesSection {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-flow: dense;
+    width: 300px;
+    margin: 0 auto;
+  }
+}
+
+
   @media only screen and (min-width: 667px) {
     .recipesSection {
         display: grid;
