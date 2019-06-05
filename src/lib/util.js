@@ -32,6 +32,7 @@ export const userValidation = props => {
             .catch(err => logError(err));
         })
         .catch(err => {
+          localStorage.removeItem("token");
           logError(err);
           if(props.location.pathname == '/profile/*')
             return history.replace('/');

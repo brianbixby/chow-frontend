@@ -42,5 +42,6 @@ export const tokenSignInRequest = token => dispatch => {
       console.log("res-cookie: ", res.cookie);
       localStorage.token = res.text;
       return res;
-    });
+    })
+    // .catch(err => console.error(err));
 };

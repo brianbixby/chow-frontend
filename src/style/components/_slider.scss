@@ -1,0 +1,201 @@
+.slider {
+    display: block;
+    font-size: 0;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  
+    .sliderItemContainer {
+      display: inline-block;
+      height: 151px;
+      overflow: hidden;
+      position: relative;
+      width: 270px;
+    }
+    .sliderText {
+      background: rgba(0,0,0,0.45);
+      bottom: 0;
+      color: #fff;
+      overflow: hidden;
+      padding: 2% 3% 3%;
+      position: absolute;
+      white-space: normal;
+      width: 100%;
+      z-index: 100;
+    }
+    .sliderHeader {
+      font-size: 1rem;
+    }
+    .sliderSubheader {
+      display: none;
+    }
+} 
+
+  .sliderSubItem {
+    background-color: #fafafa;
+    border-bottom: 1px solid #e6e6e6;
+    float: left;
+    min-height: 76px;
+    position: relative;
+    width: 100%;
+    display: block;
+  
+    .subItemInnerWrapper {
+      background-color: transparent;
+      height: auto;
+      margin-left: -2px;
+      overflow: visible;
+      padding-left: 0;
+      display: block;
+      font-size: 0;
+      position: relative;
+      white-space: nowrap;
+      width: 100%;
+      flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      clear: both;
+      padding: 2.5% 0 0;
+      margin: 0;
+  
+      .sliderSubitemContainer {
+        background-color: transparent;
+        flex-shrink: 0;
+        height: auto;
+        margin: 0 5px;
+        overflow: visible;
+        width: 70px;
+        display: inline-block;
+
+        .subItemInsideWrapper {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            align-items: center;
+            -ms-flex-align: center;
+            height: 100%;
+            margin: 0;
+            max-width: none;
+            overflow: hidden;
+            width: 100%;
+
+            .sliderSubitemImage {
+                box-shadow: 3px 2px 5px 0 #c2c2c2;
+                border-radius: 50%;
+                float: none;
+                height: 60px;
+                margin-right: 0;
+                width: 60px;
+              }
+              .sliderSubitemTitle {
+                font-size: 14px;
+                font-size: .875rem;
+                -ms-transform: translateX(0);
+                transform: translateX(0);
+                -ms-transform: translateY(0);
+                transform: translateY(0);
+                color: #2d2d2d;
+                font-weight: normal;
+                left: auto;
+                line-height: 16px;
+                margin: 0 auto;
+                max-height: 57px;
+                padding: 0 10px;
+                padding: 6px 0 0.25rem;
+                position: static;
+                text-align: center;
+                top: auto;
+              }
+        }
+      }
+    }
+  }
+
+@media (min-width: 480px) {
+    .slider .sliderItemContainer {
+        height: 190px;
+        width: 340px;
+    }
+}
+
+@media (min-width: 568px) {
+    .sliderSubItem .subItemInnerWrapper {
+        padding-top: 0.5rem;
+    }
+}
+  
+@media (min-width: 640px) {
+    .slider .sliderItemContainer {
+        height: 246px;
+        width: 440px;
+    }
+}
+
+  @media (min-width: 768px) {
+    .slider {
+        .sliderItemContainer {
+            height: 280px;
+            width: 500px;
+        }
+        .sliderText {
+            min-height: 5.5rem;
+        }
+        .sliderHeader {
+            font-size: 1.125rem;
+        }
+        .sliderSubheader {
+            font-size: .875rem;
+            clear: both;
+            display: block;
+            float: left;
+            margin: 0;
+        }
+    }
+
+    .sliderSubItem {
+      max-height: 167px;
+      
+      .subItemInnerWrapper .sliderSubitemContainer {
+          width: 90px;
+  
+          .subItemInsideWrapper .sliderSubitemImage {
+            height: 78px;
+            width: 78px;
+          }
+          .subItemInsideWrapper .sliderSubitemTitle {
+            font-size: .9375rem;
+            line-height: 17px;
+            max-height: 64px;
+            padding-top: 10px;
+          }
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sliderSubItem {
+      .subItemInnerWrapper .sliderSubitemContainer {
+            width: 100px;
+            margin-left: 23px;
+  
+            .subItemInsideWrapper .sliderSubitemImage {
+              height: 88px;
+              width: 88px;
+            }
+      }
+    }
+}
+
+@media (min-width: 640px) {
+    .slider .sliderItemContainer {
+        height: 308px;
+        width: 550px;
+    }
+}
+  
+
+
+  

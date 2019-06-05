@@ -8,8 +8,6 @@ import { favoritesFetchRequest, favoriteDeleteRequest } from '../../actions/favo
 import { recipeFetchRequest } from '../../actions/search-actions.js';
 import { userValidation, logError, formatDate, renderIf } from './../../lib/util.js';
 
-// map faves and delete button for faves
-
 class ProfileContainer extends React.Component {
   constructor(props){
     super(props);

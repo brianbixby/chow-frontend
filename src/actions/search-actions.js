@@ -28,12 +28,14 @@ export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
 };
 
 export const recipeFetchRequest = recipeURI => dispatch => {
-  let uri = recipeURI.substring(recipeURI.indexOf('#recipe_') + 1, recipeURI.length);
-  let qString = `r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_${uri}`;
+  console.log("recipeFetchRequest: ", recipeURI);
+  // let uri = recipeURI.substring(recipeURI.indexOf('#recipe_') + 1, recipeURI.length);
+  let qString = `r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_${recipeURI}`;
   let url = `https://api.edamam.com/search?${qString}${process.env.API_KEY}`;
 
   return superagent.get(url)
     .then(res => {
+      console.log("res: ", res.body[0]);
       dispatch(recipeFetch(res.body[0]));
       return res.body[0];
     })
