@@ -4,6 +4,7 @@ import userProfile from './userProfile-reducers';
 import recipes from './recipes-reducers';
 import recipe from './recipe-reducers';
 import favorites from './favorites-reducers';
+import homepage from './homepage-reducers';
 
 export default combineReducers({
   userAuth,
@@ -11,4 +12,5 @@ export default combineReducers({
   recipes,
   recipe,
   favorites,
+  homepage,
 });
