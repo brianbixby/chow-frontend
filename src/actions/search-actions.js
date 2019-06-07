@@ -17,7 +17,7 @@ export const recipeFetch = recipe => ({
 
 export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
   console.log(queryString, queryParams);
-  let url = `https://api.edamam.com/${queryString}${process.env.API_KEY}&from=0&to=20${queryParams}`;
+  let url = `https://api.edamam.com/${queryString}${process.env.API_KEY}&from=0&to=24${queryParams}`;
   return superagent.get(url)
     .then(res => {
       dispatch(recipesFetch(res.body.hits));

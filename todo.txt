@@ -1,0 +1,25 @@
+nav
+  - add browse drop down
+  - responsive nav on small screen
+advanced search 
+    - x button hover opacity
+    - exclude button opacity
+    - reset search button (undoes health and diet)
+    - exclude ingredient logic on back end
+    - make responsive
+home page
+  make search results centered on small screen
+sign up/sign in
+  page redirects you to homepage on signin
+  style page 
+  !!!fix form and all forms so red carot doesnt show and handle errors
+profile
+    stlye profile page
+recipes
+  add infinite scroll
+  add total number of reults and edit search button
+recipe page 
+  style individual recipe page
+
+add or remove favorite: have pop up instead of alert
+handle errors

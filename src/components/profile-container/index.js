@@ -85,24 +85,30 @@ class ProfileContainer extends React.Component {
             </div>
           </div>
         </div>
-        <div className='flex-container space-around'>
+        <div className='recipesOuter'>
           {renderIf(favorites && favorites.length > 0 ,
-            <div>
+            <div className='recipesSection'>
               {favorites.map(fav => {
                 let boundRecipeClick = this.handleBoundRecipeClick.bind(this, fav);
                 let boundDeleteFavoriteClick = this.handleboundDeleteFavoriteClick.bind(this, fav);
-                return <div key={fav.uri} className='tile'>
-                  <button onClick={boundDeleteFavoriteClick} className='allResultsFavButton' type='btn btn-default'>
-                    <span className='glyphicon glyphicon-bookmark'></span> <span className='allResultsFavButtonText'>Save</span>
-                  </button>
-                  <div className='tileWoutFavButton' onClick={boundRecipeClick}>
-                    <img className='tilePic' src={fav.image} />
-                    <p className='tileLabel'>{fav.label}</p>
-                    <p className='tileCalorieAndIngredientText'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(fav.calories, fav.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {fav.ingredientLines.length} </span>   INGREDIENTS</span></p>
-                    <p className='tileCalorieAndIngredientTextHidden'><span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(fav.calories, fav.yield)}</span> CALS   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {fav.ingredientLines.length} </span>   INGR</span></p>
-                  </div>
-                    <p><a className='tileSource' rel='noopener noreferrer' target='_blank' href={fav.url}>{fav.source}</a></p>
-                </div>
+                return <div key={fav.uri} className='outer'>
+                        <div className='cardImageContainer' onClick={boundRecipeClick}>
+                          <img className='cardImage' src={fav.image} />
+                        </div>
+                        <div className='likeButton' onClick={boundDeleteFavoriteClick} title="Remove this recipe from your favorites"></div>
+                        <div className='cardInfo' onClick={boundRecipeClick}>
+                          <div className='byDiv'>
+                            <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={fav.url}>{fav.source}</a></p>
+                          </div>
+                          <div className='cardInfoDiv'>
+                          <h3 className='cardTitle'>{fav.label} </h3>
+                          <p className='healthLabels'>{fav.healthLabels.join(", ")} </p>
+                          <p className='calsAndIngreds'> 
+                          <span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(fav.calories, fav.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {fav.ingredientLines.length} </span>   INGREDIENTS</span>
+                          </p>
+                          </div>
+                        </div>
+                </div> 
               })}
             </div>
           )}

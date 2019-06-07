@@ -49,6 +49,9 @@
   .likeButton:hover {
     background-color: rgba(0,0,0,0.6);
   }
+  .profile-container .likeButton, .profile-container .likeButton:hover {
+    background-color: rgba(255,126,26,0.9);
+  }
   .cardImageContainer {
     position: relative;
     cursor: pointer;

@@ -240,6 +240,10 @@
   text-align: center;
   white-space: nowrap;
   line-height: 3.125rem;
+  margin-top: 10px;
+}
+#advancedSearchFormButton:hover {
+  background: #ed9702;
 }
 .calSection, .dietSection, .healthSection {
   float: left;
@@ -289,6 +293,13 @@
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
+.calSection label:hover span, .dietSection label:hover span, .healthSection label:hover span{
+  color: rgba(138, 193, 62, .5);
+}
+input[type='radio']:checked + span {
+  color: #8ac13e;
+}
+
 @media only screen and (min-width: 768px) {
   .advancedSearchDiv {
     border: 1px solid #e6e6e6;

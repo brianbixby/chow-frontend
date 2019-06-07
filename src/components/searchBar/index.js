@@ -208,7 +208,7 @@ class SearchBar extends React.Component {
                         </span>
                       </div>
                       <div className='healthSection'>
-                        <span className='advancedSearchSectionHeader'>Health </span>
+                        <span className='advancedSearchSectionHeader'>Health (click one) </span>
                         <label>
                           <input
                             type='radio'
@@ -218,7 +218,7 @@ class SearchBar extends React.Component {
                             onFocus={this.handleFocus}
                             onBlur={this.handleBlur}
                           />  
-                          Peanut Free
+                          <span>Peanut Free</span>
                         </label>
                           <label>
                             <input
@@ -229,7 +229,7 @@ class SearchBar extends React.Component {
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur} 
                             />  
-                            Sugar Conscious
+                            <span>Sugar Conscious</span>
                           </label>
                           <label>
                             <input
@@ -240,7 +240,7 @@ class SearchBar extends React.Component {
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
                             />  
-                            Tree Nut Free
+                            <span>Tree Nut Free</span>
                           </label>
                           <label>
                             <input
@@ -251,7 +251,7 @@ class SearchBar extends React.Component {
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur} 
                             />  
-                            Vegan
+                            <span>Vegan</span>
                           </label>
                           <label>
                             <input
@@ -262,11 +262,11 @@ class SearchBar extends React.Component {
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
                             />  
-                            Vegetarian
+                            <span>Vegetarian</span>
                           </label>
                       </div>
                       <div className='dietSection'>
-                        <span className='advancedSearchSectionHeader'>Diet</span>
+                        <span className='advancedSearchSectionHeader'>Diet (click one)</span>
                         <div className='allergyFormGroup' className='form-group'>
                           <label>
                             <input
@@ -277,7 +277,7 @@ class SearchBar extends React.Component {
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
                             />  
-                            Balanced
+                            <span>Balanced</span>
                           </label>
                           <label>
                             <input
@@ -288,7 +288,7 @@ class SearchBar extends React.Component {
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
                             />  
-                            High Protein
+                            <span>High Protein</span>
                           </label>
                           <label>
                             <input
@@ -299,7 +299,7 @@ class SearchBar extends React.Component {
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur} 
                             />  
-                            Low Carb
+                            <span>Low Carb</span>
                           </label>
                         </div>
                         <button id='advancedSearchFormButton' type='submit'>Go</button>
