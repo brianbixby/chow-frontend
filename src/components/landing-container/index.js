@@ -105,10 +105,10 @@ class LandingContainer extends React.Component {
                 let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
                 let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
                 return <div key={myRecipe.recipe.uri} className='outer'>
-                        <div className='likeButton' onClick={boundFavoriteClick}></div>
                         <div className='cardImageContainer' onClick={boundRecipeClick}>
                           <img className='cardImage' src={myRecipe.recipe.image} />
                         </div>
+                        <div className='likeButton' onClick={boundFavoriteClick}></div>
                         <div className='cardInfo' onClick={boundRecipeClick}>
                           <div className='byDiv'>
                             <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>

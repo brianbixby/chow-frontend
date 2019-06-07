@@ -54,12 +54,77 @@ button, a, .modal-close, form input, form textarea {
   transition: opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1), transform 0.1s cubic-bezier(0.77, 0, 0.175, 1);
   transition: opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1), transform 0.1s cubic-bezier(0.77, 0, 0.175, 1), -webkit-transform 0.1s cubic-bezier(0.77, 0, 0.175, 1);
 }
-button:focus, a:focus, {
+button:focus, a:focus {
   outline: none;
 }
 button, a {
   cursor: pointer !important;
 }
+
+input[type='text'] {
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
+  -webkit-user-modify: read-write-plaintext-only;
+  }
+button, input {
+  line-height: normal;
+}
+button, input, select, textarea {
+  font-family: inherit;
+  margin: 0;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-focus-ring-color: rgba(255,255,255,0) !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: rgba(255,255,255,0) !important;
+}
+input {
+  -webkit-appearance: textfield;
+  background-color: white;
+  -webkit-rtl-ordering: logical;
+  cursor: text;
+  padding: 1px;
+  border-width: 2px;
+  border-style: inset;
+  border-color: initial;
+  border-image: initial;
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin: 0em;
+  font: 400 11px system-ui;
+  -webkit-writing-mode: horizontal-tb !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+}
+body {
+  font-size: 16px;
+  font-size: 1rem;
+  color: #2d2d2d;
+  font-family: "Source Sans Pro",Arial;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  -webkit-text-size-adjust: none;
+}
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  color: -internal-root-color;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 2dppx) {
 	body {
 		-moz-osx-font-smoothing: grayscale;

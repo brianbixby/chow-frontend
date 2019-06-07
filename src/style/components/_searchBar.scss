@@ -2,7 +2,8 @@
   position: absolute;
   top: 12px;
   left: 275px;
-  width: calc((100vw - 680px));
+  width: calc((100vw - 545px));
+  z-index: 1;
 
   .input-group {
     height: 50px;
@@ -58,56 +59,279 @@
   }
 }
 
+// advanced search
+.advancedSearchDiv {
+  padding-bottom: 15px;
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  top: 58px;
+  z-index: 10001;
+  border-bottom: 1px solid #e6e6e6;
 
+  .iconClose {
+    background-color: #f2f2f2;
+    border: none;
+    border: solid 1px #cfcfcf;
+    border-radius: 50%;
+    color: #666;
+    cursor: pointer;
+    display: block;
+    height: 2rem;
+    text-align: center;
+    width: 2rem;
+    display: none;
+  }
+  .iconClose::before {
+    font-size: 33px;
+    color: #cfcfcf;
+    display: block;
+    font-weight: 300;
+    left: 0.55rem;
+    position: absolute;
+    text-align: center;
+    top: -0.3rem;
+    color: #828282;
+    content: '\00D7';
+    margin: -1px 0 0 1px;
+    position: static;
+  }
+  .inputWrapper {
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -ms-flex-align: center;
+    min-height: 49px;
+    line-height: 3.125rem;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    position: relative;
 
+    .magnifyingGlassIcon {
+      background: url(https://secureimages.allrecipes.com/assets/deployables/v-1.165.0.5109/svg/sprite.css.svg) no-repeat;
+      -ms-transform: scale(.75, .75);
+      transform: scale(.75, .75);
+      display: inline-block;
+      width: 46px;
+      height: 46px;
+      background-position: 89.13520408163265% 71.42857142857143%;
+    }
+    .keyWordsInput {
+      width: 100%;
+      padding-left: 0;
+      font-style: italic;
+      font-size: 1rem;
+      border: none;
+      display: inline-block;
+      float: left;
+      height: 100%;
+      margin: 0;
+      padding: 0 0 0 2%;
+      text-decoration: none;
+    }
+    .excludeInner {
+      flex-shrink: 0;
+      width: calc(100% - 56px);
+      margin: 0 4px;
+    }
+    .addExclude {
+      height: 41px;
+      display: inline-block;
+      width: 100%;
+      min-width: 40px;
+      float: left;
+      margin: 2px 0;
+    }
+    .excludeInput {
+      font-size: 1rem;
+      width: 100%;
+      line-height: normal;
+      min-width: 40px;
+      background-color: #f2f2f2;
+      padding-left: 8px;
+      font-style: italic;
+      border: none;
+      display: inline-block;
+      float: left;
+      height: 100%;
+      margin: 0;
+      padding: 0 0 0 2%;
+      text-decoration: none;
+    }
+    .excludeButton {
+      cursor: pointer;
+      display: -ms-flexbox;
+      display: flex;
+      align-items: center;
+      -ms-flex-align: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      position: absolute;
+      right: 0;
+      top: 0;
+      line-height: 3rem;
+      height: 3rem;
+      width: 3rem;
+      background-color: #fafafa;
+      border-left: 1px solid #cfcfcf;
+      border-bottom: 1px solid #cfcfcf;
+      color: #ee4036;
+      font-size: 36px;
+      max-width: 459px;
+      padding: 0 5%;
+      text-align: center;
+      white-space: nowrap;
 
+      span {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+    }
+    .keyWordsInput::placeholder, .excludeInput::placeholder {
+      color: #b2b2b2;
+      opacity: 1;
+    }
+  }
+}
 
+.excludedDiv {
+  margin: 81px 8px 16px;
 
+  .excludedP {
+    background-color: #ee4036;
+    display: block;
+    padding: 0 .5rem;
+    margin-right: 3px;
+    white-space: nowrap;
+    color: #fff;
+    height: 2.6rem;
+    line-height: 2.6rem;
+    font-size: 1.125rem;
+    display: inline-block;
+    cursor: pointer;
 
+    .excludedItem {
+      font-weight: 700;
+    }
+    .xButton {
+      position: relative;
+      left: .5rem;
+      padding: 10px 10px 10px 0;
+      font-weight: 700;
+    }
+  }
+}
 
-// #searchBarDiv {
-//   max-width: 60%;
-//   margin-left: 20%;
-//   margin-right: 20%;
-//   height: 50px;
-//   display: flex;
-//   justify-content: center;
-// }
+#advancedSearchFormButton {
+  float: left;
+  margin-top: 1rem;
+  width: 95%;
+  margin: 0 2.5%;
+  font-size: 1.25rem;
+  background-color: #feaa26;
+  height: 3.125rem;
+  border: 0 none;
+  border-radius: 0;
+  color: #fff;
+  display: inline-block;
+  max-width: 459px;
+  padding: 0 5%;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 3.125rem;
+}
+.calSection, .dietSection, .healthSection {
+  float: left;
+  width: 33%;
+}
+.calSection {
 
-// .searchBarForm {
-//   border-radius: 45px 0px 0px 45px;
-//   display: flex;
-//   justify-content: center;
-//   height: 50px;
-//   font-weight: 200;
-//   font-size: 16px;
-//   padding-left: 20px;
-// }
+}
+.healthSection {
 
-// #searchBarForm {
-//   text-align: center;
-//   display: flex;
-//   justify-content: center;
-//   /*margin-top: 75px;*/
-// }
+}
+.dietSection {
 
-// #searchBarButton {
-//   border-radius: 0px 45px 45px 0px;
-//   cursor:pointer;
-//   height: 50px;
-//   width: 50px;
-//   background-color: #8EE11B;
-//   color: white;
-// }
+}
+.calSection .subSection,.calSection label, .dietSection label, .healthSection label {
+  color: #4d4d4d;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -ms-flex-align: center;
+  font-size: 15px;
+  line-height: 29px;
+  cursor: pointer;
+  letter-spacing: .1rem;
+  margin-left: 5px;
+  margin-right: 30%;
+}
+.subSection input {
+  border-bottom: 1px solid #e6e6e6;
+  width: 100%;
+  margin-left: 10px;
+}
 
-// @media only screen and (max-width : 400px) {
-//   #searchBarDiv {
-//     max-width: 90%;
-//     margin-left: 5%;
-//     margin-right: 5%;
-//     height: 50px;
-//     display: flex;
-//     justify-content: center;
-//   }
-// }
+.subSection {
+  white-space: pre;
+}
+.mt16 {
+  margin-top: 16px;
+}
+.advancedSearchSectionHeader {
+  border-bottom: 1px solid #e6e6e6;
+  display: block;
+  margin-right: 30%;
+  color: #4d4d4d;
+  font-size: 18px;
+  font-weight: 400;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+@media only screen and (min-width: 768px) {
+  .advancedSearchDiv {
+    border: 1px solid #e6e6e6;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 24px 16px;
+    font-size: 1.5rem;
+
+    .iconClose {
+      display: -ms-flexbox;
+      display: flex;
+      align-items: center;
+      -ms-flex-align: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      position: absolute;
+      right: .5rem;
+      top: .5rem;
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+    .inputWrapper {
+      width: calc((50vw - 25px));
+      float: left;
+      clear: none;
+      margin: 16px 4px;
+    }
+  }
+}
+
+@media only screen and (max-width: 899px) and (min-width: 768px) {
+  .searchContainer {
+      width: calc((100vw - 362px));
+      left: 122px;
+  }
+}
+
+@media only screen and (max-width: 1023px) and (min-width: 900px) {
+  .searchContainer {
+      width: calc((100vw - 515px));
+  }
+}
 

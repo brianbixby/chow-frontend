@@ -41,8 +41,6 @@ class Navbar extends React.Component {
     render() {
         let spoon = require('./../helpers/assets/icons/spoon.icon.svg');
         let chevron = require('./../helpers/assets/icons/chevron-down.icon.svg');
-        let bell = require('./../helpers/assets/icons/bell.icon.svg');
-        let heart = require('./../helpers/assets/icons/heart.icon.svg');
         let user = require('./../helpers/assets/icons/user.icon.svg');
         let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
         let profileText = this.props.userAuth && this.props.userProfile && this.props.userProfile.username ? this.props.userProfile.username : "Sign Up/ Sign In" ;
@@ -55,12 +53,6 @@ class Navbar extends React.Component {
                     <p><span>BROWSE</span> <img src={chevron}/></p>
                 </div>
                 <SearchBar onComplete={this.handleSearch} />
-                <div className='navBellDiv'>
-                    <img src={bell} />
-                </div>
-                <div className='navHeartDiv'>
-                    <img src={heart} />
-                </div>
                 <div className='navProfileDiv' onClick={this.handleProfileDivClick}>
                     <div className='navProfileDivInner'>
                         <div className='profileImageDiv'>
@@ -72,11 +64,6 @@ class Navbar extends React.Component {
                             </p>
                         </div>
                     </div>
-                </div>
-                <div className='hamburgerNav'>
-                    <span className='hamtop'></span>
-                    <span className='hammid'></span>
-                    <span className='hambot'></span>
                 </div>
             </nav>
         );

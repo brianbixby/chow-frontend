@@ -39,6 +39,7 @@ nav {
         left: 123px;
         padding: 0 54px 0 30px;
         cursor: pointer;
+        display: none;
 
         p {
             position: relative;
@@ -59,41 +60,9 @@ nav {
     .browseDiv:hover {
         background: #ebebeb;
     }
-    .navBellDiv {
-        position: absolute;
-        right: 338px;
-        top: 12px;
-        padding-right: 2px;
-        padding-left: 8px;
-        height: 50px;
-        width: 56px;
-        cursor: pointer;
-
-        img {
-            margin-top: 4px;
-            width: 41px;
-        }
-        img:hover {
-            opacity: .6;
-        }
-    }
-    .navHeartDiv {
-        position: absolute;
-        right: 282px;
-        top: 12px;
-        padding-right: 8px;
-        padding-left: 2px;
-        height: 50px;
-        width: 56px;
-        cursor: pointer;
-
-        img:hover {
-            opacity: .6;
-        }
-    }
     .navProfileDiv {
         position: absolute;
-        right: 62px;
+        right: 25px;
         // top: 6px;
         top: 12px;
         background: #f2f2f2;
@@ -106,9 +75,9 @@ nav {
             .profileImageDiv {
                 position: absolute;
 
-                .avatar {
+                // .avatar {
     
-                }
+                // }
                 .noProfileImageNav {
                     width: 52px;
                     margin-top: -1px;
@@ -136,28 +105,28 @@ nav {
             }
         }
     }
-    .hamburgerNav {
-        position: absolute;
-        // top: 20px;
-        top: 26px;
-        right: 20px;
-        cursor: pointer;
-
-        span {
-            display: block;
-            width: 22px;
-            height: 3px;
-            background-color: #999;
-            margin-top: 4px;
-        }
-        .hamtop {
-
-        }
-        .hammid {
-
-        }
-        .hambot {
-            
-        }
+  }
+  @media only screen and (max-width: 1023px) and (min-width: 768px) {
+    // nav .navProfileDiv {
+    //     right: 40px;
+    // }
+    nav .navProfileDiv .navProfileDivInner {
+      width: 190px;
+    }
+    nav .navProfileDiv .navProfileDivInner .profileTextDiv {
+      width: 125px;
+    }
+    nav .navProfileDiv .navProfileDivInner .profileTextDiv .profileText {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 7.5px;
+      margin-left: 7.5px;
     }
   }
+
+@media only screen and (min-width: 900px) {
+    nav .browseDiv {
+        display: block;
+    }
+}

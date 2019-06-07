@@ -12,6 +12,9 @@ class SearchBar extends React.Component {
       advancedSearch: false,
       searchTerm: '',
       searchTermError: null,
+      exclude: '',
+      excludeError: null,
+      excludedArr: [],
       minCals: '',
       minCalsError: null,
       maxCals: '',
@@ -26,7 +29,7 @@ class SearchBar extends React.Component {
     };
   }
   componentWillUnmount() {
-    this.setState({ advancedSearch: false, searchTerm: '', minCals: '', maxCals: '', maxIngredients: '', dietOption: null, healthOption: null });
+    this.setState({ advancedSearch: false, searchTerm: '', exclude: '', excludeError: null, excludedArr: [], minCals: '', maxCals: '', maxIngredients: '', dietOption: null, healthOption: null });
   }
   validateInput = e => {
     let { name, value } = e.target;
@@ -85,7 +88,16 @@ class SearchBar extends React.Component {
       minCalsError: state.minCalsError ? null : 'required',
       maxCalsError: state.maxCalsError ? null : 'required',
       maxIngredientsError: state.maxIngredientsError ? null : 'required',
+      excludeError: state.excludeError ? null : 'required',
     }));
+  };
+
+  handleExclude = e => {
+    this.setState({ excludedArr: [...this.state.excludedArr, this.state.exclude ], exclude: ''});
+  };
+
+  handleBoundExcludeClick = (exclude, e) => {
+    this.setState({ excludedArr: this.state.excludedArr.filter(excluded => excluded !== exclude)});
   };
 
   render() {
@@ -116,9 +128,48 @@ class SearchBar extends React.Component {
               </div>
               {renderIf(advancedSearch, 
                 <div className='advancedSearchDiv'>
-                      <div>
-                        <span className='advancedSearchSectionHeader'>Calories</span> <br/>
-                        <span>From 
+                  <span className='iconClose' onClick={() => this.setState({advancedSearch: !this.state.advancedSearch})}> </span>
+                  <div className='inputWrapper keyWords'>
+                    <span className='magnifyingGlassIcon'></span>
+                    <input 
+                      className='keyWordsInput'
+                      type='text'
+                      name='searchTerm'
+                      placeholder='Find a recipe'
+                      value={searchTerm}
+                      onChange={this.handleChange}
+                      onFocus={this.handleFocus}
+                      onBlur={this.handleBlur}
+                    />
+                  </div>
+                  <div className='inputWrapper exclude'>
+                    <div className='excludeInner'>
+                      <div className='addExclude'>
+                        <input 
+                          className='excludeInput'
+                          type='text'
+                          name='exclude'
+                          placeholder='Exclude Ingredients'
+                          value={this.state.exclude}
+                          onChange={this.handleChange}
+                          onFocus={this.handleFocus}
+                          onBlur={this.handleBlur}
+                        />
+                      </div>
+                    </div>
+                    <p className='excludeButton' onClick={this.handleExclude}><span>—</span></p>
+                  </div>
+                  {renderIf(this.state.excludedArr.length > 0,
+                    <div className='excludedDiv'>
+                      {this.state.excludedArr.map((exclude, idx) => {
+                        let boundExcludeClick = this.handleBoundExcludeClick.bind(this, exclude);
+                        return <p key={idx} onClick={boundExcludeClick} className='excludedP'><span className='excludedItem'>{exclude}</span><span className='xButton'>X</span></p>
+                      })}
+                    </div>
+                  )}
+                      <div className='calSection'>
+                        <span className='advancedSearchSectionHeader'>Calories</span>
+                        <span className='subSection'>From 
                           <input 
                             id='textBoxInputMinCal' 
                             type='text' 
@@ -128,10 +179,9 @@ class SearchBar extends React.Component {
                             onChange={this.handleChange}
                             onFocus={this.handleFocus}
                             onBlur={this.handleBlur}
-                            style={{width: '50px'}} 
                           />
-                        </span> <br/>
-                        <span>To 
+                        </span>
+                        <span className='subSection'>To 
                           <input
                             id='textBoxInputMaxCal'
                             type='text'
@@ -141,27 +191,24 @@ class SearchBar extends React.Component {
                             onChange={this.handleChange}
                             onFocus={this.handleFocus}
                             onBlur={this.handleBlur}
-                            style={{width: '50px'}} 
                           />
-                        </span><br/>
-                        <span className='advancedSearchSectionHeader'>Results</span> <br/>
-                        <span>Up to 
+                        </span>
+                        <span className='advancedSearchSectionHeader mt16'>Ingredients</span>
+                        <span className='subSection'>Up to 
                           <input
                             id='textBoxInputMaxResults'
                             type='text'
                             name='maxIngredients'
                             placeholder='Max Ingredients ex. 12'
-                            style={{width: '50px'}} 
                             value={this.state.maxIngredients}
                             onChange={this.handleChange}
                             onFocus={this.handleFocus}
                             onBlur={this.handleBlur}
-                            style={{width: '50px'}} 
                           />
-                        </span><br/>
+                        </span>
                       </div>
-                      <div>
-                        <span className='advancedSearchSectionHeader'>Health </span> <br/>
+                      <div className='healthSection'>
+                        <span className='advancedSearchSectionHeader'>Health </span>
                         <label>
                           <input
                             type='radio'
@@ -172,11 +219,7 @@ class SearchBar extends React.Component {
                             onBlur={this.handleBlur}
                           />  
                           Peanut Free
-                        </label><br/>
-                      </div>
-                      <div>
-                        <br/>
-                        <div className='dietFormGroup' className='form-group'>
+                        </label>
                           <label>
                             <input
                               type='radio' 
@@ -187,7 +230,7 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur} 
                             />  
                             Sugar Conscious
-                          </label><br/>
+                          </label>
                           <label>
                             <input
                               type='radio'
@@ -198,7 +241,7 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur}
                             />  
                             Tree Nut Free
-                          </label><br/>
+                          </label>
                           <label>
                             <input
                               type='radio' 
@@ -209,7 +252,7 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur} 
                             />  
                             Vegan
-                          </label><br/>
+                          </label>
                           <label>
                             <input
                               type='radio'
@@ -220,11 +263,10 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur}
                             />  
                             Vegetarian
-                          </label><br/>
-                        </div>
+                          </label>
                       </div>
-                      <div>
-                        <b>Diet </b> <br/>
+                      <div className='dietSection'>
+                        <span className='advancedSearchSectionHeader'>Diet</span>
                         <div className='allergyFormGroup' className='form-group'>
                           <label>
                             <input
@@ -236,7 +278,7 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur}
                             />  
                             Balanced
-                          </label><br/>
+                          </label>
                           <label>
                             <input
                               type='radio'
@@ -247,7 +289,7 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur}
                             />  
                             High Protein
-                          </label><br/>
+                          </label>
                           <label>
                             <input
                               type='radio' 
@@ -258,9 +300,9 @@ class SearchBar extends React.Component {
                               onBlur={this.handleBlur} 
                             />  
                             Low Carb
-                          </label><br/><br/><br/><br/><br/><br/>
+                          </label>
                         </div>
-                        <button id='advancedSearchFormButton' type='submit' className='button green'><span id='advancedSearchIcon' className='glyphicon glyphicon-check'>&nbsp;<span id='advancedSearchButtonText'><b>Done</b></span></span></button>
+                        <button id='advancedSearchFormButton' type='submit'>Go</button>
                       </div>
                   <div className='advancedSearchToolTip'>
                     <Tooltip message={minCalsError} show={focused === 'minCals' || submitted} />
@@ -269,6 +311,9 @@ class SearchBar extends React.Component {
                   </div>
                 </div>
               )}
+
+              
+
             </form>
           </div>
     );
