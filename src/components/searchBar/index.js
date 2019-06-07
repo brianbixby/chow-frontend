@@ -100,6 +100,11 @@ class SearchBar extends React.Component {
     this.setState({ excludedArr: this.state.excludedArr.filter(excluded => excluded !== exclude)});
   };
 
+  handleAdvancedSearch = e => {
+    this.props.advancedSearch();
+    this.setState({advancedSearch: !this.state.advancedSearch});
+  };
+
   render() {
     let { searchTerm, searchTermError, minCalsError, maxCalsError, maxIngredientsError, advancedSearch, error, focused, submitted } = this.state;
     let magnify = require('./../helpers/assets/icons/magnify.icon.svg');
@@ -120,7 +125,7 @@ class SearchBar extends React.Component {
                   onFocus={this.handleFocus}
                   onBlur={this.handleBlur}
                 />
-                <div className='advancedSearchButton' onClick={() => this.setState({advancedSearch: !this.state.advancedSearch})}>
+                <div className='advancedSearchButton' onClick={this.handleAdvancedSearch}>
                   <p>Advanced Search</p>
                 </div>
                 <Tooltip message={searchTermError} show={focused === 'searchTerm' || submitted} />

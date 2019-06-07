@@ -1,5 +1,4 @@
 nav
-  - add browse drop down
   - responsive nav on small screen
 advanced search 
     - x button hover opacity
