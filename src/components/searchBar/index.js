@@ -26,11 +26,27 @@ class SearchBar extends React.Component {
       error: null,
       focused: null,
       submitted: false,
+      width: 0,
     };
   }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.updateWindowDimensions);
+    this.updateWindowDimensions();
+  }
+  componentDidMount() {
+    this.updateWindowDimensions();
+  }
+  
   componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
     this.setState({ advancedSearch: false, searchTerm: '', exclude: '', excludeError: null, excludedArr: [], minCals: '', maxCals: '', maxIngredients: '', dietOption: null, healthOption: null });
   }
+  
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth });
+  }
+
   validateInput = e => {
     let { name, value } = e.target;
     let errors = { 
@@ -109,12 +125,18 @@ class SearchBar extends React.Component {
     let { searchTerm, searchTermError, minCalsError, maxCalsError, maxIngredientsError, advancedSearch, error, focused, submitted } = this.state;
     let magnify = require('./../helpers/assets/icons/magnify.icon.svg');
     return (
-          <div className='searchContainer'>
+          <div className={classToggler({
+            'searchContainer': true,
+            'hideSearchBar': (!this.props.showSearchBarSmall && this.state.width < 768),
+          })}>
             <form className='searchForm' onSubmit={this.handleSubmit} className={classToggler({
                 'form': true,
                 'error': error && submitted,
               })}>
-              <div className='input-group'>
+              <div className={classToggler({
+                'input-group': true,
+                'hideSearchBar': (this.props.showSearchBarSmall && this.state.width < 768),
+              })}>
                 <input 
                   className='form-control search-form'
                   type='text'
@@ -131,7 +153,7 @@ class SearchBar extends React.Component {
                 <Tooltip message={searchTermError} show={focused === 'searchTerm' || submitted} />
                 <button type='submit' className='btn search-btn'><img src={magnify} /></button>
               </div>
-              {renderIf(advancedSearch, 
+              {renderIf(advancedSearch || (this.props.showSearchBarSmall && this.state.width < 768), 
                 <div className='advancedSearchDiv'>
                   <span className='iconClose' onClick={() => this.setState({advancedSearch: !this.state.advancedSearch})}> </span>
                   <div className='inputWrapper keyWords'>
@@ -174,7 +196,7 @@ class SearchBar extends React.Component {
                   )}
                       <div className='calSection'>
                         <span className='advancedSearchSectionHeader'>Calories</span>
-                        <span className='subSection'>From 
+                        <span className='subSection calSubSection'>From 
                           <input 
                             id='textBoxInputMinCal' 
                             type='text' 
@@ -186,7 +208,7 @@ class SearchBar extends React.Component {
                             onBlur={this.handleBlur}
                           />
                         </span>
-                        <span className='subSection'>To 
+                        <span className='subSection calSubSection'>To 
                           <input
                             id='textBoxInputMaxCal'
                             type='text'
@@ -198,8 +220,8 @@ class SearchBar extends React.Component {
                             onBlur={this.handleBlur}
                           />
                         </span>
-                        <span className='advancedSearchSectionHeader mt16'>Ingredients</span>
-                        <span className='subSection'>Up to 
+                        <span className='advancedSearchSectionHeader mt16 mt50small'>Ingredients</span>
+                        <span className='subSection calSubSection mw180'>Up to 
                           <input
                             id='textBoxInputMaxResults'
                             type='text'
@@ -213,7 +235,7 @@ class SearchBar extends React.Component {
                         </span>
                       </div>
                       <div className='healthSection'>
-                        <span className='advancedSearchSectionHeader'>Health (click one) </span>
+                        <span className='advancedSearchSectionHeader mt50small'>Health (click one) </span>
                         <label>
                           <input
                             type='radio'
@@ -271,7 +293,7 @@ class SearchBar extends React.Component {
                           </label>
                       </div>
                       <div className='dietSection'>
-                        <span className='advancedSearchSectionHeader'>Diet (click one)</span>
+                        <span className='advancedSearchSectionHeader mt10small'>Diet (click one)</span>
                         <div className='allergyFormGroup' className='form-group'>
                           <label>
                             <input

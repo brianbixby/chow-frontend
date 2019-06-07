@@ -1,11 +1,8 @@
-nav
-  - responsive nav on small screen
 advanced search 
     - x button hover opacity
     - exclude button opacity
     - reset search button (undoes health and diet)
     - exclude ingredient logic on back end
-    - make responsive
 home page
   make search results centered on small screen
 sign up/sign in
@@ -22,3 +19,4 @@ recipe page
 
 add or remove favorite: have pop up instead of alert
 handle errors
+make edamam api faster

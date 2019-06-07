@@ -209,6 +209,7 @@
     font-size: 1.125rem;
     display: inline-block;
     cursor: pointer;
+    margin-bottom: 5px;
 
     .excludedItem {
       font-weight: 700;
@@ -248,15 +249,6 @@
 .calSection, .dietSection, .healthSection {
   float: left;
   width: 33%;
-}
-.calSection {
-
-}
-.healthSection {
-
-}
-.dietSection {
-
 }
 .calSection .subSection,.calSection label, .dietSection label, .healthSection label {
   color: #4d4d4d;
@@ -298,6 +290,70 @@
 }
 input[type='radio']:checked + span {
   color: #8ac13e;
+}
+
+@media only screen and (max-width: 767px) {
+  .advancedSearchDiv {
+    border: 1px solid #e6e6e6;
+    width: 100vw;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    left: -275px;
+    padding: 0 16px 24px 16px;
+    font-size: 1.5rem;
+    border-top: none;
+
+    .iconClose {
+      display: none;
+    }
+    .inputWrapper {
+      width: calc((100vw - 50px));
+      float: left;
+      clear: none;
+      margin: 16px 4px 0;
+    }
+    .exclude {
+      margin-bottom: 16px;
+    }
+  }
+  .advancedSearchDiv .inputWrapper .excludeButton {
+    padding: 0 2.5%;
+  }
+  // .excludedDiv .excludedP {
+  //   margin-top: 10px;
+  //   margin-bottom: 0;
+  // }
+  .calSection, .dietSection, .healthSection {
+    float: none;
+    width: 100%;
+  }
+  .advancedSearchSectionHeader {
+    width: 40%;
+    min-width: 150px;
+  }
+  .calSection .calSubSection {
+    width: calc((49vw - 25px));
+    float: left;
+    margin-right: 0;
+  }
+  .calSection .mw180 {
+    min-width: 180px;
+  }
+  .mt50small {
+    margin-top: 50px;
+  }
+  .calSection label, .dietSection label, .healthSection label {
+    margin-left: 5px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  #advancedSearchFormButton {
+    max-width: none;
+  }
+  .mt10small {
+    margin-top: 10px;
+  }
 }
 
 @media only screen and (min-width: 768px) {

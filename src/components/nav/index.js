@@ -6,12 +6,12 @@ import Avatar from '../helpers/avatar';
 import SearchBar from '../searchBar';
 import { signOut } from '../../actions/userAuth-actions.js';
 import { recipesFetchRequest } from '../../actions/search-actions.js';
-import { logError, renderIf } from '../../lib/util.js';
+import { logError, renderIf, classToggler } from '../../lib/util.js';
 
 class Navbar extends React.Component {
     constructor(props){
         super(props);
-        this.state={showBrowse: false, };
+        this.state={showBrowse: false, showSearchBarSmall: false };
     }
 
     handleSignOut = () => {
@@ -54,7 +54,7 @@ class Navbar extends React.Component {
 					{category: "Meal Type", subCategory: [{title: "Appetizers & Snacks", link: "search?q=appetizer&calories=0-10000"}, {title: "Breakfast & Brunch", link: "search?q=brunch&calories=0-10000"}, {title: "Desserts", link: "search?q=dessert&calories=0-10000"}, {title: "Dinner", link: "search?q=dinner&calories=0-10000"}, {title: "Drinks", link: "search?q=drink&calories=0-10000"}]},
 					{category: "Ingredient", subCategory: [{title: "Beef", link: "search?q=beef&calories=0-10000"}, {title: "Chicken", link: "search?q=chicken&calories=0-10000"}, {title: "Pasta", link: "search?q=pasta&calories=0-10000"}, {title: "Pork", link: "search?q=pork&calories=0-10000"}, {title: "Salmon", link: "search?q=salmon&calories=0-10000"}]},
 					{category: "Diet & Health", subCategory: [{title: "High Protein", link: "search?q=&calories=0-10000&diet=high-protein"}, {title: "Low Carb", link: "search?q=&calories=0-10000&diet=low-carb"}, {title: "Peanut Free", link: "search?q=&calories=0-10000&health=peanut-free"}, {title: "Vegan", link: "search?q=&calories=0-10000&health=vegan"}, {title: "Vegetarian", link: "search?q=&calories=0-10000&health=vegetarian"}]},
-					{category: "Cuisine Type", subCategory: [{title: "italian", link: "search?q=italian&calories=0-10000"}, {title: "Mexican", link: "search?q=mexican&calories=0-10000"}, {title: "Chinese", link: "search?q=chinese&calories=0-10000"}, {title: "Indian", link: "search?q=indian&calories=0-10000"}, {title: "French", link: "search?q=french&calories=0-10000"}]},
+					{category: "Cuisine Type", subCategory: [{title: "Italian", link: "search?q=italian&calories=0-10000"}, {title: "Mexican", link: "search?q=mexican&calories=0-10000"}, {title: "Chinese", link: "search?q=chinese&calories=0-10000"}, {title: "Indian", link: "search?q=indian&calories=0-10000"}, {title: "French", link: "search?q=french&calories=0-10000"}]},
 				];
         const spoon = require('./../helpers/assets/icons/spoon.icon.svg');
         const chevron = require('./../helpers/assets/icons/chevron-down.icon.svg');
@@ -91,7 +91,16 @@ class Navbar extends React.Component {
 													</div>
 											</div>
                 )}
-                <SearchBar onComplete={this.handleSearch} advancedSearch={() => this.setState({showBrowse: false})} />
+                <SearchBar onComplete={this.handleSearch} advancedSearch={() => this.setState({showBrowse: false, showSearchBarSmall: false})} showSearchBarSmall={this.state.showSearchBarSmall} />
+                <div onClick={() => this.setState({showSearchBarSmall: !this.state.showSearchBarSmall})} className={classToggler({
+									'navSearchIcon': true,
+									'showSearchBarSmall': this.state.showSearchBarSmall,
+                })}>
+                    <div className='navSearchIconInner'>
+                        <span className='navSearchIconSpan'></span>
+                    </div>
+                </div>
+
                 <div className='navProfileDiv' onClick={this.handleProfileDivClick}>
                     <div className='navProfileDivInner'>
                         <div className='profileImageDiv'>
