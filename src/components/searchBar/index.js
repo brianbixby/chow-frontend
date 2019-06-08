@@ -83,9 +83,7 @@ class SearchBar extends React.Component {
   handleChange = e => {
     let { name, value } = e.target;
 
-    this.setState({
-      [name]: value,
-    });
+    this.setState({[name]: value});
   };
   handleSubmit = e => {
     e.preventDefault();

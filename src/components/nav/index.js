@@ -25,9 +25,13 @@ class Navbar extends React.Component {
         let ingredients = searchParams.maxIngredients ? `&ingr=${searchParams.maxIngredients}` : '';
         let diet = searchParams.dietOption ? `&diet=${searchParams.dietOption}` : '';
         let health = searchParams.healthOption ? `&health=${searchParams.healthOption}` : '';
-        let queryParams = `&calories=${searchParams.minCals}-${searchParams.maxCals}${health}${diet}${ingredients}`;
+        let exclude = '';
+        if (searchParams.excludedArr.length > 0) {
+            searchParams.excludedArr = searchParams.excludedArr.map(el => `&excluded=${el}`);
+            exclude = searchParams.excludedArr.join('');
+        }
+        let queryParams = `&calories=${searchParams.minCals}-${searchParams.maxCals}${health}${diet}${ingredients}${exclude}`;
         let queryString = searchParams.searchTerm ? `search?q=${searchParams.searchTerm}` : 'search?q=';
-      
         return this.props.recipesFetch(queryString, queryParams)
           .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
           .catch(err => logError(err));

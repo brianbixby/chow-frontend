@@ -1,8 +1,5 @@
 advanced search 
-    - x button hover opacity
-    - exclude button opacity
     - reset search button (undoes health and diet)
-    - exclude ingredient logic on back end
 home page
   make search results centered on small screen
 sign up/sign in

@@ -187,6 +187,12 @@
         font-weight: 600;
       }
     }
+    .excludeButton:hover {
+      background-color: #f2f2f2;
+      span {
+        font-weight: 900;
+      }
+    }
     .keyWordsInput::placeholder, .excludeInput::placeholder {
       color: #b2b2b2;
       opacity: 1;
@@ -311,7 +317,7 @@ input[type='radio']:checked + span {
       width: calc((100vw - 50px));
       float: left;
       clear: none;
-      margin: 16px 4px 0;
+      margin: 16px auto 0;
     }
     .exclude {
       margin-bottom: 16px;
@@ -385,6 +391,12 @@ input[type='radio']:checked + span {
       float: left;
       clear: none;
       margin: 16px 4px;
+    }
+    .iconClose:hover {
+      background-color: #E6E6E6;
+    }
+    .iconClose:hover::before {
+      color: rgb(128,128,128);
     }
   }
 }
