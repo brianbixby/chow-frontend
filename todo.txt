@@ -1,7 +1,5 @@
 advanced search 
     - reset search button (undoes health and diet)
-home page
-  make search results centered on small screen
 sign up/sign in
   page redirects you to homepage on signin
   style page 
@@ -10,10 +8,10 @@ profile
     stlye profile page
 recipes
   add infinite scroll
-  add total number of reults and edit search button
 recipe page 
   style individual recipe page
 
 add or remove favorite: have pop up instead of alert
 handle errors
 make edamam api faster
+add logout

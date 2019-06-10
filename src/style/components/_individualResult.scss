@@ -1,85 +1,276 @@
-.individualResultImg {
-  margin: 30px 30px 0px 30px;
+// .individualResultImg {
+//   margin: 30px 30px 0px 30px;
+// }
+// .individualResultIngredientCount, .individualResultPrep, .individualResultNutrition {
+//   font-size: 16px;
+//   color: gray;
+//   border-bottom: 1px rgba(220,220,220, 0.7) solid;
+// }
+// .individualResultIngredientCount {
+//   margin-top: 0px;
+// }
+// .individualResultLabel {
+//   font-size: 20px;
+//   margin-top: 45px;
+//   text-align: center;
+//   margin-bottom: 20px;
+// }
+// .individualResultSource {
+//   font-size: 12px;
+//   margin-bottom: 45px;
+//   text-align: center;
+// }
+// .individualResultFavButton {
+//   text-align: center;
+//   margin-left: 140px;
+//   margin-bottom: 45px;
+// }
+// .individualResultDietLabel {
+//   margin-left: 70px;
+//   margin-right: 70px;
+// }
+// .individualResultIngredients {
+//   margin-left: 15px;
+// }
+// .individualResultNutritionLable {
+//   font-size: 10px;
+//   margin-left: 35px;
+// }
+// .individualResultNutritionNumber {
+//   margin-left: 55px;
+//   font-size: 18px;
+// }
+// .individualResultNutritionBox {
+//   display: inline-block;
+// }
+// .individualResultNutritionDiv {
+//   border-bottom: 1px rgba(220,220,220, 0.7) solid;
+//   margin-bottom: 15px;
+// }
+// .individualResultNutritionPercentFacts {
+//   text-align: right;
+//   color: gray;
+//   float: right;
+//   margin-left: 40px;
+// }
+// .individualResultNutritionNumberFacts {
+//   text-align: right;
+// }
+// .individualResultNutritionItemFacts {
+//   color: black;
+// }
+// .individualResultNutritionButton:hover {
+//   text-decoration: none;
+//   font-weight:bold;
+// }
+// .individualResultNutritionPercentDetailedFacts {
+//   text-align: right;
+//   color: gray;
+//   float: right;
+//   margin-left: 40px;
+//   font-size: 12px;
+// }
+// .individualResultNutritionNumberDetailedFacts {
+//   text-align: right;
+//   font-size: 12px;
+// }
+// .individualResultNutritionItemDetailedFacts {
+//   color: black;
+//   margin-left: 40px;
+//   font-size: 12px;
+// }
+// #ingredListDiv {
+//   margin-top: 0px;
+//   padding-top: 0px;
+// }
+
+.irImgContainerDisplaySmall {
+  display: none;
+  // float: left;
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+  .irImgContainerInnerWrapper {
+    display: block;
+    margin: 0 auto;
+    max-width: 720px;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    -ms-flex-pack: center;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    align-items: center;
+    -ms-flex-align: center;
+
+    img {
+      // border: 1px solid #fafafa;
+      max-width: 720px;
+      min-height: 200px;
+      height: calc((100vh - 125px));
+      width: auto;
+    }
+  }
 }
-.individualResultIngredientCount, .individualResultPrep, .individualResultNutrition {
+.irLabel {
+  font-size: 1.375rem;
+  line-height: 28px;
+  margin: 24px 0 8px;
+  text-align: center;
+}
+.irImgContainerDisplayLarge {
+  display: none;
+}
+.irhealthLabels {
+  min-height: 32px;
+  .irhealthLabelsInner {
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -ms-flex-align: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    font-size: 16px;
+    font-size: 1rem;
+  
+    p {
+      display: inline-block;
+      color: #ff7e1a;
+  
+      span {
+        color: #b3b3b3;
+        padding: 0 4px;
+      }
+      // span:last-child {
+      //   display: none;
+      // }
+    }
+  }
+}
+.irSource {
+  margin: 0 0.5rem 0.5rem 60px;
+  min-width: 270px;
+  position: relative;
+  width: 78%;
+  color: #808080;
+
+  a {
+    color: #2d2d2d;
+  }
+}
+.irSectionHeader {
+  padding: 0.8rem 1% 0.5rem;
+  min-height: 58px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  width: 95%;
+  border-bottom: 1px solid #e6e6e6;
+  clear: both;
+  color: #4d4d4d;
+  font-weight: 300;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.irIngredients p {
+  color: #2d2d2d;
   font-size: 16px;
-  color: gray;
-  border-bottom: 1px rgba(220,220,220, 0.7) solid;
-}
-.individualResultIngredientCount {
-  margin-top: 0px;
-}
-.individualResultLabel {
-  font-size: 20px;
-  margin-top: 45px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.individualResultSource {
-  font-size: 12px;
-  margin-bottom: 45px;
-  text-align: center;
-}
-.individualResultFavButton {
-  text-align: center;
-  margin-left: 140px;
-  margin-bottom: 45px;
-}
-.individualResultDietLabel {
-  margin-left: 70px;
-  margin-right: 70px;
-}
-.individualResultIngredients {
-  margin-left: 15px;
-}
-.individualResultNutritionLable {
-  font-size: 10px;
-  margin-left: 35px;
-}
-.individualResultNutritionNumber {
-  margin-left: 55px;
-  font-size: 18px;
-}
-.individualResultNutritionBox {
   display: inline-block;
+  margin: 0;
+  padding: 0.35rem 0.5rem 0.35rem 2%;
+  position: relative;
+  margin-left: 1.2rem;
 }
-.individualResultNutritionDiv {
-  border-bottom: 1px rgba(220,220,220, 0.7) solid;
-  margin-bottom: 15px;
+
+.irDirections {
+  p {
+    padding: 0.35rem 0.5rem 0.35rem 2%;
+    margin-left: 1.2rem;
+    line-height: 50px;
+  }
+  .button {
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 51px;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: top;
+    color: #fff;
+    min-width: 70px !important;
+    left: 65px;
+    background: #feaa26;
+    height: 50px;
+    text-align: center;
+    width: 124px !important;
+    border: none;
+  }
+  .gray {
+    color: #808080;
+  }
+  .link {
+    color: #2d2d2d;
+  }
 }
-.individualResultNutritionPercentFacts {
+.tnDiv p {
+  color: #2d2d2d;
+  font-size: 16px;
+  margin: 0;
+  padding: 0.35rem 0.5rem 0.35rem 2%;
+  margin-left: 1.2rem;
+}
+.nutrientColumnTotal {
+  padding: 0px 10px;
+  text-align: right;  
+  float: right;  
+}
+.nutrientColumnPercent {
+  width: 56px;
   text-align: right;
-  color: gray;
+  color: #666;
   float: right;
-  margin-left: 40px;
 }
-.individualResultNutritionNumberFacts {
-  text-align: right;
+.nutrientRow {
+  color: #2d2d2d;
+  font-size: 16px;
+  padding: 0.35rem 2%;
+  margin: 0 1.2rem;
 }
-.individualResultNutritionItemFacts {
-  color: black;
+@media only screen and (max-width: 450px) {
+  .irImgContainerDisplaySmall .irImgContainerInnerWrapper img {
+    width: 100%;
+    height: auto;
+  }
 }
-.individualResultNutritionButton:hover {
-  text-decoration: none;
-  font-weight:bold;
+
+@media only screen and (min-width: 451px) {
+
 }
-.individualResultNutritionPercentDetailedFacts {
-  text-align: right;
-  color: gray;
-  float: right;
-  margin-left: 40px;
-  font-size: 12px;
+
+@media only screen and (min-width: 500px) {
+  .irImgContainerDisplaySmall .irImgContainerInnerWrapper img {
+    border: 1px solid #fafafa;
+  }
 }
-.individualResultNutritionNumberDetailedFacts {
-  text-align: right;
-  font-size: 12px;
+
+@media only screen and (max-width: 767px) {
+  .irImgContainerDisplaySmall {
+    display: block;
+  }
 }
-.individualResultNutritionItemDetailedFacts {
-  color: black;
-  margin-left: 40px;
-  font-size: 12px;
+
+@media only screen and (min-width: 768px) {
+  
 }
-#ingredListDiv {
-  margin-top: 0px;
-  padding-top: 0px;
+
+@media only screen and (max-width: 1023px) {
+  .irImgContainerDisplaySmall {
+    display: block;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .irImgContainerDisplayLarge {
+    display: none;
+  }
 }

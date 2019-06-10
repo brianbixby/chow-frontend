@@ -49,9 +49,13 @@ class RecipesContainer extends React.Component {
           </div>
         )}
         <div className='recipesOuter'>
-          {renderIf(this.props.recipes && this.props.recipes.length > 0 ,
+          {renderIf(this.props.recipes && this.props.recipes.hits.length > 0 ,
+            <div>
+            <div className='resultCountDiv'>
+              <p>{this.props.recipes.count} recipe results for <span>"{this.props.recipes.q}"</span></p>
+            </div>
             <div className='recipesSection'>
-              {this.props.recipes.map(myRecipe => {
+              {this.props.recipes.hits.map(myRecipe => {
                 let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
                 let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
                 return <div key={myRecipe.recipe.uri} className='outer'>
@@ -73,6 +77,7 @@ class RecipesContainer extends React.Component {
                         </div>
                 </div> 
               })}
+            </div>
             </div>
           )}
         </div>

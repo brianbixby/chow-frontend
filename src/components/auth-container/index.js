@@ -28,6 +28,7 @@ class AuthContainer extends React.Component {
         return this.props.favoritesFetch(profile.body)
           .catch(err => logError(err));
       })
+      // .then(() => this.props.history.goBack)
       .catch(err => {
         logError(err);
         errCB(err);
@@ -44,6 +45,7 @@ class AuthContainer extends React.Component {
         return this.props.favoritesFetch(profile.body)
           .catch(err => logError(err));
       })
+      // .then(() => this.props.history.goBack)
       .catch(err => {
         logError(err);
         errCB(err);

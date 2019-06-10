@@ -39,44 +39,71 @@ class RecipeContainer extends React.Component {
 
   render() {
     let { recipe } = this.props;
-    let digest = recipe.digest;
+    // let digest = recipe.digest;
     return (
       <div className='container'>
-        <h1> single result</h1>
         {renderIf(recipe && recipe.length < 1 ,
           <div>
             Sorry, no results.
           </div>
         )}
         {renderIf(recipe && recipe.uri && recipe.uri.length > 0 && recipe.digest.length > 0,
-          <div className='row'>
-            <div className='singleResultShowLarge'>
-              <div className='row'>
-                <div id='individualImgDiv' className='col-xs-12 col-sm-6 col-lg-6'>
-                  <img className='individualResultImg' src={recipe.image} />
+          <div className='irContainer'>
+            <div className='irMain'>
+              <div className='irHead'>
+                <div className='irImgContainerDisplaySmall'>
+                  <div className='irImgContainerInnerWrapper'>
+                    <img className='irImg' src={recipe.image} />
+                  </div>
                 </div>
-
-                <div id='summaryDiv' className='col-xs-12 col-sm-6 col-lg-6'>
-                  <p className='individualResultLabel'>{recipe.label}</p>
-                  <p className='individualResultSource'>See full recipe on: <a rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
-                  <button className='individualResultFavButton' onClick={this.handleFavoriteClick} id='favoriteButton' className='btn btn-primary'>
+                <div className='irMainInfo'>
+                  <p className='irLabel'>{recipe.label}</p>
+                  {/* <p className='irhealthLabels'>{recipe.healthLabels.join(`<span> | </span>`)} </p> */}
+                  <div className='irhealthLabels'>
+                    <div className='irhealthLabelsInner'>
+                      {recipe.healthLabels.map((label, idx) => {
+                        let span = idx == recipe.healthLabels.length - 1 ? <span></span> : <span>|</span>;
+                        return <p key={idx} className=''>{label}{span}</p>
+                      })}
+                    </div>
+                  </div>
+                  <p className='irSource'>Recipe by: <a rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
+                  {/* <button className='irFavButton' onClick={this.handleFavoriteClick} id='favoriteButton' className='btn btn-primary'>
                     <span className='glyphicon glyphicon-bookmark'></span> Save
-                  </button>
-                  <h5> <span className='individualResultDietLabel'>{recipe.dietLabels}</span> <span className='individualResultHealthLabel'>{recipe.healthLabels}</span></h5>
+                  </button> */}
+                </div>
+                <div className='irImgContainerDisplayLarge'>
+                  <img className='irImg' src={recipe.image} />
                 </div>
               </div>
-
-              <div id='nutritionalSummaryDiv' className='col-xs-12 col-sm-6 col-lg-5'>
-                <p className='individualResultIngredientCount'>Nutrition</p>
-                <div className='individualResultNutritionDiv'>
-                  <p className='individualResultNutritionBox'> <span className='individualResultNutritionNumber'>{this.calsPS(recipe.calories, recipe.yield)} </span><br/> <span className='individualResultNutritionLable'>CALORIES/SERVING </span></p>
-                  <p className='individualResultNutritionBox'> <span className='individualResultNutritionNumber'>{this.calsPD(recipe.calories, recipe.yield)}% </span><br/><span className='individualResultNutritionLable'> DAILY VALUE</span></p>
-                  <p className='individualResultNutritionBox'> <span className='individualResultNutritionNumber'>{recipe.yield}</span> <br/><span className='individualResultNutritionLable'> SERVINGS </span> </p>
+              <div className='irIngredients'>
+                <h2 className='irIngredientHead irSectionHeader'> {recipe.ingredientLines.length} Ingredients</h2>
+                {recipe.ingredientLines.map((ingredient, idx) => {
+                  return <div key={idx} className=''>
+                      <p>{ingredient}</p>
+                    </div>
+                })}
+              </div>
+              <div className='irNutrition'>
+                <h2 className='irNutritionHead irSectionHeader'>Nutrition</h2>
+                <div className='totalNutrientColumn'>
+                  {recipe.digest.map((digest, idx) => {
+                    let total = parseInt(digest.total/recipe.yield);
+                    let percent = parseInt(digest.daily/recipe.yield);
+                    percent = percent > 0 ? `${percent}%` : "-";
+                    return <div key={idx} className='nutrientRow'>
+                        <p><span className='nutrientColumnLabel'>{digest.label}</span><span className='nutrientColumnPercent'>{percent}</span><span className='nutrientColumnTotal'>{total}{digest.unit}</span></p>
+                      </div>
+                  })}
                 </div>
               </div>
-              <RecipeDigest digest={digest} recipeYield={recipe.yield}/> 
-
-              <div className='col-lg-2'></div>
+              <div className='irDirections'>
+                <h2 className='irDirectionsHead irSectionHeader'> Directions</h2>
+                <p><a className='button' rel="noopener noreferrer" target="_blank" href={recipe.url}>Directions</a> <span className='gray'>on</span> <a className='link' rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
+              </div>
+            </div>
+            <div className='aside'>
+        
             </div>
           </div>
         )}

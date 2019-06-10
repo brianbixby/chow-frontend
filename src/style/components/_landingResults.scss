@@ -130,6 +130,27 @@
     color: #4d4d4d !important;
   }
 
+.resultCountDiv {
+  display: -ms-flexbox;
+  display: flex;
+  align-items: flex-start;
+  -ms-flex-align: flex-start;
+  margin: 0 auto 8px;
+  position: relative;
+  width: 95%;
+  padding: 8px 0;
+
+  p {
+    color: gray;
+    font-style: oblique;
+
+    span {
+      color: #2d2d2d;
+      font-style: none;
+      padding-left: 4px;
+    }
+  }
+}
 @media only screen and (max-width: 627px) {
   .recipesSection {
     display: grid;
@@ -137,6 +158,9 @@
     grid-auto-flow: dense;
     width: 300px;
     margin: 0 auto;
+  }
+  .outer {
+    margin: 7px auto 20px;
   }
 }
 
