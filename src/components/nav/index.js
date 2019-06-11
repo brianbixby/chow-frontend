@@ -3,20 +3,59 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Avatar from '../helpers/avatar';
+import Modal from '../helpers/modal';
 import SearchBar from '../searchBar';
+import UserAuthForm from '../userAuth-form';
 import { signOut } from '../../actions/userAuth-actions.js';
 import { recipesFetchRequest } from '../../actions/search-actions.js';
+import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
+import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
+import { favoritesFetchRequest } from '../../actions/favorite-actions.js';
 import { logError, renderIf, classToggler } from '../../lib/util.js';
 
 class Navbar extends React.Component {
     constructor(props){
         super(props);
-        this.state={showBrowse: false, showSearchBarSmall: false };
+        this.state={showBrowse: false, showSearchBarSmall: false, authFormAction: 'Sign Up', formDisplay: false, };
     }
 
     handleSignOut = () => {
         this.props.signOut();
         this.props.history.push('/');
+    };
+
+    handleSignin = (user, errCB) => {
+      return this.props.signIn(user)
+        .then(() => {
+          return this.props.userProfileFetch()
+            .catch(err => logError(err));
+        })
+        .then(profile => {
+          return this.props.favoritesFetch(profile.body)
+            .catch(err => logError(err));
+        })
+        .then(() => this.setState({ formDisplay: false }))
+        .catch(err => {
+          logError(err);
+          errCB(err);
+        });
+    };
+  
+    handleSignup = (user, errCB) => {
+      return this.props.signUp(user)
+        .then(() => {
+          return this.props.userProfileFetch()
+            .catch(err => logError(err));
+        })
+        .then(profile => {
+          return this.props.favoritesFetch(profile.body)
+            .catch(err => logError(err));
+        })
+        .then(() => this.setState({ formDisplay: false }))
+        .catch(err => {
+          logError(err);
+          errCB(err);
+        });
     };
 
     handleSearch = (searchParams) => {
@@ -38,9 +77,8 @@ class Navbar extends React.Component {
     };
 
     handleProfileDivClick = e => {
-        let link = this.props.userAuth ? `/profile/${this.props.userProfile.username}` : '/account/signup';
-        this.props.history.push(link);
-    }
+        this.props.userAuth ? this.props.history.push(`/profile/${this.props.userProfile.username}`) : this.setState({formDisplay: true});
+    };
 
     handleboundCatClick = (item, e) => {
         let queryString = item.link.split("&calories=0-10000")[0];
@@ -65,6 +103,7 @@ class Navbar extends React.Component {
         const user = require('./../helpers/assets/icons/user.icon.svg');
         let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
         let profileText = this.props.userAuth && this.props.userProfile && this.props.userProfile.username ? this.props.userProfile.username : "Sign Up/ Sign In" ;
+        let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
         return (
             <nav>
                 <div className='homeLinkDiv'>
@@ -117,6 +156,23 @@ class Navbar extends React.Component {
                         </div>
                     </div>
                 </div>
+                {renderIf(this.state.formDisplay,
+                  <div>
+                    <Modal heading='Chow' close={() => this.setState({ formDisplay: false })}>
+                      <UserAuthForm authFormAction={this.state.authFormAction} onComplete={handleComplete} />
+
+                      <div className='userauth-buttons'>
+                        {renderIf(this.state.authFormAction==='Sign In',
+                          <button className='b-button dark-button' onClick={() => this.setState({authFormAction: 'Sign Up'})}>Sign Up</button>
+                        )}
+
+                        {renderIf(this.state.authFormAction==='Sign Up',
+                          <button className='b-button dark-button' onClick={() => this.setState({authFormAction: 'Sign In'})}>Sign In</button>
+                        )}
+                      </div>
+                    </Modal>
+                  </div>
+                )}
             </nav>
         );
     }
@@ -130,6 +186,10 @@ let mapStateToProps = state => ({
 let mapDispatchToProps = dispatch => ({
     signOut: () => dispatch(signOut()),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    signUp: user => dispatch(signUpRequest(user)),
+    signIn: user => dispatch(signInRequest(user)),
+    favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),
+    userProfileFetch: () => dispatch(userProfileFetchRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

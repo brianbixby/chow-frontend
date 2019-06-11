@@ -4,7 +4,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import LandingContainer from '../landing-container';
 import RecipesContainer from '../recipes-container';
 import RecipeContainer from '../recipe-container';
-import AuthContainer from '../auth-container';
 import ProfileContainer from '../profile-container';
 import Navbar from '../nav';
 
@@ -15,7 +14,6 @@ class App extends React.Component {
         <section>
           <Route path='*' component={Navbar} />
           <Route exact path='/' component={LandingContainer} />
-          <Route exact path='/account/:authAction' component={AuthContainer} />
           <Route exact path='/profile/:userName' component={ProfileContainer} />
           <Route exact path='/search/:searchQuery' component={RecipesContainer} />
           <Route exact path='/recipe/:recipeQuery' component={RecipeContainer} />

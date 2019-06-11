@@ -1,11 +1,7 @@
 advanced search 
     - reset search button (undoes health and diet)
 sign up/sign in
-  page redirects you to homepage on signin
-  style page 
   !!!fix form and all forms so red carot doesnt show and handle errors
-profile
-    stlye profile page
 recipes
   add infinite scroll
 recipe page 

@@ -23,16 +23,9 @@ class ProfileContainer extends React.Component {
       .catch(err => logError(err));
   };
 
-  // handleBoundRecipeClick = (favorite, e) => {
-  //   return this.props.recipeFetch(favorite.uri.split("#recipe_")[1])
-  //     .then(() => this.props.history.push(`/recipe/${favorite.label}`))
-  //     .catch(err => logError(err));
-  // };
-
   handleBoundRecipeClick = (favorite, e) => {
-    console.log("favorite: ", favorite);
     this.props.recipeFetchRequest(favorite);
-    let uri = favorite.uri.split('recipe_')[1];
+    let uri = favorite.uri.split('#recipe_')[1];
     return this.props.history.push(`/recipe/${uri}`);
   };
 
@@ -52,46 +45,25 @@ class ProfileContainer extends React.Component {
     let { favorites } = this.props;
     return (
       <div className='profile-container page-outer-div'>
-        <div className='grid-container'>
-          <div>
-            <div className='row'>
-              <div className='col-md-8'>
-                <div className='createOuter'>
-                  <div className='page-form'>
-                    <UserProfileForm 
-                      userProfile={this.props.userProfile} 
-                      onComplete={this.handleProfileUpdate}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className='col-md-4 hideMedium'>
-                <div className='mainContainer'>
-                  <div className='mainContainer-header'>
-                    <div className='left'>
-                      <p className='mainContainerHeader'>{name}</p>
-                    </div>
-                  </div>
-                  <div className='mainContainerSection'>
-                    <div className='mainContainerSectionWrapper'>
-                      <div className='container'>
-                        <div className='inner-wrapper'>
-                          <div className='profile-image-div'>
-                            <img className='profile-image' src={profileImage} />
-                          </div>
-                          <div className='userProfileData'>
-                            <p>Member Since: {formatDate(this.props.userProfile.createdOn)}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        <div className='page-form'>
+          <div className='profileWrapper'>
+            <div className='inner-wrapper'>
+              <div className='profile-image-div'>
+                <img className='profile-image' src={profileImage} />
+                <p className='mainContainerHeader'>{name}</p>
+                <p className='profileDate'>Member Since: {formatDate(this.props.userProfile.createdOn)}</p>
               </div>
             </div>
+            </div>
           </div>
-        </div>
+          <div className='page-form'>
+            <UserProfileForm 
+              userProfile={this.props.userProfile} 
+              onComplete={this.handleProfileUpdate}
+            />
+          </div>
         <div className='recipesOuter'>
+          <p className='favoritesHeader'>Favorites</p>
           {renderIf(favorites && favorites.length > 0 ,
             <div className='recipesSection'>
               {favorites.map((fav, idx) => {
@@ -117,6 +89,9 @@ class ProfileContainer extends React.Component {
                 </div> 
               })}
             </div>
+          )}
+          {renderIf(favorites && favorites.length < 1,
+            <p className='noFavorites'>No saved Favories.</p>
           )}
         </div>
       </div>

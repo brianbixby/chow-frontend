@@ -127,7 +127,10 @@ class UserAuthForm extends React.Component {
       })}>
         {renderIf(this.props.authFormAction === 'Sign Up',
           <div>
-            <h2>sign up.</h2>
+          <h2>sign up.</h2>
+          <div className='authInputWrapper'>
+          <div className='authInner'>
+            <div className='authinside'>
             <input
               className={classToggler({error: emailError})}
               type='text'
@@ -138,7 +141,10 @@ class UserAuthForm extends React.Component {
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
             />
-            <Tooltip message={emailError} show={focused === 'email' || submitted} />
+          </div>
+          </div>
+          </div>
+          <Tooltip message={emailError} show={focused === 'email' || submitted} />
           </div>
         )}
         {renderIf(this.props.authFormAction !== 'Sign Up',
@@ -146,6 +152,9 @@ class UserAuthForm extends React.Component {
             <h2>sign in.</h2>
           </div>
         )}
+                  <div className='authInputWrapper'>
+          <div className='authInner'>
+            <div className='authinside'>
         <input
           className={classToggler({error: usernameError || !usernameAvailable})}
           type='text'
@@ -156,14 +165,20 @@ class UserAuthForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
+        </div>
+        </div>
+        </div>
         <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
         {renderIf(username && this.props.authFormAction=== 'Sign Up',
           <div>
-            <p>
+            <p className='authPadding'>
               {username} {usernameAvailable ? 'is available': 'is not available'}
             </p>
           </div>
         )}
+                  <div className='authInputWrapper'>
+          <div className='authInner'>
+            <div className='authinside'>
         <input
           className={classToggler({passwordError})}
           type='password'
@@ -174,6 +189,9 @@ class UserAuthForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
+        </div>
+        </div>
+        </div>
         <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
         <button type='submit'> {this.props.authFormAction} </button>
       </form>

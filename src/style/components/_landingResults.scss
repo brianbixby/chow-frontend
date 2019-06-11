@@ -9,6 +9,7 @@
     -ms-flex-direction: row;
     flex-direction: row;
     width: 100%;
+    margin: auto;
   }
 
 .homepageRecipesOuter {
@@ -226,6 +227,6 @@
 @media only screen and (min-width: 1270px) {
     .recipesSection {
         grid-template-columns: repeat(4, 1fr);
-        width: 1257px;
+        width: 1264px;
     }
 }

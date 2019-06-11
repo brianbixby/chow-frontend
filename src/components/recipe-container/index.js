@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import RecipesMap from '../recipes-map';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
@@ -43,6 +44,9 @@ class RecipeContainer extends React.Component {
 
   calsPS = (cals, servings) => Math.round(cals/servings);
   calsPD = (cals, servings) => (cals/servings/20).toFixed(0);
+  handleRedirect = url => {
+    return this.props.history.push(url);
+  };
 
   render() {
     let { recipe } = this.props;
@@ -110,7 +114,9 @@ class RecipeContainer extends React.Component {
               </div>
             </div>
             <div className='aside'>
-        
+            {renderIf(this.props.recipes.hits && this.props.recipes.hits.length > 0,
+              <RecipesMap recipes={this.props.recipes.hits} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect}/> 
+            )}
             </div>
           </div>
         )}
