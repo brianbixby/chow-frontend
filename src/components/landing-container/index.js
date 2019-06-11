@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import RecipesMap from '../recipes-map';
+// recipe fetch
 import { homepageFetchRequest, recipeFetch, recipesFetchRequest } from '../../actions/search-actions.js';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
@@ -37,24 +39,28 @@ class LandingContainer extends React.Component {
       .catch(err => logError(err));
   };
 
-  handleBoundRecipeClick = (myRecipe, e) => {
-    this.props.recipeFetchRequest(myRecipe.recipe);
-    let uri = myRecipe.recipe.uri.split('recipe_')[1];
-    return this.props.history.push(`/recipe/${uri}`);
+  handleRedirect = url => {
+    return this.props.history.push(url);
   };
 
-  handleBoundFavoriteClick = (favorite, e) => {
-    if (this.props.userAuth) {
-      this.props.favoriteFetch(favorite.recipe)
-        .then(() => alert("favorite added."))
-        .catch(err => logError(err));
-    }
-  };
+  // handleBoundRecipeClick = (myRecipe, e) => {
+  //   this.props.recipeFetchRequest(myRecipe.recipe);
+  //   let uri = myRecipe.recipe.uri.split('recipe_')[1];
+  //   return this.props.history.push(`/recipe/${uri}`);
+  // };
+
+  // handleBoundFavoriteClick = (favorite, e) => {
+  //   if (this.props.userAuth) {
+  //     this.props.favoriteFetch(favorite.recipe)
+  //       .then(() => alert("favorite added."))
+  //       .catch(err => logError(err));
+  //   }
+  // };
 
   calsPS = (cals, servings) => Math.round(cals/servings);
 
   render() {
-    let { homepage } = this.props;
+    // let { homepage } = this.props;
     let sliderItems = [{header: "Sensational Sangria Recipes", subHeader: "Browse hundreds of variations on this fun and fruity punch.", image: "https://i.imgur.com/Cdm8uLo.jpg", link: "search?q=sangria&calories=0-10000" }, 
     {header: "Hummus Recipes", subHeader: "Browse hundreds of ways to get your dip on.", image: "https://i.imgur.com/U2S3zqF.jpg", link: "search?q=hummus&calories=0-10000" }, 
     {header: "Greek Pasta Salad", subHeader: "These salads are filled with bold flavors: kalamata olives, feta cheese and fresh herbs.", image: "https://i.imgur.com/ZJTqzVc.jpg", link: "search?q=greek%20pasta%20salad&calories=0-10000" },
@@ -98,7 +104,8 @@ class LandingContainer extends React.Component {
             })}
             </div>
         </div>
-        <div className='homepageRecipesOuter'>
+        <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect}/>
+        {/* <div className='homepageRecipesOuter'>
           {renderIf(homepage && homepage.length > 0 ,
             <div className='recipesSection'>
               {homepage.map(myRecipe => {
@@ -125,25 +132,26 @@ class LandingContainer extends React.Component {
               })}
             </div>
           )}
-        </div>
+        </div> */}
       </section>
     );
   }
 }
 
 let mapStateToProps = state => ({
-  userAuth: state.userAuth,
+  // no need for userauth
+  // userAuth: state.userAuth,
   homepage: state.homepage,
 });
 
 let mapDispatchToProps = dispatch => {
   return {
-    favoriteFetch: favorite => dispatch(favoriteFetchRequest(favorite)),
+    // favoriteFetch: favorite => dispatch(favoriteFetchRequest(favorite)),
     favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     homepageFetch: () => dispatch(homepageFetchRequest()),
-    recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
+    // recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
   };
 };

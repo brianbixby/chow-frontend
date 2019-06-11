@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import RecipeDigest from '../recipe-digest';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
-import { recipeFetchRequest } from '../../actions/search-actions.js';
+import { recipeFetchRequest, recipesFetchRequest } from '../../actions/search-actions.js';
 import { logError, renderIf, classToggler, userValidation } from './../../lib/util.js';
 
 // to do check and get recipe search params from url
@@ -20,8 +19,16 @@ class RecipeContainer extends React.Component {
     userValidation(this.props);
     let uri = window.location.href.split('/recipe/')[1];
     if (!this.props.recipe || this.props.recipe.uri != `http://www.edamam.com/ontologies/edamam.owl#recipe_${uri}`) {
-      console.log("getting recipe: ");
       this.props.recipeFetch(uri)
+        .then(() => {
+          if (!this.props.recipes.length) {
+            this.props.recipesFetch("search?q=summer", "&calories=0-10000")
+              .catch(err => logError(err));
+          }
+        })
+        .catch(err => logError(err));
+    } else if(!this.props.recipes.length) {
+      this.props.recipesFetch("search?q=summer", "&calories=0-10000")
         .catch(err => logError(err));
     }
   }
@@ -114,6 +121,7 @@ class RecipeContainer extends React.Component {
 
 let mapStateToProps = state => ({
   recipe: state.recipe,
+  recipes: state.recipes,
 });
 
 let mapDispatchToProps = dispatch => {
@@ -123,6 +131,7 @@ let mapDispatchToProps = dispatch => {
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     recipeFetch: query => dispatch(recipeFetchRequest(query)),
+    recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
   };
 };
 

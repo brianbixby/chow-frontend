@@ -5,7 +5,8 @@ import UserProfileForm from '../userProfile-form';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteDeleteRequest } from '../../actions/favorite-actions.js';
-import { recipeFetchRequest } from '../../actions/search-actions.js';
+// import { recipeFetchRequest } from '../../actions/search-actions.js';
+import { recipeFetch } from '../../actions/search-actions.js';
 import { userValidation, logError, formatDate, renderIf } from './../../lib/util.js';
 
 class ProfileContainer extends React.Component {
@@ -22,15 +23,20 @@ class ProfileContainer extends React.Component {
       .catch(err => logError(err));
   };
 
+  // handleBoundRecipeClick = (favorite, e) => {
+  //   return this.props.recipeFetch(favorite.uri.split("#recipe_")[1])
+  //     .then(() => this.props.history.push(`/recipe/${favorite.label}`))
+  //     .catch(err => logError(err));
+  // };
+
   handleBoundRecipeClick = (favorite, e) => {
-    console.log(favorite);
-    this.props.recipeFetch(favorite.uri)
-      .then(() => this.props.history.push(`/recipe/${favorite.label}`))
-      .catch(err => logError(err));
+    console.log("favorite: ", favorite);
+    this.props.recipeFetchRequest(favorite);
+    let uri = favorite.uri.split('recipe_')[1];
+    return this.props.history.push(`/recipe/${uri}`);
   };
 
   handleboundDeleteFavoriteClick = (favorite, e) => {
-    console.log("del fav click: ", favorite)
     if (this.props.userAuth) {
       this.props.favoriteDelete(favorite)
         .then(() => alert("favorite deleted."))
@@ -88,10 +94,10 @@ class ProfileContainer extends React.Component {
         <div className='recipesOuter'>
           {renderIf(favorites && favorites.length > 0 ,
             <div className='recipesSection'>
-              {favorites.map(fav => {
+              {favorites.map((fav, idx) => {
                 let boundRecipeClick = this.handleBoundRecipeClick.bind(this, fav);
                 let boundDeleteFavoriteClick = this.handleboundDeleteFavoriteClick.bind(this, fav);
-                return <div key={fav.uri} className='outer'>
+                return <div key={idx} className='outer'>
                         <div className='cardImageContainer' onClick={boundRecipeClick}>
                           <img className='cardImage' src={fav.image} />
                         </div>
@@ -125,7 +131,8 @@ let mapStateToProps = (state) => ({
 })
 
 let mapDispatchToProps = (dispatch) => ({
-  recipeFetch: recipeURI => dispatch(recipeFetchRequest(recipeURI)),
+  // recipeFetch: recipeURI => dispatch(recipeFetchRequest(recipeURI)),
+  recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
   favoriteDelete: favorite => dispatch(favoriteDeleteRequest(favorite)),
   favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),
   userProfileFetch: () => dispatch(userProfileFetchRequest()),

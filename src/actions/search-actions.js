@@ -51,6 +51,7 @@ export const recipeFetchRequest = recipeURI => dispatch => {
 
   return superagent.get(url)
     .then(res => {
+      console.log("res.body: ",res.body);
       dispatch(recipeFetch(res.body[0]));
       return res.body[0];
     })
