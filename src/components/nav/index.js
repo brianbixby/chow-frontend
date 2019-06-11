@@ -59,17 +59,17 @@ class Navbar extends React.Component {
     };
 
     handleSearch = (searchParams) => {
-        if(!searchParams.minCals) searchParams.minCals='0';
-        if(!searchParams.maxCals) searchParams.maxCals='10000';
+        let minCals = !searchParams.minCals ? '0' : searchParams.minCals;
+        let maxCals = !searchParams.maxCals ? '10000' : searchParams.maxCals;
         let ingredients = searchParams.maxIngredients ? `&ingr=${searchParams.maxIngredients}` : '';
         let diet = searchParams.dietOption ? `&diet=${searchParams.dietOption}` : '';
         let health = searchParams.healthOption ? `&health=${searchParams.healthOption}` : '';
         let exclude = '';
         if (searchParams.excludedArr.length > 0) {
-            searchParams.excludedArr = searchParams.excludedArr.map(el => `&excluded=${el}`);
-            exclude = searchParams.excludedArr.join('');
+            let shallowCopyExcludedArr = searchParams.excludedArr.map(el => `&excluded=${el}`);
+            exclude = shallowCopyExcludedArr.join('');
         }
-        let queryParams = `&calories=${searchParams.minCals}-${searchParams.maxCals}${health}${diet}${ingredients}${exclude}`;
+        let queryParams = `&calories=${minCals}-${maxCals}${health}${diet}${ingredients}${exclude}`;
         let queryString = searchParams.searchTerm ? `search?q=${searchParams.searchTerm}` : 'search?q=';
         return this.props.recipesFetch(queryString, queryParams)
           .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))

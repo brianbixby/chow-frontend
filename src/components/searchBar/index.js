@@ -11,9 +11,7 @@ class SearchBar extends React.Component {
     this.state = { 
       advancedSearch: false,
       searchTerm: '',
-      searchTermError: null,
       exclude: '',
-      excludeError: null,
       excludedArr: [],
       minCals: '',
       minCalsError: null,
@@ -21,8 +19,8 @@ class SearchBar extends React.Component {
       maxCalsError: null,
       maxIngredients: '',
       maxIngredientsError: null,
-      dietOption: null,
-      healthOption: null,
+      dietOption: '',
+      healthOption: '',
       error: null,
       focused: null,
       submitted: false,
@@ -50,7 +48,6 @@ class SearchBar extends React.Component {
   validateInput = e => {
     let { name, value } = e.target;
     let errors = { 
-      searchTermError: this.state.searchTermError, 
       minCalsError: this.state.minCalsError, 
       maxCalsError: this.state.maxCalsError,
       maxIngredientsError: this.state.maxIngredientsError,
@@ -58,37 +55,40 @@ class SearchBar extends React.Component {
     let setError = (name, error) => errors[`${name}Error`] = error;
     let deleteError = name => errors[`${name}Error`] = null;
 
-    if(name === 'searchTerm') {
-      if(!value)
-        setError(name, `${name} can not be empty`);
-      else
-        deleteError(name);
-    }
     if(name === 'minCals' || name === 'maxCals' || name === 'maxIngredients') {
-      if(value && isInt(value))
+      if(value && !isInt(value))
         setError(name, `${name} must be a number`);
       else
         deleteError(name);
     }
 
-    this.setState({ ...errors, error: !!(errors.emailError || errors.minCalsError || errors.maxCalsError || errors.maxIngredients) });
+    this.setState({ ...errors, error: !!(errors.minCalsError || errors.maxCalsError || errors.maxIngredients) });
   };
+
   handleFocus = e => this.setState({ focused: e.target.name});
+
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
       focused: state.focused == name ? null : state.focused,
     }));
   };
+
   handleChange = e => {
     let { name, value } = e.target;
-
     this.setState({[name]: value});
   };
+
+  handleRadioClick = e => {
+    let { name, value } = e.target;
+    this.state[name] === value ? this.setState({[name]: ''}) : this.setState({[name]: value});
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     if(!this.state.error) {
       this.props.onComplete(this.state)
+        .then(() => this.handleAdvancedSearch())
       //   .catch(err => {
       //     this.setState({ 
       //       error: err,
@@ -98,11 +98,9 @@ class SearchBar extends React.Component {
     }
     this.setState(state => ({
       submitted: true,
-      searchTermError: state.searchTermError || state.searchTerm ? null : 'required',
-      minCalsError: state.minCalsError ? null : 'required',
-      maxCalsError: state.maxCalsError ? null : 'required',
-      maxIngredientsError: state.maxIngredientsError ? null : 'required',
-      excludeError: state.excludeError ? null : 'required',
+      minCalsError: !state.minCalsError ? null : 'required',
+      maxCalsError: !state.maxCalsError ? null : 'required',
+      maxIngredientsError: !state.maxIngredientsError ? null : 'required',
     }));
   };
 
@@ -120,7 +118,7 @@ class SearchBar extends React.Component {
   };
 
   render() {
-    let { searchTerm, searchTermError, minCalsError, maxCalsError, maxIngredientsError, advancedSearch, error, focused, submitted } = this.state;
+    let { searchTerm, minCalsError, maxCalsError, maxIngredientsError, advancedSearch, error, focused, submitted } = this.state;
     let magnify = require('./../helpers/assets/icons/magnify.icon.svg');
     return (
           <div className={classToggler({
@@ -148,7 +146,6 @@ class SearchBar extends React.Component {
                 <div className='advancedSearchButton' onClick={this.handleAdvancedSearch}>
                   <p>Advanced Search</p>
                 </div>
-                <Tooltip message={searchTermError} show={focused === 'searchTerm' || submitted} />
                 <button type='submit' className='btn search-btn'><img src={magnify} /></button>
               </div>
               {renderIf(advancedSearch || (this.props.showSearchBarSmall && this.state.width < 768), 
@@ -239,9 +236,10 @@ class SearchBar extends React.Component {
                             type='radio'
                             name='healthOption' 
                             value='peanut-free'
-                            onChange={this.handleChange}
+                            onClick={this.handleRadioClick}
                             onFocus={this.handleFocus}
                             onBlur={this.handleBlur}
+                            checked={this.state.healthOption === 'peanut-free'}
                           />  
                           <span>Peanut Free</span>
                         </label>
@@ -250,9 +248,11 @@ class SearchBar extends React.Component {
                               type='radio' 
                               name='healthOption' 
                               value='sugar-conscious'
-                              onChange={this.handleChange}
+                              onClick={this.handleRadioClick}
                               onFocus={this.handleFocus}
-                              onBlur={this.handleBlur} 
+                              onBlur={this.handleBlur}
+                              checked={this.state.healthOption === 'sugar-conscious'}
+ 
                             />  
                             <span>Sugar Conscious</span>
                           </label>
@@ -261,9 +261,11 @@ class SearchBar extends React.Component {
                               type='radio'
                               name='healthOption' 
                               value='tree-nut-free'
-                              onChange={this.handleChange}
+                              onClick={this.handleRadioClick}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
+                              checked={this.state.healthOption === 'tree-nut-free'}
+
                             />  
                             <span>Tree Nut Free</span>
                           </label>
@@ -272,9 +274,11 @@ class SearchBar extends React.Component {
                               type='radio' 
                               name='healthOption' 
                               value='vegan'
-                              onChange={this.handleChange}
+                              onClick={this.handleRadioClick}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur} 
+                              checked={this.state.healthOption === 'vegan'}
+
                             />  
                             <span>Vegan</span>
                           </label>
@@ -283,9 +287,11 @@ class SearchBar extends React.Component {
                               type='radio'
                               name='healthOption' 
                               value='vegetarian'
-                              onChange={this.handleChange}
+                              onClick={this.handleRadioClick}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
+                              checked={this.state.healthOption === 'vegetarian'}
+
                             />  
                             <span>Vegetarian</span>
                           </label>
@@ -298,9 +304,10 @@ class SearchBar extends React.Component {
                               type='radio'
                               name='dietOption' 
                               value='balanced'
-                              onChange={this.handleChange}
+                              onClick={this.handleRadioClick}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
+                              checked={this.state.dietOption === 'balanced'}
                             />  
                             <span>Balanced</span>
                           </label>
@@ -309,9 +316,10 @@ class SearchBar extends React.Component {
                               type='radio'
                               name='dietOption' 
                               value='high-protein'
-                              onChange={this.handleChange}
+                              onClick={this.handleRadioClick}
                               onFocus={this.handleFocus}
                               onBlur={this.handleBlur}
+                              checked={this.state.dietOption === 'high-protein'}
                             />  
                             <span>High Protein</span>
                           </label>
@@ -320,9 +328,10 @@ class SearchBar extends React.Component {
                               type='radio' 
                               name='dietOption' 
                               value='low-carb'
-                              onChange={this.handleChange}
+                              onClick={this.handleRadioClick}
                               onFocus={this.handleFocus}
-                              onBlur={this.handleBlur} 
+                              onBlur={this.handleBlur}
+                              checked={this.state.dietOption === 'low-carb'} 
                             />  
                             <span>Low Carb</span>
                           </label>

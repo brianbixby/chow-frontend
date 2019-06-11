@@ -11,3 +11,4 @@ add or remove favorite: have pop up instead of alert
 handle errors
 make edamam api faster
 add logout
+show user logged in on phone
