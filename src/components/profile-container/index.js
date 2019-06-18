@@ -5,7 +5,6 @@ import UserProfileForm from '../userProfile-form';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteDeleteRequest } from '../../actions/favorite-actions.js';
-// import { recipeFetchRequest } from '../../actions/search-actions.js';
 import { recipeFetch } from '../../actions/search-actions.js';
 import { userValidation, logError, formatDate, renderIf, classToggler } from './../../lib/util.js';
 
@@ -121,7 +120,6 @@ let mapStateToProps = (state) => ({
 })
 
 let mapDispatchToProps = (dispatch) => ({
-  // recipeFetch: recipeURI => dispatch(recipeFetchRequest(recipeURI)),
   recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
   favoriteDelete: favorite => dispatch(favoriteDeleteRequest(favorite)),
   favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),

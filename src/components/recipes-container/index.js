@@ -24,11 +24,6 @@ class RecipesContainer extends React.Component {
     window.scrollTo(0, 0);
   }
 
-  // componentWillUnmount() {
-  //   console.log("unmounted");
-  //   this.setState({userSuccess: false});
-  // }
-
   handleBoundRecipeClick = (myRecipe, e) => {
     this.props.recipeFetchRequest(myRecipe.recipe);
     let uri = myRecipe.recipe.uri.split('recipe_')[1];
@@ -60,7 +55,6 @@ class RecipesContainer extends React.Component {
           </div>
         )}
         <div className='recipesOuter'>
-          {/* {renderIf(this.props.recipes && this.props.recipes.hits.length > 0 , */}
           {renderIf(recipes,
             <div>
             <div className='resultCountDiv'>
@@ -92,7 +86,6 @@ class RecipesContainer extends React.Component {
                         })}
                       </div>
             }
-
             </div>
           )}
         </div>

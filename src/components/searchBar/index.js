@@ -113,12 +113,6 @@ class SearchBar extends React.Component {
           this.props.advancedSearch();
           this.setState({advancedSearch: false});
         })
-      //   .catch(err => {
-      //     this.setState({ 
-      //       error: err,
-      //       submitted: true,
-      //   });
-      // });
       }
     }
     this.setState(state => ({
@@ -370,9 +364,6 @@ class SearchBar extends React.Component {
                   </div>
                 </div>
               )}
-
-              
-
             </form>
           </div>
     );

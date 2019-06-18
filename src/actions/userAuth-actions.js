@@ -39,6 +39,5 @@ export const tokenSignInRequest = token => dispatch => {
       dispatch(signIn(res.text));
       localStorage.chowToken = res.text;
       return res;
-    })
-    // .catch(err => console.error(err));
+    });
 };

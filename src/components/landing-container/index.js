@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import RecipesMap from '../recipes-map';
-// recipe fetch
 import { homepageFetchRequest, homepageFetch, recipeFetch, recipesFetchRequest, recipesFetch } from '../../actions/search-actions.js';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
-import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
-import { userValidation, logError, classToggler, renderIf } from './../../lib/util.js';
+import { favoritesFetchRequest } from '../../actions/favorite-actions.js';
+import { userValidation, logError } from './../../lib/util.js';
 
 class LandingContainer extends React.Component {
   constructor(props){
@@ -62,14 +61,13 @@ class LandingContainer extends React.Component {
   calsPS = (cals, servings) => Math.round(cals/servings);
 
   render() {
-    // let { homepage } = this.props;
-    let sliderItems = [{header: "Sensational Sangria Recipes", subHeader: "Browse hundreds of variations on this fun and fruity punch.", image: "https://i.imgur.com/Cdm8uLo.jpg", link: "search?q=sangria&calories=0-10000" }, 
+    const sliderItems = [{header: "Sensational Sangria Recipes", subHeader: "Browse hundreds of variations on this fun and fruity punch.", image: "https://i.imgur.com/Cdm8uLo.jpg", link: "search?q=sangria&calories=0-10000" }, 
     {header: "Hummus Recipes", subHeader: "Browse hundreds of ways to get your dip on.", image: "https://i.imgur.com/U2S3zqF.jpg", link: "search?q=hummus&calories=0-10000" }, 
     {header: "Greek Pasta Salad", subHeader: "These salads are filled with bold flavors: kalamata olives, feta cheese and fresh herbs.", image: "https://i.imgur.com/ZJTqzVc.jpg", link: "search?q=greek%20pasta%20salad&calories=0-10000" },
     {header: "Sloppy Bulgogi and other Fusion Mashups.", subHeader: "Try these delicious cross-cultural combos.", image: "https://i.imgur.com/U58wzmg.jpg", link: "search?q=fusion&calories=0-10000" },
     {header: "Chicken Teriyaki Skewers", subHeader: "See how to make delicious Summery chicken teriyaki skewers.", image: "https://i.imgur.com/mHOTbhs.jpg", link: "search?q=chicken%20teriyaki%20skewers&calories=0-10000" }];
 
-    let subItems = [{title: "World Cuisine", image: "https://i.imgur.com/OQv9K29.png", link: "search?q=world%20cuisine&calories=0-10000"},
+    const subItems = [{title: "World Cuisine", image: "https://i.imgur.com/OQv9K29.png", link: "search?q=world%20cuisine&calories=0-10000"},
     {title: "Vegan Recipes", image: "https://i.imgur.com/RnxBP1l.jpg", link: "search?q=vegan&calories=0-10000"},
     {title: "Slow Cooker", image: "https://i.imgur.com/LWNK25s.jpg", link: "search?q=slow%20cooker&calories=0-10000"},
     {title: "Shrimp Recipes", image: "https://i.imgur.com/cKdLXB2.jpg", link: "search?q=shrimp&calories=0-10000"},
@@ -113,20 +111,16 @@ class LandingContainer extends React.Component {
 }
 
 let mapStateToProps = state => ({
-  // no need for userauth
-  // userAuth: state.userAuth,
   homepage: state.homepage,
 });
 
 let mapDispatchToProps = dispatch => {
   return {
-    // favoriteFetch: favorite => dispatch(favoriteFetchRequest(favorite)),
     favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     homepageFetch: () => dispatch(homepageFetchRequest()),
     homepageFetchRequest: recipes => dispatch(homepageFetch(recipes)),
-    // recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
     recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
   };

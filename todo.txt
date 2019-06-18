@@ -3,6 +3,5 @@ layout of the menu
 Directions?
 health types on ir clickable
 headers when clicked display more info
-
 on update profile something should happen
 CONTAINER

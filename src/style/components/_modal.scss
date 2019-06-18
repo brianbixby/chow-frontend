@@ -176,9 +176,7 @@
     input {
       width: 100%;
       background-color: #f9f9f9;
-      // border-radius: $border-radius;
       border-width: 0px;
-      // margin: $margin;
       box-sizing: border-box;
       padding: 15px;
       border-radius: 3px;
@@ -188,8 +186,6 @@
       width: 2vw;
     }
     input:focus {
-      // background-color: $color-primary-hover;
-      // border-radius: $border-radius;
       border-width: 0px;
     }
     label {

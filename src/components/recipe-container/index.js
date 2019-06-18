@@ -60,8 +60,8 @@ class RecipeContainer extends React.Component {
 
   render() {
     let { recipe } = this.props;
-    let cal = require('./../helpers/assets/icons/cal.icon.svg');
-    let serving = require('./../helpers/assets/icons/serving.icon.svg');
+    const cal = require('./../helpers/assets/icons/cal.icon.svg');
+    const serving = require('./../helpers/assets/icons/serving.icon.svg');
     return (
       <div>
       {recipe &&

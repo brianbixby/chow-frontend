@@ -16,7 +16,6 @@ export default (state=[], action) => {
     case 'FAVORITES_FETCH':
       return payload;
     case 'FAVORITE_DELETE':
-      // payload is the deleted favorite's ID
       if(state === []) throw new Error('USAGE ERROR: can not delete favorite not in state');
       return state.filter(favorite => favorite._id !== payload);
     case 'SIGN_OUT':
