@@ -106,6 +106,9 @@ class ProfileContainer extends React.Component {
         </div>
       </div>
       }
+      {!userProfile &&
+        <div className='resultCountDiv'> <p>Sorry, not logged in. Please try logging in.</p></div>
+      }
       </div>
     );
   }

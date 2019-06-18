@@ -1,8 +1,8 @@
-handle errors on all forms (no individual recipe, bad url and bad url for all recipes)
 recipes: add infinite scroll
-cache edamam api results
-add error page
-
 layout of the menu
-cant see banner when minimize
 Directions?
+health types on ir clickable
+headers when clicked display more info
+
+on update profile something should happen
+CONTAINER

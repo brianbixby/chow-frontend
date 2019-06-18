@@ -40,7 +40,7 @@ class SearchBar extends React.Component {
   
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
-    this.setState({ advancedSearch: false, searchTerm: '', exclude: '', excludeError: null, excludedArr: [], minCals: '', maxCals: '', maxIngredients: '', dietOption: null, healthOption: null });
+    this.setState({ advancedSearch: false, searchTerm: '', exclude: '', excludeError: null, excludedArr: [], minCals: '', maxCals: '', maxIngredients: '', dietOption: '', healthOption: '' });
   }
   
   updateWindowDimensions = () => {

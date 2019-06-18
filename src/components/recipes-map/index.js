@@ -13,7 +13,6 @@ class RecipesMap extends React.Component {
   }
 
   handleBoundRecipeClick = (myRecipe, e) => {
-    console.log("myRecipe.recipe: ",myRecipe.recipe);
     this.props.recipeFetchRequest(myRecipe.recipe);
     let uri = myRecipe.recipe.uri.split('recipe_')[1];
     return this.props.redirect(`/recipe/${uri}`);

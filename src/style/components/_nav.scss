@@ -276,6 +276,22 @@ nav {
     height: 100%;
     margin-right: -13px;
   }
+  .profileDropDownWrapper::after {
+    display: none;
+  }
+  .profileDropDown {
+    width: 100vw;
+    right: 0;
+    top: 62px;
+    border-top: none;
+  }
+  nav .activeProfileDiv {
+    background: #fff;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    right: 0;
+    padding-right: 13px;
+  }
 }
 .notificationAlert {
   font-size: 14px;

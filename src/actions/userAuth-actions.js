@@ -15,7 +15,6 @@ export const signUpRequest = user => dispatch => {
     .withCredentials()
     .send(user)
     .then( res => {
-      console.log("res-cookie: ", res);
       dispatch(signIn(res.text));
       localStorage.chowToken = res.text;
       return res;
@@ -28,7 +27,6 @@ export const signInRequest = user => dispatch => {
     .auth(user.username, user.password)
     .then( res => {
       dispatch(signIn(res.text));
-      console.log("res-cookie: ", res);
       localStorage.chowToken = res.text;
       return res;
     });
@@ -39,7 +37,6 @@ export const tokenSignInRequest = token => dispatch => {
     .set('Authorization', `Bearer ${token}`)
     .then( res => {
       dispatch(signIn(res.text));
-      console.log("res-cookie: ", res);
       localStorage.chowToken = res.text;
       return res;
     })

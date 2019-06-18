@@ -14,10 +14,8 @@ class RecipesContainer extends React.Component {
   }
 
   componentWillMount() {
-    console.log("********");
     userValidation(this.props);
     if (this.props.recipes.length == 0) {
-      console.log("********&&&&&&&&&&&&&******************");
       let string = window.location.href.split('/search/')[1];
       let hashIndex = string.indexOf('&');
       this.props.recipesFetch(string.substring(0, hashIndex), string.substring(hashIndex, string.length))
@@ -25,18 +23,6 @@ class RecipesContainer extends React.Component {
     }
     window.scrollTo(0, 0);
   }
-  // getDerivedStateFromProps() {
-  //   console.log("********");
-  //   userValidation(this.props);
-  //   if (this.props.recipes.length == 0) {
-  //     console.log("********&&&&&&&&&&&&&******************");
-  //     let string = window.location.href.split('/search/')[1];
-  //     let hashIndex = string.indexOf('&');
-  //     this.props.recipesFetch(string.substring(0, hashIndex), string.substring(hashIndex, string.length))
-  //       .catch(err => logError(err));
-  //   }
-  //   window.scrollTo(0, 0);
-  // }
 
   // componentWillUnmount() {
   //   console.log("unmounted");

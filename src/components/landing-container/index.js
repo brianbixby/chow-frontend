@@ -107,34 +107,6 @@ class LandingContainer extends React.Component {
             </div>
         </div>
         <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect}/>
-        {/* <div className='homepageRecipesOuter'>
-          {renderIf(homepage && homepage.length > 0 ,
-            <div className='recipesSection'>
-              {homepage.map(myRecipe => {
-                let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
-                let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
-                return <div key={myRecipe.recipe.uri} className='outer'>
-                        <div className='cardImageContainer' onClick={boundRecipeClick}>
-                          <img className='cardImage' src={myRecipe.recipe.image} />
-                        </div>
-                        <div className='likeButton' onClick={boundFavoriteClick}></div>
-                        <div className='cardInfo' onClick={boundRecipeClick}>
-                          <div className='byDiv'>
-                            <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
-                          </div>
-                          <div className='cardInfoDiv'>
-                          <h3 className='cardTitle'>{myRecipe.recipe.label} </h3>
-                          <p className='healthLabels'>{myRecipe.recipe.healthLabels.join(", ")} </p>
-                          <p className='calsAndIngreds'> 
-                          <span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGREDIENTS</span>
-                          </p>
-                          </div>
-                        </div>
-                </div> 
-              })}
-            </div>
-          )}
-        </div> */}
       </section>
     );
   }

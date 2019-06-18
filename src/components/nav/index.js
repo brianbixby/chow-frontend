@@ -75,6 +75,7 @@ class Navbar extends React.Component {
     };
 
     handleProfileDivClick = e => {
+        this.setState({showBrowse: false, showSearchBarSmall: false});
         this.props.userAuth ?  this.setState({dropDownDisplay: !this.state.dropDownDisplay}) : this.setState({formDisplay: true});
     };
 
@@ -132,7 +133,7 @@ class Navbar extends React.Component {
                 <div className='homeLinkDiv'>
                     <Link to='/' className='homeLink'>chow <span className='spoonContainer'><img src={spoon} className='spoon'/></span></Link>
                 </div>
-                <div className='browseDiv' onClick={() => this.setState({showBrowse: !this.state.showBrowse})}>
+                <div className='browseDiv' onClick={() => this.setState({showBrowse: !this.state.showBrowse, dropDownDisplay: false})}>
                     <p><span>BROWSE</span> <img src={chevron}/></p>
                 </div>
                 {renderIf(this.state.showBrowse,
@@ -157,8 +158,8 @@ class Navbar extends React.Component {
 													</div>
 											</div>
                 )}
-                <SearchBar onComplete={this.handleSearch} redirect={this.handleRedirect} advancedSearch={() => this.setState({showBrowse: false, showSearchBarSmall: false})} showSearchBarSmall={this.state.showSearchBarSmall} />
-                <div onClick={() => this.setState({showSearchBarSmall: !this.state.showSearchBarSmall})} className={classToggler({
+                <SearchBar onComplete={this.handleSearch} redirect={this.handleRedirect} advancedSearch={() => this.setState({dropDownDisplay: false, showBrowse: false, showSearchBarSmall: false})} showSearchBarSmall={this.state.showSearchBarSmall} />
+                <div onClick={() => this.setState({showSearchBarSmall: !this.state.showSearchBarSmall, dropDownDisplay: false})} className={classToggler({
 									'navSearchIcon': true,
 									'showSearchBarSmall': this.state.showSearchBarSmall,
                 })}>
@@ -167,7 +168,10 @@ class Navbar extends React.Component {
                     </div>
                 </div>
 
-                <div className='navProfileDiv' onClick={this.handleProfileDivClick}>
+                <div onClick={this.handleProfileDivClick} className={classToggler({
+									'navProfileDiv': true,
+									'activeProfileDiv': this.state.dropDownDisplay,
+                })}>
                     <div className='navProfileDivInner'>
                         <div className='profileImageDiv'>
                             {profileImage} 

@@ -11,7 +11,7 @@ import { logError, renderIf, classToggler, userValidation } from './../../lib/ut
 class RecipeContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {userSuccess: false};
+    this.state = {userSuccess: false, recipeError: false};
   }
 
   componentWillMount() {
@@ -19,7 +19,8 @@ class RecipeContainer extends React.Component {
     let uri = window.location.href.split('/recipe/')[1];
     if (!this.props.recipe || this.props.recipe.uri != `http://www.edamam.com/ontologies/edamam.owl#recipe_${uri}`) {
       this.props.recipeFetch(uri)
-        .then(() => {
+        .then(recipe => {
+          if (!recipe) return this.setState({recipeError: true});
           if (!this.props.recipes.length) {
             this.props.recipesFetch("search?q=summer", "&calories=0-10000")
               .catch(err => logError(err));
@@ -31,6 +32,10 @@ class RecipeContainer extends React.Component {
         .catch(err => logError(err));
     }
     window.scrollTo(0, 0);
+  }
+
+  componentWillUnmount() {
+    this.setState({ userSuccess: false, recipeError: false });
   }
  
   handleBoundFavoriteClick = () => {
@@ -87,9 +92,6 @@ class RecipeContainer extends React.Component {
                     </div>
                   </div>
                   <p className='irSource'>Recipe by: <a rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
-                  {/* <button className='irFavButton' onClick={this.handleBoundFavoriteClick} id='favoriteButton' className='btn btn-primary'>
-                    <span className='glyphicon glyphicon-bookmark'></span> Save
-                  </button> */}
                 </div>
                 <div className='irImgContainerDisplayLarge'>
                   <img className='irImg' src={recipe.image} />
@@ -152,7 +154,11 @@ class RecipeContainer extends React.Component {
           </div>
         )}
       </div>
-    }</div>
+    }
+    {this.state.recipeError &&
+      <div className='resultCountDiv'> <p>Sorry, no results. Please try modifying your search.</p></div>
+    }
+    </div>
     );
   }
 }

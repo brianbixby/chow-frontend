@@ -17,12 +17,10 @@ export const favoriteDelete = favorite => ({
 
 export const favoriteFetchRequest = favorite => (dispatch, getState) => {
   let { userAuth } = getState();
-  console.log("hello");
   return superagent.post(`${process.env.API_URL}/api/favorite`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(favorite)
     .then(res => {
-      console.log("res: ", res);
       dispatch(favoriteFetch(res.body));
       return res;
     });
