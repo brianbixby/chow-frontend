@@ -7,7 +7,7 @@ import { homepageFetchRequest, recipeFetch, recipesFetchRequest } from '../../ac
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
-import { userValidation, logError, renderIf } from './../../lib/util.js';
+import { userValidation, logError, classToggler, renderIf } from './../../lib/util.js';
 
 class LandingContainer extends React.Component {
   constructor(props){
@@ -21,6 +21,7 @@ class LandingContainer extends React.Component {
       this.props.homepageFetch()
         .catch(err => logError(err));
     }
+    window.scrollTo(0, 0);
   }
 
   handleBoundItemClick = (item, e) => {

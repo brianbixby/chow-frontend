@@ -1,14 +1,7 @@
-advanced search 
-    - reset search button (undoes health and diet)
-sign up/sign in
-  !!!fix form and all forms so red carot doesnt show and handle errors
-recipes
-  add infinite scroll
-recipe page 
-  style individual recipe page
-
-add or remove favorite: have pop up instead of alert
-handle errors
+handle errors on all forms (no individual recipe, bad url and bad url for all recipes)
+make sure every page can load on its own
 make edamam api faster
-add logout
-show user logged in on phone
+recipes: add infinite scroll
+cache edamam api results
+add error page
+add like button individual recipe page

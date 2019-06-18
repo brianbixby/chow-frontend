@@ -5,23 +5,43 @@ import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
 import { recipesFetchRequest, recipeFetch } from '../../actions/search-actions.js';
-import { logError, renderIf, userValidation } from './../../lib/util.js';
+import { logError, renderIf, userValidation, classToggler } from './../../lib/util.js';
 
 class RecipesContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {userSuccess: false};
   }
 
   componentWillMount() {
+    console.log("********");
     userValidation(this.props);
     if (this.props.recipes.length == 0) {
+      console.log("********&&&&&&&&&&&&&******************");
       let string = window.location.href.split('/search/')[1];
       let hashIndex = string.indexOf('&');
       this.props.recipesFetch(string.substring(0, hashIndex), string.substring(hashIndex, string.length))
         .catch(err => logError(err));
     }
+    window.scrollTo(0, 0);
   }
+  // getDerivedStateFromProps() {
+  //   console.log("********");
+  //   userValidation(this.props);
+  //   if (this.props.recipes.length == 0) {
+  //     console.log("********&&&&&&&&&&&&&******************");
+  //     let string = window.location.href.split('/search/')[1];
+  //     let hashIndex = string.indexOf('&');
+  //     this.props.recipesFetch(string.substring(0, hashIndex), string.substring(hashIndex, string.length))
+  //       .catch(err => logError(err));
+  //   }
+  //   window.scrollTo(0, 0);
+  // }
+
+  // componentWillUnmount() {
+  //   console.log("unmounted");
+  //   this.setState({userSuccess: false});
+  // }
 
   handleBoundRecipeClick = (myRecipe, e) => {
     this.props.recipeFetchRequest(myRecipe.recipe);
@@ -32,9 +52,14 @@ class RecipesContainer extends React.Component {
   handleBoundFavoriteClick = (favorite, e) => {
     if (this.props.userAuth) {
       this.props.favoriteFetch(favorite.recipe)
-        .then(() => alert("favorite added."))
+        .then(() => this.handleUserSuccess())
         .catch(err => logError(err));
     }
+  };
+
+  handleUserSuccess = () => {
+    this.setState({userSuccess: true});
+    setTimeout(() => this.setState({userSuccess: false}), 5000);
   };
   
   calsPS = (cals, servings) => Math.round(cals/servings);
@@ -43,43 +68,50 @@ class RecipesContainer extends React.Component {
     let { recipes } = this.props;
     return (
       <div className='container-fluid'>
-        {renderIf(recipes && recipes.length < 1 ,
-          <div>
-            Sorry, no results.
+        {renderIf(!recipes,
+          <div className='resultCountDiv'>
+            Sorry, no results. Please try modifying your search.
           </div>
         )}
         <div className='recipesOuter'>
-          {renderIf(this.props.recipes && this.props.recipes.hits.length > 0 ,
+          {/* {renderIf(this.props.recipes && this.props.recipes.hits.length > 0 , */}
+          {renderIf(recipes,
             <div>
             <div className='resultCountDiv'>
-              <p>{this.props.recipes.count} recipe results for <span>"{this.props.recipes.q}"</span></p>
+              <p>{recipes.count} recipe results for <span>"{recipes.q}"</span></p>
             </div>
-            <div className='recipesSection'>
-              {this.props.recipes.hits.map(myRecipe => {
-                let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
-                let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
-                return <div key={myRecipe.recipe.uri} className='outer'>
-                        <div className='cardImageContainer' onClick={boundRecipeClick}>
-                          <img className='cardImage' src={myRecipe.recipe.image} />
-                        </div>
-                        <div className='likeButton' onClick={boundFavoriteClick}></div>
-                        <div className='cardInfo' onClick={boundRecipeClick}>
-                          <div className='byDiv'>
-                            <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
-                          </div>
-                          <div className='cardInfoDiv'>
-                          <h3 className='cardTitle'>{myRecipe.recipe.label} </h3>
-                          <p className='healthLabels'>{myRecipe.recipe.healthLabels.join(", ")} </p>
-                          <p className='calsAndIngreds'> 
-                          <span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGREDIENTS</span>
-                          </p>
-                          </div>
-                        </div>
-                </div> 
-              })}
-            </div>
+            {recipes.hits &&
+                      <div className='recipesSection'>
+                        {recipes.hits.map(myRecipe => {
+                          let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
+                          let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
+                          return <div key={myRecipe.recipe.uri} className='outer'>
+                                  <div className='cardImageContainer' onClick={boundRecipeClick}>
+                                    <img className='cardImage' src={myRecipe.recipe.image} />
+                                  </div>
+                                  <div className='likeButton' onClick={boundFavoriteClick}></div>
+                                  <div className='cardInfo' onClick={boundRecipeClick}>
+                                    <div className='byDiv'>
+                                      <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
+                                    </div>
+                                    <div className='cardInfoDiv'>
+                                    <h3 className='cardTitle'>{myRecipe.recipe.label} </h3>
+                                    <p className='healthLabels'>{myRecipe.recipe.healthLabels.join(", ")} </p>
+                                    <p className='calsAndIngreds'> 
+                                    <span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> CALORIES   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span>   INGREDIENTS</span>
+                                    </p>
+                                    </div>
+                                  </div>
+                          </div> 
+                        })}
+                      </div>
+            }
+
             </div>
           )}
+        </div>
+        <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
+          <p>Favorite added.</p>
         </div>
       </div>
     );

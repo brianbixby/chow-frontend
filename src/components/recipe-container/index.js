@@ -8,8 +8,6 @@ import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favor
 import { recipeFetchRequest, recipesFetchRequest } from '../../actions/search-actions.js';
 import { logError, renderIf, classToggler, userValidation } from './../../lib/util.js';
 
-// to do check and get recipe search params from url
-
 class RecipeContainer extends React.Component {
   constructor(props){
     super(props);
@@ -32,6 +30,7 @@ class RecipeContainer extends React.Component {
       this.props.recipesFetch("search?q=summer", "&calories=0-10000")
         .catch(err => logError(err));
     }
+    window.scrollTo(0, 0);
   }
  
   handleBoundFavoriteClick = (favorite, e) => {
@@ -45,15 +44,19 @@ class RecipeContainer extends React.Component {
   calsPS = (cals, servings) => Math.round(cals/servings);
   calsPD = (cals, servings) => (cals/servings/20).toFixed(0);
   handleRedirect = url => {
-    return this.props.history.push(url);
+    this.props.history.push(url);
+    return window.scrollTo(0, 0);
   };
 
   render() {
     let { recipe } = this.props;
-    // let digest = recipe.digest;
+    let cal = require('./../helpers/assets/icons/cal.icon.svg');
+    let serving = require('./../helpers/assets/icons/serving.icon.svg');
     return (
+      <div>
+      {recipe &&
       <div className='container'>
-        {renderIf(recipe && recipe.length < 1 ,
+        {renderIf(!recipe || recipe && recipe.length < 1,
           <div>
             Sorry, no results.
           </div>
@@ -69,7 +72,6 @@ class RecipeContainer extends React.Component {
                 </div>
                 <div className='irMainInfo'>
                   <p className='irLabel'>{recipe.label}</p>
-                  {/* <p className='irhealthLabels'>{recipe.healthLabels.join(`<span> | </span>`)} </p> */}
                   <div className='irhealthLabels'>
                     <div className='irhealthLabelsInner'>
                       {recipe.healthLabels.map((label, idx) => {
@@ -87,16 +89,35 @@ class RecipeContainer extends React.Component {
                   <img className='irImg' src={recipe.image} />
                 </div>
               </div>
-              <div className='irIngredients'>
-                <h2 className='irIngredientHead irSectionHeader'> {recipe.ingredientLines.length} Ingredients</h2>
-                {recipe.ingredientLines.map((ingredient, idx) => {
-                  return <div key={idx} className=''>
-                      <p>{ingredient}</p>
-                    </div>
-                })}
+              <div className='recipeColumn'>
+                <div className='irIngredients'>
+                  <h2 className='irIngredientHead irSectionHeader'> {recipe.ingredientLines.length} Ingredients</h2>
+                  {recipe.ingredientLines.map((ingredient, idx) => {
+                    return <div key={idx} className=''>
+                        <p>{ingredient}</p>
+                      </div>
+                  })}
+                </div>
+                <div className='irDirections hideSmall'>
+                  <h2 className='irDirectionsHead irSectionHeader'> Directions</h2>
+                  <p><a className='button' rel="noopener noreferrer" target="_blank" href={recipe.url}>Directions</a> <span className='gray'>on</span> <a className='link' rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
+                </div>
               </div>
               <div className='irNutrition'>
-                <h2 className='irNutritionHead irSectionHeader'>Nutrition</h2>
+                <h2 className='irNutritionHead irSectionHeader'>Nutrition
+                <span className='iconOuter'>
+                  <span className='iconInner'>
+                    <span className='recipeIconsDiv'>{parseInt(recipe.calories)} <span className='hideMobile'>cals</span></span>
+                    <img src={cal} className='iconScale'/>
+                  </span>
+                </span>
+                <span className='iconOuter servingIcon'>
+                  <span className='iconInner'>
+                    <span className='recipeIconsDiv'>{recipe.yield} <span className='hideMobile'>servings</span></span>
+                    <img src={serving} className='iconScale'/>
+                  </span>
+                </span>
+                </h2>
                 <div className='totalNutrientColumn'>
                   {recipe.digest.map((digest, idx) => {
                     let total = parseInt(digest.total/recipe.yield);
@@ -108,19 +129,21 @@ class RecipeContainer extends React.Component {
                   })}
                 </div>
               </div>
-              <div className='irDirections'>
+              <div className='irDirections hideBig'>
                 <h2 className='irDirectionsHead irSectionHeader'> Directions</h2>
                 <p><a className='button' rel="noopener noreferrer" target="_blank" href={recipe.url}>Directions</a> <span className='gray'>on</span> <a className='link' rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
               </div>
             </div>
             <div className='aside'>
-            {renderIf(this.props.recipes.hits && this.props.recipes.hits.length > 0,
-              <RecipesMap recipes={this.props.recipes.hits} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect}/> 
-            )}
+              <h2 className='irSectionHeader'> Recommended</h2>
+              {renderIf(this.props.recipes.hits && this.props.recipes.hits.length > 0,
+                <RecipesMap recipes={this.props.recipes.hits} containerClass={"individualRecipeOuter"} redirect={this.handleRedirect}/> 
+              )}
             </div>
           </div>
         )}
       </div>
+    }</div>
     );
   }
 }

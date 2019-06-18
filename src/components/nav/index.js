@@ -16,12 +16,14 @@ import { logError, renderIf, classToggler } from '../../lib/util.js';
 class Navbar extends React.Component {
     constructor(props){
         super(props);
-        this.state={showBrowse: false, showSearchBarSmall: false, authFormAction: 'Sign Up', formDisplay: false, };
+        this.state={showBrowse: false, showSearchBarSmall: false, authFormAction: 'Sign Up', formDisplay: false, userSuccess: false, dropDownDisplay: false };
     }
 
     handleSignOut = () => {
+        this.setState({dropDownDisplay: !this.state.dropDownDisplay});
+        if(window.location.pathname == `/profile/${this.props.userProfile.username}`) this.props.history.push('/');
         this.props.signOut();
-        this.props.history.push('/');
+        this.handleUserSuccess();
     };
 
     handleSignin = (user, errCB) => {
@@ -34,7 +36,10 @@ class Navbar extends React.Component {
           return this.props.favoritesFetch(profile.body)
             .catch(err => logError(err));
         })
-        .then(() => this.setState({ formDisplay: false }))
+        .then(() => {
+          this.setState({ formDisplay: false });
+          this.handleUserSuccess();
+        })
         .catch(err => {
           logError(err);
           errCB(err);
@@ -51,7 +56,10 @@ class Navbar extends React.Component {
           return this.props.favoritesFetch(profile.body)
             .catch(err => logError(err));
         })
-        .then(() => this.setState({ formDisplay: false }))
+        .then(() => {
+          this.setState({ formDisplay: false });
+          this.handleUserSuccess();
+        })
         .catch(err => {
           logError(err);
           errCB(err);
@@ -72,12 +80,20 @@ class Navbar extends React.Component {
         let queryParams = `&calories=${minCals}-${maxCals}${health}${diet}${ingredients}${exclude}`;
         let queryString = searchParams.searchTerm ? `search?q=${searchParams.searchTerm}` : 'search?q=';
         return this.props.recipesFetch(queryString, queryParams)
-          .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
+          .then(() => {
+            return this.props.history.push(`/search/${queryString}${queryParams}`);
+            // return window.scrollTo(0, 0);
+          })
           .catch(err => logError(err));
     };
 
     handleProfileDivClick = e => {
-        this.props.userAuth ? this.props.history.push(`/profile/${this.props.userProfile.username}`) : this.setState({formDisplay: true});
+        this.props.userAuth ?  this.setState({dropDownDisplay: !this.state.dropDownDisplay}) : this.setState({formDisplay: true});
+    };
+
+    handleProfileLinkClick = e => {
+      this.setState({dropDownDisplay: false})
+      this.props.history.push(`/profile/${this.props.userProfile.username}`)
     };
 
     handleboundCatClick = (item, e) => {
@@ -89,7 +105,12 @@ class Navbar extends React.Component {
 						return this.props.history.push(`/search/${queryString}${queryParams}`);
 					})
           .catch(err => logError(err));
-      };
+    };
+
+    handleUserSuccess = () => {
+      this.setState({userSuccess: true});
+      setTimeout(() => this.setState({userSuccess: false}), 5000);
+    };
 
     render() {
         const categories = [
@@ -101,9 +122,13 @@ class Navbar extends React.Component {
         const spoon = require('./../helpers/assets/icons/spoon.icon.svg');
         const chevron = require('./../helpers/assets/icons/chevron-down.icon.svg');
         const user = require('./../helpers/assets/icons/user.icon.svg');
+        const profileLink = require('./../helpers/assets/icons/profileLink.icon.svg');
         let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
         let profileText = this.props.userAuth && this.props.userProfile && this.props.userProfile.username ? this.props.userProfile.username : "Sign Up/ Sign In" ;
         let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
+        let userSuccessMessage = this.state.authFormAction === 'Sign Up' ? "Signed up!" : "Logged in.";
+        let profile = this.props.userProfile;
+        let showNotification = this.props.userProfile && this.props.userProfile.image ? true : false;
         return (
             <nav>
                 <div className='homeLinkDiv'>
@@ -147,7 +172,10 @@ class Navbar extends React.Component {
                 <div className='navProfileDiv' onClick={this.handleProfileDivClick}>
                     <div className='navProfileDivInner'>
                         <div className='profileImageDiv'>
-                            {profileImage}
+                            {profileImage} 
+                            <span>
+                            {showNotification && <span className='notificationAlert' title="Upload an image and complete your profile">1</span>}
+                            </span>
                         </div>
                         <div className='profileTextDiv'>
                             <p className='profileText'>
@@ -173,10 +201,30 @@ class Navbar extends React.Component {
                     </Modal>
                   </div>
                 )}
-            </nav>
+                <div className={classToggler({'profileDropDown': true, 'showProfileDropDown': this.state.dropDownDisplay })}>
+                  <div className='profileDropDownWrapper'>
+                    <div className='profileLinkWrapper'>
+                      <p className='profileLink' onClick={this.handleProfileLinkClick}><img src={profileLink} className='profileLinkImage'/> <span className='profileLinkText'>Profile</span></p>
+                    </div>
+                    <div className='signOutWrapper' onClick={this.handleSignOut}>
+                      <p className='signOut'> Sign Out</p>
+                    </div>
+                  </div>
+                </div>
+                  <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
+                    {renderIf(profile,
+                      <p>{userSuccessMessage}</p>
+                    )}
+                    {renderIf(!profile,
+                      <p>Logged out.</p>
+                    )}
+                  </div>
+            </nav> 
         );
     }
 }
+
+
 
 let mapStateToProps = state => ({
     userAuth: state.userAuth,

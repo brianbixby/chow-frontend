@@ -85,7 +85,6 @@
 // }
 
 .irImgContainerDisplaySmall {
-  display: none;
   // float: left;
   position: relative;
   text-align: center;
@@ -134,6 +133,7 @@
     -ms-flex-pack: center;
     font-size: 16px;
     font-size: 1rem;
+    flex-wrap: wrap;
   
     p {
       display: inline-block;
@@ -172,20 +172,21 @@
   font-weight: 300;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  position: relative;
 }
 .irIngredients p {
   color: #2d2d2d;
   font-size: 16px;
   display: inline-block;
   margin: 0;
-  padding: 0.35rem 0.5rem 0.35rem 2%;
+  padding: 0.35rem 2%;
   position: relative;
   margin-left: 1.2rem;
 }
 
 .irDirections {
   p {
-    padding: 0.35rem 0.5rem 0.35rem 2%;
+    padding: 0.35rem 2%;
     margin-left: 1.2rem;
     line-height: 50px;
   }
@@ -206,6 +207,9 @@
     width: 124px !important;
     border: none;
   }
+  .button:hover {
+    background: #ed9702;
+  }
   .gray {
     color: #808080;
   }
@@ -217,7 +221,7 @@
   color: #2d2d2d;
   font-size: 16px;
   margin: 0;
-  padding: 0.35rem 0.5rem 0.35rem 2%;
+  padding: 0.35rem 2%;
   margin-left: 1.2rem;
 }
 .nutrientColumnTotal {
@@ -237,6 +241,60 @@
   padding: 0.35rem 2%;
   margin: 0 1.2rem;
 }
+
+.irNutrition {
+  .iconOuter {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -ms-flex-align: center;
+    position: absolute;
+    right: 3%;
+    top: 0px;
+  }
+  .servingIcon {
+    right: calc((87px + 3%));
+  }
+  .iconInner {
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -ms-flex-align: center;
+  }
+.recipeIconsDiv {
+  font-size: .875rem;
+  color: #4d4d4d;
+  float: right;
+  font-weight: normal;
+  white-space: nowrap;
+  position: relative;
+  margin-top: 4px;
+}
+.iconScale {
+  -ms-transform: scale(.75, .75);
+  transform: scale(.75, .75);
+  margin-left: -5px;
+  -ms-transform: scale(.75, .75);
+  transform: scale(.75, .75);
+  margin-left: -5px;
+  width: 46px;
+  height: 46px;
+}
+}
+.aside, .ingredsSpan, .calsSpan {
+  display: none;
+}
+
+@media only screen and (max-width: 380px) {
+  .hideMobile {
+    display: none;
+  }
+  .irNutrition .servingIcon {
+    right: calc((62px + 3%));
+  }
+}
 @media only screen and (max-width: 450px) {
   .irImgContainerDisplaySmall .irImgContainerInnerWrapper img {
     width: 100%;
@@ -252,16 +310,32 @@
   .irImgContainerDisplaySmall .irImgContainerInnerWrapper img {
     border: 1px solid #fafafa;
   }
+  .irImgContainerDisplaySmall {
+    margin-top: 24px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
   .irImgContainerDisplaySmall {
     display: block;
   }
+  .hideSmall {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-  
+  .hideBig {
+    display: none;
+  }
+  .irNutrition {
+    width: 49%;
+    display: inline-block;
+  }
+  .recipeColumn {
+    float: left;
+    width: 49%;
+  }
 }
 
 @media only screen and (max-width: 1023px) {
@@ -273,4 +347,88 @@
   .irImgContainerDisplayLarge {
     display: none;
   }
+  .irMain {
+    width: 69%;
+    float: left;
+    margin-bottom: 20px;
+  }
+  .aside {
+    display: block;
+    width: 30%;
+    float: left;
+    overflow: hidden;
+    border-left: 1px solid #e6e6e6;
+    max-height: 1335px;
+    overflow-y: scroll;
+  
+    .individualRecipeOuter {
+      margin-left: 2.5%;
+      margin-right: calc((2.5% - 9px));
+      
+      .recipesSection {
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+  
+      .outer {
+        margin: 0 0 20px;
+        width: calc((100% - 9px));
+        margin-right: 9px;
+        height: auto;
+        padding-bottom: 28px;
+  
+        .cardImageContainer {
+          width: 100%;
+  
+          .cardImage {
+            height: auto;
+            width: 100%;
+          }
+        }
+        .likeButton {
+          -webkit-transform: scale(.5, .5);
+          transform: scale(.5, .5);
+          right: -10px;
+          top: -10px;
+        }
+        .cardInfo {
+          width: 100%;
+  
+          .cardTitle {
+            position: relative;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-height: 17px;
+            height: 34px;
+            margin-bottom: 3px;
+            padding-bottom: 0;
+            padding-right: 8px;
+          }
+          .calsAndIngreds {
+            margin: 10px 0;
+            padding: 2px 0 0 8px;
+          }
+          .healthLabels {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            line-height: 13px;
+            height: 39px;
+            padding-right: 8px;
+          }
+          .ingredsSpan, .calsSpan {
+            display: inline-block;
+          }
+          .ingredientsSpan, .caloriesSpan {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
 }

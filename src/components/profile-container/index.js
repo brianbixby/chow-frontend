@@ -7,15 +7,16 @@ import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions
 import { favoritesFetchRequest, favoriteDeleteRequest } from '../../actions/favorite-actions.js';
 // import { recipeFetchRequest } from '../../actions/search-actions.js';
 import { recipeFetch } from '../../actions/search-actions.js';
-import { userValidation, logError, formatDate, renderIf } from './../../lib/util.js';
+import { userValidation, logError, formatDate, renderIf, classToggler } from './../../lib/util.js';
 
 class ProfileContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {userSuccess: false};
   }
   componentWillMount() {
-    return userValidation(this.props);
+    userValidation(this.props);
+    window.scrollTo(0, 0);
   }
 
   handleProfileUpdate = profile => {
@@ -32,9 +33,14 @@ class ProfileContainer extends React.Component {
   handleboundDeleteFavoriteClick = (favorite, e) => {
     if (this.props.userAuth) {
       this.props.favoriteDelete(favorite)
-        .then(() => alert("favorite deleted."))
+        .then(() => this.handleUserSuccess())
         .catch(err => logError(err));
     }
+  };
+
+  handleUserSuccess = () => {
+    this.setState({userSuccess: true});
+    setTimeout(() => this.setState({userSuccess: false}), 5000);
   };
 
   calsPS = (cals, servings) => Math.round(cals/servings);
@@ -93,6 +99,9 @@ class ProfileContainer extends React.Component {
           {renderIf(favorites && favorites.length < 1,
             <p className='noFavorites'>No saved Favories.</p>
           )}
+        </div>
+        <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
+          <p>Favorite deleted.</p>
         </div>
       </div>
     );

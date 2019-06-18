@@ -88,7 +88,10 @@ class SearchBar extends React.Component {
     e.preventDefault();
     if(!this.state.error) {
       this.props.onComplete(this.state)
-        .then(() => this.handleAdvancedSearch())
+        .then(() => {
+          this.props.advancedSearch();
+          this.setState({advancedSearch: false});
+        })
       //   .catch(err => {
       //     this.setState({ 
       //       error: err,
