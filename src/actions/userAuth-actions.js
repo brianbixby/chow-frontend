@@ -6,7 +6,7 @@ export const signIn = token => ({
 });
 
 export const signOut = () => {
-  delete localStorage.token;
+  delete localStorage.chowToken;
   return { type: 'SIGN_OUT' };
 };
 
@@ -15,9 +15,9 @@ export const signUpRequest = user => dispatch => {
     .withCredentials()
     .send(user)
     .then( res => {
-      console.log("res-cookie: ", res.cookie);
+      console.log("res-cookie: ", res);
       dispatch(signIn(res.text));
-      localStorage.token = res.text;
+      localStorage.chowToken = res.text;
       return res;
     });
 };
@@ -28,8 +28,8 @@ export const signInRequest = user => dispatch => {
     .auth(user.username, user.password)
     .then( res => {
       dispatch(signIn(res.text));
-      console.log("res-cookie: ", res.cookie);
-      localStorage.token = res.text;
+      console.log("res-cookie: ", res);
+      localStorage.chowToken = res.text;
       return res;
     });
 };
@@ -39,8 +39,8 @@ export const tokenSignInRequest = token => dispatch => {
     .set('Authorization', `Bearer ${token}`)
     .then( res => {
       dispatch(signIn(res.text));
-      console.log("res-cookie: ", res.cookie);
-      localStorage.token = res.text;
+      console.log("res-cookie: ", res);
+      localStorage.chowToken = res.text;
       return res;
     })
     // .catch(err => console.error(err));

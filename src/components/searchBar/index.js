@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { isInt } from 'validator';
 
+import { recipesFetch } from '../../actions/search-actions.js';
 import Tooltip from '../helpers/tooltip';
 import { renderIf, classToggler } from './../../lib/util.js';
 
@@ -87,7 +89,26 @@ class SearchBar extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     if(!this.state.error) {
-      this.props.onComplete(this.state)
+      let minCals = !this.state.minCals ? '0' : this.state.minCals;
+      let maxCals = !this.state.maxCals ? '10000' : this.state.maxCals;
+      let ingredients = this.state.maxIngredients ? `&ingr=${this.state.maxIngredients}` : '';
+      let diet = this.state.dietOption ? `&diet=${this.state.dietOption}` : '';
+      let health = this.state.healthOption ? `&health=${this.state.healthOption}` : '';
+      let exclude = '';
+      if (this.state.excludedArr.length > 0) {
+          let shallowCopyExcludedArr = this.state.excludedArr.map(el => `&excluded=${el}`);
+          exclude = shallowCopyExcludedArr.join('');
+      }
+      let queryParams = `&calories=${minCals}-${maxCals}${health}${diet}${ingredients}${exclude}`;
+      let queryString = this.state.searchTerm ? `search?q=${this.state.searchTerm}` : 'search?q=';
+
+      if (localStorage.getItem(`${queryString}${queryParams}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['timestamp'] > new Date().getTime()) {
+        this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['content']);
+        this.props.redirect(`/search/${queryString}${queryParams}`);
+        this.props.advancedSearch();
+        this.setState({advancedSearch: false});
+      } else {
+        this.props.onComplete(queryString, queryParams)
         .then(() => {
           this.props.advancedSearch();
           this.setState({advancedSearch: false});
@@ -98,6 +119,7 @@ class SearchBar extends React.Component {
       //       submitted: true,
       //   });
       // });
+      }
     }
     this.setState(state => ({
       submitted: true,
@@ -357,4 +379,8 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+let mapDispatchToProps = dispatch => ({
+  recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
+});
+
+export default connect(null, mapDispatchToProps)(SearchBar);

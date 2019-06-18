@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import RecipesMap from '../recipes-map';
 // recipe fetch
-import { homepageFetchRequest, recipeFetch, recipesFetchRequest } from '../../actions/search-actions.js';
+import { homepageFetchRequest, homepageFetch, recipeFetch, recipesFetchRequest, recipesFetch } from '../../actions/search-actions.js';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
@@ -17,7 +17,10 @@ class LandingContainer extends React.Component {
 
   componentWillMount() {
     userValidation(this.props);
-    if (!this.props.homepage || this.props.homepage.length == 0) {
+    if (localStorage.random  && JSON.parse(localStorage.getItem('random'))['timestamp'] > new Date().getTime()) {
+      this.props.homepageFetchRequest(JSON.parse(localStorage.getItem('random'))['content']);
+    }
+    else if (!this.props.homepage || this.props.homepage.length == 0) {
       this.props.homepageFetch()
         .catch(err => logError(err));
     }
@@ -27,6 +30,12 @@ class LandingContainer extends React.Component {
   handleBoundItemClick = (item, e) => {
     let queryString = item.link.split("&calories=0-10000")[0];
     let queryParams = "&calories=0-10000";
+
+    if (localStorage.getItem(`${queryString}${queryParams}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['timestamp'] > new Date().getTime()) {
+      this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['content']);
+      return this.props.history.push(`/search/${queryString}${queryParams}`);
+    }
+
     return this.props.recipesFetch(queryString, queryParams)
       .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
       .catch(err => logError(err));
@@ -35,6 +44,12 @@ class LandingContainer extends React.Component {
   handleBoundSubitemClick = (subItem, e) => {
     let queryString = subItem.link.split("&calories=0-10000")[0];
     let queryParams = "&calories=0-10000";
+
+    if (localStorage.getItem(`${queryString}${queryParams}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['timestamp'] > new Date().getTime()) {
+      this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['content']);
+      return this.props.history.push(`/search/${queryString}${queryParams}`);
+    }
+
     return this.props.recipesFetch(queryString, queryParams)
       .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
       .catch(err => logError(err));
@@ -43,20 +58,6 @@ class LandingContainer extends React.Component {
   handleRedirect = url => {
     return this.props.history.push(url);
   };
-
-  // handleBoundRecipeClick = (myRecipe, e) => {
-  //   this.props.recipeFetchRequest(myRecipe.recipe);
-  //   let uri = myRecipe.recipe.uri.split('recipe_')[1];
-  //   return this.props.history.push(`/recipe/${uri}`);
-  // };
-
-  // handleBoundFavoriteClick = (favorite, e) => {
-  //   if (this.props.userAuth) {
-  //     this.props.favoriteFetch(favorite.recipe)
-  //       .then(() => alert("favorite added."))
-  //       .catch(err => logError(err));
-  //   }
-  // };
 
   calsPS = (cals, servings) => Math.round(cals/servings);
 
@@ -152,8 +153,10 @@ let mapDispatchToProps = dispatch => {
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     homepageFetch: () => dispatch(homepageFetchRequest()),
+    homepageFetchRequest: recipes => dispatch(homepageFetch(recipes)),
     // recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
   };
 };
 

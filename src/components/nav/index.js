@@ -7,7 +7,7 @@ import Modal from '../helpers/modal';
 import SearchBar from '../searchBar';
 import UserAuthForm from '../userAuth-form';
 import { signOut } from '../../actions/userAuth-actions.js';
-import { recipesFetchRequest } from '../../actions/search-actions.js';
+import { recipesFetchRequest, recipesFetch } from '../../actions/search-actions.js';
 import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest } from '../../actions/favorite-actions.js';
@@ -66,23 +66,10 @@ class Navbar extends React.Component {
         });
     };
 
-    handleSearch = (searchParams) => {
-        let minCals = !searchParams.minCals ? '0' : searchParams.minCals;
-        let maxCals = !searchParams.maxCals ? '10000' : searchParams.maxCals;
-        let ingredients = searchParams.maxIngredients ? `&ingr=${searchParams.maxIngredients}` : '';
-        let diet = searchParams.dietOption ? `&diet=${searchParams.dietOption}` : '';
-        let health = searchParams.healthOption ? `&health=${searchParams.healthOption}` : '';
-        let exclude = '';
-        if (searchParams.excludedArr.length > 0) {
-            let shallowCopyExcludedArr = searchParams.excludedArr.map(el => `&excluded=${el}`);
-            exclude = shallowCopyExcludedArr.join('');
-        }
-        let queryParams = `&calories=${minCals}-${maxCals}${health}${diet}${ingredients}${exclude}`;
-        let queryString = searchParams.searchTerm ? `search?q=${searchParams.searchTerm}` : 'search?q=';
+    handleSearch = (queryString, queryParams) => {
         return this.props.recipesFetch(queryString, queryParams)
           .then(() => {
             return this.props.history.push(`/search/${queryString}${queryParams}`);
-            // return window.scrollTo(0, 0);
           })
           .catch(err => logError(err));
     };
@@ -99,6 +86,13 @@ class Navbar extends React.Component {
     handleboundCatClick = (item, e) => {
         let queryString = item.link.split("&calories=0-10000")[0];
         let queryParams = item.link.split(queryString)[1];
+
+        if (localStorage.getItem(`${queryString}${queryParams}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['timestamp'] > new Date().getTime()) {
+          this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['content']);
+          this.setState({showBrowse: false});
+          return this.props.history.push(`/search/${queryString}${queryParams}`);
+        }
+
         return this.props.recipesFetch(queryString, queryParams)
           .then(() => {
 						this.setState({showBrowse: false});
@@ -110,6 +104,10 @@ class Navbar extends React.Component {
     handleUserSuccess = () => {
       this.setState({userSuccess: true});
       setTimeout(() => this.setState({userSuccess: false}), 5000);
+    };
+
+    handleRedirect = url => {
+      return this.props.history.push(url);
     };
 
     render() {
@@ -159,7 +157,7 @@ class Navbar extends React.Component {
 													</div>
 											</div>
                 )}
-                <SearchBar onComplete={this.handleSearch} advancedSearch={() => this.setState({showBrowse: false, showSearchBarSmall: false})} showSearchBarSmall={this.state.showSearchBarSmall} />
+                <SearchBar onComplete={this.handleSearch} redirect={this.handleRedirect} advancedSearch={() => this.setState({showBrowse: false, showSearchBarSmall: false})} showSearchBarSmall={this.state.showSearchBarSmall} />
                 <div onClick={() => this.setState({showSearchBarSmall: !this.state.showSearchBarSmall})} className={classToggler({
 									'navSearchIcon': true,
 									'showSearchBarSmall': this.state.showSearchBarSmall,
@@ -234,6 +232,7 @@ let mapStateToProps = state => ({
 let mapDispatchToProps = dispatch => ({
     signOut: () => dispatch(signOut()),
     recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
     signUp: user => dispatch(signUpRequest(user)),
     signIn: user => dispatch(signInRequest(user)),
     favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),

@@ -2,4 +2,7 @@ handle errors on all forms (no individual recipe, bad url and bad url for all re
 recipes: add infinite scroll
 cache edamam api results
 add error page
-add like button individual recipe page
+
+layout of the menu
+cant see banner when minimize
+Directions?

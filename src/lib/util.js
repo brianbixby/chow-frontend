@@ -20,7 +20,7 @@ export const userValidation = props => {
   if(!props.userAuth) {
     let { history } = props;
     
-    let token = localStorage.token;  
+    let token = localStorage.chowToken;  
     if(token) {
       props.tokenSignIn(token)
         .then(() => {
@@ -32,7 +32,7 @@ export const userValidation = props => {
             .catch(err => logError(err));
         })
         .catch(err => {
-          localStorage.removeItem("token");
+          localStorage.removeItem("chowToken");
           logError(err);
           if(props.location.pathname == '/profile/*')
             return history.replace('/');
