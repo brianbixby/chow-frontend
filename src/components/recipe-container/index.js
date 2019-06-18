@@ -11,7 +11,7 @@ import { logError, renderIf, classToggler, userValidation } from './../../lib/ut
 class RecipeContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {userSuccess: false};
   }
 
   componentWillMount() {
@@ -33,12 +33,17 @@ class RecipeContainer extends React.Component {
     window.scrollTo(0, 0);
   }
  
-  handleBoundFavoriteClick = (favorite, e) => {
+  handleBoundFavoriteClick = () => {
     if (this.props.userAuth) {
-      this.props.favoriteFetch(favorite.recipe)
-        .then(() => alert("favorite added."))
+      this.props.favoriteFetch(this.props.recipe)
+        .then(() =>this.handleUserSuccess())
         .catch(err => logError(err));
     }
+  };
+
+  handleUserSuccess = () => {
+    this.setState({userSuccess: true});
+    setTimeout(() => this.setState({userSuccess: false}), 5000);
   };
 
   calsPS = (cals, servings) => Math.round(cals/servings);
@@ -68,6 +73,7 @@ class RecipeContainer extends React.Component {
                 <div className='irImgContainerDisplaySmall'>
                   <div className='irImgContainerInnerWrapper'>
                     <img className='irImg' src={recipe.image} />
+                    <div className='likeButton' onClick={this.handleBoundFavoriteClick}></div>
                   </div>
                 </div>
                 <div className='irMainInfo'>
@@ -81,7 +87,7 @@ class RecipeContainer extends React.Component {
                     </div>
                   </div>
                   <p className='irSource'>Recipe by: <a rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
-                  {/* <button className='irFavButton' onClick={this.handleFavoriteClick} id='favoriteButton' className='btn btn-primary'>
+                  {/* <button className='irFavButton' onClick={this.handleBoundFavoriteClick} id='favoriteButton' className='btn btn-primary'>
                     <span className='glyphicon glyphicon-bookmark'></span> Save
                   </button> */}
                 </div>
@@ -107,7 +113,7 @@ class RecipeContainer extends React.Component {
                 <h2 className='irNutritionHead irSectionHeader'>Nutrition
                 <span className='iconOuter'>
                   <span className='iconInner'>
-                    <span className='recipeIconsDiv'>{parseInt(recipe.calories)} <span className='hideMobile'>cals</span></span>
+                    <span className='recipeIconsDiv'>{parseInt(recipe.calories/recipe.yield)} <span className='hideMobile'>cals</span></span>
                     <img src={cal} className='iconScale'/>
                   </span>
                 </span>
@@ -134,6 +140,9 @@ class RecipeContainer extends React.Component {
                 <p><a className='button' rel="noopener noreferrer" target="_blank" href={recipe.url}>Directions</a> <span className='gray'>on</span> <a className='link' rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
               </div>
             </div>
+            <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
+              <p>Favorite added.</p>
+            </div>
             <div className='aside'>
               <h2 className='irSectionHeader'> Recommended</h2>
               {renderIf(this.props.recipes.hits && this.props.recipes.hits.length > 0,
@@ -151,6 +160,7 @@ class RecipeContainer extends React.Component {
 let mapStateToProps = state => ({
   recipe: state.recipe,
   recipes: state.recipes,
+  userAuth: state.userAuth,
 });
 
 let mapDispatchToProps = dispatch => {

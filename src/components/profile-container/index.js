@@ -47,16 +47,17 @@ class ProfileContainer extends React.Component {
   
   render(){
     let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : require('./../helpers/assets/icons/profilePlaceholder.jpeg');
-    let name = this.props.userProfile.username;
-    let { favorites } = this.props;
+    let { favorites, userProfile } = this.props;
     return (
-      <div className='profile-container page-outer-div'>
+      <div>
+      {userProfile &&
+        <div className='profile-container page-outer-div'>
         <div className='page-form'>
           <div className='profileWrapper'>
             <div className='inner-wrapper'>
               <div className='profile-image-div'>
                 <img className='profile-image' src={profileImage} />
-                <p className='mainContainerHeader'>{name}</p>
+                <p className='mainContainerHeader'>{userProfile.username}</p>
                 <p className='profileDate'>Member Since: {formatDate(this.props.userProfile.createdOn)}</p>
               </div>
             </div>
@@ -103,6 +104,8 @@ class ProfileContainer extends React.Component {
         <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
           <p>Favorite deleted.</p>
         </div>
+      </div>
+      }
       </div>
     );
   }
