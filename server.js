@@ -6,7 +6,6 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(cors());
-// app.use({'Content-Encoding': 'gzip, deflate'});
 app.use(express.static(`${__dirname}/dist`));
 
 app.listen(PORT, () => {
