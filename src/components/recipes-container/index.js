@@ -16,7 +16,7 @@ class RecipesContainer extends React.Component {
 
   componentWillMount() {
     userValidation(this.props);
-    if (this.props.recipes.length == 0) {
+    if (!this.props.recipes || !this.props.recipes.hits || this.props.recipes.hits.length == 0) {
       let string = window.location.href.split('/search/')[1];
       let hashIndex = string.indexOf('&');
       let queryString = string.substring(0, hashIndex);
@@ -37,7 +37,7 @@ class RecipesContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.setState({userSuccess: false, recipeLoadCount: 1});
+    this.setState({userSuccess: false, recipeLoadCount: 0});
     document.removeEventListener('scroll', this.trackScrolling);
   }
 
@@ -63,19 +63,19 @@ class RecipesContainer extends React.Component {
   calsPS = (cals, servings) => Math.round(cals/servings);
 
   isBottom = (el) => {
-    return el.getBoundingClientRect().bottom <= window.innerHeight;
+    return el.getBoundingClientRect().bottom <= (window.innerHeight + 300);
   };
   
   trackScrolling = () => {
     const wrappedElement = document.getElementById('recipesWrapper');
     if (this.isBottom(wrappedElement)) {
-      this.setState({recipeLoadCount: this.state.recipeLoadCount + 1});
       let string = window.location.href.split('/search/')[1];
       let hashIndex = string.indexOf('&');
-
       let queryString = string.substring(0, hashIndex);
       let queryParams = string.substring(hashIndex, string.length);
       let min = (parseInt(this.state.recipeLoadCount) * 24 + 1).toString();
+      if (this.state.recipeLoadCount >= 4) document.removeEventListener('scroll', this.trackScrolling);
+      this.setState({recipeLoadCount: this.state.recipeLoadCount + 1});
       if (localStorage.getItem(`${queryString}${queryParams}${min}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))['timestamp'] > new Date().getTime()) {
         this.props.infiniteRecipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))['content']);
       } else {
@@ -101,12 +101,12 @@ class RecipesContainer extends React.Component {
             <div className='resultCountDiv'>
               <p>{recipes.count} recipe results for <span>"{recipes.q}"</span></p>
             </div>
-            {recipes.hits &&
+            {this.props.recipes.hits &&
                       <div className='recipesSection'>
-                        {recipes.hits.map(myRecipe => {
+                        {this.props.recipes.hits.map((myRecipe, idx) => {
                           let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
                           let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
-                          return <div key={myRecipe.recipe.uri} className='outer'>
+                          return <div key={idx} className='outer'>
                                   <div className='cardImageContainer' onClick={boundRecipeClick}>
                                     <img className='cardImage' src={myRecipe.recipe.image} />
                                   </div>
@@ -127,6 +127,13 @@ class RecipesContainer extends React.Component {
                         })}
                       </div>
             }
+            <div>
+              {renderIf(parseInt(recipes.to) >= 100,
+                <div className='infiniteScrollMax'>
+                  <p>Sorry, but the API limits our query results to 100. </p>
+                </div>
+              )}
+            </div>
             </div>
           )}
         </div>

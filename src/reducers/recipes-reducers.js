@@ -5,9 +5,9 @@ export default (state=[], action) => {
     case 'RECIPES_FETCH':
       return payload;
     case 'INFINITE_RECIPES_FETCH':
-      console.log(state, payload)
-      state.hits = [...state.hits, ...payload];
-      return state;
+      payload.hits = [...state.hits, ...payload.hits];
+      payload.count = state.count;
+      return payload;
     default:
       return state;
   }

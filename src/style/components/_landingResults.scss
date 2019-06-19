@@ -157,6 +157,25 @@
     }
   }
 }
+.infiniteScrollMax {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: start;
+  align-items: flex-start;
+  -ms-flex-align: flex-start;
+  margin: 0 auto 8px;
+  position: relative;
+  width: 95%;
+  padding: 8px 0;
+  text-align: right;
+  
+  p {
+    text-align: right;
+    width: 100%;
+    color: gray;
+  }
+}
 @media only screen and (max-width: 627px) {
   .recipesSection {
     display: grid;

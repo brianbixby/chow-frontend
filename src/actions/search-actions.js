@@ -22,22 +22,19 @@ export const recipeFetch = recipe => ({
 
 export const recipesFetchRequest = (queryString, queryParams, min, infiniteSearch) => dispatch => {
   const max = (parseInt(min) + 24).toString();
-  console.log(min, max);
   let url = `https://api.edamam.com/${queryString}${process.env.API_KEY}&from=${min}&to=${max}${queryParams}`;
 
-  console.log(queryString, queryParams, min, infiniteSearch);
   return superagent.get(url)
     .then(res => {
-      console.log("res.body: ", res.body);
-      localStorage.setItem(queryString + queryParams + min, JSON.stringify({content: res.body.hits, timestamp: new Date().getTime() + 480000}));
-      !infiniteSearch ? dispatch(recipesFetch(res.body)) : dispatch(infiniteRecipesFetch(res.body.hits));
+      localStorage.setItem(queryString + queryParams + min, JSON.stringify({content: res.body, timestamp: new Date().getTime() + 480000}));
+      !infiniteSearch ? dispatch(recipesFetch(res.body)) : dispatch(infiniteRecipesFetch(res.body));
       return res.body;
     })
-    .catch(err => {
-      if(err.status === 404)
-        return alert('404 Error: Recipes not found please try again with a valid search term ex. pizza' );
-      alert(`${err.status} Error: ${err.message}`);
-    });
+    // .catch(err => {
+    //   if(err.status === 404)
+    //     return alert('404 Error: Recipes not found please try again with a valid search term ex. pizza' );
+    //   alert(`${err.status} Error: ${err.message}`);
+    // });
 };
 
 export const homepageFetchRequest = () => dispatch => {
@@ -49,11 +46,11 @@ export const homepageFetchRequest = () => dispatch => {
       dispatch(homepageFetch(res.body.hits));
       return res.body.hits;
     })
-    .catch(err => {
-      if(err.status === 404)
-        return alert('404 Error: Recipes not found please try again with a valid search term ex. pizza' );
-      alert(`${err.status} Error: ${err.message}`);
-    });
+    // .catch(err => {
+    //   if(err.status === 404)
+    //     return alert('404 Error: Recipes not found please try again with a valid search term ex. pizza' );
+    //   alert(`${err.status} Error: ${err.message}`);
+    // });
 };
 
 export const recipeFetchRequest = recipeURI => dispatch => {
@@ -66,9 +63,9 @@ export const recipeFetchRequest = recipeURI => dispatch => {
       dispatch(recipeFetch(res.body[0]));
       return res.body[0];
     })
-    .catch(err => {
-      if(err.status === 404)
-        return alert('404 Error: Recipe not found please try again with a valid search term ex. pizza' );
-      alert(`${err.status} Error: ${err.message}`);
-    });
+    // .catch(err => {
+    //   if(err.status === 404)
+    //     return alert('404 Error: Recipe not found please try again with a valid search term ex. pizza' );
+    //   alert(`${err.status} Error: ${err.message}`);
+    // });
 };
