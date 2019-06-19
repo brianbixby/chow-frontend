@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+
 
 import RecipesMap from '../recipes-map';
 import { homepageFetchRequest, homepageFetch, recipeFetch, recipesFetchRequest, recipesFetch } from '../../actions/search-actions.js';
@@ -126,4 +128,4 @@ let mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingContainer));

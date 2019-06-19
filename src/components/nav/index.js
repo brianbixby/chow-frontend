@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from "react-router-dom";
 
 import Avatar from '../helpers/avatar';
 import Modal from '../helpers/modal';
@@ -243,4 +243,4 @@ let mapDispatchToProps = dispatch => ({
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));

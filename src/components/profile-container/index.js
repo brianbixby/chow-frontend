@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
 import UserProfileForm from '../userProfile-form';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
@@ -128,4 +129,4 @@ let mapDispatchToProps = (dispatch) => ({
   userProfileUpdate: profile => dispatch(userProfileUpdateRequest(profile)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileContainer));

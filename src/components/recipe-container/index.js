@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
 import RecipesMap from '../recipes-map';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
@@ -180,4 +181,4 @@ let mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecipeContainer));
