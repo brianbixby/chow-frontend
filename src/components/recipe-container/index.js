@@ -23,13 +23,13 @@ class RecipeContainer extends React.Component {
         .then(recipe => {
           if (!recipe) return this.setState({recipeError: true});
           if (!this.props.recipes.length) {
-            this.props.recipesFetch("search?q=summer", "&calories=0-10000")
+            this.props.recipesFetch("search?q=summer", "&calories=0-10000", 0, false)
               .catch(err => logError(err));
           }
         })
         .catch(err => logError(err));
     } else if(!this.props.recipes.length) {
-      this.props.recipesFetch("search?q=summer", "&calories=0-10000")
+      this.props.recipesFetch("search?q=summer", "&calories=0-10000", 0, false)
         .catch(err => logError(err));
     }
     window.scrollTo(0, 0);
@@ -177,7 +177,7 @@ let mapDispatchToProps = dispatch => {
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     recipeFetch: query => dispatch(recipeFetchRequest(query)),
-    recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    recipesFetch: (queryString, queryParams, min, infiniteSearch) => dispatch(recipesFetchRequest(queryString, queryParams, min, infiniteSearch)),
   };
 };
 

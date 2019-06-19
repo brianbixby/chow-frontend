@@ -5,6 +5,11 @@ export const recipesFetch = recipes => ({
   payload: recipes,
 });
 
+export const infiniteRecipesFetch = recipes => ({
+  type: 'INFINITE_RECIPES_FETCH',
+  payload: recipes,
+});
+
 export const homepageFetch = recipes => ({
   type: 'HOMEPAGE_FETCH',
   payload: recipes,
@@ -15,13 +20,17 @@ export const recipeFetch = recipe => ({
   payload: recipe,
 });
 
-export const recipesFetchRequest = (queryString, queryParams) => dispatch => {
-  let url = `https://api.edamam.com/${queryString}${process.env.API_KEY}&from=0&to=24${queryParams}`;
+export const recipesFetchRequest = (queryString, queryParams, min, infiniteSearch) => dispatch => {
+  const max = (parseInt(min) + 24).toString();
+  console.log(min, max);
+  let url = `https://api.edamam.com/${queryString}${process.env.API_KEY}&from=${min}&to=${max}${queryParams}`;
 
+  console.log(queryString, queryParams, min, infiniteSearch);
   return superagent.get(url)
     .then(res => {
-      localStorage.setItem(queryString + queryParams, JSON.stringify({content: res.body, timestamp: new Date().getTime() + 480000}));
-      dispatch(recipesFetch(res.body));
+      console.log("res.body: ", res.body);
+      localStorage.setItem(queryString + queryParams + min, JSON.stringify({content: res.body.hits, timestamp: new Date().getTime() + 480000}));
+      !infiniteSearch ? dispatch(recipesFetch(res.body)) : dispatch(infiniteRecipesFetch(res.body.hits));
       return res.body;
     })
     .catch(err => {

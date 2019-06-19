@@ -67,7 +67,7 @@ class Navbar extends React.Component {
     };
 
     handleSearch = (queryString, queryParams) => {
-        return this.props.recipesFetch(queryString, queryParams)
+        return this.props.recipesFetch(queryString, queryParams, 0, false)
           .then(() => {
             return this.props.history.push(`/search/${queryString}${queryParams}`);
           })
@@ -88,13 +88,13 @@ class Navbar extends React.Component {
         let queryString = item.link.split("&calories=0-10000")[0];
         let queryParams = item.link.split(queryString)[1];
 
-        if (localStorage.getItem(`${queryString}${queryParams}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['timestamp'] > new Date().getTime()) {
-          this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['content']);
+        if (localStorage.getItem(`${queryString}${queryParams}0`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['timestamp'] > new Date().getTime()) {
+          this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['content']);
           this.setState({showBrowse: false});
           return this.props.history.push(`/search/${queryString}${queryParams}`);
         }
 
-        return this.props.recipesFetch(queryString, queryParams)
+        return this.props.recipesFetch(queryString, queryParams, 0, false)
           .then(() => {
 						this.setState({showBrowse: false});
 						return this.props.history.push(`/search/${queryString}${queryParams}`);
@@ -235,7 +235,7 @@ let mapStateToProps = state => ({
 
 let mapDispatchToProps = dispatch => ({
     signOut: () => dispatch(signOut()),
-    recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    recipesFetch: (queryString, queryParams, min, infiniteSearch) => dispatch(recipesFetchRequest(queryString, queryParams, min, infiniteSearch)),
     recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
     signUp: user => dispatch(signUpRequest(user)),
     signIn: user => dispatch(signInRequest(user)),

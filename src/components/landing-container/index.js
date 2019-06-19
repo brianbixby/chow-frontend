@@ -32,12 +32,12 @@ class LandingContainer extends React.Component {
     let queryString = item.link.split("&calories=0-10000")[0];
     let queryParams = "&calories=0-10000";
 
-    if (localStorage.getItem(`${queryString}${queryParams}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['timestamp'] > new Date().getTime()) {
-      this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['content']);
+    if (localStorage.getItem(`${queryString}${queryParams}0`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['timestamp'] > new Date().getTime()) {
+      this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['content']);
       return this.props.history.push(`/search/${queryString}${queryParams}`);
     }
 
-    return this.props.recipesFetch(queryString, queryParams)
+    return this.props.recipesFetch(queryString, queryParams, 0, false)
       .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
       .catch(err => logError(err));
   };
@@ -46,12 +46,14 @@ class LandingContainer extends React.Component {
     let queryString = subItem.link.split("&calories=0-10000")[0];
     let queryParams = "&calories=0-10000";
 
-    if (localStorage.getItem(`${queryString}${queryParams}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['timestamp'] > new Date().getTime()) {
-      this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['content']);
+    if (localStorage.getItem(`${queryString}${queryParams}0`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['timestamp'] > new Date().getTime()) {
+      this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['content']);
       return this.props.history.push(`/search/${queryString}${queryParams}`);
     }
 
-    return this.props.recipesFetch(queryString, queryParams)
+    let min = 0;
+    let infiniteSearch = false;
+    return this.props.recipesFetch(queryString, queryParams, min, infiniteSearch)
       .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
       .catch(err => logError(err));
   };
@@ -123,7 +125,7 @@ let mapDispatchToProps = dispatch => {
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     homepageFetch: () => dispatch(homepageFetchRequest()),
     homepageFetchRequest: recipes => dispatch(homepageFetch(recipes)),
-    recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    recipesFetch: (queryString, queryParams, min, infiniteSearch) => dispatch(recipesFetchRequest(queryString, queryParams, min, infiniteSearch)),
     recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
   };
 };

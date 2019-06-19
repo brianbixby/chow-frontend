@@ -5,13 +5,13 @@ import { withRouter } from "react-router-dom";
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
-import { recipesFetchRequest, recipeFetch } from '../../actions/search-actions.js';
+import { recipesFetchRequest, recipesFetch, recipeFetch, infiniteRecipesFetch } from '../../actions/search-actions.js';
 import { logError, renderIf, userValidation, classToggler } from './../../lib/util.js';
 
 class RecipesContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {userSuccess: false};
+    this.state = {userSuccess: false, recipeLoadCount: 0};
   }
 
   componentWillMount() {
@@ -19,10 +19,26 @@ class RecipesContainer extends React.Component {
     if (this.props.recipes.length == 0) {
       let string = window.location.href.split('/search/')[1];
       let hashIndex = string.indexOf('&');
-      this.props.recipesFetch(string.substring(0, hashIndex), string.substring(hashIndex, string.length))
+      let queryString = string.substring(0, hashIndex);
+      let queryParams = string.substring(hashIndex, string.length);
+      if (localStorage.getItem(`${queryString}${queryParams}0`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['timestamp'] > new Date().getTime()) {
+        this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['content']);
+      } else {
+        this.props.recipesFetch(queryString, queryParams, 0, false)
         .catch(err => logError(err));
+      }
     }
     window.scrollTo(0, 0);
+  }
+
+  componentDidMount() {
+    document.addEventListener('scroll', this.trackScrolling);
+    this.setState({recipeLoadCount: Math.floor(this.props.recipes.hits.length/24)});
+  }
+
+  componentWillUnmount() {
+    this.setState({userSuccess: false, recipeLoadCount: 1});
+    document.removeEventListener('scroll', this.trackScrolling);
   }
 
   handleBoundRecipeClick = (myRecipe, e) => {
@@ -46,10 +62,34 @@ class RecipesContainer extends React.Component {
   
   calsPS = (cals, servings) => Math.round(cals/servings);
 
+  isBottom = (el) => {
+    return el.getBoundingClientRect().bottom <= window.innerHeight;
+  };
+  
+  trackScrolling = () => {
+    const wrappedElement = document.getElementById('recipesWrapper');
+    if (this.isBottom(wrappedElement)) {
+      this.setState({recipeLoadCount: this.state.recipeLoadCount + 1});
+      let string = window.location.href.split('/search/')[1];
+      let hashIndex = string.indexOf('&');
+
+      let queryString = string.substring(0, hashIndex);
+      let queryParams = string.substring(hashIndex, string.length);
+      let min = (parseInt(this.state.recipeLoadCount) * 24 + 1).toString();
+      if (localStorage.getItem(`${queryString}${queryParams}${min}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))['timestamp'] > new Date().getTime()) {
+        this.props.infiniteRecipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))['content']);
+      } else {
+        const infiniteSearch = true;
+        this.props.recipesFetch(queryString, queryParams, min, infiniteSearch)
+          .catch(err => logError(err));
+      }
+    }
+  };
+
   render() {
     let { recipes } = this.props;
     return (
-      <div className='container-fluid'>
+      <div id='recipesWrapper' className='container-fluid'>
         {renderIf(!recipes,
           <div className='resultCountDiv'>
             Sorry, no results. Please try modifying your search.
@@ -109,8 +149,10 @@ let mapDispatchToProps = dispatch => {
     favoriteFetch: favorite => dispatch(favoriteFetchRequest(favorite)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
-    recipesFetch: (queryString, queryParams) => dispatch(recipesFetchRequest(queryString, queryParams)),
+    recipesFetch: (queryString, queryParams, min, infiniteSearch) => dispatch(recipesFetchRequest(queryString, queryParams, min, infiniteSearch)),
+    recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
     recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
+    infiniteRecipesFetchRequest: recipes => dispatch(infiniteRecipesFetch(recipes)),
   };
 };
 

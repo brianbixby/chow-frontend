@@ -102,8 +102,8 @@ class SearchBar extends React.Component {
       let queryParams = `&calories=${minCals}-${maxCals}${health}${diet}${ingredients}${exclude}`;
       let queryString = this.state.searchTerm ? `search?q=${this.state.searchTerm}` : 'search?q=';
 
-      if (localStorage.getItem(`${queryString}${queryParams}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['timestamp'] > new Date().getTime()) {
-        this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}`))['content']);
+      if (localStorage.getItem(`${queryString}${queryParams}0`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['timestamp'] > new Date().getTime()) {
+        this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))['content']);
         this.props.redirect(`/search/${queryString}${queryParams}`);
         this.props.advancedSearch();
         this.setState({advancedSearch: false});
