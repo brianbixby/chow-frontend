@@ -1,6 +1,4 @@
-recipes: add infinite scroll
-layout of the menu
+layout of the menu, CONTAINER
 health types on ir clickable
-headers when clicked display more info
-on update profile something should happen
-CONTAINER
+hide heart not loged in, 
+on update profile something should happen, 

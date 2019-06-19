@@ -268,12 +268,17 @@
     float: left;
     overflow: hidden;
     border-left: 1px solid #e6e6e6;
-    max-height: 1335px;
-    overflow-y: scroll;
+    height: 1335px;
   
     .individualRecipeOuter {
       margin-left: 2.5%;
       margin-right: calc((2.5% - 9px));
+      width: 100%;
+      height: calc((100%)) !important;
+      overflow-y: scroll !important;
+      padding-right: 17px;
+      -webkit-box-sizing: content-box;
+      box-sizing: content-box;
       
       .recipesSection {
         grid-template-columns: repeat(2, 1fr);

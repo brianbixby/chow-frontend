@@ -28,7 +28,7 @@ class RecipeContainer extends React.Component {
           }
         })
         .catch(err => logError(err));
-    } else if(!this.props.recipes.length) {
+    } else if(!this.props.recipes || !this.props.recipes.hits || !this.props.recipes.hits.length) {
       this.props.recipesFetch("search?q=summer", "&calories=0-10000", 0, false)
         .catch(err => logError(err));
     }
@@ -92,7 +92,6 @@ class RecipeContainer extends React.Component {
                       })}
                     </div>
                   </div>
-                  {/* <p className='irSource'>Recipe by: <a rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p> */}
                 </div>
                 <div className='irImgContainerDisplayLarge'>
                   <img className='irImg' src={recipe.image} />

@@ -83,31 +83,36 @@ class LandingContainer extends React.Component {
     {title: "Appetizers", image: "https://i.imgur.com/2bNJ7AZ.png", link: "search?q=appetizers&calories=0-10000"}];
     return (
       <section className='container'>
-        <div className='slider'>
-          {sliderItems.map((item, idx) => {
-            let boundItemClick = this.handleBoundItemClick.bind(this, item);
-            return <div key={idx} className='sliderItemContainer' onClick={boundItemClick}>
-                <div className="sliderText">
-                  <h3 className='sliderHeader'>{item.header}</h3>
-                  <p className='sliderSubheader'>{item.subHeader}</p>
-                </div>
-                <img src={item.image} className="sliderItemImage"/>
-              </div>
-          })}
-        </div>
-        <div className='sliderSubItem'>
-          <div className='subItemInnerWrapper'>
-            {subItems.map((subItem, idx) => {
-              let boundSubitemClick = this.handleBoundSubitemClick.bind(this, subItem);
-              return <div key={idx} className='sliderSubitemContainer' onClick={boundSubitemClick}>
-                  <div className='subItemInsideWrapper'>
-                    <img src={subItem.image} className="sliderSubitemImage"/>
-                    <p className='sliderSubitemTitle'>{subItem.title}</p>
+        <div className='sliderContainer'>
+          <div className='slider'>
+            {sliderItems.map((item, idx) => {
+              let boundItemClick = this.handleBoundItemClick.bind(this, item);
+              return <div key={idx} className='sliderItemContainer' onClick={boundItemClick}>
+                  <div className="sliderText">
+                    <h3 className='sliderHeader'>{item.header}</h3>
+                    <p className='sliderSubheader'>{item.subHeader}</p>
                   </div>
+                  <img src={item.image} className="sliderItemImage"/>
                 </div>
             })}
-            </div>
+          </div>
         </div>
+        <div className='sliderSubItemWrapper'>
+          <div className='sliderSubItem'>
+            <div className='subItemInnerWrapper'>
+              {subItems.map((subItem, idx) => {
+                let boundSubitemClick = this.handleBoundSubitemClick.bind(this, subItem);
+                return <div key={idx} className='sliderSubitemContainer' onClick={boundSubitemClick}>
+                    <div className='subItemInsideWrapper'>
+                      <img src={subItem.image} className="sliderSubitemImage"/>
+                      <p className='sliderSubitemTitle'>{subItem.title}</p>
+                    </div>
+                  </div>
+              })}
+              </div>
+          </div>
+        </div>
+
         <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect}/>
       </section>
     );

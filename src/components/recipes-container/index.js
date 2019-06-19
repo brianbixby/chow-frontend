@@ -16,7 +16,7 @@ class RecipesContainer extends React.Component {
 
   componentWillMount() {
     userValidation(this.props);
-    if (!this.props.recipes || !this.props.recipes.hits || this.props.recipes.hits.length == 0) {
+    if (!this.props.recipes || !this.props.recipes.hits || !this.props.recipes.hits.length) {
       let string = window.location.href.split('/search/')[1];
       let hashIndex = string.indexOf('&');
       let queryString = string.substring(0, hashIndex);
