@@ -301,6 +301,14 @@
 .authPadding, .tooltip {
   padding-left: 10px;
 }
+@media (max-width: 450px) {
+  .modal-wrapper{
+    width: 95vw;
+  }
+  .modal-content h2 {
+    font-size: 22px;
+  }
+}
 @media (max-width: 550px) {
   .modal-wrapper{
     width: 90vw;

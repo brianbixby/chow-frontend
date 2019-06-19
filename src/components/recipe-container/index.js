@@ -92,7 +92,7 @@ class RecipeContainer extends React.Component {
                       })}
                     </div>
                   </div>
-                  <p className='irSource'>Recipe by: <a rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p>
+                  {/* <p className='irSource'>Recipe by: <a rel="noopener noreferrer" target="_blank" href={recipe.url}>{recipe.source}</a></p> */}
                 </div>
                 <div className='irImgContainerDisplayLarge'>
                   <img className='irImg' src={recipe.image} />

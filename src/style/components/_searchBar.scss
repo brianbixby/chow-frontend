@@ -297,7 +297,11 @@
 input[type='radio']:checked + span {
   color: #8ac13e;
 }
-
+@media only screen and (max-width: 450px) {
+  .advancedSearchSectionHeader {
+    margin-bottom: 0;
+  }
+}
 @media only screen and (max-width: 767px) {
   .advancedSearchDiv {
     border: 1px solid #e6e6e6;

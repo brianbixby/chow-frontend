@@ -17,10 +17,6 @@ app.get('/*', function(req, res) {
   })
 })
 
-// app.get('/*', (request, response) => {
-//   response.sendFile(path.join(__dirname, '../public/index.html'));
-// });
-
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
 });
