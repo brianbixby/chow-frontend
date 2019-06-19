@@ -14,9 +14,9 @@ class App extends React.Component {
         <section>
           <Route path='*' component={Navbar} />
           <Route exact path='/' component={LandingContainer} />
-          <Route exact path='/profile/:userName' component={ProfileContainer} />
-          <Route exact path='/search/:searchQuery' component={RecipesContainer} />
-          <Route exact path='/recipe/:recipeQuery' component={RecipeContainer} />
+          <Route path='/profile/:userName' component={ProfileContainer} />
+          <Route path='/search/:searchQuery' component={RecipesContainer} />
+          <Route path='/recipe/:recipeQuery' component={RecipeContainer} />
         </section>
       </BrowserRouter>
     );
