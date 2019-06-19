@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
 
 import { recipeFetch } from '../../actions/search-actions.js';
 import { favoriteFetchRequest } from '../../actions/favorite-actions.js';
@@ -82,4 +81,4 @@ let mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecipesMap));
+export default connect(mapStateToProps, mapDispatchToProps)(RecipesMap);

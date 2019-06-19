@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
 import { isInt } from 'validator';
 
 import { recipesFetch } from '../../actions/search-actions.js';
@@ -375,4 +374,4 @@ let mapDispatchToProps = dispatch => ({
   recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(SearchBar));
+export default connect(null, mapDispatchToProps)(SearchBar);
