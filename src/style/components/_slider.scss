@@ -153,9 +153,12 @@
   border: 1px solid transparent;
   border-radius: 50%;
   position: absolute;
-  top: 1.65rem;
   z-index: 198;
   cursor: pointer;
+  margin-top: calc((2.5% + 15px));
+}
+.subItemIcon:hover {
+  background: rgba(0, 0, 0, 0.6);
 }
 .iconChevronRight {
   left: auto;
@@ -167,33 +170,24 @@
 }
 .subItemIcon::before {
   border-style: solid;
-  border-width: 0.18em 0.18em 0 0;
+  border-width: 3px 3px 0 0;
   color: #b2b2b2;
   content: '';
   display: inline-block;
   height: 0.75rem;
   position: relative;
-  vertical-align: top;
   width: 0.77rem;
   color: #fff;
   height: 0.4rem;
-  left: 11px;
-  top: 10px;
   width: 0.4rem;
   height: 0.5rem;
-  left: 16px;
-  top: 14px;
   width: 0.5rem;
-  left: 9px;
   color: #fff;
   height: 0.4rem;
-  left: 11px;
-  top: 10px;
   width: 0.4rem;
   height: 0.5rem;
-  left: 16px;
-  top: 14px;
   width: 0.5rem;
+  vertical-align: calc((-50% + 3px));
 }
 .iconChevronRight::before {
   -ms-transform: rotate(45deg);
@@ -228,7 +222,7 @@
       height: 120px;
     }
     .subItemIcon {
-      top: 1.8rem;
+      margin-top: 23px;
     }
 }
   
@@ -237,7 +231,22 @@
         width: 440px;
     }
 }
-
+@media (max-width: 767px) {
+  .subItemIcon {
+    height: 30px;
+    width: 30px;
+  }
+  .subItemIcon::before {
+    width: 10px;
+    height: 10px;
+  }
+  .iconChevronRight::before{
+    right: -8px;
+  }
+  .iconChevronLeft::before{
+    right: -10px;
+  }
+}
 @media (min-width: 768px) {
   .sliderSubItemWrapper {
     height: 150px;
@@ -284,10 +293,19 @@
     }
   }
   .iconChevronRight::before {
-    left: 13px;
+    right: -12px
   }
   .iconChevronLeft::before {
-    right: 13px;
+    right: -14px;
+  }
+  .subItemIcon {
+    margin-top: 27px;
+  }
+  .subItemIcon::before {
+    height: 12.5px;
+    width: 12.5px;
+    border-width: 4px 4px 0 0;
+    vertical-align: calc((-50% - 2px));
   }
 }
 
@@ -304,7 +322,7 @@
     }
   }
   .subItemIcon {
-    top: 2.5rem;
+    margin-top: 32px;
   }
 }
 
