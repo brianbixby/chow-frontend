@@ -51,8 +51,9 @@
 }
 .sliderSubItemWrapper {
   height: 100%;
-  width: 100%;
   overflow: hidden;
+  position: relative;
+  width: 100vw !important;
 
   .sliderSubItem {
     width: 100%;
@@ -144,7 +145,64 @@
         }
       }
     }
-  }
+}
+.subItemIcon {
+  height: 40px;
+  width: 40px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 1.65rem;
+  z-index: 198;
+  cursor: pointer;
+}
+.iconChevronRight {
+  left: auto;
+  right: 15px;
+}
+.iconChevronLeft {
+  right: auto;
+  left: 15px;
+}
+.subItemIcon::before {
+  border-style: solid;
+  border-width: 0.18em 0.18em 0 0;
+  color: #b2b2b2;
+  content: '';
+  display: inline-block;
+  height: 0.75rem;
+  position: relative;
+  vertical-align: top;
+  width: 0.77rem;
+  color: #fff;
+  height: 0.4rem;
+  left: 11px;
+  top: 10px;
+  width: 0.4rem;
+  height: 0.5rem;
+  left: 16px;
+  top: 14px;
+  width: 0.5rem;
+  left: 9px;
+  color: #fff;
+  height: 0.4rem;
+  left: 11px;
+  top: 10px;
+  width: 0.4rem;
+  height: 0.5rem;
+  left: 16px;
+  top: 14px;
+  width: 0.5rem;
+}
+.iconChevronRight::before {
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.iconChevronLeft::before {
+  -ms-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
 @media (max-width: 479px) {
   .slider .sliderText {
     height: 40px;
@@ -169,6 +227,9 @@
     .sliderSubItemWrapper {
       height: 120px;
     }
+    .subItemIcon {
+      top: 1.8rem;
+    }
 }
   
 @media (min-width: 640px) {
@@ -177,65 +238,74 @@
     }
 }
 
-  @media (min-width: 768px) {
-    .sliderSubItemWrapper {
-      height: 150px;
-    }
-    .sliderContainer {
-      height: 280px;
-    }
-    .slider {
-        .sliderItemContainer {
-            height: 280px;
-            width: 500px;
-        }
-        .sliderText {
-            height: 60px;
-        }
-        .sliderHeader {
-            font-size: 1.125rem;
-        }
-        .sliderSubheader {
-            font-size: .875rem;
-            clear: both;
-            display: block;
-            float: left;
-            margin: 0;
-        }
-    }
-
-    .sliderSubItem {
-      max-height: 167px;
-      
-      .subItemInnerWrapper .sliderSubitemContainer {
-          width: 90px;
-  
-          .subItemInsideWrapper .sliderSubitemImage {
-            height: 78px;
-            width: 78px;
-          }
-          .subItemInsideWrapper .sliderSubitemTitle {
-            font-size: .9375rem;
-            line-height: 17px;
-            max-height: 64px;
-            padding-top: 10px;
-          }
+@media (min-width: 768px) {
+  .sliderSubItemWrapper {
+    height: 150px;
+  }
+  .sliderContainer {
+    height: 280px;
+  }
+  .slider {
+      .sliderItemContainer {
+          height: 280px;
+          width: 500px;
       }
-    }
+      .sliderText {
+          height: 60px;
+      }
+      .sliderHeader {
+          font-size: 1.125rem;
+      }
+      .sliderSubheader {
+          font-size: .875rem;
+          clear: both;
+          display: block;
+          float: left;
+          margin: 0;
+      }
   }
 
-  @media (min-width: 1024px) {
-    .sliderSubItem {
-      .subItemInnerWrapper .sliderSubitemContainer {
-            width: 100px;
-            margin-left: 23px;
-  
-            .subItemInsideWrapper .sliderSubitemImage {
-              height: 88px;
-              width: 88px;
-            }
-      }
+  .sliderSubItem {
+    max-height: 167px;
+    
+    .subItemInnerWrapper .sliderSubitemContainer {
+        width: 90px;
+
+        .subItemInsideWrapper .sliderSubitemImage {
+          height: 78px;
+          width: 78px;
+        }
+        .subItemInsideWrapper .sliderSubitemTitle {
+          font-size: .9375rem;
+          line-height: 17px;
+          max-height: 64px;
+          padding-top: 10px;
+        }
     }
+  }
+  .iconChevronRight::before {
+    left: 13px;
+  }
+  .iconChevronLeft::before {
+    right: 13px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sliderSubItem {
+    .subItemInnerWrapper .sliderSubitemContainer {
+          width: 100px;
+          margin-left: 23px;
+
+          .subItemInsideWrapper .sliderSubitemImage {
+            height: 88px;
+            width: 88px;
+          }
+    }
+  }
+  .subItemIcon {
+    top: 2.5rem;
+  }
 }
 
 @media (min-width: 1200px) {

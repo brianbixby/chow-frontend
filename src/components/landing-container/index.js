@@ -64,6 +64,22 @@ class LandingContainer extends React.Component {
 
   calsPS = (cals, servings) => Math.round(cals/servings);
 
+  handleRightClick = () => {
+    this.refs.subItemScroller ? (this.refs.subItemScroller.scrollLeft += window.innerWidth) : null;
+  };
+  
+  handleLeftClick = () => {
+    this.refs.subItemScroller ? (this.refs.subItemScroller.scrollLeft -= window.innerWidth) : null;
+  };
+
+  handleSliderRightClick = () => {
+    this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft += window.innerWidth) : null;
+  };
+  
+  handleSliderLeftClick = () => {
+    this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft -= window.innerWidth) : null;
+  };
+
   render() {
     const sliderItems = [{header: "Sensational Sangria Recipes", subHeader: "Browse hundreds of variations on this fun and fruity punch.", image: "https://i.imgur.com/Cdm8uLo.jpg", link: "search?q=sangria&calories=0-10000" }, 
     {header: "Hummus Recipes", subHeader: "Browse hundreds of ways to get your dip on.", image: "https://i.imgur.com/U2S3zqF.jpg", link: "search?q=hummus&calories=0-10000" }, 
@@ -84,7 +100,7 @@ class LandingContainer extends React.Component {
     return (
       <section className='container'>
         <div className='sliderContainer'>
-          <div className='slider'>
+          <div className='slider' ref='sliderScroller'>
             {sliderItems.map((item, idx) => {
               let boundItemClick = this.handleBoundItemClick.bind(this, item);
               return <div key={idx} className='sliderItemContainer' onClick={boundItemClick}>
@@ -96,9 +112,11 @@ class LandingContainer extends React.Component {
                 </div>
             })}
           </div>
+          <div className='sliderIconChevronLeft sliderIcon iconChevronLeft subItemIcon' onClick={this.handleSliderLeftClick}></div>
+          <div className='sliderIconChevronRight sliderIcon iconChevronRight subItemIcon' onClick={this.handleSliderRightClick}></div>
         </div>
         <div className='sliderSubItemWrapper'>
-          <div className='sliderSubItem'>
+          <div className='sliderSubItem' ref='subItemScroller'>
             <div className='subItemInnerWrapper'>
               {subItems.map((subItem, idx) => {
                 let boundSubitemClick = this.handleBoundSubitemClick.bind(this, subItem);
@@ -109,10 +127,11 @@ class LandingContainer extends React.Component {
                     </div>
                   </div>
               })}
-              </div>
+            </div>
           </div>
+          <div className='iconChevronLeft subItemIcon' onClick={this.handleLeftClick}></div>
+          <div className='iconChevronRight subItemIcon' onClick={this.handleRightClick}></div>
         </div>
-
         <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect}/>
       </section>
     );
