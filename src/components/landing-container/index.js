@@ -13,7 +13,7 @@ import { userValidation, logError } from './../../lib/util.js';
 class LandingContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = {slideWidth: 270};
   }
 
   componentWillMount() {
@@ -27,6 +27,29 @@ class LandingContainer extends React.Component {
     }
     window.scrollTo(0, 0);
   }
+
+  componentDidMount() {
+    this.updateSlideWidth();
+    window.addEventListener('resize', this.updateSlideWidth);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateSlideWidth);
+  }
+  
+  updateSlideWidth = () => {
+    if (window.innerWidth < 480) {
+      this.setState({ slideWidth: 270 });
+    } else if (window.innerWidth < 640) {
+      this.setState({ slideWidth: 340 });
+    } else if (window.innerWidth < 768) {
+      this.setState({ slideWidth: 440 });
+    } else if (window.innerWidth < 1200) {
+      this.setState({ slideWidth: 500 });
+    } else {
+      this.setState({ slideWidth: 550 });
+    }
+  };
 
   handleBoundItemClick = (item, e) => {
     let queryString = item.link.split("&calories=0-10000")[0];
@@ -73,11 +96,11 @@ class LandingContainer extends React.Component {
   };
 
   handleSliderRightClick = () => {
-    this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft += window.innerWidth) : null;
+    this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft += this.state.slideWidth) : null;
   };
   
   handleSliderLeftClick = () => {
-    this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft -= window.innerWidth) : null;
+    this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft -= this.state.slideWidth) : null;
   };
 
   render() {
@@ -112,8 +135,8 @@ class LandingContainer extends React.Component {
                 </div>
             })}
           </div>
-          <div className='sliderIconChevronLeft sliderIcon iconChevronLeft subItemIcon' onClick={this.handleSliderLeftClick}></div>
-          <div className='sliderIconChevronRight sliderIcon iconChevronRight subItemIcon' onClick={this.handleSliderRightClick}></div>
+          <div className='sliderIconChevronLeft sliderIcon' onClick={this.handleSliderLeftClick}></div>
+          <div className='sliderIconChevronRight sliderIcon' onClick={this.handleSliderRightClick}></div>
         </div>
         <div className='sliderSubItemWrapper'>
           <div className='sliderSubItem' ref='subItemScroller'>

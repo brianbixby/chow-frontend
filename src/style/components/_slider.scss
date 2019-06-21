@@ -2,6 +2,7 @@
   height: 251px;
   width: 100%;
   overflow: hidden;
+  position: relative;
 }
 .slider {
     display: block;
@@ -150,6 +151,7 @@
   height: 40px;
   width: 40px;
   background: rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.5);
   border: 1px solid transparent;
   border-radius: 50%;
   position: absolute;
@@ -157,43 +159,74 @@
   cursor: pointer;
   margin-top: calc((2.5% + 15px));
 }
+.sliderIcon {
+  height: 80px;
+  width: 80px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 198;
+  cursor: pointer;
+  top: 85px;
+}
 .subItemIcon:hover {
   background: rgba(0, 0, 0, 0.6);
+  background: #fff;
 }
-.iconChevronRight {
+.sliderIcon:hover:hover:before, .subItemIcon:hover:before {
+  color: rgb(254, 170, 38);
+}
+.iconChevronRight, .sliderIconChevronRight {
   left: auto;
   right: 15px;
 }
-.iconChevronLeft {
+.iconChevronLeft, .sliderIconChevronLeft {
   right: auto;
   left: 15px;
 }
 .subItemIcon::before {
   border-style: solid;
   border-width: 3px 3px 0 0;
-  color: #b2b2b2;
+  color: rgba(254, 170, 38, .5);
   content: '';
   display: inline-block;
   height: 0.75rem;
   position: relative;
   width: 0.77rem;
-  color: #fff;
   height: 0.4rem;
   width: 0.4rem;
   height: 0.5rem;
   width: 0.5rem;
-  color: #fff;
   height: 0.4rem;
   width: 0.4rem;
   height: 0.5rem;
   width: 0.5rem;
   vertical-align: calc((-50% + 3px));
 }
-.iconChevronRight::before {
+.sliderIcon::before {
+  border-style: solid;
+  border-width: 6px 6px 0 0;
+  color: rgba(254, 170, 38, .5);
+  content: '';
+  display: inline-block;
+  height: 0.75rem;
+  position: relative;
+  width: 0.77rem;
+  height: 0.4rem;
+  width: 0.4rem;
+  height: 0.5rem;
+  width: 0.5rem;
+  height: 0.4rem;
+  width: 0.4rem;
+  height: 20px;
+  width: 20px;
+  vertical-align: calc((-50% + 6px));
+}
+.iconChevronRight::before, .sliderIconChevronRight::before {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-.iconChevronLeft::before {
+.iconChevronLeft::before, .sliderIconChevronLeft::before {
   -ms-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
@@ -245,6 +278,21 @@
   }
   .iconChevronLeft::before{
     right: -10px;
+  }
+  .sliderIcon {
+    height: 60px;
+    width: 60px;
+  }
+  .sliderIcon::before {
+    height: 20px;
+    width: 20px;
+    margin-top: 19px;
+  }
+  .sliderIconChevronLeft::before {
+    right: -20px;
+  }
+  .sliderIconChevronRight::before {
+    right: -16px;
   }
 }
 @media (min-width: 768px) {
@@ -307,6 +355,22 @@
     border-width: 4px 4px 0 0;
     vertical-align: calc((-50% - 2px));
   }
+  .sliderIcon {
+    height: 80px;
+    width: 80px;
+    top: 100px;
+  }
+  .sliderIcon::before {
+    height: 26px;
+    width: 26px;
+    margin-top: 25px;
+  }
+  .sliderIconChevronLeft::before {
+    right: -26px;
+  }
+  .sliderIconChevronRight::before {
+    right: -21px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -333,6 +397,9 @@
     }
     .sliderContainer {
       height: 308px;
+    }
+    .sliderIcon {
+      top: 114px;
     }
 }
   
