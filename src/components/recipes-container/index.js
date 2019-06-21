@@ -11,7 +11,7 @@ import { logError, renderIf, userValidation, classToggler } from './../../lib/ut
 class RecipesContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {userSuccess: false, recipeLoadCount: 0};
+    this.state = {userSuccess: false};
   }
 
   componentWillMount() {
@@ -33,11 +33,10 @@ class RecipesContainer extends React.Component {
 
   componentDidMount() {
     document.addEventListener('scroll', this.trackScrolling);
-    this.setState({recipeLoadCount: Math.floor(this.props.recipes.hits.length/24)});
   }
 
   componentWillUnmount() {
-    this.setState({userSuccess: false, recipeLoadCount: 0});
+    this.setState({userSuccess: false});
     document.removeEventListener('scroll', this.trackScrolling);
   }
 
@@ -63,27 +62,29 @@ class RecipesContainer extends React.Component {
   calsPS = (cals, servings) => Math.round(cals/servings);
 
   isBottom = (el) => {
-    return el.getBoundingClientRect().bottom <= (window.innerHeight + 300);
+    return el.getBoundingClientRect().bottom <= (window.innerHeight + 1500);
   };
   
   trackScrolling = () => {
+    document.removeEventListener('scroll', this.trackScrolling);
     const wrappedElement = document.getElementById('recipesWrapper');
-    if (this.isBottom(wrappedElement)) {
+    if (this.isBottom(wrappedElement) && this.props.recipes && this.props.recipes.hits && this.props.recipes.hits.length < 96) {
       let string = window.location.href.split('/search/')[1];
       let hashIndex = string.indexOf('&');
       let queryString = string.substring(0, hashIndex);
       let queryParams = string.substring(hashIndex, string.length);
-      let min = (parseInt(this.state.recipeLoadCount) * 24 + 1).toString();
-      if (this.state.recipeLoadCount >= 4) document.removeEventListener('scroll', this.trackScrolling);
-      this.setState({recipeLoadCount: this.state.recipeLoadCount + 1});
+      let min = (this.props.recipes.hits.length).toString();
       if (localStorage.getItem(`${queryString}${queryParams}${min}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))['timestamp'] > new Date().getTime()) {
         this.props.infiniteRecipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))['content']);
+        return document.addEventListener('scroll', this.trackScrolling);
       } else {
         const infiniteSearch = true;
-        this.props.recipesFetch(queryString, queryParams, min, infiniteSearch)
+        return this.props.recipesFetch(queryString, queryParams, min, infiniteSearch)
+          .then(() => document.addEventListener('scroll', this.trackScrolling))
           .catch(err => logError(err));
       }
     }
+    document.addEventListener('scroll', this.trackScrolling);
   };
 
   render() {
@@ -128,9 +129,9 @@ class RecipesContainer extends React.Component {
                       </div>
             }
             <div>
-              {renderIf(parseInt(recipes.to) >= 100,
+              {renderIf(this.props.recipes && this.props.recipes.hits && this.props.recipes.hits.length >= 96,
                 <div className='infiniteScrollMax'>
-                  <p>Sorry, but the API limits our query results to 100. </p>
+                  <p>Sorry, but the API limits our query results. </p>
                 </div>
               )}
             </div>
