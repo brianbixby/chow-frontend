@@ -127,7 +127,7 @@ class Navbar extends React.Component {
         let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
         let userSuccessMessage = this.state.authFormAction === 'Sign Up' ? "Signed up!" : "Logged in.";
         let profile = this.props.userProfile;
-        let showNotification = this.props.userProfile && this.props.userProfile.image ? true : false;
+        let showNotification = this.props.userProfile && !this.props.userProfile.image ? true : false;
         return (
             <nav>
                 <div className='homeLinkDiv'>
@@ -221,7 +221,7 @@ class Navbar extends React.Component {
                       <p>Logged out.</p>
                     )}
                   </div>
-            </nav> 
+            </nav>
         );
     }
 }

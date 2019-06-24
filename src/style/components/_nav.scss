@@ -123,6 +123,7 @@ nav {
   transition-duration: 1s;
   -webkit-transition-timing-function: cubic-bezier(0, .33, .67, 1);
   transition-timing-function: cubic-bezier(0, .33, .67, 1);
+  cursor: pointer;
 
   p {
     line-height: 1.3;
@@ -140,6 +141,7 @@ nav {
   img {
     max-width: 100%;
     max-height: 100%;
+    border-radius: 50%;
   }
 }
 .profileDropDown {
@@ -248,7 +250,7 @@ nav {
         }
         .navSearchIcon {
             position: absolute;
-            right: 57px;
+            right: 70px;
             top: 0;
             display: block;
             border-left: 1px solid #fafafa;
@@ -281,6 +283,8 @@ nav {
   .avatar {
     height: 100%;
     margin-right: -13px;
+    width: 40px;
+    margin-top: 11px;
   }
   .profileDropDownWrapper::after {
     display: none;
@@ -297,6 +301,7 @@ nav {
     border-right: 1px solid #e6e6e6;
     right: 0;
     padding-right: 13px;
+    padding-left: 13px;
   }
 }
 .notificationAlert {
@@ -312,29 +317,41 @@ nav {
   position: absolute;
   cursor: initial;
   color: #fff;
-  top: 14px;
-  left: 22px;
+  top: 10px;
+  left: 25px;
   cursor: pointer;
 }
 .hide {
   display: none;
 }
 
-  @media only screen and (max-width: 1023px) and (min-width: 768px) {
-    nav .navProfileDiv .navProfileDivInner {
-      width: 190px;
-    }
-    nav .navProfileDiv .navProfileDivInner .profileTextDiv {
-      width: 125px;
-    }
-    nav .navProfileDiv .navProfileDivInner .profileTextDiv .profileText {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-right: 7.5px;
-      margin-left: 7.5px;
-    }
+@media only screen and (min-width: 768px) {
+  .navProfileDiv .avatar {
+    width: 40px;
+    margin-top: 5px;
+    margin-left: 12.5px;
   }
+  .notificationAlert {
+    top: 3px;
+    left: 40px;
+  }
+}
+
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  nav .navProfileDiv .navProfileDivInner {
+    width: 190px;
+  }
+  nav .navProfileDiv .navProfileDivInner .profileTextDiv {
+    width: 125px;
+  }
+  nav .navProfileDiv .navProfileDivInner .profileTextDiv .profileText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 7.5px;
+    margin-left: 7.5px;
+  }
+}
 
 @media only screen and (min-width: 900px) {
     nav .browseDiv {

@@ -43,10 +43,10 @@ class RecipesMap extends React.Component {
         <div className={this.props.containerClass} ref='scroller'>
             {renderIf(recipes && recipes.length > 0 ,
                 <div className='recipesSection'>
-                    {recipes.map(myRecipe => {
+                    {recipes.map((myRecipe, idx) => {
                     let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
                     let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
-                    return <div key={myRecipe.recipe.uri} className='outer'>
+                    return <div key={idx} className='outer'>
                             <div className='cardImageContainer' onClick={boundRecipeClick}>
                                 <img className='cardImage' src={myRecipe.recipe.image} />
                             </div>

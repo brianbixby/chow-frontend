@@ -1,2 +1,7 @@
-health types on ir clickable
-on update profile something should happen, 
+orange heart on hover,
+if liked then background is already orange
+upload image for url 
+fix aside on ir, maybe add scroll
+clean up code
+add console.log
+add footer and header above head

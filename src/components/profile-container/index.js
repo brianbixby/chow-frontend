@@ -12,15 +12,23 @@ import { userValidation, logError, formatDate, renderIf, classToggler } from './
 class ProfileContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {userSuccess: false};
+    this.state = { userSuccess: false, editProfile: false, userSuccessMessage: '' };
   }
   componentWillMount() {
     userValidation(this.props);
     window.scrollTo(0, 0);
   }
 
+  componentWillUnmount() {
+    this.setState({ userSuccess: false, editProfile: false, userSuccessMessage: '' });
+  }
+
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
+      .then(() => {
+        this.setState({editProfile: false, userSuccessMessage: 'Profile updated.'});
+        return this.handleUserSuccess();
+      })
       .catch(err => logError(err));
   };
 
@@ -33,7 +41,10 @@ class ProfileContainer extends React.Component {
   handleboundDeleteFavoriteClick = (favorite, e) => {
     if (this.props.userAuth) {
       this.props.favoriteDelete(favorite)
-        .then(() => this.handleUserSuccess())
+        .then(() => {
+          this.setState({userSuccessMessage: 'Favorite deleted.'});
+          return this.handleUserSuccess();
+        })
         .catch(err => logError(err));
     }
   };
@@ -64,10 +75,25 @@ class ProfileContainer extends React.Component {
             </div>
           </div>
           <div className='page-form'>
-            <UserProfileForm 
-              userProfile={this.props.userProfile} 
-              onComplete={this.handleProfileUpdate}
-            />
+            {renderIf(!this.props.userProfile.image,
+              <div className='finishProfile'>
+                <p>Upload an image to complete your profile.</p>
+              </div>
+            )}
+            {renderIf(this.state.editProfile,
+              <UserProfileForm 
+                userProfile={this.props.userProfile} 
+                onComplete={this.handleProfileUpdate}
+              />
+            )}
+            {renderIf(!this.state.editProfile,
+              <div className='viewProfile'>
+                <p>State: <span>{this.props.userProfile.state}</span></p>
+                <p>Country: <span>{this.props.userProfile.country}</span></p>
+                <p>Profile img URL: <span>{this.props.userProfile.image}</span></p>
+                <p className='editProfileButton' onClick={() => this.setState({editProfile: true})}>Edit</p>
+              </div>
+            )}
           </div>
         <div className='recipesOuter'>
           <p className='favoritesHeader'>Favorites</p>
@@ -102,7 +128,7 @@ class ProfileContainer extends React.Component {
           )}
         </div>
         <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
-          <p>Favorite deleted.</p>
+          <p>{this.state.userSuccessMessage}</p>
         </div>
       </div>
       }
