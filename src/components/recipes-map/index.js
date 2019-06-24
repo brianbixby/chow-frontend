@@ -11,6 +11,11 @@ class RecipesMap extends React.Component {
     this.state = {userSuccess: false};
   }
 
+  componentDidMount() {
+    console.log("this.refs: ", this.refs);
+    this.props.passRefUpward(this.refs);
+  }
+
   handleBoundRecipeClick = (myRecipe, e) => {
     this.props.recipeFetchRequest(myRecipe.recipe);
     let uri = myRecipe.recipe.uri.split('recipe_')[1];
@@ -35,7 +40,7 @@ class RecipesMap extends React.Component {
   render() {
     let { recipes } = this.props;
     return (
-        <div className={this.props.containerClass}>
+        <div className={this.props.containerClass} ref='scroller'>
             {renderIf(recipes && recipes.length > 0 ,
                 <div className='recipesSection'>
                     {recipes.map(myRecipe => {
@@ -45,7 +50,7 @@ class RecipesMap extends React.Component {
                             <div className='cardImageContainer' onClick={boundRecipeClick}>
                                 <img className='cardImage' src={myRecipe.recipe.image} />
                             </div>
-                            <div className='likeButton' onClick={boundFavoriteClick}></div>
+                            <div className={classToggler({likeButton: true, hideLike: !this.props.userAuth})} onClick={boundFavoriteClick}></div>
                             <div className='cardInfo' onClick={boundRecipeClick}>
                                 <div className='byDiv'>
                                 <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>

@@ -1,4 +1,2 @@
-layout of the menu, CONTAINER
 health types on ir clickable
-hide heart not loged in, 
 on update profile something should happen, 

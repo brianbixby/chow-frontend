@@ -12,7 +12,7 @@ import { logError, renderIf, classToggler, userValidation } from './../../lib/ut
 class RecipeContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {userSuccess: false, recipeError: false};
+    this.state = {userSuccess: false, recipeError: false, myRequestedRefs: null};
   }
 
   componentWillMount() {
@@ -36,7 +36,7 @@ class RecipeContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.setState({ userSuccess: false, recipeError: false });
+    this.setState({ userSuccess: false, recipeError: false, myRequestedRefs: null });
   }
  
   handleBoundFavoriteClick = () => {
@@ -59,6 +59,19 @@ class RecipeContainer extends React.Component {
     return window.scrollTo(0, 0);
   };
 
+  handleUpClick = () => {
+    this.refs.scroller ? (this.refs.scroller.scrollTo -= window.innerHeight) : null;
+  };
+  
+  handleDownClick = () => {
+    this.refs.scroller ? (this.refs.scroller.scrollTo += window.innerHeight) : null;
+  };
+
+  getRefsFromChild = childRefs => {    this.setState({
+      myRequestedRefs: childRefs
+    });
+  };
+
   render() {
     let { recipe } = this.props;
     const cal = require('./../helpers/assets/icons/cal.icon.svg');
@@ -79,7 +92,7 @@ class RecipeContainer extends React.Component {
                 <div className='irImgContainerDisplaySmall'>
                   <div className='irImgContainerInnerWrapper'>
                     <img className='irImg' src={recipe.image} />
-                    <div className='likeButton' onClick={this.handleBoundFavoriteClick}></div>
+                    <div className={classToggler({likeButton: true, hideLike: !this.props.userAuth})} onClick={this.handleBoundFavoriteClick}></div>
                   </div>
                 </div>
                 <div className='irMainInfo'>
@@ -147,8 +160,10 @@ class RecipeContainer extends React.Component {
             </div>
             <div className='aside'>
               <h2 className='irSectionHeader'> Recommended</h2>
+              <div className='iconChevronUp asideIcon' onClick={this.handleUpClick}></div>
+              <div className='iconChevronDown asideIcon' onClick={this.handleDownClick}></div>
               {renderIf(this.props.recipes.hits && this.props.recipes.hits.length > 0,
-                <RecipesMap recipes={this.props.recipes.hits} containerClass={"individualRecipeOuter"} redirect={this.handleRedirect}/> 
+                  <RecipesMap recipes={this.props.recipes.hits} containerClass={"individualRecipeOuter"} redirect={this.handleRedirect} passRefUpward={this.getRefsFromChild}/> 
               )}
             </div>
           </div>

@@ -13,7 +13,7 @@ import { userValidation, logError } from './../../lib/util.js';
 class LandingContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {slideWidth: 270};
+    this.state = {slideWidth: 270, myRequestedRefs: null};
   }
 
   componentWillMount() {
@@ -35,6 +35,7 @@ class LandingContainer extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateSlideWidth);
+    this.setState({ myRequestedRefs: null });
   }
   
   updateSlideWidth = () => {
@@ -103,6 +104,19 @@ class LandingContainer extends React.Component {
     this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft -= this.state.slideWidth) : null;
   };
 
+  handleUpClick = () => {
+    this.refs.scroller ? (this.refs.scroller.scrollTo -= window.innerHeight) : null;
+  };
+  
+  handleDownClick = () => {
+    this.refs.scroller ? (this.refs.scroller.scrollTo += window.innerHeight) : null;
+  };
+
+  getRefsFromChild = childRefs => {    this.setState({
+      myRequestedRefs: childRefs
+    });
+  };
+
   render() {
     const sliderItems = [{header: "Sensational Sangria Recipes", subHeader: "Browse hundreds of variations on this fun and fruity punch.", image: "https://i.imgur.com/Cdm8uLo.jpg", link: "search?q=sangria&calories=0-10000" }, 
     {header: "Hummus Recipes", subHeader: "Browse hundreds of ways to get your dip on.", image: "https://i.imgur.com/U2S3zqF.jpg", link: "search?q=hummus&calories=0-10000" }, 
@@ -155,7 +169,7 @@ class LandingContainer extends React.Component {
           <div className='iconChevronLeft subItemIcon' onClick={this.handleLeftClick}></div>
           <div className='iconChevronRight subItemIcon' onClick={this.handleRightClick}></div>
         </div>
-        <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect}/>
+        <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect} passRefUpward={this.getRefsFromChild}/>
       </section>
     );
   }

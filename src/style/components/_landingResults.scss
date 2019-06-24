@@ -71,27 +71,45 @@
     padding-left: 8px;
     font-size: 1.0625rem;
     min-height: 20px;
-    display: flex;
-    align-items: center;
+    // display: flex;
     color: #4d4d4d;
     flex-shrink: 0;
     padding-bottom: 3px;
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 17px;
+    height: 34px;
+    margin-bottom: 3px;
+    padding-bottom: 0;
+    padding-right: 8px;
   }
   .healthLabels {
     display: flex;
     padding-left: 8px;
     font-size: .8125rem;
     color: #999;
-    height: 34px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 13px;
+    height: 39px;
+    padding-right: 8px;
   }
   .calsAndIngreds {
   max-height: 42px;
-  padding: 2px 8px 0;
+  // padding: 2px 8px 0;
   font-size: .875rem;
   clear: both;
   color: #7f7f7f;
   width: 100%;
+  margin: 10px 0;
+  padding: 2px 0 0 8px;
   }
   .byDiv {
   bottom: 0;
@@ -138,7 +156,7 @@
   display: flex;
   align-items: flex-start;
   -ms-flex-align: flex-start;
-  margin: 0 auto 8px;
+  margin: -2.5vw auto 8px;
   position: relative;
   width: 95%;
   padding: 8px 0;
@@ -172,6 +190,9 @@
     width: 100%;
     color: gray;
   }
+}
+.hideLike {
+  display: none !important;
 }
 @media only screen and (max-width: 627px) {
   .recipesSection {
