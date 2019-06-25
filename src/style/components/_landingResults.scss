@@ -45,15 +45,16 @@
     cursor: pointer;
   }
   .likeButton:hover {
-    background-color: rgba(0,0,0,0.6);
-  }
-  .profile-container .likeButton, .profile-container .likeButton:hover {
     background-color: rgba(255,126,26,0.9);
   }
   .likedRecipe {
-    background-image: url(https://i.imgur.com/UIdGONj.png);
-    background-repeat: no-repeat;
-    background-position: center center;
+    // background-image: url(https://i.imgur.com/UIdGONj.png);
+    // background-repeat: no-repeat;
+    // background-position: center center;
+    background-color: rgba(255,126,26,0.9);
+  }
+  .likedRecipe:hover {
+    background-color: rgba(255,126,26,1);
   }
   .cardImageContainer {
     position: relative;

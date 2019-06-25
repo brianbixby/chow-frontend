@@ -13,11 +13,12 @@ import { userValidation, logError } from './../../lib/util.js';
 class LandingContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {slideWidth: 270, myRequestedRefs: null};
+    this.state = {slideWidth: 270 };
   }
 
   componentWillMount() {
     userValidation(this.props);
+    console.log('If you have any questions about my code please email me @BrianBixby0@gmail.com and visit www.BuiltByBixby.com to see my latest projects.');
     if (localStorage.random  && JSON.parse(localStorage.getItem('random'))['timestamp'] > new Date().getTime()) {
       this.props.homepageFetchRequest(JSON.parse(localStorage.getItem('random'))['content']);
     }
@@ -35,7 +36,6 @@ class LandingContainer extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateSlideWidth);
-    this.setState({ myRequestedRefs: null });
   }
   
   updateSlideWidth = () => {
@@ -104,18 +104,6 @@ class LandingContainer extends React.Component {
     this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft -= this.state.slideWidth) : null;
   };
 
-  handleUpClick = () => {
-    this.refs.scroller ? (this.refs.scroller.scrollTo -= window.innerHeight) : null;
-  };
-  
-  handleDownClick = () => {
-    this.refs.scroller ? (this.refs.scroller.scrollTo += window.innerHeight) : null;
-  };
-
-  getRefsFromChild = childRefs => {    this.setState({
-      myRequestedRefs: childRefs
-    });
-  };
 
   render() {
     const sliderItems = [{header: "Sensational Sangria Recipes", subHeader: "Browse hundreds of variations on this fun and fruity punch.", image: "https://i.imgur.com/Cdm8uLo.jpg", link: "search?q=sangria&calories=0-10000" }, 
@@ -169,7 +157,7 @@ class LandingContainer extends React.Component {
           <div className='iconChevronLeft subItemIcon' onClick={this.handleLeftClick}></div>
           <div className='iconChevronRight subItemIcon' onClick={this.handleRightClick}></div>
         </div>
-        <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect} passRefUpward={this.getRefsFromChild}/>
+        <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect} />
       </section>
     );
   }

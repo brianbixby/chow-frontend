@@ -1,3 +1,9 @@
+.aside {
+  position: relative;
+}
+.asideIcon {
+  display: none;
+}
 .irImgContainerDisplaySmall {
   position: relative;
   text-align: center;
@@ -196,6 +202,44 @@
 .aside, .ingredsSpan, .calsSpan {
   display: none;
 }
+.asideIcon {
+  position: fixed;
+  cursor: pointer;
+  bottom: 15px;
+  z-index: 1;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid transparent;
+  display: block;
+}
+.iconChevronDown {
+  right: 12px;
+}
+.asideIcon::before {
+  border-style: solid;
+  color: rgba(254, 170, 38, .5);
+  content: '';
+  display: inline-block;
+  position: relative;
+  height: 12.5px;
+  width: 12.5px;
+  border-width: 4px 4px 0 0;
+  vertical-align: calc((-50% - 2px));
+}
+.iconChevronDown::before {
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+  right: -12px;
+}
+.iconChevronUp::before {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  right: -12px;
+}
 @media only screen and (max-width: 380px) {
   .hideMobile {
     display: none;
@@ -341,6 +385,9 @@
             display: none;
           }
         }
+      }
+      .outer:nth-last-child(2), .outer:nth-last-child(1) {
+        margin-bottom: 90px;
       }
     }
   }

@@ -12,7 +12,7 @@ import { logError, renderIf, classToggler, userValidation } from './../../lib/ut
 class RecipeContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {userSuccess: false, recipeError: false, myRequestedRefs: null, userSuccessMessage: ''};
+    this.state = {userSuccess: false, recipeError: false, userSuccessMessage: ''};
   }
 
   componentWillMount() {
@@ -36,7 +36,7 @@ class RecipeContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.setState({ userSuccess: false, recipeError: false, myRequestedRefs: null });
+    this.setState({ userSuccess: false, recipeError: false,});
   }
  
   handleBoundFavoriteClick = () => {
@@ -72,25 +72,13 @@ class RecipeContainer extends React.Component {
     return window.scrollTo(0, 0);
   };
 
-  handleUpClick = () => {
-    this.refs.scroller ? (this.refs.scroller.scrollTo -= window.innerHeight) : null;
-  };
-  
-  handleDownClick = () => {
-    this.refs.scroller ? (this.refs.scroller.scrollTo += window.innerHeight) : null;
-  };
-
-  getRefsFromChild = childRefs => {    this.setState({
-      myRequestedRefs: childRefs
-    });
-  };
-
   render() {
     let { recipe } = this.props;
     const cal = require('./../helpers/assets/icons/cal.icon.svg');
     const serving = require('./../helpers/assets/icons/serving.icon.svg');
     return (
-      <div>
+      <div ref={this.asideRef}>
+        {/* <p>{this.asideRef.current}</p> */}
       {recipe &&
       <div className='container'>
         {renderIf(!recipe || recipe && recipe.length < 1,
@@ -173,10 +161,8 @@ class RecipeContainer extends React.Component {
             </div>
             <div className='aside'>
               <h2 className='irSectionHeader'> Recommended</h2>
-              <div className='iconChevronUp asideIcon' onClick={this.handleUpClick}></div>
-              <div className='iconChevronDown asideIcon' onClick={this.handleDownClick}></div>
               {renderIf(this.props.recipes.hits && this.props.recipes.hits.length > 0,
-                  <RecipesMap recipes={this.props.recipes.hits} containerClass={"individualRecipeOuter"} redirect={this.handleRedirect} passRefUpward={this.getRefsFromChild}/> 
+                  <RecipesMap recipes={this.props.recipes.hits} containerClass={"individualRecipeOuter"} redirect={this.handleRedirect}/> 
               )}
             </div>
           </div>

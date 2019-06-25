@@ -12,8 +12,8 @@ class RecipesMap extends React.Component {
   }
 
   componentDidMount() {
-    console.log("this.refs: ", this.refs);
-    this.props.passRefUpward(this.refs);
+    console.log("this: ", this);
+    // this.props.passRefUpward(this.refs);
   }
 
   handleBoundRecipeClick = (myRecipe, e) => {
@@ -50,10 +50,20 @@ class RecipesMap extends React.Component {
 
   calsPS = (cals, servings) => Math.round(cals/servings);
 
+  handleUpClick = () => {
+    this.refs.asideRef ? (this.refs.asideRef.scrollBy(0, -1 * (window.innerHeight - 132))) : null;
+  };
+  
+  handleDownClick = () => {
+    this.refs.asideRef ? (this.refs.asideRef.scrollBy(0, window.innerHeight - 132)) : null;
+  };
+
   render() {
     let { recipes } = this.props;
     return (
-        <div className={this.props.containerClass} ref='scroller'>
+        <div className={this.props.containerClass} ref='asideRef'>
+            <div className='iconChevronUp asideIcon' onClick={this.handleUpClick}></div>
+            <div className='iconChevronDown asideIcon' onClick={this.handleDownClick}></div>
             {renderIf(recipes && recipes.length > 0 ,
                 <div className='recipesSection'>
                     {recipes.map((myRecipe, idx) => {
@@ -102,3 +112,18 @@ let mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipesMap);
+
+// const RecipesMap = connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(UnconnectedRecipesMap);
+
+
+// export default React.forwardRef((props, ref) => {
+//   return (
+//     <RecipesMap {...props} myRef={ref}/>
+//   );
+// });
+
+
+
+// export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedRecipesMap);
+
+// const RecipeContainer = withRouter(connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(UnconnectedRecipeContainer));
