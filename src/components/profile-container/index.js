@@ -16,12 +16,13 @@ class ProfileContainer extends React.Component {
   }
   componentWillMount() {
     userValidation(this.props);
+    this.setState({ userSuccess: false, editProfile: false, userSuccessMessage: '' });
     window.scrollTo(0, 0);
   }
 
-  componentWillUnmount() {
-    this.setState({ userSuccess: false, editProfile: false, userSuccessMessage: '' });
-  }
+  // componentWillUnmount() {
+  //   this.setState({ userSuccess: false, editProfile: false, userSuccessMessage: '' });
+  // }
 
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
@@ -106,7 +107,7 @@ class ProfileContainer extends React.Component {
                         <div className='cardImageContainer' onClick={boundRecipeClick}>
                           <img className='cardImage' src={fav.image} />
                         </div>
-                        <div className='likeButton' onClick={boundDeleteFavoriteClick} title="Remove this recipe from your favorites"></div>
+                        <div className='likeButton likedRecipe' onClick={boundDeleteFavoriteClick} title="Remove this recipe from your favorites"></div>
                         <div className='cardInfo' onClick={boundRecipeClick}>
                           <div className='byDiv'>
                             <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={fav.url}>{fav.source}</a></p>

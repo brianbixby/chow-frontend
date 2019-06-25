@@ -4,14 +4,14 @@ import { withRouter } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
-import { favoritesFetchRequest, favoriteFetchRequest } from '../../actions/favorite-actions.js';
+import { favoritesFetchRequest, favoriteFetchRequest, favoriteDeleteRequest } from '../../actions/favorite-actions.js';
 import { recipesFetchRequest, recipesFetch, recipeFetch, infiniteRecipesFetch } from '../../actions/search-actions.js';
 import { logError, renderIf, userValidation, classToggler } from './../../lib/util.js';
 
 class RecipesContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = {userSuccess: false};
+    this.state = {userSuccess: false, userSuccessMessage: ''};
   }
 
   componentWillMount() {
@@ -48,9 +48,22 @@ class RecipesContainer extends React.Component {
 
   handleBoundFavoriteClick = (favorite, e) => {
     if (this.props.userAuth) {
-      this.props.favoriteFetch(favorite.recipe)
-        .then(() => this.handleUserSuccess())
-        .catch(err => logError(err));
+      let found = this.props.favorites.filter(fav => fav.uri == favorite.recipe.uri);
+      if (found.length) {
+        this.props.favoriteDelete(found[0])
+          .then(() => {
+            this.setState({userSuccessMessage: 'Favorite deleted.'});
+            return this.handleUserSuccess();
+          })
+          .catch(err => logError(err));
+      } else {
+        return this.props.favoriteFetch(favorite.recipe)
+          .then(() => {
+            this.setState({userSuccessMessage: 'Favorite added.'});
+            return this.handleUserSuccess();
+          })
+          .catch(err => logError(err));
+      }
     }
   };
 
@@ -111,7 +124,7 @@ class RecipesContainer extends React.Component {
                                   <div className='cardImageContainer' onClick={boundRecipeClick}>
                                     <img className='cardImage' src={myRecipe.recipe.image} />
                                   </div>
-                                  <div className={classToggler({likeButton: true, hideLike: !this.props.userAuth})} onClick={boundFavoriteClick}></div>
+                                  <div className={classToggler({likeButton: true, hideLike: !this.props.userAuth, likedRecipe: this.props.favorites && this.props.favorites.some(o => o["uri"] === myRecipe.recipe.uri)})} onClick={boundFavoriteClick}></div>
                                   <div className='cardInfo' onClick={boundRecipeClick}>
                                     <div className='byDiv'>
                                       <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
@@ -139,7 +152,7 @@ class RecipesContainer extends React.Component {
           )}
         </div>
         <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
-          <p>Favorite added.</p>
+          <p>{this.state.userSuccessMessage}</p>
         </div>
       </div>
     );
@@ -149,12 +162,14 @@ class RecipesContainer extends React.Component {
 let mapStateToProps = state => ({
   recipes: state.recipes,
   userAuth: state.userAuth,
+  favorites: state.favorites,
 });
 
 let mapDispatchToProps = dispatch => {
   return {
     favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),
     favoriteFetch: favorite => dispatch(favoriteFetchRequest(favorite)),
+    favoriteDelete: favorite => dispatch(favoriteDeleteRequest(favorite)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     recipesFetch: (queryString, queryParams, min, infiniteSearch) => dispatch(recipesFetchRequest(queryString, queryParams, min, infiniteSearch)),

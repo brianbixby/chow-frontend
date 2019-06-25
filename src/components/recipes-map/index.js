@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { recipeFetch } from '../../actions/search-actions.js';
-import { favoriteFetchRequest } from '../../actions/favorite-actions.js';
+import { favoriteFetchRequest, favoriteDeleteRequest } from '../../actions/favorite-actions.js';
 import { renderIf, logError, classToggler } from '../../lib/util';
 
 class RecipesMap extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {userSuccess: false};
+    this.state = {userSuccess: false, userSuccessMessage: ''};
   }
 
   componentDidMount() {
@@ -24,9 +24,22 @@ class RecipesMap extends React.Component {
 
   handleBoundFavoriteClick = (favorite, e) => {
     if (this.props.userAuth) {
-      this.props.favoriteFetch(favorite.recipe)
-        .then(() =>this.handleUserSuccess())
-        .catch(err => logError(err));
+      let found = this.props.favorites.filter(fav => fav.uri == favorite.recipe.uri);
+      if (found.length) {
+        this.props.favoriteDelete(found[0])
+          .then(() => {
+            this.setState({userSuccessMessage: 'Favorite deleted.'});
+            return this.handleUserSuccess();
+          })
+          .catch(err => logError(err));
+      } else {
+        return this.props.favoriteFetch(favorite.recipe)
+          .then(() => {
+            this.setState({userSuccessMessage: 'Favorite added.'});
+            return this.handleUserSuccess();
+          })
+          .catch(err => logError(err));
+      }
     }
   };
 
@@ -50,7 +63,7 @@ class RecipesMap extends React.Component {
                             <div className='cardImageContainer' onClick={boundRecipeClick}>
                                 <img className='cardImage' src={myRecipe.recipe.image} />
                             </div>
-                            <div className={classToggler({likeButton: true, hideLike: !this.props.userAuth})} onClick={boundFavoriteClick}></div>
+                            <div className={classToggler({likeButton: true, hideLike: !this.props.userAuth, likedRecipe: this.props.favorites && this.props.favorites.some(o => o["uri"] === myRecipe.recipe.uri)})} onClick={boundFavoriteClick}></div>
                             <div className='cardInfo' onClick={boundRecipeClick}>
                                 <div className='byDiv'>
                                 <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
@@ -68,7 +81,7 @@ class RecipesMap extends React.Component {
                 </div>
             )}
             <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
-              <p>Favorite added.</p>
+              <p>{this.state.userSuccessMessage}</p>
             </div>
         </div>
     );
@@ -77,12 +90,14 @@ class RecipesMap extends React.Component {
 
 let mapStateToProps = state => ({
   userAuth: state.userAuth,
+  favorites: state.favorites,
 });
 
 let mapDispatchToProps = dispatch => {
   return {
     favoriteFetch: favorite => dispatch(favoriteFetchRequest(favorite)),
     recipeFetchRequest: recipe => dispatch(recipeFetch(recipe)),
+    favoriteDelete: favorite => dispatch(favoriteDeleteRequest(favorite)),
   };
 };
 
