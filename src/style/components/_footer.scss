@@ -1,0 +1,86 @@
+footer {
+  background-color: #fafafa;
+  border-top: 1px solid #e6e6e6;
+
+  .socialIcons {
+    float: left;
+    max-width: 165px;
+
+    li {
+      display: -ms-flexbox;
+      display: flex;
+      align-items: center;
+      -ms-flex-align: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      background-color: #cfcfcf;
+      border-radius: 32px;
+      float: left;
+      height: 32px;
+      margin: 0 7px 7px 0;
+      overflow: hidden;
+      position: relative;
+      width: 32px;
+
+      a {
+        display: -ms-flexbox;
+        display: flex;
+        align-items: center;
+        -ms-flex-align: center;
+        justify-content: center;
+        -ms-flex-pack: center;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        background-color: #cfcfcf;
+
+        span {
+          position: relative;
+          width: 20px;
+          height: 20px;
+        }
+        .githubSpan {
+          background: url(https://i.imgur.com/LN1RKyP.png) no-repeat center center;
+          background-size: cover;
+          transform: scale(2, 2);
+          left: -1px;
+        }
+        .linkedinSpan {
+          background: url(https://i.imgur.com/pIOsAKO.png) no-repeat center center;
+          background-size: cover;
+          transform: scale(1.5, 1.5);
+        }
+      }
+      a:hover {
+        background-color: #999999;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+  footer .socialIcons li{
+    -ms-transform: scale(.8, .8);
+    transform: scale(.8, .8);
+    margin-right: 0;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  footer {
+    padding-bottom: 50px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  footer .socialIcons {
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1);
+    width: 80%;
+    margin-left: 0 !important;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  footer .socialIcons {
+    width: 70%;
+  }
+}

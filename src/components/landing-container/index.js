@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 
-
+import Footer from '../footer';
 import RecipesMap from '../recipes-map';
 import { homepageFetchRequest, homepageFetch, recipeFetch, recipesFetchRequest, recipesFetch } from '../../actions/search-actions.js';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
@@ -123,42 +123,45 @@ class LandingContainer extends React.Component {
     {title: "Bread Recipes", image: "https://i.imgur.com/BNQZO8L.png", link: "search?q=bread&calories=0-10000"},
     {title: "Appetizers", image: "https://i.imgur.com/2bNJ7AZ.png", link: "search?q=appetizers&calories=0-10000"}];
     return (
-      <section className='container'>
-        <div className='sliderContainer'>
-          <div className='slider' ref='sliderScroller'>
-            {sliderItems.map((item, idx) => {
-              let boundItemClick = this.handleBoundItemClick.bind(this, item);
-              return <div key={idx} className='sliderItemContainer' onClick={boundItemClick} title={item.header}>
-                  <div className="sliderText">
-                    <h3 className='sliderHeader'>{item.header}</h3>
-                    <p className='sliderSubheader'>{item.subHeader}</p>
-                  </div>
-                  <img src={item.image} className="sliderItemImage"/>
-                </div>
-            })}
-          </div>
-          <div className='sliderIconChevronLeft sliderIcon' onClick={this.handleSliderLeftClick} title="Scroll right"></div>
-          <div className='sliderIconChevronRight sliderIcon' onClick={this.handleSliderRightClick} title="Scroll left"></div>
-        </div>
-        <div className='sliderSubItemWrapper'>
-          <div className='sliderSubItem' ref='subItemScroller'>
-            <div className='subItemInnerWrapper'>
-              {subItems.map((subItem, idx) => {
-                let boundSubitemClick = this.handleBoundSubitemClick.bind(this, subItem);
-                return <div key={idx} className='sliderSubitemContainer' onClick={boundSubitemClick} title={subItem.title}>
-                    <div className='subItemInsideWrapper'>
-                      <img src={subItem.image} className="sliderSubitemImage"/>
-                      <p className='sliderSubitemTitle'>{subItem.title}</p>
+      <div>
+        <section className='container'>
+          <div className='sliderContainer'>
+            <div className='slider' ref='sliderScroller'>
+              {sliderItems.map((item, idx) => {
+                let boundItemClick = this.handleBoundItemClick.bind(this, item);
+                return <div key={idx} className='sliderItemContainer' onClick={boundItemClick} title={item.header}>
+                    <div className="sliderText">
+                      <h3 className='sliderHeader'>{item.header}</h3>
+                      <p className='sliderSubheader'>{item.subHeader}</p>
                     </div>
+                    <img src={item.image} className="sliderItemImage"/>
                   </div>
               })}
             </div>
+            <div className='sliderIconChevronLeft sliderIcon' onClick={this.handleSliderLeftClick} title="Scroll right"></div>
+            <div className='sliderIconChevronRight sliderIcon' onClick={this.handleSliderRightClick} title="Scroll left"></div>
           </div>
-          <div className='iconChevronLeft subItemIcon' onClick={this.handleLeftClick} title="Scroll left"></div>
-          <div className='iconChevronRight subItemIcon' onClick={this.handleRightClick} title="Scroll right"></div>
-        </div>
-        <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect} />
-      </section>
+          <div className='sliderSubItemWrapper'>
+            <div className='sliderSubItem' ref='subItemScroller'>
+              <div className='subItemInnerWrapper'>
+                {subItems.map((subItem, idx) => {
+                  let boundSubitemClick = this.handleBoundSubitemClick.bind(this, subItem);
+                  return <div key={idx} className='sliderSubitemContainer' onClick={boundSubitemClick} title={subItem.title}>
+                      <div className='subItemInsideWrapper'>
+                        <img src={subItem.image} className="sliderSubitemImage"/>
+                        <p className='sliderSubitemTitle'>{subItem.title}</p>
+                      </div>
+                    </div>
+                })}
+              </div>
+            </div>
+            <div className='iconChevronLeft subItemIcon' onClick={this.handleLeftClick} title="Scroll left"></div>
+            <div className='iconChevronRight subItemIcon' onClick={this.handleRightClick} title="Scroll right"></div>
+          </div>
+          <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect} />
+        </section>
+        <Footer />
+      </div>
     );
   }
 }

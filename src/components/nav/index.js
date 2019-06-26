@@ -134,10 +134,10 @@ class Navbar extends React.Component {
               <ul className='socialMediaBar'>
                 <li>Follow me on:</li>
                 <li>
-                  <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank" title="Github.com"><span className='githubSpan'></span> </a>
+                  <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank" title="Github"><span className='githubSpan'></span> </a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank" title="Linkedin.com"><span className='linkedinSpan'></span></a>
+                  <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank" title="Linkedin"><span className='linkedinSpan'></span></a>
                 </li>
               </ul>
               <span className='test'></span>

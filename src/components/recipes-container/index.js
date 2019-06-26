@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 
+import Footer from '../footer';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest, favoriteFetchRequest, favoriteDeleteRequest } from '../../actions/favorite-actions.js';
@@ -103,57 +104,61 @@ class RecipesContainer extends React.Component {
   render() {
     let { recipes } = this.props;
     return (
-      <div id='recipesWrapper' className='container-fluid'>
-        {renderIf(!recipes,
-          <div className='resultCountDiv'>
-            Sorry, no results. Please try modifying your search.
-          </div>
-        )}
-        <div className='recipesOuter'>
-          {renderIf(recipes,
-            <div>
+      <div>
+        <div id='recipesWrapper' className='container-fluid'>
+          {renderIf(!recipes,
             <div className='resultCountDiv'>
-              <p>{recipes.count} recipe results for <span>"{recipes.q}"</span></p>
-            </div>
-            {this.props.recipes.hits &&
-                      <div className='recipesSection'>
-                        {this.props.recipes.hits.map((myRecipe, idx) => {
-                          let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
-                          let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
-                          return <div key={idx} className='outer'>
-                                  <div className='cardImageContainer' onClick={boundRecipeClick} title={myRecipe.recipe.label}>
-                                    <img className='cardImage' src={myRecipe.recipe.image} />
-                                  </div>
-                                  <div className={classToggler({likeButton: true, hideLike: !this.props.userAuth, likedRecipe: this.props.favorites && this.props.favorites.some(o => o["uri"] === myRecipe.recipe.uri)})} onClick={boundFavoriteClick}></div>
-                                  <div className='cardInfo' onClick={boundRecipeClick}>
-                                    <div className='byDiv'>
-                                      <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url} title={myRecipe.recipe.source}>{myRecipe.recipe.source}</a></p>
-                                    </div>
-                                    <div className='cardInfoDiv' title={myRecipe.recipe.label}>
-                                    <h3 className='cardTitle'>{myRecipe.recipe.label} </h3>
-                                    <p className='healthLabels'>{myRecipe.recipe.healthLabels.join(", ")} </p>
-                                    <p className='calsAndIngreds'> 
-                                      <span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> <span className='caloriesSpan'>CALORIES </span><span className='calsSpan'>CALS </span>   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span><span className='ingredientsSpan'> INGREDIENTS</span><span className='ingredsSpan'> INGRDS</span></span>
-                                    </p>
-                                    </div>
-                                  </div>
-                          </div> 
-                        })}
-                      </div>
-            }
-            <div>
-              {renderIf(this.props.recipes && this.props.recipes.hits && this.props.recipes.hits.length >= 96,
-                <div className='infiniteScrollMax'>
-                  <p>Sorry, but the API limits our query results. </p>
-                </div>
-              )}
-            </div>
+              Sorry, no results. Please try modifying your search.
             </div>
           )}
+          <div className='recipesOuter'>
+            {renderIf(recipes,
+              <div>
+              <div className='resultCountDiv'>
+                <p>{recipes.count} recipe results for <span>"{recipes.q}"</span></p>
+              </div>
+              {this.props.recipes.hits &&
+                        <div className='recipesSection'>
+                          {this.props.recipes.hits.map((myRecipe, idx) => {
+                            let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
+                            let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
+                            let likedRecipe = this.props.favorites && this.props.favorites.some(o => o["uri"] === myRecipe.recipe.uri);
+                            return <div key={idx} className='outer'>
+                                    <div className='cardImageContainer' onClick={boundRecipeClick} title={myRecipe.recipe.label}>
+                                      <img className='cardImage' src={myRecipe.recipe.image} />
+                                    </div>
+                                    <div title={likedRecipe ? "Remove this recipe from your favorites" : "Add this recipe from your favorites"} className={classToggler({likeButton: true, hideLike: !this.props.userAuth, likedRecipe: likedRecipe})} onClick={boundFavoriteClick}></div>
+                                    <div className='cardInfo' onClick={boundRecipeClick}>
+                                      <div className='byDiv'>
+                                        <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url} title={myRecipe.recipe.source}>{myRecipe.recipe.source}</a></p>
+                                      </div>
+                                      <div className='cardInfoDiv' title={myRecipe.recipe.label}>
+                                      <h3 className='cardTitle'>{myRecipe.recipe.label} </h3>
+                                      <p className='healthLabels'>{myRecipe.recipe.healthLabels.join(", ")} </p>
+                                      <p className='calsAndIngreds'> 
+                                        <span className='tileCalorieText'> <span className='tileCalorieTextNumber'> {this.calsPS(myRecipe.recipe.calories, myRecipe.recipe.yield)}</span> <span className='caloriesSpan'>CALORIES </span><span className='calsSpan'>CALS </span>   </span>   |   <span className='tileIngredientText'> <span className='tileIngredientTextNumber'> {myRecipe.recipe.ingredientLines.length} </span><span className='ingredientsSpan'> INGREDIENTS</span><span className='ingredsSpan'> INGRDS</span></span>
+                                      </p>
+                                      </div>
+                                    </div>
+                            </div> 
+                          })}
+                        </div>
+              }
+              <div>
+                {renderIf(this.props.recipes && this.props.recipes.hits && this.props.recipes.hits.length >= 96,
+                  <div className='infiniteScrollMax'>
+                    <p>Sorry, but the API limits our query results. </p>
+                  </div>
+                )}
+              </div>
+              </div>
+            )}
+          </div>
+          <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
+            <p>{this.state.userSuccessMessage}</p>
+          </div>
         </div>
-        <div className={classToggler({'sliderPopup': true, 'clozed': this.state.userSuccess })} onClick={() => this.setState({userSuccess: false})}>
-          <p>{this.state.userSuccessMessage}</p>
-        </div>
+        <Footer />
       </div>
     );
   }
