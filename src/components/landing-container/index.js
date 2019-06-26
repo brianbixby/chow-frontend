@@ -13,6 +13,7 @@ import {
 import { tokenSignInRequest } from "../../actions/userAuth-actions.js";
 import { userProfileFetchRequest } from "../../actions/userProfile-actions.js";
 import { favoritesFetchRequest } from "../../actions/favorite-actions.js";
+import { logged } from "../../actions/log-actions.js";
 import { userValidation, logError } from "./../../lib/util.js";
 
 class LandingContainer extends React.Component {
@@ -23,9 +24,6 @@ class LandingContainer extends React.Component {
 
   componentWillMount() {
     userValidation(this.props);
-    console.log(
-      "If you have any questions about my code please email me @BrianBixby0@gmail.com and visit www.BuiltByBixby.com to see my latest projects."
-    );
     if (
       localStorage.random &&
       JSON.parse(localStorage.getItem("random"))["timestamp"] >
@@ -43,6 +41,12 @@ class LandingContainer extends React.Component {
   componentDidMount() {
     this.updateSlideWidth();
     window.addEventListener("resize", this.updateSlideWidth);
+    if (!this.props.log) {
+      this.props.loggedRequest(true);
+      console.log(
+        "If you have any questions about my code please email me @BrianBixby0@gmail.com and visit www.BuiltByBixby.com to see my latest projects."
+      );
+    }
   }
 
   componentWillUnmount() {
@@ -321,7 +325,8 @@ class LandingContainer extends React.Component {
 }
 
 let mapStateToProps = state => ({
-  homepage: state.homepage
+  homepage: state.homepage,
+  log: state.log,
 });
 
 let mapDispatchToProps = dispatch => {
@@ -336,7 +341,8 @@ let mapDispatchToProps = dispatch => {
       dispatch(
         recipesFetchRequest(queryString, queryParams, min, infiniteSearch)
       ),
-    recipesFetchRequest: recipes => dispatch(recipesFetch(recipes))
+    recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
+    loggedRequest: val => dispatch(logged(val)),
   };
 };
 
