@@ -63,6 +63,8 @@
 }
 @media only screen and (min-width: 768px) {
   .homepageRecipesOuter, .recipesOuter{
+    margin-top: 30px;
+    
     .recipesSection {
       .calsSpan, .ingredsSpan {
         display: none;
@@ -76,7 +78,6 @@
 
 @media only screen and (min-width: 1200px) {
   .homepageRecipesOuter, .recipesOuter {
-    margin-top: 4vw;
     .recipesSection {
       grid-template-columns: repeat(4, 1fr);
 
@@ -93,12 +94,6 @@
 @media only screen and (min-width: 1280px) {
   .subItemIcon {
     display: none;
-  }
-}
-
-@media only screen and (min-width: 1300px) {
-  .homepageRecipesOuter, .recipesOuter {
-    margin-top: 5vw;
   }
 }
 

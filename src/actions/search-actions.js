@@ -30,7 +30,6 @@ export const recipesFetchRequest = (queryString, queryParams, min, infiniteSearc
       !infiniteSearch ? dispatch(recipesFetch(res.body)) : dispatch(infiniteRecipesFetch(res.body));
       return res.body;
     })
-    .catch(err => err);
     // .catch(err => {
     //   if(err.status === 404)
     //     return alert('404 Error: Recipes not found please try again with a valid search term ex. pizza' );

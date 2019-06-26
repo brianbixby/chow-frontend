@@ -81,7 +81,8 @@ class RecipeContainer extends React.Component {
   
   trackScrolling = () => {
     const el = document.getElementById('recipePageWrapper');
-    if (el.getBoundingClientRect().bottom <= (window.innerHeight + 38)) {
+
+    if (el.getBoundingClientRect().bottom <= (window.innerHeight + 100)) {
       if (!this.state.pageBottom) this.setState({pageBottom: true });
     } else {
       if (this.state.pageBottom) this.setState({pageBottom: false });
@@ -94,7 +95,7 @@ class RecipeContainer extends React.Component {
     const serving = require('./../helpers/assets/icons/serving.icon.svg');
     let likedRecipe = this.props.favorites && this.props.favorites.some(o => o["uri"] === recipe.uri);
     return (
-      <div id="recipePageWrapper" className={classToggler({ pageBottom: this.state.pageBottom })}>
+      <div id="recipePageWrapper" className={classToggler({ main: true, pageBottom: this.state.pageBottom })}>
         <div>
           {recipe &&
           <div className='container'>

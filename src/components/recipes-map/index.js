@@ -11,11 +11,6 @@ class RecipesMap extends React.Component {
     this.state = {userSuccess: false, userSuccessMessage: ''};
   }
 
-  componentDidMount() {
-    console.log("this: ", this);
-    // this.props.passRefUpward(this.refs);
-  }
-
   handleBoundRecipeClick = (myRecipe, e) => {
     this.props.recipeFetchRequest(myRecipe.recipe);
     let uri = myRecipe.recipe.uri.split('recipe_')[1];
@@ -113,18 +108,3 @@ let mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipesMap);
-
-// const RecipesMap = connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(UnconnectedRecipesMap);
-
-
-// export default React.forwardRef((props, ref) => {
-//   return (
-//     <RecipesMap {...props} myRef={ref}/>
-//   );
-// });
-
-
-
-// export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedRecipesMap);
-
-// const RecipeContainer = withRouter(connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(UnconnectedRecipeContainer));

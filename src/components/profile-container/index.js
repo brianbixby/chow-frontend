@@ -21,10 +21,6 @@ class ProfileContainer extends React.Component {
     window.scrollTo(0, 0);
   }
 
-  // componentWillUnmount() {
-  //   this.setState({ userSuccess: false, editProfile: false, userSuccessMessage: '' });
-  // }
-
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
       .then(() => {
@@ -62,7 +58,7 @@ class ProfileContainer extends React.Component {
     let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : require('./../helpers/assets/icons/profilePlaceholder.jpeg');
     let { favorites, userProfile } = this.props;
     return (
-      <div>
+      <div className='main'>
         {userProfile &&
           <div className='profile-container page-outer-div'>
           <div className='page-form'>

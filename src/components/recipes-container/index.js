@@ -104,7 +104,7 @@ class RecipesContainer extends React.Component {
   render() {
     let { recipes } = this.props;
     return (
-      <div>
+      <div className='main'>
         <div id='recipesWrapper' className='container-fluid'>
           {renderIf(!recipes,
             <div className='resultCountDiv'>

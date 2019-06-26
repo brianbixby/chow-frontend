@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import Footer from '../footer';
 import RecipesMap from '../recipes-map';
-import { homepageFetchRequest, homepageFetch, recipeFetch, recipesFetchRequest, recipesFetch } from '../../actions/search-actions.js';
+import { homepageFetchRequest, homepageFetch, recipesFetchRequest, recipesFetch } from '../../actions/search-actions.js';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { favoritesFetchRequest } from '../../actions/favorite-actions.js';
@@ -123,7 +123,7 @@ class LandingContainer extends React.Component {
     {title: "Bread Recipes", image: "https://i.imgur.com/BNQZO8L.png", link: "search?q=bread&calories=0-10000"},
     {title: "Appetizers", image: "https://i.imgur.com/2bNJ7AZ.png", link: "search?q=appetizers&calories=0-10000"}];
     return (
-      <div>
+      <div className='main'>
         <section className='container'>
           <div className='sliderContainer'>
             <div className='slider' ref='sliderScroller'>

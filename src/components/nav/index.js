@@ -121,7 +121,6 @@ class Navbar extends React.Component {
         const spoon = require('./../helpers/assets/icons/spoon.icon.svg');
         const chevron = require('./../helpers/assets/icons/chevron-down.icon.svg');
         const user = require('./../helpers/assets/icons/user.icon.svg');
-        const profileLink = require('./../helpers/assets/icons/profileLink.icon.svg');
         let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
         let profileText = this.props.userAuth && this.props.userProfile && this.props.userProfile.username ? this.props.userProfile.username : "Sign Up/ Sign In" ;
         let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
