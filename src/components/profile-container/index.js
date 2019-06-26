@@ -104,15 +104,15 @@ class ProfileContainer extends React.Component {
                 let boundRecipeClick = this.handleBoundRecipeClick.bind(this, fav);
                 let boundDeleteFavoriteClick = this.handleboundDeleteFavoriteClick.bind(this, fav);
                 return <div key={idx} className='outer'>
-                        <div className='cardImageContainer' onClick={boundRecipeClick}>
+                        <div className='cardImageContainer' onClick={boundRecipeClick} title={fav.label}>
                           <img className='cardImage' src={fav.image} />
                         </div>
                         <div className='likeButton likedRecipe' onClick={boundDeleteFavoriteClick} title="Remove this recipe from your favorites"></div>
                         <div className='cardInfo' onClick={boundRecipeClick}>
                           <div className='byDiv'>
-                            <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={fav.url}>{fav.source}</a></p>
+                            <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={fav.url} title={fav.source}>{fav.source}</a></p>
                           </div>
-                          <div className='cardInfoDiv'>
+                          <div className='cardInfoDiv' title={fav.label}>
                           <h3 className='cardTitle'>{fav.label} </h3>
                           <p className='healthLabels'>{fav.healthLabels.join(", ")} </p>
                           <p className='calsAndIngreds'> 

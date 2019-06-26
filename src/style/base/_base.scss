@@ -124,6 +124,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   color: -internal-root-color;
+  // scroll-behavior: smooth;
 }
 
 form input:-internal-autofill-selected {

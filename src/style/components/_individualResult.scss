@@ -132,6 +132,9 @@
   .link {
     color: #2d2d2d;
   }
+  .link:hover {
+    text-decoration: underline;
+  }
 }
 .tnDiv p {
   color: #2d2d2d;
@@ -202,7 +205,7 @@
 .aside, .ingredsSpan, .calsSpan {
   display: none;
 }
-.asideIcon {
+.aside .asideIcon {
   position: fixed;
   cursor: pointer;
   bottom: 15px;
@@ -215,6 +218,9 @@
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid transparent;
   display: block;
+}
+.asideIcon:hover {
+  background: #fff;
 }
 .iconChevronDown {
   right: 12px;
@@ -233,12 +239,14 @@
 .iconChevronDown::before {
   -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
-  right: -12px;
+  top: 0;
+  left: 12px;
 }
 .iconChevronUp::before {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  right: -12px;
+  top: 0;
+  left: 12px;
 }
 @media only screen and (max-width: 380px) {
   .hideMobile {
@@ -322,6 +330,7 @@
       padding-right: 17px;
       -webkit-box-sizing: content-box;
       box-sizing: content-box;
+      scroll-behavior: smooth;
       
       .recipesSection {
         grid-template-columns: repeat(2, 1fr);

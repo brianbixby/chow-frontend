@@ -128,7 +128,7 @@ class LandingContainer extends React.Component {
           <div className='slider' ref='sliderScroller'>
             {sliderItems.map((item, idx) => {
               let boundItemClick = this.handleBoundItemClick.bind(this, item);
-              return <div key={idx} className='sliderItemContainer' onClick={boundItemClick}>
+              return <div key={idx} className='sliderItemContainer' onClick={boundItemClick} title={item.header}>
                   <div className="sliderText">
                     <h3 className='sliderHeader'>{item.header}</h3>
                     <p className='sliderSubheader'>{item.subHeader}</p>
@@ -137,15 +137,15 @@ class LandingContainer extends React.Component {
                 </div>
             })}
           </div>
-          <div className='sliderIconChevronLeft sliderIcon' onClick={this.handleSliderLeftClick}></div>
-          <div className='sliderIconChevronRight sliderIcon' onClick={this.handleSliderRightClick}></div>
+          <div className='sliderIconChevronLeft sliderIcon' onClick={this.handleSliderLeftClick} title="Scroll right"></div>
+          <div className='sliderIconChevronRight sliderIcon' onClick={this.handleSliderRightClick} title="Scroll left"></div>
         </div>
         <div className='sliderSubItemWrapper'>
           <div className='sliderSubItem' ref='subItemScroller'>
             <div className='subItemInnerWrapper'>
               {subItems.map((subItem, idx) => {
                 let boundSubitemClick = this.handleBoundSubitemClick.bind(this, subItem);
-                return <div key={idx} className='sliderSubitemContainer' onClick={boundSubitemClick}>
+                return <div key={idx} className='sliderSubitemContainer' onClick={boundSubitemClick} title={subItem.title}>
                     <div className='subItemInsideWrapper'>
                       <img src={subItem.image} className="sliderSubitemImage"/>
                       <p className='sliderSubitemTitle'>{subItem.title}</p>
@@ -154,8 +154,8 @@ class LandingContainer extends React.Component {
               })}
             </div>
           </div>
-          <div className='iconChevronLeft subItemIcon' onClick={this.handleLeftClick}></div>
-          <div className='iconChevronRight subItemIcon' onClick={this.handleRightClick}></div>
+          <div className='iconChevronLeft subItemIcon' onClick={this.handleLeftClick} title="Scroll left"></div>
+          <div className='iconChevronRight subItemIcon' onClick={this.handleRightClick} title="Scroll right"></div>
         </div>
         <RecipesMap recipes={this.props.homepage} containerClass={"homepageRecipesOuter"} redirect={this.handleRedirect} />
       </section>

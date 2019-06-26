@@ -129,8 +129,22 @@ class Navbar extends React.Component {
         let profile = this.props.userProfile;
         let showNotification = this.props.userProfile && !this.props.userProfile.image ? true : false;
         return (
+          <div>
+            <div className='navBanner'>
+              <ul className='socialMediaBar'>
+                <li>Follow me on:</li>
+                <li>
+                  <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank" title="Github.com"><span className='githubSpan'></span> </a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank" title="Linkedin.com"><span className='linkedinSpan'></span></a>
+                </li>
+              </ul>
+              <span className='test'></span>
+              <a className='portfolioLink' href="https://www.builtbybixby.com" rel="noopener noreferrer" target="_blank" title="BuiltByBixby.com">Check out my portfolio</a>
+            </div>
             <nav>
-                <div className='homeLinkDiv'>
+                <div className='homeLinkDiv' title="Home">
                     <Link to='/' className='homeLink'>chow <span className='spoonContainer'><img src={spoon} className='spoon'/></span></Link>
                 </div>
                 <div className='browseDiv' onClick={() => this.setState({showBrowse: !this.state.showBrowse, dropDownDisplay: false})}>
@@ -206,7 +220,11 @@ class Navbar extends React.Component {
                 <div className={classToggler({'profileDropDown': true, 'showProfileDropDown': this.state.dropDownDisplay })}>
                   <div className='profileDropDownWrapper'>
                     <div className='profileLinkWrapper'>
-                      <p className='profileLink' onClick={this.handleProfileLinkClick}><img src={profileLink} className='profileLinkImage'/> <span className='profileLinkText'>Profile</span></p>
+                      <p className='profileLink' onClick={this.handleProfileLinkClick}>
+                      <svg className='profileLinkImage'>
+                        <use xlinkHref="#navProfileIcon" />
+                      </svg>
+                      <span className='profileLinkText'>Profile</span></p>
                     </div>
                     <div className='signOutWrapper' onClick={this.handleSignOut}>
                       <p className='signOut'> Sign Out</p>
@@ -222,6 +240,12 @@ class Navbar extends React.Component {
                     )}
                   </div>
             </nav>
+            <svg display="none">
+              <symbol id="navProfileIcon" viewBox="-14.55 -14.55 223.1 223.1" width="46" height="46">
+                <path d="M3932.18 2033.43l-27.19-55.09-27.21 55.09-60.78 8.87 44.07 42.9-10.4 60.53 54.36-28.62 54.46 28.56-10.42-60.57 43.93-42.86-60.82-8.81z"/><path d="M4160.95 2117.13v-138.72l-.05-.11-27.1 55.12-60.85 8.85 44.04 42.91-10.38 60.55 54.34-28.6z"/><path d="M4248.95 2042.29l-60.8-8.81-27.2-55.01v138.72l.04-.02 54.46 28.56-10.47-60.58 43.97-42.86z"/><path d="M177 153.16H17v-111h160v111zm-153-6.94h146V49.09H24v97.12z"/><path d="M92 106s-4.65-6-15.8-8.73a17.57 17.57 0 1 0-22.52.13 35.26 35.26 0 0 0-15.09 7.83 3.31 3.31 0 0 0-.9.85 3.55 3.55 0 0 0-.48.92 3.63 3.63 0 0 0-.16 1v23.18h55.67V108a3 3 0 0 0-.18-1 2.48 2.48 0 0 0-.54-1zM111.69 79.42h47.83v9.54h-47.83zM111.69 100.53h47.83v9.53h-47.83zM111.69 121.65h47.83v9.54h-47.83z"/>
+              </symbol>
+            </svg>
+          </div>
         );
     }
 }

@@ -121,15 +121,15 @@ class RecipesContainer extends React.Component {
                           let boundRecipeClick = this.handleBoundRecipeClick.bind(this, myRecipe);
                           let boundFavoriteClick = this.handleBoundFavoriteClick.bind(this, myRecipe);
                           return <div key={idx} className='outer'>
-                                  <div className='cardImageContainer' onClick={boundRecipeClick}>
+                                  <div className='cardImageContainer' onClick={boundRecipeClick} title={myRecipe.recipe.label}>
                                     <img className='cardImage' src={myRecipe.recipe.image} />
                                   </div>
                                   <div className={classToggler({likeButton: true, hideLike: !this.props.userAuth, likedRecipe: this.props.favorites && this.props.favorites.some(o => o["uri"] === myRecipe.recipe.uri)})} onClick={boundFavoriteClick}></div>
                                   <div className='cardInfo' onClick={boundRecipeClick}>
                                     <div className='byDiv'>
-                                      <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url}>{myRecipe.recipe.source}</a></p>
+                                      <p className='byP'><a className='byA' rel='noopener noreferrer' target='_blank' href={myRecipe.recipe.url} title={myRecipe.recipe.source}>{myRecipe.recipe.source}</a></p>
                                     </div>
-                                    <div className='cardInfoDiv'>
+                                    <div className='cardInfoDiv' title={myRecipe.recipe.label}>
                                     <h3 className='cardTitle'>{myRecipe.recipe.label} </h3>
                                     <p className='healthLabels'>{myRecipe.recipe.healthLabels.join(", ")} </p>
                                     <p className='calsAndIngreds'> 

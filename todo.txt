@@ -1,4 +1,3 @@
 upload image for url 
-fix aside on ir, maybe add scroll
 clean up code
 add footer and header above head

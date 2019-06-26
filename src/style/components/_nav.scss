@@ -28,6 +28,11 @@ nav {
         }
       }
     }
+    .homeLinkDiv:hover {
+      .homeLink, .spoonContainer .spoon {
+        opacity: .7;
+      }
+    }
     .browseDiv {
         height: 50px;
         line-height: 50px;
@@ -190,6 +195,7 @@ nav {
   display: inline-block;
   width: 46px;
   height: 46px;
+  fill:#4d4d4d;
 }
 .profileLinkText {
   position: relative;
@@ -205,6 +211,12 @@ nav {
   min-height: 40px;
   letter-spacing: .4px;
   cursor: pointer;
+}
+.profileLink:hover, .signOutWrapper:hover  {
+  color: #2d2d2d;
+}
+.profileLink:hover .profileLinkImage {
+  fill:#2d2d2d;
 }
 .signOutWrapper {
   color: #4d4d4d;
@@ -324,7 +336,9 @@ nav {
 .hide {
   display: none;
 }
-
+.navBanner {
+  display: none;
+}
 @media only screen and (min-width: 768px) {
   .navProfileDiv .avatar {
     width: 40px;
@@ -335,6 +349,84 @@ nav {
     top: 3px;
     left: 40px;
   }
+  .navBanner {
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    -ms-flex-align: center;
+    justify-content: space-between;
+    -ms-flex-pack: justify;
+    font-size: 15px;
+    font-size: .9375rem;
+    padding: 0 1rem 0 1.35rem;
+    height: 40px;
+    background-color: #f2f2f2;
+
+    .socialMediaBar {
+      display: -ms-flexbox;
+      display: flex;
+      align-items: center;
+      -ms-flex-align: center;
+
+      li {
+        margin-right: -.3rem;
+      }
+      li:not(:first-child) {
+        margin-right: -1.3rem;
+        -ms-transform: scale(.4, .4);
+        transform: scale(.4, .4);
+
+        a {
+          display: -ms-flexbox;
+          display: flex;
+          align-items: center;
+          -ms-flex-align: center;
+          justify-content: center;
+          -ms-flex-pack: center;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          background-color: #cfcfcf;
+
+          span {
+            position: relative;
+            width: 20px;
+            height: 20px;
+          }
+          .githubSpan {
+            background: url(https://i.imgur.com/LN1RKyP.png) no-repeat center center;
+            background-size: cover;
+            transform: scale(2, 2);
+            left: -1px;
+          }
+          .linkedinSpan {
+            background: url(https://i.imgur.com/pIOsAKO.png) no-repeat center center;
+            background-size: cover;
+            transform: scale(1.5, 1.5);
+          }
+        }
+        a:hover {
+          background-color: #999999;
+        }
+      }
+  }
+  .portfolioLink {
+    color: #ff7e1a;
+  }
+  .portfolioLink:hover {
+    color: #feaa26;
+  }
+  .test {
+    margin: 20px;
+    width: 40px;
+    height: 40px;
+    background: url(https://i.imgur.com/pIOsAKO.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
 }
 
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
