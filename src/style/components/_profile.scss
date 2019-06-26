@@ -1,7 +1,6 @@
 .profile-form {
   width: 96%;
   margin: 0 auto;
-
   label {
     width: 100%;
     margin: .8rem auto 1.5%;
@@ -27,36 +26,38 @@
     font-size: 16px;
     color: #4d4d4d;
   }
-
-  button{
-      color: #fff;
-      font-size: 16px;
-      line-height: 50px;
-      right: calc((3% + 4px));
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      background: #feaa26;
-      height: 50px;
-      width: 155px;
-      text-align: center;
-      z-index: 1;
-      border: none;
-      margin-top: .8rem;
-    }
-    button:hover {
-      background: #ed9702;
-    }
+  button {
+    color: #fff;
+    font-size: 16px;
+    line-height: 50px;
+    right: calc((3% + 4px));
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #feaa26;
+    height: 50px;
+    width: 155px;
+    text-align: center;
+    z-index: 1;
+    border: none;
+    margin-top: .8rem;
+  }
+  button:hover {
+    background: #ed9702;
+  }
 }
+
 .page-form {
   width: 96%;
   margin: 15px auto 10px;
 }
+
 .profileWrapper {
   width: 96%;
   margin: 0 auto;
   max-width: 225px;
 }
+
 .mainContainerHeader {
   font-size: 17px;
   font-size: 1.0625rem;
@@ -65,10 +66,12 @@
   margin: .8rem 0 1.5%;
   text-transform: capitalize;
 }
+
 .profileDate {
   color: #999;
   font-size: 16px;
 }
+
 .favoritesHeader {
   border-bottom: 1px solid #e6e6e6;
   clear: both;
@@ -82,6 +85,7 @@
   width: 92.16%;
   margin: auto;
 }
+
 .noFavorites {
   padding: 0.8rem 1% 0.7rem;
   width: 92.16%;
@@ -91,12 +95,10 @@
 .viewProfile {
   width: 96%;
   margin: 0 auto;
-  
   p {
     margin: .8rem auto 1.5%;
     font-weight: 300;
     font-size: 17px;
-
     span {
       padding-bottom: 0.4rem;
       padding-top: 0.5rem;
@@ -136,25 +138,30 @@
     background: #ed9702;
   }
 }
+
 .profile-container .recipesSection {
   margin-top: 20px;
 }
+
 .profile-image {
   width: 100%;
   height: auto;
 }
+
 .finishProfile {
-    margin: 10px auto 25px;
+  margin: 10px auto 25px;
   p {
     color: #ff7e1a;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .finishProfile {
     width: 96%;
     margin: 0 auto;
   }
 }
+
 @media only screen and (min-width: 768px) {
   .page-form {
     width: 49%;

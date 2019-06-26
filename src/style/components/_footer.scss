@@ -2,11 +2,9 @@ footer {
   background-color: #fafafa;
   border-top: 1px solid #e6e6e6;
   margin-top: 25px;
-
   .socialIcons {
     float: left;
     max-width: 165px;
-
     li {
       display: -ms-flexbox;
       display: flex;
@@ -22,7 +20,6 @@ footer {
       overflow: hidden;
       position: relative;
       width: 32px;
-
       a {
         display: -ms-flexbox;
         display: flex;
@@ -34,7 +31,6 @@ footer {
         width: 50px;
         height: 50px;
         background-color: #cfcfcf;
-
         span {
           position: relative;
           width: 14px;
@@ -70,6 +66,7 @@ footer {
     color: #feaa26;
   }
 }
+
 .footerWrapper {
   display: -ms-flexbox;
   display: flex;
@@ -81,6 +78,7 @@ footer {
   margin: 0;
   position: relative;
 }
+
 .footerTile {
   display: inline-block;
   position: relative;

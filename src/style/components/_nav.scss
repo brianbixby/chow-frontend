@@ -1,115 +1,108 @@
 nav {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    background-color: #fafafa;
-    min-height: 74px;
-  
-    .homeLinkDiv {
-        position: absolute;
-        top: 32px;
-        left: 22px;
-        min-width: 79px;
-  
-      .homeLink {
-        font-family: 'Varela Round', sans-serif;
-        color: #ff7e1a;
-        font-size: 28px;
-        line-height: 1;
-
-        .spoonContainer {
-            position: relative;
-
-            .spoon {
-                position: absolute;
-                left: -90px;
-                top: -2px;
-            }
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fafafa;
+  min-height: 74px;
+  .homeLinkDiv {
+    position: absolute;
+    top: 32px;
+    left: 22px;
+    min-width: 79px;
+    .homeLink {
+      font-family: 'Varela Round', sans-serif;
+      color: #ff7e1a;
+      font-size: 28px;
+      line-height: 1;
+      .spoonContainer {
+        position: relative;
+        .spoon {
+          position: absolute;
+          left: -90px;
+          top: -2px;
         }
       }
-    }
-    .homeLinkDiv:hover {
-      .homeLink, .spoonContainer .spoon {
-        opacity: .7;
-      }
-    }
-    .browseDiv {
-        height: 50px;
-        line-height: 50px;
-        top: 12px;
-        background: #f2f2f2;
-        position: absolute;
-        left: 123px;
-        padding: 0 54px 0 30px;
-        cursor: pointer;
-        display: none;
-
-        p {
-            position: relative;
-
-            span {
-                color: #2d2d2d;
-                font-size: 15px;
-                line-height: 50px;
-            }
-            img {
-                width: 14px;
-                position: absolute;
-                top: 18px;
-                left: 65px;
-            }
-        }
-    }
-    .browseDiv:hover {
-        background: #ebebeb;
-    }
-    .navProfileDiv {
-        position: absolute;
-        right: 25px;
-        top: 12px;
-        background: #f2f2f2;
-
-        .navProfileDivInner {
-            position: relative;
-            width: 220px;
-            height: 50px;
-
-            .profileImageDiv {
-                position: absolute;
-                cursor: pointer;
-                height: 100%;
-
-                .noProfileImageNav {
-                    width: 52px;
-                    margin-top: -1px;
-                    margin-left: 6px;
-                }
-            }
-            .profileTextDiv {
-                position: absolute;
-                left: 65px;
-                background: #feaa26;
-                height: 50px;
-                width: 155px;
-                text-align: center;
-                cursor: pointer;
-
-                .profileText {
-                    color: #fff;
-                    font-size: 16px;
-                    line-height: 50px;
-                    font-family: 'Source Sans Pro', sans-serif;
-                }
-            }
-            .profileTextDiv:hover {
-                background: #ed9702;
-            }
-        }
     }
   }
-.navSearchIcon {
+  .homeLinkDiv:hover {
+    .homeLink,
+    .spoonContainer .spoon {
+      opacity: .7;
+    }
+  }
+  .browseDiv {
+    height: 50px;
+    line-height: 50px;
+    top: 12px;
+    background: #f2f2f2;
+    position: absolute;
+    left: 123px;
+    padding: 0 54px 0 30px;
+    cursor: pointer;
     display: none;
+    p {
+      position: relative;
+      span {
+        color: #2d2d2d;
+        font-size: 15px;
+        line-height: 50px;
+      }
+      img {
+        width: 14px;
+        position: absolute;
+        top: 18px;
+        left: 65px;
+      }
+    }
+  }
+  .browseDiv:hover {
+    background: #ebebeb;
+  }
+  .navProfileDiv {
+    position: absolute;
+    right: 25px;
+    top: 12px;
+    background: #f2f2f2;
+    .navProfileDivInner {
+      position: relative;
+      width: 220px;
+      height: 50px;
+      .profileImageDiv {
+        position: absolute;
+        cursor: pointer;
+        height: 100%;
+        .noProfileImageNav {
+          width: 52px;
+          margin-top: -1px;
+          margin-left: 6px;
+        }
+      }
+      .profileTextDiv {
+        position: absolute;
+        left: 65px;
+        background: #feaa26;
+        height: 50px;
+        width: 155px;
+        text-align: center;
+        cursor: pointer;
+        .profileText {
+          color: #fff;
+          font-size: 16px;
+          line-height: 50px;
+          font-family: 'Source Sans Pro', sans-serif;
+        }
+      }
+      .profileTextDiv:hover {
+        background: #ed9702;
+      }
+    }
+  }
 }
+
+.navSearchIcon {
+  display: none;
+}
+
 .sliderPopup {
   width: auto;
   max-width: 100vw;
@@ -129,7 +122,6 @@ nav {
   -webkit-transition-timing-function: cubic-bezier(0, .33, .67, 1);
   transition-timing-function: cubic-bezier(0, .33, .67, 1);
   cursor: pointer;
-
   p {
     line-height: 1.3;
     text-transform: uppercase;
@@ -138,9 +130,11 @@ nav {
     text-overflow: ellipsis;
   }
 }
+
 .sliderPopup.clozed {
   bottom: 0;
 }
+
 .avatar {
   height: 100%;
   img {
@@ -149,6 +143,7 @@ nav {
     border-radius: 50%;
   }
 }
+
 .profileDropDown {
   display: none;
   max-width: none;
@@ -160,9 +155,11 @@ nav {
   position: absolute;
   background-color: #fff;
 }
+
 .showProfileDropDown {
   display: block;
 }
+
 .profileDropDownWrapper {
   padding: 10px 5px 0;
   font-weight: normal;
@@ -171,6 +168,7 @@ nav {
   margin: .5rem !important;
   width: initial !important;
 }
+
 .profileDropDownWrapper::after {
   left: 55px;
   -webkit-transform: rotate(-45deg);
@@ -188,6 +186,7 @@ nav {
   z-index: -1;
   right: 9rem !important;
 }
+
 .profileLinkImage {
   -ms-transform: scale(.75, .75);
   transform: scale(.75, .75);
@@ -195,11 +194,13 @@ nav {
   display: inline-block;
   width: 46px;
   height: 46px;
-  fill:#4d4d4d;
+  fill: #4d4d4d;
 }
+
 .profileLinkText {
   position: relative;
 }
+
 .profileLink {
   display: -ms-flexbox;
   display: flex;
@@ -212,12 +213,16 @@ nav {
   letter-spacing: .4px;
   cursor: pointer;
 }
-.profileLink:hover, .signOutWrapper:hover  {
+
+.profileLink:hover,
+.signOutWrapper:hover {
   color: #2d2d2d;
 }
+
 .profileLink:hover .profileLinkImage {
-  fill:#2d2d2d;
+  fill: #2d2d2d;
 }
+
 .signOutWrapper {
   color: #4d4d4d;
   background-color: transparent;
@@ -234,64 +239,61 @@ nav {
     width: 100vw;
   }
 }
+
 @media only screen and (max-width: 767px) {
-    nav {
-        min-height: 62px;
-        
-        .homeLinkDiv {
-            top: 22px;
-        }
-        .navProfileDiv {
-            background: none;
-            top: 0;
-            right: 13px;
-        
-            .navProfileDivInner {
-            height: 62px;
-            width: 44px;
-            
-            .profileImageDiv .noProfileImageNav {
-                width: 43px;
-                margin-left: 0;
-                margin-top: 11px;
-            }
-            }
-        }
-        .hideSearchBar, .navProfileDiv .navProfileDivInner .profileTextDiv {
-            display: none;
-        }
-        .navSearchIcon {
-            position: absolute;
-            right: 70px;
-            top: 0;
-            display: block;
-            border-left: 1px solid #fafafa;
-            border-right: 1px solid #fafafa;
-        
-            .navSearchIconInner {
-            position: relative;
-            height: 62px;
-            width: 48px;
-            cursor: pointer;
-        
-            .navSearchIconSpan {
-                background: url(https://secureimages.allrecipes.com/assets/deployables/v-1.165.0.5109/svg/sprite.css.svg) no-repeat;
-                -webkit-transform: scale(0.85, 0.85);
-                transform: scale(0.85, 0.85);
-                display: inline-block;
-                width: 46px;
-                height: 46px;
-                background-position: 89.13520408163265% 71.42857142857143%;
-                margin-top: 10px;
-            }
-            }
-        }
-        .showSearchBarSmall {
-            background: #fff;
-            border-left: 1px solid #e6e6e6;
-            border-right: 1px solid #e6e6e6;
-        }
+  nav {
+    min-height: 62px;
+    .homeLinkDiv {
+      top: 22px;
     }
+    .navProfileDiv {
+      background: none;
+      top: 0;
+      right: 13px;
+      .navProfileDivInner {
+        height: 62px;
+        width: 44px;
+        .profileImageDiv .noProfileImageNav {
+          width: 43px;
+          margin-left: 0;
+          margin-top: 11px;
+        }
+      }
+    }
+    .hideSearchBar,
+    .navProfileDiv .navProfileDivInner .profileTextDiv {
+      display: none;
+    }
+    .navSearchIcon {
+      position: absolute;
+      right: 70px;
+      top: 0;
+      display: block;
+      border-left: 1px solid #fafafa;
+      border-right: 1px solid #fafafa;
+      .navSearchIconInner {
+        position: relative;
+        height: 62px;
+        width: 48px;
+        cursor: pointer;
+        .navSearchIconSpan {
+          background: url(https://secureimages.allrecipes.com/assets/deployables/v-1.165.0.5109/svg/sprite.css.svg) no-repeat;
+          -webkit-transform: scale(0.85, 0.85);
+          transform: scale(0.85, 0.85);
+          display: inline-block;
+          width: 46px;
+          height: 46px;
+          background-position: 89.13520408163265% 71.42857142857143%;
+          margin-top: 10px;
+        }
+      }
+    }
+    .showSearchBarSmall {
+      background: #fff;
+      border-left: 1px solid #e6e6e6;
+      border-right: 1px solid #e6e6e6;
+    }
+  }
   .avatar {
     height: 100%;
     margin-right: -13px;
@@ -316,6 +318,7 @@ nav {
     padding-left: 13px;
   }
 }
+
 .notificationAlert {
   font-size: 14px;
   font-size: .875rem;
@@ -333,12 +336,15 @@ nav {
   left: 25px;
   cursor: pointer;
 }
+
 .hide {
   display: none;
 }
+
 .navBanner {
   display: none;
 }
+
 @media only screen and (min-width: 768px) {
   .navProfileDiv .avatar {
     width: 40px;
@@ -361,13 +367,11 @@ nav {
     padding: 0 1rem 0 1.35rem;
     height: 40px;
     background-color: #f2f2f2;
-
     .socialMediaBar {
       display: -ms-flexbox;
       display: flex;
       align-items: center;
       -ms-flex-align: center;
-
       li {
         margin-right: -.3rem;
       }
@@ -375,7 +379,6 @@ nav {
         margin-right: -1.3rem;
         -ms-transform: scale(.4, .4);
         transform: scale(.4, .4);
-
         a {
           display: -ms-flexbox;
           display: flex;
@@ -387,7 +390,6 @@ nav {
           width: 50px;
           height: 50px;
           background-color: #cfcfcf;
-
           span {
             position: relative;
             width: 20px;
@@ -409,24 +411,24 @@ nav {
           background-color: #999999;
         }
       }
+    }
+    .portfolioLink {
+      color: #ff7e1a;
+    }
+    .portfolioLink:hover {
+      color: #feaa26;
+    }
+    .test {
+      margin: 20px;
+      width: 40px;
+      height: 40px;
+      background: url(https://i.imgur.com/pIOsAKO.png) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
   }
-  .portfolioLink {
-    color: #ff7e1a;
-  }
-  .portfolioLink:hover {
-    color: #feaa26;
-  }
-  .test {
-    margin: 20px;
-    width: 40px;
-    height: 40px;
-    background: url(https://i.imgur.com/pIOsAKO.png) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-}
 }
 
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
@@ -446,12 +448,13 @@ nav {
 }
 
 @media only screen and (min-width: 900px) {
-    nav .browseDiv {
-        display: block;
-    }
+  nav .browseDiv {
+    display: block;
+  }
 }
+
 @media only screen and (min-width: 1024px) {
   .profileDropDown {
-    width:265px;
+    width: 265px;
   }
 }

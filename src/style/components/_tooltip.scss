@@ -1,14 +1,11 @@
-@import './../lib/vars'; 
-
+@import './../lib/vars';
 .tooltip {
   height: 0;
-
   section {
     transform: translateY(-27px);
     position: relative;
     margin-bottom: 1vw;
     width: 100%;
-    
     p {
       background: #FFF;
       color: $color-primary;
@@ -20,7 +17,6 @@
       border-radius: 4px;
       margin-left: 10px;
     }
-
     .caret-up {
       position: absolute;
       top: -10px;
@@ -28,9 +24,9 @@
       color: $color-primary;
       height: 15px;
     }
-
   }
 }
+
 .leagues-container {
   .hideLarge .tooltip section {
     transform: translateY(-30px);

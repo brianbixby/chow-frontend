@@ -4,13 +4,11 @@
   left: 275px;
   width: calc((100vw - 545px));
   z-index: 1;
-
   .input-group {
     height: 50px;
     line-height: 50px;
     border: 1px solid #e6e6e6;
     background-color: #fff;
-
     .search-form {
       width: 68.5%;
       height: 100%;
@@ -48,7 +46,6 @@
       z-index: 9;
       justify-content: center;
       align-items: center;
-
       img {
         width: 34.5px;
       }
@@ -68,7 +65,6 @@
   top: 58px;
   z-index: 10001;
   border-bottom: 1px solid #e6e6e6;
-
   .iconClose {
     background-color: #f2f2f2;
     border: none;
@@ -106,7 +102,6 @@
     background-color: #fff;
     border: 1px solid #e6e6e6;
     position: relative;
-
     .magnifyingGlassIcon {
       background: url(https://secureimages.allrecipes.com/assets/deployables/v-1.165.0.5109/svg/sprite.css.svg) no-repeat;
       -ms-transform: scale(.75, .75);
@@ -181,7 +176,6 @@
       padding: 0 5%;
       text-align: center;
       white-space: nowrap;
-
       span {
         font-size: 1.25rem;
         font-weight: 600;
@@ -193,7 +187,8 @@
         font-weight: 900;
       }
     }
-    .keyWordsInput::placeholder, .excludeInput::placeholder {
+    .keyWordsInput::placeholder,
+    .excludeInput::placeholder {
       color: #b2b2b2;
       opacity: 1;
     }
@@ -202,7 +197,6 @@
 
 .excludedDiv {
   margin: 81px 8px 16px;
-
   .excludedP {
     background-color: #ee4036;
     display: block;
@@ -216,7 +210,6 @@
     display: inline-block;
     cursor: pointer;
     margin-bottom: 5px;
-
     .excludedItem {
       font-weight: 700;
     }
@@ -249,14 +242,22 @@
   line-height: 3.125rem;
   margin-top: 10px;
 }
+
 #advancedSearchFormButton:hover {
   background: #ed9702;
 }
-.calSection, .dietSection, .healthSection {
+
+.calSection,
+.dietSection,
+.healthSection {
   float: left;
   width: 33%;
 }
-.calSection .subSection,.calSection label, .dietSection label, .healthSection label {
+
+.calSection .subSection,
+.calSection label,
+.dietSection label,
+.healthSection label {
   color: #4d4d4d;
   display: -ms-flexbox;
   display: flex;
@@ -269,6 +270,7 @@
   margin-left: 5px;
   margin-right: 30%;
 }
+
 .subSection input {
   border-bottom: 1px solid #e6e6e6;
   width: 100%;
@@ -278,9 +280,11 @@
 .subSection {
   white-space: pre;
 }
+
 .mt16 {
   margin-top: 16px;
 }
+
 .advancedSearchSectionHeader {
   border-bottom: 1px solid #e6e6e6;
   display: block;
@@ -291,17 +295,23 @@
   padding-bottom: 5px;
   margin-bottom: 10px;
 }
-.calSection label:hover span, .dietSection label:hover span, .healthSection label:hover span{
+
+.calSection label:hover span,
+.dietSection label:hover span,
+.healthSection label:hover span {
   color: rgba(138, 193, 62, .5);
 }
-input[type='radio']:checked + span {
+
+input[type='radio']:checked+span {
   color: #8ac13e;
 }
+
 @media only screen and (max-width: 450px) {
   .advancedSearchSectionHeader {
     margin-bottom: 0;
   }
 }
+
 @media only screen and (max-width: 767px) {
   .advancedSearchDiv {
     border: 1px solid #e6e6e6;
@@ -313,7 +323,6 @@ input[type='radio']:checked + span {
     padding: 0 16px 24px 16px;
     font-size: 1.5rem;
     border-top: none;
-
     .iconClose {
       display: none;
     }
@@ -330,7 +339,9 @@ input[type='radio']:checked + span {
   .advancedSearchDiv .inputWrapper .excludeButton {
     padding: 0 2.5%;
   }
-  .calSection, .dietSection, .healthSection {
+  .calSection,
+  .dietSection,
+  .healthSection {
     float: none;
     width: 100%;
   }
@@ -349,7 +360,9 @@ input[type='radio']:checked + span {
   .mt50small {
     margin-top: 50px;
   }
-  .calSection label, .dietSection label, .healthSection label {
+  .calSection label,
+  .dietSection label,
+  .healthSection label {
     margin-left: 5px;
     display: inline-block;
     margin-right: 5px;
@@ -372,7 +385,6 @@ input[type='radio']:checked + span {
     left: 0;
     padding: 24px 16px;
     font-size: 1.5rem;
-
     .iconClose {
       display: -ms-flexbox;
       display: flex;
@@ -396,21 +408,20 @@ input[type='radio']:checked + span {
       background-color: #E6E6E6;
     }
     .iconClose:hover::before {
-      color: rgb(128,128,128);
+      color: rgb(128, 128, 128);
     }
   }
 }
 
 @media only screen and (max-width: 899px) and (min-width: 768px) {
   .searchContainer {
-      width: calc((100vw - 362px));
-      left: 122px;
+    width: calc((100vw - 362px));
+    left: 122px;
   }
 }
 
 @media only screen and (max-width: 1023px) and (min-width: 900px) {
   .searchContainer {
-      width: calc((100vw - 515px));
+    width: calc((100vw - 515px));
   }
 }
-

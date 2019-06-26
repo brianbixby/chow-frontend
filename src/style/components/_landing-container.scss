@@ -1,11 +1,12 @@
-.homepageRecipesOuter, .recipesOuter {
+.homepageRecipesOuter,
+.recipesOuter {
   margin-top: 20px;
 }
 
 @media only screen and (min-width: 410px) {
-  .homepageRecipesOuter, .recipesOuter {
+  .homepageRecipesOuter,
+  .recipesOuter {
     margin-right: 15px;
-
     .recipesSection {
       grid-template-columns: repeat(2, 1fr);
       height: auto;
@@ -13,27 +14,26 @@
       display: grid;
       grid-auto-flow: dense;
       margin: 0 auto;
-
       .outer {
         margin: 0 0 20px;
         width: calc((100% - 15px));
         margin-left: 15px;
         height: auto;
         padding-bottom: 28px;
-  
         .cardImageContainer {
           width: 100%;
-  
           .cardImage {
             height: auto;
             width: 100%;
           }
         }
       }
-      .calsSpan, .ingredsSpan {
+      .calsSpan,
+      .ingredsSpan {
         display: inline-block;
       }
-      .ingredientsSpan, .caloriesSpan {
+      .ingredientsSpan,
+      .caloriesSpan {
         display: none;
       }
       .likeButton {
@@ -47,12 +47,12 @@
 }
 
 @media only screen and (min-width: 656px) {
-  .homepageRecipesOuter, .recipesOuter {
+  .homepageRecipesOuter,
+  .recipesOuter {
     margin-right: 5vw;
     margin-top: 5vw;
     .recipesSection {
       grid-template-columns: repeat(3, 1fr);
-
       .outer {
         margin: 0 0 5vw;
         width: calc((100% - 5vw));
@@ -61,15 +61,18 @@
     }
   }
 }
+
 @media only screen and (min-width: 768px) {
-  .homepageRecipesOuter, .recipesOuter{
+  .homepageRecipesOuter,
+  .recipesOuter {
     margin-top: 30px;
-    
     .recipesSection {
-      .calsSpan, .ingredsSpan {
+      .calsSpan,
+      .ingredsSpan {
         display: none;
       }
-      .ingredientsSpan, .caloriesSpan {
+      .ingredientsSpan,
+      .caloriesSpan {
         display: inline-block;
       }
     }
@@ -77,10 +80,10 @@
 }
 
 @media only screen and (min-width: 1200px) {
-  .homepageRecipesOuter, .recipesOuter {
+  .homepageRecipesOuter,
+  .recipesOuter {
     .recipesSection {
       grid-template-columns: repeat(4, 1fr);
-
       .likeButton {
         -webkit-transform: scale(1, 1);
         transform: scale(1, 1);
@@ -98,12 +101,10 @@
 }
 
 @media only screen and (min-width: 1900px) {
-  .homepageRecipesOuter, .recipesOuter {
+  .homepageRecipesOuter,
+  .recipesOuter {
     .recipesSection {
       grid-template-columns: repeat(6, 1fr);
     }
   }
 }
-
-
-

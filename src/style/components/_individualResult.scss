@@ -1,14 +1,15 @@
 .aside {
   position: relative;
 }
+
 .asideIcon {
   display: none;
 }
+
 .irImgContainerDisplaySmall {
   position: relative;
   text-align: center;
   width: 100%;
-
   .irImgContainerInnerWrapper {
     display: block;
     margin: 0 auto;
@@ -22,7 +23,6 @@
     flex-direction: column-reverse;
     align-items: center;
     -ms-flex-align: center;
-
     img {
       max-width: 720px;
       min-height: 200px;
@@ -32,15 +32,18 @@
     }
   }
 }
+
 .irLabel {
   font-size: 1.375rem;
   line-height: 28px;
   margin: 24px 0 8px;
   text-align: center;
 }
+
 .irImgContainerDisplayLarge {
   display: none;
 }
+
 .irhealthLabels {
   min-height: 32px;
   .irhealthLabelsInner {
@@ -53,11 +56,9 @@
     font-size: 16px;
     font-size: 1rem;
     flex-wrap: wrap;
-  
     p {
       display: inline-block;
       color: #ff7e1a;
-  
       span {
         color: #b3b3b3;
         padding: 0 4px;
@@ -65,17 +66,18 @@
     }
   }
 }
+
 .irSource {
   margin: 0 0.5rem 0.5rem 60px;
   min-width: 270px;
   position: relative;
   width: 78%;
   color: #808080;
-
   a {
     color: #2d2d2d;
   }
 }
+
 .irSectionHeader {
   padding: 0.8rem 1% 0.5rem;
   min-height: 58px;
@@ -90,6 +92,7 @@
   margin-bottom: 1rem;
   position: relative;
 }
+
 .irIngredients p {
   color: #2d2d2d;
   font-size: 16px;
@@ -136,6 +139,7 @@
     text-decoration: underline;
   }
 }
+
 .tnDiv p {
   color: #2d2d2d;
   font-size: 16px;
@@ -143,17 +147,20 @@
   padding: 0.35rem 2%;
   margin-left: 1.2rem;
 }
+
 .nutrientColumnTotal {
   padding: 0px 10px;
-  text-align: right;  
-  float: right;  
+  text-align: right;
+  float: right;
 }
+
 .nutrientColumnPercent {
   width: 56px;
   text-align: right;
   color: #666;
   float: right;
 }
+
 .nutrientRow {
   color: #2d2d2d;
   font-size: 16px;
@@ -182,29 +189,33 @@
     align-items: center;
     -ms-flex-align: center;
   }
-.recipeIconsDiv {
-  font-size: .875rem;
-  color: #4d4d4d;
-  float: right;
-  font-weight: normal;
-  white-space: nowrap;
-  position: relative;
-  margin-top: 4px;
+  .recipeIconsDiv {
+    font-size: .875rem;
+    color: #4d4d4d;
+    float: right;
+    font-weight: normal;
+    white-space: nowrap;
+    position: relative;
+    margin-top: 4px;
+  }
+  .iconScale {
+    -ms-transform: scale(.75, .75);
+    transform: scale(.75, .75);
+    margin-left: -5px;
+    -ms-transform: scale(.75, .75);
+    transform: scale(.75, .75);
+    margin-left: -5px;
+    width: 46px;
+    height: 46px;
+  }
 }
-.iconScale {
-  -ms-transform: scale(.75, .75);
-  transform: scale(.75, .75);
-  margin-left: -5px;
-  -ms-transform: scale(.75, .75);
-  transform: scale(.75, .75);
-  margin-left: -5px;
-  width: 46px;
-  height: 46px;
-}
-}
-.aside, .ingredsSpan, .calsSpan {
+
+.aside,
+.ingredsSpan,
+.calsSpan {
   display: none;
 }
+
 .aside .asideIcon {
   position: fixed;
   cursor: pointer;
@@ -219,12 +230,15 @@
   border: 1px solid transparent;
   display: block;
 }
+
 .asideIcon:hover {
   background: #fff;
 }
+
 .iconChevronDown {
   right: 12px;
 }
+
 .asideIcon::before {
   border-style: solid;
   color: rgba(254, 170, 38, .5);
@@ -236,18 +250,21 @@
   border-width: 4px 4px 0 0;
   vertical-align: calc((-50% - 2px));
 }
+
 .iconChevronDown::before {
   -webkit-transform: rotate(135deg);
   transform: rotate(135deg);
   top: 0;
   left: 12px;
 }
+
 .iconChevronUp::before {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
   top: 0;
   left: 12px;
 }
+
 @media only screen and (max-width: 380px) {
   .hideMobile {
     display: none;
@@ -256,6 +273,7 @@
     right: calc((62px + 3%));
   }
 }
+
 @media only screen and (max-width: 450px) {
   .irImgContainerDisplaySmall .irImgContainerInnerWrapper img {
     width: 100%;
@@ -263,9 +281,7 @@
   }
 }
 
-@media only screen and (min-width: 451px) {
-
-}
+@media only screen and (min-width: 451px) {}
 
 @media only screen and (min-width: 500px) {
   .irImgContainerDisplaySmall .irImgContainerInnerWrapper img {
@@ -304,6 +320,7 @@
     display: block;
   }
 }
+
 @media only screen and (min-width: 1024px) {
   .irImgContainerDisplayLarge {
     display: none;
@@ -311,7 +328,7 @@
   .irMain {
     width: 69%;
     display: inline-block;
-    vertical-align:top;
+    vertical-align: top;
     margin-bottom: 20px;
   }
   .aside {
@@ -321,7 +338,6 @@
     overflow: hidden;
     border-left: 1px solid #e6e6e6;
     height: 1335px;
-  
     .individualRecipeOuter {
       margin-left: 2.5%;
       margin-right: calc((2.5% - 9px));
@@ -332,77 +348,76 @@
       -webkit-box-sizing: content-box;
       box-sizing: content-box;
       scroll-behavior: smooth;
-      
       .recipesSection {
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
-  
-      .outer {
-        margin: 0 0 20px;
-        width: calc((100% - 9px));
-        margin-right: 9px;
-        height: auto;
-        padding-bottom: 28px;
-  
-        .cardImageContainer {
-          width: 100%;
-  
-          .cardImage {
-            height: auto;
+        .outer {
+          margin: 0 0 20px;
+          width: calc((100% - 9px));
+          margin-right: 9px;
+          height: auto;
+          padding-bottom: 28px;
+          .cardImageContainer {
             width: 100%;
+            .cardImage {
+              height: auto;
+              width: 100%;
+            }
+          }
+          .likeButton {
+            -webkit-transform: scale(.5, .5);
+            transform: scale(.5, .5);
+            right: -10px;
+            top: -10px;
+          }
+          .cardInfo {
+            width: 100%;
+            .cardTitle {
+              position: relative;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              line-height: 17px;
+              height: 34px;
+              margin-bottom: 3px;
+              padding-bottom: 0;
+              padding-right: 8px;
+            }
+            .calsAndIngreds {
+              margin: 10px 0;
+              padding: 2px 0 0 8px;
+            }
+            .healthLabels {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 3;
+              line-height: 13px;
+              height: 39px;
+              padding-right: 8px;
+            }
+            .ingredsSpan,
+            .calsSpan {
+              display: inline-block;
+            }
+            .ingredientsSpan,
+            .caloriesSpan {
+              display: none;
+            }
           }
         }
-        .likeButton {
-          -webkit-transform: scale(.5, .5);
-          transform: scale(.5, .5);
-          right: -10px;
-          top: -10px;
+        .outer:nth-last-child(2),
+        .outer:nth-last-child(1) {
+          margin-bottom: 90px;
         }
-        .cardInfo {
-          width: 100%;
-  
-          .cardTitle {
-            position: relative;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            line-height: 17px;
-            height: 34px;
-            margin-bottom: 3px;
-            padding-bottom: 0;
-            padding-right: 8px;
-          }
-          .calsAndIngreds {
-            margin: 10px 0;
-            padding: 2px 0 0 8px;
-          }
-          .healthLabels {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            line-height: 13px;
-            height: 39px;
-            padding-right: 8px;
-          }
-          .ingredsSpan, .calsSpan {
-            display: inline-block;
-          }
-          .ingredientsSpan, .caloriesSpan {
-            display: none;
-          }
-        }
-      }
-      .outer:nth-last-child(2), .outer:nth-last-child(1) {
-        margin-bottom: 90px;
       }
     }
   }
 }
-}
+
 .pageBottom .aside {
   .asideIcon {
     position: absolute;
