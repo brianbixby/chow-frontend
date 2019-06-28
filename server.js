@@ -15,7 +15,7 @@ app.get('/*', function(req, res) {
       res.status(500).send(err)
     }
   })
-})
+});
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
