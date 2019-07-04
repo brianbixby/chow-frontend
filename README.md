@@ -12,10 +12,9 @@ Information about the backend of Chow can be found here: [Chow Backend](https://
 
 - Node 
 - MongoDB
-- Travis
-- heroku
-- github
-- npm
+- Heroku
+- Github
+- NPM/Yarn
 - Frontend Node packages:
   - Autoprefixer          
   - Babel-core         
@@ -38,7 +37,9 @@ Information about the backend of Chow can be found here: [Chow Backend](https://
   - Redux                          
   - Superagent                  
   - Validator                  
+- devDependencies:
   - Babel-jest
+  - Babel-plugin-static-fs
   - Babel-plugin-stylus-compiler
   - Babel-plugin-transform-async-to-generator
   - Babel-plugin-transform-css-import-to-string
@@ -52,32 +53,33 @@ Information about the backend of Chow can be found here: [Chow Backend](https://
   - Enzyme          
   - Enzyme-adapter-react-16          
   - Eslint          
+  - Eslint-plugin-prettier
   - Eslint-plugin-react          
-  - Jest          
+  - Jest    
+  - Prettier      
   - Redux-devtools-extension
-  - Redux-logger
+  - Redux-logger 
 
-- Backend Node packages:
+- Backend Node packages
   - Production
-    - Bcrypt
+    - Bcryptjs
     - Bluebird
     - Cors
     - Coveralls
-    - Crypto 
     - Debug 
     - Del 
     - Dotenv 
     - Express  
     - Http-errors 
-    - Istanbul 
     - Jsonwebtoken 
     - Mongoose 
     - Morgan
+    - Nyc
   - Development
     - Eslint
     - Faker
     - Jest
-    - Superagent 
+    - Superagent
 
 ## License
 

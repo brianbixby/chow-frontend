@@ -44,7 +44,7 @@ class LandingContainer extends React.Component {
     if (!this.props.log) {
       this.props.loggedRequest(true);
       console.log(
-        "If you have any questions about my code please email me @BrianBixby0@gmail.com and visit www.BuiltByBixby.com to see my latest projects."
+        "If you have any questions about my code please email me @BrianBixby0@gmail.com and visit https://www.builtbybixby.us to see my latest projects."
       );
     }
   }

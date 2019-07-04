@@ -31,10 +31,10 @@ class Footer extends React.Component {
           </div>
           <a
             className="creator"
-            href="https://www.builtbybixby.com"
+            href="https://www.builtbybixby.us"
             rel="noopener noreferrer"
             target="_blank"
-            title="BuiltByBixby.com"
+            title="BuiltByBixby.us"
           >
             Built by Bixby
           </a>

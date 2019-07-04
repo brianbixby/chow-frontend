@@ -256,10 +256,10 @@ class Navbar extends React.Component {
           <span className="test"></span>
           <a
             className="portfolioLink"
-            href="https://www.builtbybixby.com"
+            href="https://www.builtbybixby.us"
             rel="noopener noreferrer"
             target="_blank"
-            title="BuiltByBixby.com"
+            title="BuiltByBixby.us"
           >
             Check out my portfolio
           </a>
