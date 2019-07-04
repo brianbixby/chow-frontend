@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The frontend for a MERN stack Recipe App.",
   "engines": {
-    "node": "12.4.0",
+    "node": "12.5.0",
     "yarn": "1.17.0",
     "npm": "6.9.0"
   },
