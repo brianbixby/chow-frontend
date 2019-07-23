@@ -95,6 +95,3 @@ weather app location
 https://tech.holidayextras.com/parceljs-how-simple-really-is-it-679a4feba69d
 
 https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fchow-fe.herokuapp.com%2F
-
-/Users/brianbixby/Desktop/portfolio/chow-fe-new
-/Users/brianbixby/Desktop/portfolio/chow-backendss

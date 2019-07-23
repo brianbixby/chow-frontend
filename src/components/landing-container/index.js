@@ -9,7 +9,7 @@ import { tokenSignInRequest } from "../../actions/userAuth-actions.js";
 import { userProfileFetchRequest } from "../../actions/userProfile-actions.js";
 import { favoritesFetchRequest } from "../../actions/favorite-actions.js";
 import { logged } from "../../actions/log-actions.js";
-import { userValidation, logError } from "./../../lib/util.js";
+import { userValidation, logError, renderIf } from "./../../lib/util.js";
 import css from './../../style/main.scss';
 
 class LandingContainer extends React.Component {
@@ -292,6 +292,13 @@ class LandingContainer extends React.Component {
             containerClass={"homepageRecipesOuter"}
             redirect={this.handleRedirect}
           />
+          <div>
+            {renderIf(this.props.homepage && this.props.homepage.length >= 96,
+              <div className="infiniteScrollMax">
+                <p>Sorry, but the API limits our query results. </p>
+              </div>
+            )}
+          </div>
         </section>
         <Footer />
       </div>
@@ -306,24 +313,15 @@ let mapStateToProps = state => ({
 
 let mapDispatchToProps = dispatch => {
   return {
-    favoritesFetch: favoritesArr =>
-      dispatch(favoritesFetchRequest(favoritesArr)),
+    favoritesFetch: favoritesArr => dispatch(favoritesFetchRequest(favoritesArr)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
     homepageFetch: min => dispatch(homepageFetchRequest(min)),
     homepageFetchRequest: recipes => dispatch(homepageFetch(recipes)),
-    recipesFetch: (queryString, queryParams, min, infiniteSearch) =>
-      dispatch(
-        recipesFetchRequest(queryString, queryParams, min, infiniteSearch)
-      ),
+    recipesFetch: (queryString, queryParams, min, infiniteSearch) => dispatch(recipesFetchRequest(queryString, queryParams, min, infiniteSearch)),
     recipesFetchRequest: recipes => dispatch(recipesFetch(recipes)),
     loggedRequest: val => dispatch(logged(val)),
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(LandingContainer)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingContainer));
