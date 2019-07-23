@@ -4,12 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import Footer from "../footer";
 import RecipesMap from "../recipes-map";
-import {
-  homepageFetchRequest,
-  homepageFetch,
-  recipesFetchRequest,
-  recipesFetch
-} from "../../actions/search-actions.js";
+import { homepageFetchRequest, homepageFetch, recipesFetchRequest, recipesFetch } from "../../actions/search-actions.js";
 import { tokenSignInRequest } from "../../actions/userAuth-actions.js";
 import { userProfileFetchRequest } from "../../actions/userProfile-actions.js";
 import { favoritesFetchRequest } from "../../actions/favorite-actions.js";
@@ -25,16 +20,10 @@ class LandingContainer extends React.Component {
 
   componentWillMount() {
     userValidation(this.props);
-    if (
-      localStorage.random &&
-      JSON.parse(localStorage.getItem("random"))["timestamp"] >
-        new Date().getTime()
-    ) {
-      this.props.homepageFetchRequest(
-        JSON.parse(localStorage.getItem("random"))["content"]
-      );
+    if (localStorage.random0 && JSON.parse(localStorage.getItem("random0"))["timestamp"] > new Date().getTime()) {
+      this.props.homepageFetchRequest(JSON.parse(localStorage.getItem("random0"))["content"]);
     } else if (!this.props.homepage || this.props.homepage.length == 0) {
-      this.props.homepageFetch()
+      this.props.homepageFetch(0)
         .catch(err => logError(err));
     }
     window.scrollTo(0, 0);
@@ -43,16 +32,16 @@ class LandingContainer extends React.Component {
   componentDidMount() {
     this.updateSlideWidth();
     window.addEventListener("resize", this.updateSlideWidth);
+    document.addEventListener("scroll", this.trackScrolling);
     if (!this.props.log) {
       this.props.loggedRequest(true);
-      console.log(
-        "If you have any questions about my code please email me @BrianBixby0@gmail.com and visit https://www.builtbybixby.us to see my latest projects."
-      );
+      console.log("If you have any questions about my code please email me @BrianBixby0@gmail.com and visit https://www.builtbybixby.us to see my latest projects.");
     }
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateSlideWidth);
+    document.removeEventListener("scroll", this.trackScrolling);
   }
 
   updateSlideWidth = () => {
@@ -73,25 +62,12 @@ class LandingContainer extends React.Component {
     let queryString = item.link.split("&calories=0-10000")[0];
     let queryParams = "&calories=0-10000";
 
-    if (
-      localStorage.getItem(`${queryString}${queryParams}0`) &&
-      JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))[
-        "timestamp"
-      ] > new Date().getTime()
-    ) {
-      this.props.recipesFetchRequest(
-        JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))[
-          "content"
-        ]
-      );
+    if (localStorage.getItem(`${queryString}${queryParams}0`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))["timestamp"] > new Date().getTime()) {
+      this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))["content"]);
       return this.props.history.push(`/search/${queryString}${queryParams}`);
     }
-
-    return this.props
-      .recipesFetch(queryString, queryParams, 0, false)
-      .then(() =>
-        this.props.history.push(`/search/${queryString}${queryParams}`)
-      )
+    return this.props.recipesFetch(queryString, queryParams, 0, false)
+      .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
       .catch(err => logError(err));
   };
 
@@ -99,27 +75,15 @@ class LandingContainer extends React.Component {
     let queryString = subItem.link.split("&calories=0-10000")[0];
     let queryParams = "&calories=0-10000";
 
-    if (
-      localStorage.getItem(`${queryString}${queryParams}0`) &&
-      JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))[
-        "timestamp"
-      ] > new Date().getTime()
-    ) {
-      this.props.recipesFetchRequest(
-        JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))[
-          "content"
-        ]
-      );
+    if (localStorage.getItem(`${queryString}${queryParams}0`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))["timestamp"] > new Date().getTime()) {
+      this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))["content"]);
       return this.props.history.push(`/search/${queryString}${queryParams}`);
     }
 
     let min = 0;
     let infiniteSearch = false;
-    return this.props
-      .recipesFetch(queryString, queryParams, min, infiniteSearch)
-      .then(() =>
-        this.props.history.push(`/search/${queryString}${queryParams}`)
-      )
+    return this.props.recipesFetch(queryString, queryParams, min, infiniteSearch)
+      .then(() => this.props.history.push(`/search/${queryString}${queryParams}`))
       .catch(err => logError(err));
   };
 
@@ -130,35 +94,47 @@ class LandingContainer extends React.Component {
   calsPS = (cals, servings) => Math.round(cals / servings);
 
   handleRightClick = () => {
-    this.refs.subItemScroller
-      ? (this.refs.subItemScroller.scrollLeft += window.innerWidth)
-      : null;
+    this.refs.subItemScroller ? (this.refs.subItemScroller.scrollLeft += window.innerWidth) : null;
   };
 
   handleLeftClick = () => {
-    this.refs.subItemScroller
-      ? (this.refs.subItemScroller.scrollLeft -= window.innerWidth)
-      : null;
+    this.refs.subItemScroller ? (this.refs.subItemScroller.scrollLeft -= window.innerWidth) : null;
   };
 
   handleSliderRightClick = () => {
-    this.refs.sliderScroller
-      ? (this.refs.sliderScroller.scrollLeft += this.state.slideWidth)
-      : null;
+    this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft += this.state.slideWidth) : null;
   };
 
   handleSliderLeftClick = () => {
-    this.refs.sliderScroller
-      ? (this.refs.sliderScroller.scrollLeft -= this.state.slideWidth)
-      : null;
+    this.refs.sliderScroller ? (this.refs.sliderScroller.scrollLeft -= this.state.slideWidth) : null;
+  };
+
+  isBottom = el => {
+    return el.getBoundingClientRect().bottom <= window.innerHeight + 1500;
+  };
+
+  trackScrolling = () => {
+    document.removeEventListener("scroll", this.trackScrolling);
+    const wrappedElement = document.getElementById("homeContainer");
+    if (this.isBottom(wrappedElement) && this.props.homepage && this.props.homepage && this.props.homepage.length < 96) {
+      let min = this.props.homepage.length.toString();
+      if (localStorage.getItem(`random${min}`) && JSON.parse(localStorage.getItem(`random${min}`))["timestamp"] > new Date().getTime()) {
+        this.props.homepageFetchRequest(JSON.parse(localStorage.getItem(`random${min}`))["content"]);
+        return document.addEventListener("scroll", this.trackScrolling);
+      } else {
+        return this.props.homepageFetch(min)
+          .then(() => document.addEventListener("scroll", this.trackScrolling))
+          .catch(err => logError(err));
+      }
+    }
+    document.addEventListener("scroll", this.trackScrolling);
   };
 
   render() {
     const sliderItems = [
-      {
+      { 
         header: "Sensational Sangria Recipes",
-        subHeader:
-          "Browse hundreds of variations on this fun and fruity punch.",
+        subHeader: "Browse hundreds of variations on this fun and fruity punch.",
         image: require('./../helpers/assets/1.webp'),
         link: "search?q=sangria&calories=0-10000"
       },
@@ -170,8 +146,7 @@ class LandingContainer extends React.Component {
       },
       {
         header: "Greek Pasta Salad",
-        subHeader:
-          "These salads are filled with bold flavors: kalamata olives, feta cheese and fresh herbs.",
+        subHeader: "These salads are filled with bold flavors: kalamata olives, feta cheese and fresh herbs.",
         image: require('./../helpers/assets/3.webp'),
         link: "search?q=greek%20pasta%20salad&calories=0-10000"
       },
@@ -183,8 +158,7 @@ class LandingContainer extends React.Component {
       },
       {
         header: "Chicken Teriyaki Skewers",
-        subHeader:
-          "See how to make delicious Summery chicken teriyaki skewers.",
+        subHeader: "See how to make delicious Summery chicken teriyaki skewers.",
         image: require('./../helpers/assets/5.webp'),
         link: "search?q=chicken%20teriyaki%20skewers&calories=0-10000"
       }
@@ -244,14 +218,13 @@ class LandingContainer extends React.Component {
     ];
     return (
       <div className="main">
-        <section className="container">
+        <section id='homeContainer' className="container">
           <div className="sliderContainer">
             <div className="slider" ref="sliderScroller">
               {sliderItems.map((item, idx) => {
                 let boundItemClick = this.handleBoundItemClick.bind(this, item);
                 return (
-                  <div
-                    key={idx}
+                  <div key={idx}
                     className="sliderItemContainer"
                     onClick={boundItemClick}
                     title={item.header}
@@ -337,7 +310,7 @@ let mapDispatchToProps = dispatch => {
       dispatch(favoritesFetchRequest(favoritesArr)),
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     tokenSignIn: token => dispatch(tokenSignInRequest(token)),
-    homepageFetch: () => dispatch(homepageFetchRequest()),
+    homepageFetch: min => dispatch(homepageFetchRequest(min)),
     homepageFetchRequest: recipes => dispatch(homepageFetch(recipes)),
     recipesFetch: (queryString, queryParams, min, infiniteSearch) =>
       dispatch(

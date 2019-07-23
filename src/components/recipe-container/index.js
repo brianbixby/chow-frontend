@@ -36,29 +36,18 @@ class RecipeContainer extends React.Component {
   componentWillMount() {
     userValidation(this.props);
     let uri = window.location.href.split("/recipe/")[1];
-    if (
-      !this.props.recipe ||
-      this.props.recipe.uri !=
-        `http://www.edamam.com/ontologies/edamam.owl#recipe_${uri}`
-    ) {
-      this.props
-        .recipeFetch(uri)
+    if (!this.props.recipe || this.props.recipe.uri != `http://www.edamam.com/ontologies/edamam.owl#recipe_${uri}`) {
+      this.props.recipeFetch(uri)
         .then(recipe => {
           if (!recipe) return this.setState({ recipeError: true });
           if (!this.props.recipes.length) {
-            this.props
-              .recipesFetch("search?q=summer", "&calories=0-10000", 0, false)
+            this.props.recipesFetch("search?q=summer", "&calories=0-10000", 0, false)
               .catch(err => logError(err));
           }
         })
         .catch(err => logError(err));
-    } else if (
-      !this.props.recipes ||
-      !this.props.recipes.hits ||
-      !this.props.recipes.hits.length
-    ) {
-      this.props
-        .recipesFetch("search?q=summer", "&calories=0-10000", 0, false)
+    } else if (!this.props.recipes || !this.props.recipes.hits || !this.props.recipes.hits.length) {
+      this.props.recipesFetch("search?q=summer", "&calories=0-10000", 0, false)
         .catch(err => logError(err));
     }
     window.scrollTo(0, 0);

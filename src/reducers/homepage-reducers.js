@@ -3,7 +3,7 @@ export default (state=[], action) => {
   
     switch(type) {
       case 'HOMEPAGE_FETCH':
-        return payload;
+        return [...state, ...payload];
       default:
         return state;
     }

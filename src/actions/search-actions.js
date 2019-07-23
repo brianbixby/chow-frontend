@@ -37,12 +37,13 @@ export const recipesFetchRequest = (queryString, queryParams, min, infiniteSearc
     // });
 };
 
-export const homepageFetchRequest = () => dispatch => {
-  let url = `https://api.edamam.com/search?q=summer${process.env.API_KEY}&from=0&to=96&calories=0-10000`;
+export const homepageFetchRequest = min => dispatch => {
+  const max = (parseInt(min) + 24).toString();
+  let url = `https://api.edamam.com/search?q=summer${process.env.API_KEY}&from=${min}&to=${max}&calories=0-10000`;
 
   return superagent.get(url)
     .then(res => {
-      localStorage.setItem('random', JSON.stringify({content: res.body.hits, timestamp: new Date().getTime() + 604800000}));
+      localStorage.setItem(`random${min}`, JSON.stringify({content: res.body.hits, timestamp: new Date().getTime() + 604800000}));
       dispatch(homepageFetch(res.body.hits));
       return res.body.hits;
     })

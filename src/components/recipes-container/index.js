@@ -5,23 +5,9 @@ import { withRouter } from "react-router-dom";
 import Footer from "../footer";
 import { tokenSignInRequest } from "../../actions/userAuth-actions.js";
 import { userProfileFetchRequest } from "../../actions/userProfile-actions.js";
-import {
-  favoritesFetchRequest,
-  favoriteFetchRequest,
-  favoriteDeleteRequest
-} from "../../actions/favorite-actions.js";
-import {
-  recipesFetchRequest,
-  recipesFetch,
-  recipeFetch,
-  infiniteRecipesFetch
-} from "../../actions/search-actions.js";
-import {
-  logError,
-  renderIf,
-  userValidation,
-  classToggler
-} from "./../../lib/util.js";
+import { favoritesFetchRequest, favoriteFetchRequest, favoriteDeleteRequest } from "../../actions/favorite-actions.js";
+import { recipesFetchRequest, recipesFetch, recipeFetch, infiniteRecipesFetch} from "../../actions/search-actions.js";
+import { logError, renderIf, userValidation, classToggler } from "./../../lib/util.js";
 
 class RecipesContainer extends React.Component {
   constructor(props) {
@@ -31,29 +17,15 @@ class RecipesContainer extends React.Component {
 
   componentWillMount() {
     userValidation(this.props);
-    if (
-      !this.props.recipes ||
-      !this.props.recipes.hits ||
-      !this.props.recipes.hits.length
-    ) {
+    if (!this.props.recipes || !this.props.recipes.hits || !this.props.recipes.hits.length) {
       let string = window.location.href.split("/search/")[1];
       let hashIndex = string.indexOf("&");
       let queryString = string.substring(0, hashIndex);
       let queryParams = string.substring(hashIndex, string.length);
-      if (
-        localStorage.getItem(`${queryString}${queryParams}0`) &&
-        JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))[
-          "timestamp"
-        ] > new Date().getTime()
-      ) {
-        this.props.recipesFetchRequest(
-          JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))[
-            "content"
-          ]
-        );
+      if (localStorage.getItem(`${queryString}${queryParams}0`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))["timestamp"] > new Date().getTime()) {
+        this.props.recipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}0`))["content"]);
       } else {
-        this.props
-          .recipesFetch(queryString, queryParams, 0, false)
+        this.props.recipesFetch(queryString, queryParams, 0, false)
           .catch(err => logError(err));
       }
     }
@@ -77,20 +49,16 @@ class RecipesContainer extends React.Component {
 
   handleBoundFavoriteClick = (favorite, e) => {
     if (this.props.userAuth) {
-      let found = this.props.favorites.filter(
-        fav => fav.uri == favorite.recipe.uri
-      );
+      let found = this.props.favorites.filter(fav => fav.uri == favorite.recipe.uri);
       if (found.length) {
-        this.props
-          .favoriteDelete(found[0])
+        this.props.favoriteDelete(found[0])
           .then(() => {
             this.setState({ userSuccessMessage: "Favorite deleted." });
             return this.handleUserSuccess();
           })
           .catch(err => logError(err));
       } else {
-        return this.props
-          .favoriteFetch(favorite.recipe)
+        return this.props.favoriteFetch(favorite.recipe)
           .then(() => {
             this.setState({ userSuccessMessage: "Favorite added." });
             return this.handleUserSuccess();
@@ -114,28 +82,14 @@ class RecipesContainer extends React.Component {
   trackScrolling = () => {
     document.removeEventListener("scroll", this.trackScrolling);
     const wrappedElement = document.getElementById("recipesWrapper");
-    if (
-      this.isBottom(wrappedElement) &&
-      this.props.recipes &&
-      this.props.recipes.hits &&
-      this.props.recipes.hits.length < 96
-    ) {
+    if (this.isBottom(wrappedElement) && this.props.recipes && this.props.recipes.hits && this.props.recipes.hits.length < 96) {
       let string = window.location.href.split("/search/")[1];
       let hashIndex = string.indexOf("&");
       let queryString = string.substring(0, hashIndex);
       let queryParams = string.substring(hashIndex, string.length);
       let min = this.props.recipes.hits.length.toString();
-      if (
-        localStorage.getItem(`${queryString}${queryParams}${min}`) &&
-        JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))[
-          "timestamp"
-        ] > new Date().getTime()
-      ) {
-        this.props.infiniteRecipesFetchRequest(
-          JSON.parse(
-            localStorage.getItem(`${queryString}${queryParams}${min}`)
-          )["content"]
-        );
+      if (localStorage.getItem(`${queryString}${queryParams}${min}`) && JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))["timestamp"] > new Date().getTime()) {
+        this.props.infiniteRecipesFetchRequest(JSON.parse(localStorage.getItem(`${queryString}${queryParams}${min}`))["content"]);
         return document.addEventListener("scroll", this.trackScrolling);
       } else {
         const infiniteSearch = true;
@@ -325,9 +279,4 @@ let mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(RecipesContainer)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RecipesContainer));
