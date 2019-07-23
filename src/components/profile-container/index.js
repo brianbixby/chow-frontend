@@ -83,7 +83,7 @@ class ProfileContainer extends React.Component {
     let profileImage =
       this.props.userProfile && this.props.userProfile.image
         ? this.props.userProfile.image
-        : require("./../helpers/assets/icons/profilePlaceholder.jpeg");
+        : require("./../helpers/assets/icons/profilePlaceholder.webp");
     let { favorites, userProfile } = this.props;
     return (
       <div className="main">

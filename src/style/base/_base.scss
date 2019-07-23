@@ -108,6 +108,7 @@ input,
 select,
 textarea {
   font-family: inherit;
+  font-display: auto;
   margin: 0;
 }
 
@@ -153,6 +154,7 @@ body {
   font-size: 1rem;
   color: #2d2d2d;
   font-family: "Source Sans Pro", Arial;
+  font-display: auto;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -162,6 +164,7 @@ body {
 
 html {
   font-family: sans-serif;
+  font-display: auto;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   color: -internal-root-color;

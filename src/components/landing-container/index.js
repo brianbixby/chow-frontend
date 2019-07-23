@@ -15,6 +15,7 @@ import { userProfileFetchRequest } from "../../actions/userProfile-actions.js";
 import { favoritesFetchRequest } from "../../actions/favorite-actions.js";
 import { logged } from "../../actions/log-actions.js";
 import { userValidation, logError } from "./../../lib/util.js";
+import css from './../../style/main.scss';
 
 class LandingContainer extends React.Component {
   constructor(props) {
@@ -157,33 +158,33 @@ class LandingContainer extends React.Component {
         header: "Sensational Sangria Recipes",
         subHeader:
           "Browse hundreds of variations on this fun and fruity punch.",
-        image: "https://i.imgur.com/Cdm8uLo.jpg",
+        image: require('./../helpers/assets/1.webp'),
         link: "search?q=sangria&calories=0-10000"
       },
       {
         header: "Hummus Recipes",
         subHeader: "Browse hundreds of ways to get your dip on.",
-        image: "https://i.imgur.com/U2S3zqF.jpg",
+        image: require('./../helpers/assets/2.webp'),
         link: "search?q=hummus&calories=0-10000"
       },
       {
         header: "Greek Pasta Salad",
         subHeader:
           "These salads are filled with bold flavors: kalamata olives, feta cheese and fresh herbs.",
-        image: "https://i.imgur.com/ZJTqzVc.jpg",
+        image: require('./../helpers/assets/3.webp'),
         link: "search?q=greek%20pasta%20salad&calories=0-10000"
       },
       {
         header: "Sloppy Bulgogi and other Fusion Mashups.",
         subHeader: "Try these delicious cross-cultural combos.",
-        image: "https://i.imgur.com/U58wzmg.jpg",
+        image: require('./../helpers/assets/4.webp'),
         link: "search?q=fusion&calories=0-10000"
       },
       {
         header: "Chicken Teriyaki Skewers",
         subHeader:
           "See how to make delicious Summery chicken teriyaki skewers.",
-        image: "https://i.imgur.com/mHOTbhs.jpg",
+        image: require('./../helpers/assets/5.webp'),
         link: "search?q=chicken%20teriyaki%20skewers&calories=0-10000"
       }
     ];
@@ -191,52 +192,52 @@ class LandingContainer extends React.Component {
     const subItems = [
       {
         title: "World Cuisine",
-        image: "https://i.imgur.com/OQv9K29.png",
+        image: require('./../helpers/assets/6.webp'),
         link: "search?q=world%20cuisine&calories=0-10000"
       },
       {
         title: "Vegan Recipes",
-        image: "https://i.imgur.com/RnxBP1l.jpg",
+        image: require('./../helpers/assets/7.webp'),
         link: "search?q=vegan&calories=0-10000"
       },
       {
         title: "Slow Cooker",
-        image: "https://i.imgur.com/LWNK25s.jpg",
+        image: require('./../helpers/assets/8.webp'),
         link: "search?q=slow%20cooker&calories=0-10000"
       },
       {
         title: "Shrimp Recipes",
-        image: "https://i.imgur.com/cKdLXB2.jpg",
+        image: require('./../helpers/assets/9.webp'),
         link: "search?q=shrimp&calories=0-10000"
       },
       {
         title: "Cookies",
-        image: "https://i.imgur.com/yuIHLRS.jpg",
+        image: require('./../helpers/assets/10.webp'),
         link: "search?q=cookie&calories=0-10000"
       },
       {
         title: "Chicken Recipes",
-        image: "https://i.imgur.com/XpxJcn0.jpg",
+        image: require('./../helpers/assets/11.webp'),
         link: "search?q=chicken&calories=0-10000"
       },
       {
         title: "Cake Recipes",
-        image: "https://i.imgur.com/UVo3FF8.jpg",
+        image: require('./../helpers/assets/12.webp'),
         link: "search?q=cake&calories=0-10000"
       },
       {
         title: "Breakfast",
-        image: "https://i.imgur.com/guAsD12.png",
+        image: require('./../helpers/assets/13.webp'),
         link: "search?q=breakfast&calories=0-10000"
       },
       {
         title: "Bread Recipes",
-        image: "https://i.imgur.com/BNQZO8L.png",
+        image: require('./../helpers/assets/14.webp'),
         link: "search?q=bread&calories=0-10000"
       },
       {
         title: "Appetizers",
-        image: "https://i.imgur.com/2bNJ7AZ.png",
+        image: require('./../helpers/assets/15.webp'),
         link: "search?q=appetizers&calories=0-10000"
       }
     ];
