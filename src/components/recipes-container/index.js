@@ -139,8 +139,7 @@ class RecipesContainer extends React.Component {
         return document.addEventListener("scroll", this.trackScrolling);
       } else {
         const infiniteSearch = true;
-        return this.props
-          .recipesFetch(queryString, queryParams, min, infiniteSearch)
+        return this.props.recipesFetch(queryString, queryParams, min, infiniteSearch)
           .then(() => document.addEventListener("scroll", this.trackScrolling))
           .catch(err => logError(err));
       }

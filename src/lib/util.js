@@ -1,3 +1,5 @@
+import { asyncComponent } from 'react-async-component';
+
 export const log = (...args) => console.log(...args);
 export const logError = (...args) => console.error(...args);
 export const renderIf = (test, component) => test ? component : undefined;
@@ -43,4 +45,10 @@ export const userValidation = props => {
     }
   }
   return;
+};
+
+export const makeAsyncComponent = importStmt => {
+  return asyncComponent({
+    resolve: () => importStmt
+  })
 };

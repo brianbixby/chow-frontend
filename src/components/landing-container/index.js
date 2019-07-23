@@ -34,7 +34,8 @@ class LandingContainer extends React.Component {
         JSON.parse(localStorage.getItem("random"))["content"]
       );
     } else if (!this.props.homepage || this.props.homepage.length == 0) {
-      this.props.homepageFetch().catch(err => logError(err));
+      this.props.homepageFetch()
+        .catch(err => logError(err));
     }
     window.scrollTo(0, 0);
   }

@@ -61,6 +61,7 @@
     "postcss-modules": "^1.4.1",
     "posthtml-img-autosize": "^0.1.4",
     "react": "^16.8.6",
+    "react-async-component": "^2.0.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
