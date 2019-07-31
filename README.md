@@ -83,15 +83,4 @@ Information about the backend of Chow can be found here: [Chow Backend](https://
 
 ## License
 
-MIT © [Brian Bixby](https://github.com/brianbixby),
-
-
-to do :
-NODE_ENV=production - all servers
-
-auto login bracket busters
-weather app location
-
-https://tech.holidayextras.com/parceljs-how-simple-really-is-it-679a4feba69d
-
-https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fchow-fe.herokuapp.com%2F
+MIT © [Brian Bixby](https://github.com/brianbixby)

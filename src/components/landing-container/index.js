@@ -135,31 +135,31 @@ class LandingContainer extends React.Component {
       { 
         header: "Sensational Sangria Recipes",
         subHeader: "Browse hundreds of variations on this fun and fruity punch.",
-        image: require('./../helpers/assets/1.webp'),
+        image: require('./../helpers/assets/1.png'),
         link: "search?q=sangria&calories=0-10000"
       },
       {
         header: "Hummus Recipes",
         subHeader: "Browse hundreds of ways to get your dip on.",
-        image: require('./../helpers/assets/2.webp'),
+        image: require('./../helpers/assets/2.png'),
         link: "search?q=hummus&calories=0-10000"
       },
       {
         header: "Greek Pasta Salad",
         subHeader: "These salads are filled with bold flavors: kalamata olives, feta cheese and fresh herbs.",
-        image: require('./../helpers/assets/3.webp'),
+        image: require('./../helpers/assets/3.png'),
         link: "search?q=greek%20pasta%20salad&calories=0-10000"
       },
       {
         header: "Sloppy Bulgogi and other Fusion Mashups.",
         subHeader: "Try these delicious cross-cultural combos.",
-        image: require('./../helpers/assets/4.webp'),
+        image: require('./../helpers/assets/4.png'),
         link: "search?q=fusion&calories=0-10000"
       },
       {
         header: "Chicken Teriyaki Skewers",
         subHeader: "See how to make delicious Summery chicken teriyaki skewers.",
-        image: require('./../helpers/assets/5.webp'),
+        image: require('./../helpers/assets/5.png'),
         link: "search?q=chicken%20teriyaki%20skewers&calories=0-10000"
       }
     ];
@@ -167,52 +167,52 @@ class LandingContainer extends React.Component {
     const subItems = [
       {
         title: "World Cuisine",
-        image: require('./../helpers/assets/6.webp'),
+        image: require('./../helpers/assets/6.png'),
         link: "search?q=world%20cuisine&calories=0-10000"
       },
       {
         title: "Vegan Recipes",
-        image: require('./../helpers/assets/7.webp'),
+        image: require('./../helpers/assets/7.png'),
         link: "search?q=vegan&calories=0-10000"
       },
       {
         title: "Slow Cooker",
-        image: require('./../helpers/assets/8.webp'),
+        image: require('./../helpers/assets/8.png'),
         link: "search?q=slow%20cooker&calories=0-10000"
       },
       {
         title: "Shrimp Recipes",
-        image: require('./../helpers/assets/9.webp'),
+        image: require('./../helpers/assets/9.png'),
         link: "search?q=shrimp&calories=0-10000"
       },
       {
         title: "Cookies",
-        image: require('./../helpers/assets/10.webp'),
+        image: require('./../helpers/assets/10.png'),
         link: "search?q=cookie&calories=0-10000"
       },
       {
         title: "Chicken Recipes",
-        image: require('./../helpers/assets/11.webp'),
+        image: require('./../helpers/assets/11.png'),
         link: "search?q=chicken&calories=0-10000"
       },
       {
         title: "Cake Recipes",
-        image: require('./../helpers/assets/12.webp'),
+        image: require('./../helpers/assets/12.png'),
         link: "search?q=cake&calories=0-10000"
       },
       {
         title: "Breakfast",
-        image: require('./../helpers/assets/13.webp'),
+        image: require('./../helpers/assets/13.png'),
         link: "search?q=breakfast&calories=0-10000"
       },
       {
         title: "Bread Recipes",
-        image: require('./../helpers/assets/14.webp'),
+        image: require('./../helpers/assets/14.png'),
         link: "search?q=bread&calories=0-10000"
       },
       {
         title: "Appetizers",
-        image: require('./../helpers/assets/15.webp'),
+        image: require('./../helpers/assets/15.png'),
         link: "search?q=appetizers&calories=0-10000"
       }
     ];
